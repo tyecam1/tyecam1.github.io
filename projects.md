@@ -53,7 +53,7 @@ Dates in _data/projects.yml should be ISO strings: "YYYY-MM-DD".
         {% endif %}
 
         {% if p.summary_short %}<p class="project-summary">{{ p.summary_short }}</p>{% endif %}
-        {% if p.summary_long %}<p>{{ p.summary_long }}</p>{% endif %}
+        {% if p.summary_long %}<p class="project-summary-long">{{ p.summary_long }}</p>{% endif %}
 
         {% if p.repo_url and p.repo_url != "" %}
           <p class="project-links"><a href="{{ p.repo_url }}">Repository</a></p>
