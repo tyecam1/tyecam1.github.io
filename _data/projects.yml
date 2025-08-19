@@ -1,102 +1,40 @@
-# Current work (planned/new)
-
-- key: rl-sim-pipeline
-  title: Integrated RL Simulation & Telemetry Platform
-  status: current
-  start_date: "2025-09-01"
-  stack: [Python, PyTorch, Gymnasium, NumPy, Matplotlib, Flask/Streamlit, Plotly, WebSocket, Unity-MLAgents, PyBullet]
-  summary_short: >
-    An end-to-end reinforcement learning platform that unifies environment simulation (gridworld + 3D),
-    training (tabular baselines → PPO), live telemetry/visualisation (web dashboard with streaming metrics),
-    and reproducible evaluation with saved rollouts, plots, and videos. The goal is a single pipeline where
-    agents train, stream their state/metrics in real time, and can be benchmarked across 2D and 3D tasks.
-  summary_long: >
-    Objective:
-      Build a reproducible RL pipeline that spans simple 2D tasks (Gymnasium gridworld) and a 3D control
-      task (Unity ML-Agents or PyBullet), while streaming live metrics and state to a web dashboard,
-      recording artefacts, and supporting fair evaluation.
-
-    Environments:
-      • 2D Gridworld for fast iteration (obstacles, stochasticity, curriculum by obstacle density).
-      • 3D task for transfer/visual appeal (e.g., goal reaching or push task in Unity ML-Agents or PyBullet).
-      • Shared interface: reset(), step(), render(), seed(), info with episode_id and env_config hash.
-
-    Algorithms:
-      • Baselines: Tabular Q-learning / SARSA on gridworld to verify dynamics and metrics.
-      • Deep RL: PPO (PyTorch) for both env families with shared training loop, separate config presets.
-      • Evaluation policy separate from training policy to avoid bias during metric collection.
-
-    Training Loop & Metrics:
-      • Vectorised envs where possible; replay/log every N steps.
-      • Metrics: episodic return, success rate, steps-to-goal, collision count, loss terms, KL, entropy,
-        value error; wall-clock throughput.
-      • Checkpointing: model.pt, optimizer.pt, config.yaml, git commit SHA; deterministic seeds.
-
-    Telemetry & Dashboard:
-      • A lightweight Flask or Streamlit app with WebSocket updates (e.g., Flask-SocketIO or
-        Streamlit-WebSocket) streaming scalars, histograms, and images (policy heatmaps, frames).
-      • Live panels: learning curves, value/policy heatmaps (2D), reward components, FPS/throughput,
-        action distributions; latest episode video/GIF.
-      • Backfill from on-disk logs if the dashboard connects mid-run.
-
-    Logging & Artefacts:
-      • Structured logs (JSON/CSV + numpy dumps) and Matplotlib figures saved under ./runs/<timestamp>.
-      • Episode videos/GIFs, trajectory overlays, and Unity/PyBullet render captures.
-      • Simple run registry index.html for browsing past runs.
-
-    Reproducibility:
-      • Single entry points: train.py (train), eval.py (evaluation suite), viz.py (plots/heatmaps).
-      • Environment + algorithm configs via YAML; include random seeds and env hashes in artefacts.
-      • CI smoke test: 200 training steps per env to validate loop and telemetry.
-
-    Repository Layout (planned):
-      • envs/{gridworld, unity_or_pybullet}/
-      • algos/{tabular, ppo}/
-      • telemetry/{server.py (Flask/Streamlit), schema.py}
-      • scripts/{train.py, eval.py, rollout.py, viz.py}
-      • runs/<timestamp>/[checkpoints, logs, figs, videos, config.yaml]
-      • configs/{gridworld_tabular.yaml, gridworld_ppo.yaml, unity_ppo.yaml}
-
-    Milestones:
-      1) Gridworld + Q-learning baseline with plots and live scalar streaming.
-      2) PPO on gridworld; add value/policy heatmaps to dashboard.
-      3) 3D task integration (Unity ML-Agents or PyBullet); stream video frames and episode stats.
-      4) Unified evaluation suite + saved rollouts; publish comparison report across 2D/3D.
-  repo_url:
-  # image: /assets/img/rl-sim-pipeline.png
-  featured: false
-
-
 - key: walkaide
   title: The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System
   toc_title: Robotic Walk-Aide
   status: past
-  start_date: 2024-09-18
-  end_date: 2025-05-03
-  stack: [ROS, Intel RealSense (RGB-D), Python PCL, Arduino, EEG logging]
-  summary_short: A wearable navigation system combining RGB-D vision, real-time mapping, and haptic feedback, extended with EEG tagging to assess user cognitive load during navigation.
-  summary_long: This project developed and evaluated a wearable robotic navigation aid designed to assist visually impaired users in real-world navigation tasks. The system integrated an Intel RealSense RGB-D camera for dense depth perception, ROS for mapping and localization, and microcontrollers for motor and haptic control. Multiple haptic feedback modalities were tested to convey spatial cues such as obstacle proximity, direction of travel, and environmental context. A structured evaluation framework compared haptic strategies under varying environmental conditions, with metrics including task completion, accuracy, and subjective usability feedback. To extend the analysis, an EEG logging pipeline was implemented: system haptic events and motor commands were timestamped and synchronized with EEG recordings, allowing correlation of user cognitive load with navigation scenarios. This EEG extension enabled assessment not only of functional navigation performance, but also of mental workload imposed by different feedback strategies, providing insights for designing assistive devices that balance usability and cognitive demand. The system was validated through repeated trials, and the integration of real-time perception, haptics, and EEG analysis created a reproducible platform for advancing human-robot shared autonomy in wearable navigation.
+  start_date: "2024-09-18"
+  end_date: "2025-05-03"
+  stack: [ROS, Intel RealSense (RGB-D), Python, Arduino (early), EEG logging]
+  summary_short: >
+    A wearable navigation system combining RGB-D vision, real-time mapping, and haptic feedback,
+    extended with EEG tagging to assess user cognitive load during navigation.
+  summary_long: >
+    This project developed and evaluated a wearable robotic navigation aid designed to assist
+    visually impaired users. The system integrated an Intel RealSense RGB-D camera for depth
+    perception, ROS for mapping/localisation, and microcontrollers for haptic actuators.
+    Multiple feedback strategies were compared under controlled scenarios. An EEG logging pipeline
+    synchronised haptic events and motor commands with the EEG timeline to correlate cognitive
+    load with navigation difficulty, providing insight into usability and mental workload.
   repo_url: https://github.com/tyecam1/Mechatronic-Walkaide
   image: /assets/img/walkaide.png
   featured: true
 
-- key: anymal-sumo
+- key: anymal-sumo 
   toc_title: RL Quadruped Sumo Tournament
   title: Reinforcement Learning-Based Control of a Simulated Quadruped Agent in a Peer2Peer Sumo-Esque Arena
   status: past
-  start_date: 2023-08-16
-  end_date: 2024-01-05
-  stack: [PyTorch, Cuda, RaisimGym, NumPy, C++, Matplotlib]
-  summary_short: Competitive ANYmal control in a sumo arena, built on PPO and curriculum learning under Prof. Jemin Hwangbo’s reinforcement learning module at KAIST.
+  start_date: "2023-08-16"
+  end_date: "2024-01-05"
+  stack: [PyTorch, RaisimGym, NumPy, Matplotlib]
+  summary_short: >
+    Competitive ANYmal control in a sumo arena using PPO and curriculum learning, delivered as part
+    of Prof. Jemin Hwangbo’s RL module at KAIST.
   summary_long: >
-    This project involved developing reinforcement learning agents to control quadruped ANYmal robots in a simulated peer-to-peer sumo environment using raisimGym. 
-    The work built on rigorous training in reinforcement learning methods taught by Prof. Jemin Hwangbo, covering on-policy vs. off-policy algorithms, Q-functions, 
-    policy gradient methods, and optimization techniques such as stochastic gradient descent. I implemented a PPO baseline and extended it through curriculum learning, 
-    gradually increasing task difficulty to achieve robust behaviour. The most notable outcome was training a leap attack behaviour, which proved decisive in a class 
-    tournament against master’s and PhD students.  
-    The project emphasised reproducibility, careful reward design, and systematic evaluation, with results including policy performance plots, trajectory visualisations, 
-    and competitive rankings. Beyond the technical implementation, the experience highlighted the importance of curriculum design, reward shaping, and sample efficiency 
-    in applying RL to high-dimensional robotic control tasks.
+    Agents were trained in raisimGym to compete head-to-head in a sumo-style arena. The project
+    built on formal teaching of on-policy vs off-policy methods, Q-functions, policy gradients, and
+    SGD/Adam optimisation. I implemented a PPO baseline and curriculum scheduling to improve robustness,
+    yielding behaviours such as a leap attack that proved decisive in the class tournament. Results
+    included learning curves, trajectory visualisations, and reproducible configs.
   repo_url: https://github.com/tyecam1/KAIST-Anymal-Sumo
   image: /assets/img/anymal-sumo.png
   featured: true
@@ -105,26 +43,57 @@
   title: Finite Element Method Solver for Wing Section Stress Optimisation
   toc_title: Custom FEA Solver
   status: past
-  start_date: 2024-09-01
-  end_date: 2024-12-12
+  start_date: "2024-09-01"
+  end_date: "2024-12-12"
   stack: [Python, NumPy, SciPy, Matplotlib, PyVista, Gmsh]
-  summary_short: A custom finite element solver for 2D wing sections, built from first principles in Python. Supports 4- and 8-noded quadrilateral meshes, geometry optimisation, and visualisation of stress fields under drag loading.
-  summary_long: Developed as a standalone package, this solver implements a full FEA pipeline: parameterised wing geometry generation, mesh creation via Gmsh, quadrature-based stiffness matrix assembly, and sparse global system construction. Orthotropic material models are supported through custom elasticity tensors, with Dirichlet boundary conditions applied at the wing root. Stress components (principal, Von Mises, shear) are computed and visualised in ParaView. A differential evolution optimiser explores geometric (θ, ϕ) and material parameters (E1, E2, G12), leveraging multiprocessing for large design spaces. Comparative studies of 4- vs 8-noded elements highlight trade-offs between computational cost and accuracy. Additional routines perform eigenmode analysis to identify bending and torsional modes, supporting aeroelastic considerations. The workflow demonstrates how open-source numerical tools can be integrated into a reproducible structural optimisation pipeline for aerospace applications.
+  summary_short: >
+    A custom 2D wing-section FEA solver built in Python: geometry generation, Gmsh meshing,
+    quadrature-based assembly, stress visualisation, and geometry/material optimisation.
+  summary_long: >
+    The package implements a full FEA pipeline with orthotropic elasticity, Gaussian quadrature,
+    sparse global assembly, Dirichlet boundary conditions at the root, and stress recovery
+    (principal, Von Mises, shear). Differential-evolution explores geometric angles (θ, ϕ) and
+    material parameters (E1, E2, G12); multiprocessing parallelises evaluations over design points.
+    Outputs include ParaView VTK files, sparsity plots, and eigenmode analysis for bending/torsion.
   repo_url: https://github.com/tyecam1/AircraftWing-FEM-Solver
   image: /assets/img/fem-wing.png
   featured: true
 
+- key: rl-sim-pipeline
+  title: Integrated RL Simulation & Telemetry Platform
+  toc_title: RL Simulation & Telemetry Platform
+  status: current
+  start_date: "2025-09-01"
+  stack: [Python, PyTorch, Gymnasium, NumPy, Matplotlib, Flask/Streamlit, Plotly, WebSocket, Unity-MLAgents, PyBullet]
+  summary_short: >
+    An end-to-end RL platform unifying gridworld and 3D tasks with PPO training, live telemetry
+    (web dashboard), and reproducible evaluation with saved rollouts, plots, and videos.
+  summary_long: >
+    The pipeline standardises env interfaces (reset/step/render), provides tabular and PPO baselines,
+    streams metrics and frames to a Flask/Streamlit dashboard via WebSockets, and stores artefacts
+    (checkpoints, logs, figures, videos) under timestamped runs. Config-driven experiments ensure
+    determinism and comparability across 2D/3D tasks.
+  repo_url:
+  image: /assets/img/rl-sim-pipeline.png
+  featured: false
 
 - key: hybrid-tidal-wind
   title: Hybrid Tidal–Wind Farm Design Portfolio for Industrial Decarbonisation
   toc_title: Energy Park Design
   status: past
-  start_date: 2024-09-18
-  end_date: 2025-05-01
+  start_date: "2024-09-18"
+  end_date: "2025-05-01"
   stack: [Python, MATLAB, Renewable Energy, Sustainability Analysis]
-  summary_short: Designed hybrid tidal–wind arrays to repower a UK silicone plant, combining resource assessment, farm layout optimisation, and economic modelling for industrial decarbonisation.
-  summary_long: Conducted as a group portfolio project, this study developed a full-scale hybrid renewable energy park design aimed at decarbonising a UK silicone plant. Site feasibility was evaluated using bathymetric surveys of the Severn Estuary and wind datasets from the Bristol Channel. My individual contributions included: (1) modelling tidal and wind farm arrays to maximise power capture and reliability, (2) designing a condition monitoring system to improve operational efficiency and reduce maintenance costs, and (3) performing a levelised cost of energy (LCOE) analysis to benchmark economic viability against existing energy supply. Using Python and MATLAB, we simulated array configurations under varying environmental conditions and grid constraints, comparing capacity factors and downtime resilience. The integrated system demonstrated the potential of marine and wind renewables for industrial repowering, contributing to sustainability and energy security within the region. 
+  summary_short: >
+    Designed hybrid tidal–wind arrays to repower a UK silicone plant, combining resource assessment,
+    farm-layout optimisation, and LCOE modelling for industrial decarbonisation.
+  summary_long: >
+    Site feasibility was built from bathymetry of the Severn Estuary and wind data from the Bristol
+    Channel. My contributions: (1) modelling tidal and wind array performance to maximise capture
+    and reliability, (2) designing a condition-monitoring strategy to reduce O&M, and
+    (3) LCOE analysis benchmarking economic viability under grid constraints. Simulations compared
+    capacity factor, downtime resilience, and layout variants; results support the potential of
+    marine + wind renewables for industrial repowering in the region.
   repo_url:
   image: /assets/img/tidal-array.png
   featured: true
-
