@@ -51,4 +51,4 @@ Using Unity ML-Agents to train a baseline PPO agent for a simple control task. R
 - Open to freelance & full-time roles in robotics, reinforcement learning, and systems engineering  
 - [Email](mailto:tyecameron@hotmail.co.uk)  
 - [GitHub @tyecam1](https://github.com/tyecam1)  
-- [LinkedIn](https://www.linkedin.com/in/tye-cameron-866aa2203/)
+- [LinkedIn](tye-cameron-866aa2203)
