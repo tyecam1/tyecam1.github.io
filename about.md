@@ -26,17 +26,15 @@ I’m currently based on the Isle of Wight, reviewing the best opportunities to 
 
 - Extended Project Qualification: *A feasibility study of Tidal Energy on the Isle of Wight*
 
-- Undergraduate Degree Cardiff University, First Class (Honours) in Mechanical Engineering
+- First Class undergraduate Mechanical Engineering Degree:
+	- Programming focus
 	- Bosch Thermotechnology Ltd: Industrial placement, Quality & Test Rigs
-	- Dissertation: *Control of a Hydraulic Cylinder System under Varying Loads*
+	- Dissertation: *Control of a Hydraulic Cylinder System under Varying Loads*<br>
 
-
-
-- Master's Degree: Simulation, Renewable Design, Mechatronics (First Class Honours)
+- First Class Master's Mechanical Engineering Degree:
+	- Simulation & Mechatronics focus 
 	- KAIST (South Korea): Robotics, Reinforcement Learning, AI
 	- Energy Park Project: *A Feasable Portfolio for the Start-Finish Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary*
-	- Mechatronics Project: *The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System*
-
-
+	- Mechatronics Project: *The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System*<br>
 
 - Now: Independent projects in software, RL, and systems engineering for robotics.
