@@ -319,3 +319,10 @@ html { scroll-behavior: smooth; }
 
 /* Ensure no H2 highlight (override any earlier :target styling) */
 .project-section:target .project-header h2 { background: none !important; }
+
+.project-summary-long {
+  text-align: justify;
+  max-width: 750px;
+  margin: 0 auto;     /* centers the block */
+  line-height: 1.6;
+}
