@@ -21,7 +21,7 @@ I build robotics, reinforcement learning, and systems projects with a focus on c
 {% for p in featured %}
 ### {{ p.title }}
 {% if p.image %}![{{ p.title }}]({{ p.image }}){% endif %}
-<strong>Stack:</strong> {{ p.stack | join: " · " }}  
+<strong>Stack:</strong> {{ p.stack | join: " · " }}<br>  
 <strong>Summary:</strong> {{ p.summary_short }}  
 {% if p.repo_url %}<strong>Repo:</strong> <a href="{{ p.repo_url }}">{{ p.repo_url }}</a>{% endif %}
 
