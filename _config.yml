@@ -7,6 +7,7 @@ theme: minima
 header_pages:
   - projects.md
   - blog/index.md
+  - about.md
 
 # Optional: author block
 author:
