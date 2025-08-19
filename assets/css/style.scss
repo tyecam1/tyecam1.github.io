@@ -51,3 +51,57 @@ hr { margin: 1.2rem 0; }
 }
 .project .summary { margin: 0.25rem 0 0.5rem; }
 .project .links a { text-decoration: underline; }
+
+/* --- Featured projects (home) --- */
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr;            /* single column on mobile */
+  gap: 24px;
+  margin-top: 12px;
+}
+
+@media (min-width: 880px) {
+  .featured-grid {
+    grid-template-columns: 1fr 1fr;      /* two neat columns on desktop */
+  }
+}
+
+.featured-card {
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 14px 16px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.featured-card h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.featured-meta {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.featured-thumb {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 8px 0 10px;
+  display: block;
+}
+
+.featured-summary {
+  margin: 6px 0 10px;
+}
+
+.featured-links a {
+  text-decoration: underline;
+}
+
+/* Optional: keep page width comfortable */
+.wrapper { max-width: 1040px; }
+

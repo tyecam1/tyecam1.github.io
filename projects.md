@@ -11,7 +11,8 @@ permalink: /projects/
   <article class="project">
     <h3>{{ p.title }}{% if p.year %} ({{ p.year }}){% endif %}</h3>
 
-    {% if p.image %}
+    {% if p.image and p.image != "" %}
+    ![{{ p.title }}]({{ p.image }})
       <img class="thumb" src="{{ p.image }}" alt="{{ p.title }}">
     {% endif %}
 
