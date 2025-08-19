@@ -5,26 +5,15 @@ permalink: /projects/
 ---
 
 {% comment %}
-Sort newest → oldest using end_date for past projects,
-and today’s date if the project is current.
+Order:
+1) CURRENT projects by start_date (newest → oldest)
+2) PAST projects by end_date (newest → oldest)
+
+Dates in _data/projects.yml should be ISO strings: "YYYY-MM-DD".
 {% endcomment %}
-{% assign today = 'now' | date: "%Y-%m-%d" %}
-{% assign projects_with_sort = "" | split: "" %}
-
-{% for p in site.data.projects %}
-  {% if p.status == "current" %}
-    {% assign sort_val = today %}
-  {% elsif p.end_date %}
-    {% assign sort_val = p.end_date %}
-  {% else %}
-    {% assign sort_val = p.start_date %}
-  {% endif %}
-
-  {% assign p = p | merge: {"sort_val": sort_val} %}
-  {% assign projects_with_sort = projects_with_sort | push: p %}
-{% endfor %}
-
-{% assign projects = projects_with_sort | sort: "sort_val" | reverse %}
+{% assign current = site.data.projects | where: "status", "current" | sort: "start_date" | reverse %}
+{% assign past    = site.data.projects | where: "status", "past"    | sort: "end_date"   | reverse %}
+{% assign projects = current | concat: past %}
 
 <div class="projects-layout">
   <aside class="toc">
@@ -53,11 +42,15 @@ and today’s date if the project is current.
               ({{ p.start_date | date: "%b %Y" }} – {{ p.end_date | date: "%b %Y" }})
             {% endif %}
           </h2>
-          {% if p.stack %}<div class="project-meta">{{ p.stack | join: " · " }}</div>{% endif %}
+          {% if p.stack %}
+            <div class="project-meta">{{ p.stack | join: " · " }}</div>
+          {% endif %}
         </header>
 
         {% assign img = p.image | to_s | strip %}
-        {% if img != "" %}<img class="project-hero" src="{{ img }}" alt="{{ p.title }}">{% endif %}
+        {% if img != "" %}
+          <img class="project-hero" src="{{ img }}" alt="{{ p.title }}">
+        {% endif %}
 
         {% if p.summary_short %}<p class="project-summary">{{ p.summary_short }}</p>{% endif %}
         {% if p.summary_long %}<p>{{ p.summary_long }}</p>{% endif %}
@@ -73,11 +66,10 @@ and today’s date if the project is current.
 </div>
 
 <script>
-  // Active ToC highlighting without changing the H2 style
+  // Highlight active ToC item while scrolling
   (function () {
     const secs = Array.from(document.querySelectorAll('.project-section'));
     const map = new Map(secs.map(s => [s.id, document.getElementById('toc-' + s.id)]));
-
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -87,7 +79,6 @@ and today’s date if the project is current.
         }
       });
     }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-
     secs.forEach(s => io.observe(s));
   })();
 </script>
