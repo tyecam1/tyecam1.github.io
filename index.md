@@ -1,5 +1,4 @@
 ---
-layout: home
 title: Hi, I'm Tye
 ---
 
@@ -18,7 +17,7 @@ I build robotics, reinforcement learning, and systems projects with a focus on c
 {% assign featured = site.data.projects | where: "featured", true %}
 {% for p in featured %}
 ### {{ p.title }}
-{% if p.image %}![{{ p.title }}]({{ p.image }}){% endif %}  
+{% if p.image %}![{{ p.title }}]({{ p.image }})  {% endif %}  
 <strong>Stack:</strong> {{ p.stack | join: " · " }}  
 <strong>Summary:</strong> {{ p.summary_short }}  
 {% if p.repo_url %}<strong>Repo:</strong> <a href="{{ p.repo_url }}">{{ p.repo_url }}</a>{% endif %}
