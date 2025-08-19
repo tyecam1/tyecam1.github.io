@@ -4,14 +4,17 @@ title: Projects
 permalink: /projects/
 ---
 
+{% comment %} sort newest → oldest {% endcomment %}
+{% assign projects = site.data.projects | sort: "year" | reverse %}
+
 <div class="projects-layout">
   <aside class="toc">
     <nav aria-label="Projects table of contents">
       <ul>
-        {% for p in site.data.projects %}
+        {% for p in projects %}
           <li>
             <a id="toc-{{ p.key | slugify }}" href="#{{ p.key | slugify }}">
-              {{ p.title }}
+              {{ p.toc_title | default: p.title | truncate: 48 }}
             </a>
           </li>
         {% endfor %}
@@ -20,13 +23,11 @@ permalink: /projects/
   </aside>
 
   <main class="projects-main">
-    {% for p in site.data.projects %}
+    {% for p in projects %}
       <section class="project-section anchor-target" id="{{ p.key | slugify }}">
         <header class="project-header">
           <h2>{{ p.title }}{% if p.year %} ({{ p.year }}){% endif %}</h2>
-          {% if p.stack %}
-            <div class="project-meta">{{ p.stack | join: " · " }}</div>
-          {% endif %}
+          {% if p.stack %}<div class="project-meta">{{ p.stack | join: " · " }}</div>{% endif %}
         </header>
 
         {% assign img = p.image | to_s | strip %}
@@ -47,8 +48,8 @@ permalink: /projects/
   </main>
 </div>
 
-<!-- Tiny JS to highlight the active ToC item while scrolling -->
 <script>
+  // Active ToC highlighting without changing the H2 style
   (function () {
     const secs = Array.from(document.querySelectorAll('.project-section'));
     const map = new Map(secs.map(s => [s.id, document.getElementById('toc-' + s.id)]));
