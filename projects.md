@@ -4,8 +4,27 @@ title: Projects
 permalink: /projects/
 ---
 
-{% comment %} sort newest → oldest {% endcomment %}
-{% assign projects = site.data.projects | sort: "year" | reverse %}
+{% comment %}
+Sort newest → oldest using end_date for past projects,
+and today’s date if the project is current.
+{% endcomment %}
+{% assign today = 'now' | date: "%Y-%m-%d" %}
+{% assign projects_with_sort = "" | split: "" %}
+
+{% for p in site.data.projects %}
+  {% if p.status == "current" %}
+    {% assign sort_val = today %}
+  {% elsif p.end_date %}
+    {% assign sort_val = p.end_date %}
+  {% else %}
+    {% assign sort_val = p.start_date %}
+  {% endif %}
+
+  {% assign p = p | merge: {"sort_val": sort_val} %}
+  {% assign projects_with_sort = projects_with_sort | push: p %}
+{% endfor %}
+
+{% assign projects = projects_with_sort | sort: "sort_val" | reverse %}
 
 <div class="projects-layout">
   <aside class="toc">
@@ -26,14 +45,19 @@ permalink: /projects/
     {% for p in projects %}
       <section class="project-section anchor-target" id="{{ p.key | slugify }}">
         <header class="project-header">
-          <h2>{{ p.title }}{% if p.year %} ({{ p.year }}){% endif %}</h2>
+          <h2>
+            {{ p.title }}
+            {% if p.status == "current" %}
+              (In Progress{% if p.start_date %}, since {{ p.start_date | date: "%b %Y" }}{% endif %})
+            {% elsif p.start_date and p.end_date %}
+              ({{ p.start_date | date: "%b %Y" }} – {{ p.end_date | date: "%b %Y" }})
+            {% endif %}
+          </h2>
           {% if p.stack %}<div class="project-meta">{{ p.stack | join: " · " }}</div>{% endif %}
         </header>
 
         {% assign img = p.image | to_s | strip %}
-        {% if img != "" %}
-          <img class="project-hero" src="{{ img }}" alt="{{ p.title }}">
-        {% endif %}
+        {% if img != "" %}<img class="project-hero" src="{{ img }}" alt="{{ p.title }}">{% endif %}
 
         {% if p.summary_short %}<p class="project-summary">{{ p.summary_short }}</p>{% endif %}
         {% if p.summary_long %}<p>{{ p.summary_long }}</p>{% endif %}
