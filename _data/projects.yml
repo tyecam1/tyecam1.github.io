@@ -8,7 +8,7 @@
   summary_long: A reproducible gridworld environment with tabular baseline and room for PPO. Includes metrics (return, success rate, steps-to-goal), policy/value visualisations, and training diagnostics.
   repo_url:
   image: /assets/img/rl-nav-teaser.png
-  featured: true
+  featured: false
 
 - key: telemetry
   title: Robotics Telemetry Dashboard (Simulated)
@@ -19,7 +19,7 @@
   summary_long: A small, production-style app structure with simulated telemetry, WebSocket updates, and Plotly charts. Focus on clarity, configuration, and deployment notes.
   repo_url:
   image: /assets/img/telemetry-teaser.png
-  featured: true
+  featured: false
 
 - key: rl-game
   title: RL Agent in a Game

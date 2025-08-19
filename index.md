@@ -28,4 +28,4 @@ I build robotics, reinforcement learning, and systems projects with a focus on c
 ## About / Contact
 - Based in Isle of Wight, UK (Europe/London)  
 - Open to freelance and full-time roles in robotics, reinforcement learning, and systems engineering  
-- <a href="mailto:tyecameron@hotmail.co.uk">tyecameron@hotmail.co.uk</a> · <a href="https://github.com/tyecam1">GitHub @tyecam1</a> · <a href="https://www.linkedin.com/in/tye-cameron-866aa2203/">LinkedIn</a>
+- <a href="mailto:tyecameron@hotmail.co.uk">tyecameron@hotmail.co.uk</a> · <a href="https://github.com/tyecam1">GitHub @tyecam1</a> · <a href="https://www.linkedin.com/in/tye-cam/">LinkedIn</a>
