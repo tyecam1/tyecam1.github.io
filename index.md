@@ -3,6 +3,7 @@ title: Hi, I'm Tye
 ---
 
 I’m a First-Class (International) Engineering Master's graduate from Cardiff University with a KAIST exchange term.  
+  
 I build robotics, reinforcement learning, and systems projects with a focus on clean code, clear documentation, and reproducible results.
 
 ## Featured Projects
@@ -11,7 +12,8 @@ I build robotics, reinforcement learning, and systems projects with a focus on c
 {% assign featured = site.data.projects | where: "featured", true %}
 {% for p in featured %}
   <article class="featured-card">
-    <h3>{{ p.title }}</h3>
+    <h3><a href="/projects/#{{ p.key | slugify }}" style="text-decoration:none; color:inherit;">{{ p.title }}</a></h3>
+
     {% if p.stack %}
       <div class="featured-meta">{{ p.stack | join: " · " }}</div>
     {% endif %}
@@ -26,13 +28,8 @@ I build robotics, reinforcement learning, and systems projects with a focus on c
     {% endif %}
 
     <div class="featured-links">
-      {% if p.repo_url and p.repo_url != "" %}
-        <a href="{{ p.repo_url }}">Repository</a>
-      {% endif %}
-      {% if p.details_url and p.details_url != "" %}
-        {% if p.repo_url and p.repo_url != "" %} · {% endif %}
-        <a href="{{ p.details_url }}">Project details</a>
-      {% endif %}
+      <a href="/projects/#{{ p.key | slugify }}">Read more</a>
+      {% if p.repo_url and p.repo_url != "" %} · <a href="{{ p.repo_url }}">Repository</a>{% endif %}
     </div>
   </article>
 {% endfor %}
