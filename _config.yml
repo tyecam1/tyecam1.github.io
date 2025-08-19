@@ -1,5 +1,5 @@
-title: Tye Cameron-Robson
-description: Robotics • Reinforcement Learning • Systems Engineering
+title: Tye Cameron Portfolio & Blog
+description: Software • Reinforcement Learning • Systems Engineering for Robotics
 url: https://tyecam1.github.io
 theme: minima
 
@@ -8,11 +8,6 @@ header_pages:
   - projects.md
   - blog/index.md
   - about.md
-
-# Optional: author block
-author:
-  name: Tye Cameron-Robson
-  email: tyecameron@hotmail.co.uk
 
 # Markdown + plugins
 markdown: kramdown
