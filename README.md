@@ -1,7 +1,7 @@
 # Tye Cameron — Portfolio Website
 
 This repository contains the source code for my personal portfolio, built using **Jekyll** and hosted with **GitHub Pages**.  
-👉 Live site: [tyecam1.github.io](https://tyecam1.github.io)
+Live site: [tyecam1.github.io](https://tyecam1.github.io)
 
 ---
 
