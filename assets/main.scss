@@ -326,3 +326,78 @@ html { scroll-behavior: smooth; }
   margin: 0 auto;     /* centers the block */
   line-height: 1.6;
 }
+
+/* Layout width */
+.wrapper { max-width: 1180px; }
+
+/* Section container & spacing */
+.project-section {
+  max-width: 1000px;
+  margin: 0 auto 48px;
+  scroll-margin-top: 72px;
+}
+
+/* Two-column body: media | text */
+.project-body {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .project-body {
+    grid-template-columns: minmax(440px, 1fr) minmax(420px, 560px);
+    align-items: start;
+  }
+}
+
+/* Media */
+.project-media { margin: 0; }
+.project-hero {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.project-caption {
+  font-size: .9rem;
+  color: #666;
+  margin-top: 6px;
+}
+
+/* Text “card” */
+.project-text {
+  background: #fafafa;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+/* Typography */
+.project-summary {
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.project-summary-long {
+  /* If you still want justification, keep it but control line length */
+  text-align: justify;
+  line-height: 1.66;
+  max-width: 65ch;       /* comfortable reading width */
+  margin: 0;
+}
+
+.project-links { margin-top: 10px; }
+
+/* Divider spacing */
+.project-divider {
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  margin: 40px auto 56px;
+  max-width: 1000px;
+}
+
+/* Sidebar (ToC) small polish */
+.toc a { border-left: 3px solid transparent; padding: 6px 8px; }
+.toc a.active { border-left-color: #999; font-weight: 600; background: #f9f9f9; }

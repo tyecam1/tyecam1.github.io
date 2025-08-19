@@ -47,17 +47,29 @@ Dates in _data/projects.yml should be ISO strings: "YYYY-MM-DD".
           {% endif %}
         </header>
 
-        {% assign img = p.image | to_s | strip %}
-        {% if img != "" %}
-          <img class="project-hero" src="{{ img }}" alt="{{ p.title }}">
-        {% endif %}
+        <div class="project-body">
+          {% assign img = p.image | to_s | strip %}
+          {% if img != "" %}
+            <figure class="project-media">
+              <img class="project-hero" src="{{ img }}" alt="{{ p.title }}">
+              {% if p.media_caption %}
+                <figcaption class="project-caption">{{ p.media_caption }}</figcaption>
+              {% endif %}
+            </figure>
+          {% endif %}
 
-        {% if p.summary_short %}<p class="project-summary">{{ p.summary_short }}</p>{% endif %}
-        {% if p.summary_long %}<p class="project-summary-long">{{ p.summary_long }}</p>{% endif %}
-
-        {% if p.repo_url and p.repo_url != "" %}
-          <p class="project-links"><a href="{{ p.repo_url }}">Repository</a></p>
-        {% endif %}
+          <div class="project-text">
+            {% if p.summary_short %}
+              <p class="project-summary">{{ p.summary_short }}</p>
+            {% endif %}
+            {% if p.summary_long %}
+              <p class="project-summary-long">{{ p.summary_long }}</p>
+            {% endif %}
+            {% if p.repo_url and p.repo_url != "" %}
+              <p class="project-links"><a href="{{ p.repo_url }}">Repository</a></p>
+            {% endif %}
+          </div>
+        </div>
       </section>
 
       {% unless forloop.last %}<hr class="project-divider">{% endunless %}
