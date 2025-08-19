@@ -34,9 +34,9 @@
 
 # Past work (existing repos)
 - key: walkaide
-  title: WalkAide — Assistive Navigation Prototype
+  title: The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System
   status: past
-  year: 2024
+  year: 2025
   stack: [ROS, Intel RealSense (RGB-D), Python, Arduino (early), EEG logging]
   summary_short: RGB-D perception with haptic feedback; EEG tagging for cognitive-load insights.
   summary_long: Wearable navigation experiments combining RGB-D perception with haptic feedback. Includes EEG tagging to correlate cognitive load with navigation cues and system behaviour.
@@ -45,7 +45,7 @@
   featured: true
 
 - key: anymal-sumo
-  title: KAIST RL-Based Control — Quadruped ANYmal Sumo
+  title: Reinforcement Learning-Based Control of a Simulated Quadruped Agent in a Peer2Peer Sumo-Esque Tournament at KAIST
   status: past
   year: 2023
   stack: [PyTorch, RaisimGym, NumPy, Matplotlib]
@@ -56,7 +56,7 @@
   featured: true
 
 - key: fem-wing
-  title: FEM Wing Analysis — Geometry & Stress
+  title: Finite Element Method Solver for Wing Section Stress Optimisation
   status: past
   year: 2024
   stack: [Python, NumPy, SciPy, Matplotlib]
@@ -65,3 +65,15 @@
   repo_url: https://github.com/tyecam1/AircraftWing-FEM-Solver
   image: /assets/img/fem-wing.png
   featured: true
+
+- key: hybrid-tidal-wind
+  title: Hybrid Tidal–Wind Farm Design for Industrial Decarbonisation
+  status: past
+  year: 2025
+  stack: [Python, MATLAB, Renewable Energy, Sustainability Analysis]
+  summary_short: Hybrid tidal–wind arrays for decarbonising a UK silicone plant.
+  summary_long: Group design project modelling tidal and wind farm arrays, condition monitoring systems, and levelised cost of energy (LCOE) assessment. Conducted feasibility analysis using bathymetric and wind data, proposing optimal layouts for efficient energy generation and reliable grid connectivity. Demonstrated potential of marine renewables for industrial repowering in the Severn Estuary & Bristol Channel.
+  repo_url: 
+  image: /assets/img/tidal-array.png
+  featured: true
+
