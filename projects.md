@@ -6,36 +6,26 @@ permalink: /projects/
 
 # Projects
 
-## Current Focus (2025)
+## Current
+{% assign current = site.data.projects | where: "status", "current" %}
+{% for p in current %}
+### {{ p.title }} ({{ p.year }})
+{% if p.image %}![{{ p.title }}]({{ p.image }}){% endif %}
+<strong>Stack:</strong> {{ p.stack | join: " · " }}  
+<strong>Overview:</strong> {{ p.summary_long }}  
+{% if p.repo_url %}<strong>Repo:</strong> <a href="{{ p.repo_url }}">{{ p.repo_url }}</a>{% else %}<strong>Repo:</strong> Coming soon{% endif %}
 
-### RL Navigation (Gridworld)
-**Stack:** PyTorch, Gymnasium, NumPy, Matplotlib  
-**What:** Agent learns obstacle-aware shortest paths; training curves, success rate, and policy heatmaps.  
-**Repo:** (link coming soon)  
-**Post:** (blog link coming soon)
+---
+{% endfor %}
 
-### Robotics Telemetry Dashboard (Simulated)
-**Stack:** Python, Flask or Streamlit, Plotly  
-**What:** Real-time simulated robot telemetry (speed, yaw, battery) with live charts + WebSocket updates.  
-**Repo:** (link coming soon)  
-**Post:** (blog link coming soon)
+## Past
+{% assign past = site.data.projects | where: "status", "past" %}
+{% for p in past %}
+### {{ p.title }} ({{ p.year }})
+{% if p.image %}![{{ p.title }}]({{ p.image }}){% endif %}
+<strong>Stack:</strong> {{ p.stack | join: " · " }}  
+<strong>Overview:</strong> {{ p.summary_long }}  
+{% if p.repo_url %}<strong>Repo:</strong> <a href="{{ p.repo_url }}">{{ p.repo_url }}</a>{% endif %}
 
-### RL Agent in a Game
-**Stack:** Unity ML-Agents (or PyBullet), PPO baseline  
-**What:** Simple control task with a trained agent; GIF/video demo and metrics.  
-**Repo:** (link coming soon)  
-**Post:** (blog link coming soon)
-
-## Past Work
-
-### WalkAide — Assistive Navigation Prototype
-**Stack:** ROS, Intel RealSense (RGB-D), Python, Arduino (early), EEG logging  
-**Repo:** https://github.com/tyecam1/Mechatronic-Walkaide
-
-### KAIST RL-Based Control — Quadruped ANYmal Sumo
-**Stack:** PyTorch, RaisimGym, NumPy, Matplotlib  
-**Repo:** https://github.com/tyecam1/KAIST-Anymal-Sumo
-
-### FEM Wing Analysis — Geometry & Stress
-**Stack:** Python (NumPy/SciPy/Matplotlib), custom FEA, sparse optimisation  
-**Repo:** https://github.com/tyecam1/AircraftWing-FEM-Solver
+---
+{% endfor %}

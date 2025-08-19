@@ -1,0 +1,67 @@
+# Current work (planned/new)
+- key: rl-nav
+  title: RL Navigation (Gridworld)
+  status: current
+  year: 2025
+  stack: [Python, PyTorch, Gymnasium, NumPy, Matplotlib]
+  summary_short: Agent learns obstacle-aware shortest paths; plots, policy heatmaps, and trajectory animations.
+  summary_long: A reproducible gridworld environment with tabular baseline and room for PPO. Includes metrics (return, success rate, steps-to-goal), policy/value visualisations, and training diagnostics.
+  repo_url:
+  image: /assets/img/rl-nav-teaser.png
+  featured: true
+
+- key: telemetry
+  title: Robotics Telemetry Dashboard (Simulated)
+  status: current
+  year: 2025
+  stack: [Python, Flask/Streamlit, Plotly]
+  summary_short: Simulated robot state streamed to a live web dashboard with updating charts.
+  summary_long: A small, production-style app structure with simulated telemetry, WebSocket updates, and Plotly charts. Focus on clarity, configuration, and deployment notes.
+  repo_url:
+  image: /assets/img/telemetry-teaser.png
+  featured: true
+
+- key: rl-game
+  title: RL Agent in a Game
+  status: current
+  year: 2025
+  stack: [Unity ML-Agents or PyBullet, PPO]
+  summary_short: Baseline agent for a simple control task with recorded video results.
+  summary_long: An eye-catching baseline experiment using ML-Agents (or PyBullet) with saved checkpoints, evaluation metrics, and a short demo video.
+  repo_url:
+  image: /assets/img/rl-game-teaser.png
+  featured: false
+
+# Past work (existing repos)
+- key: walkaide
+  title: WalkAide — Assistive Navigation Prototype
+  status: past
+  year: 2024
+  stack: [ROS, Intel RealSense (RGB-D), Python, Arduino (early), EEG logging]
+  summary_short: RGB-D perception with haptic feedback; EEG tagging for cognitive-load insights.
+  summary_long: Wearable navigation experiments combining RGB-D perception with haptic feedback. Includes EEG tagging to correlate cognitive load with navigation cues and system behaviour.
+  repo_url: https://github.com/tyecam1/Mechatronic-Walkaide
+  image: /assets/img/walkaide.png
+  featured: true
+
+- key: anymal-sumo
+  title: KAIST RL-Based Control — Quadruped ANYmal Sumo
+  status: past
+  year: 2023
+  stack: [PyTorch, RaisimGym, NumPy, Matplotlib]
+  summary_short: PPO baselines and curriculum learning for competing ANYmal-inspired agents.
+  summary_long: Tournament setting with curriculum learning (including leap behaviour). Includes reward curves, evaluation protocol, and discussion of transferability.
+  repo_url: https://github.com/tyecam1/KAIST-Anymal-Sumo
+  image: /assets/img/anymal-sumo.png
+  featured: true
+
+- key: fem-wing
+  title: FEM Wing Analysis — Geometry & Stress
+  status: past
+  year: 2024
+  stack: [Python, NumPy, SciPy, Matplotlib]
+  summary_short: 2D wing geometry generator, constraint handling, principal stress evaluation.
+  summary_long: Custom FEA workflow with area targeting and sparse optimisation; includes geometry plots and stress visualisations.
+  repo_url: https://github.com/tyecam1/AircraftWing-FEM-Solver
+  image: /assets/img/fem-wing.png
+  featured: true
