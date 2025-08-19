@@ -43,3 +43,70 @@
 /* Smooth anchor scroll + offset for header */
 .anchor-target { scroll-margin-top: 72px; }
 html { scroll-behavior: smooth; }
+
+/* --- Projects page: sectioned "sub-pages" --- */
+
+.project-nav{
+  margin: 8px 0 18px;
+  font-size: .95rem;
+}
+.project-nav a{ text-decoration: underline; }
+
+/* Keep overall page comfortable */
+.wrapper{ max-width: 1040px; }
+
+/* Each project as its own block */
+.project-section{
+  max-width: 860px;         /* centered readable width */
+  margin: 0 auto 44px;      /* space beneath each section */
+  padding: 8px 0 0;
+}
+
+.project-header h2{
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.project-meta{
+  color: #666;
+  font-size: .95rem;
+  margin-bottom: 10px;
+}
+
+.project-hero{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #e9e9e9;
+  display: block;
+  margin: 8px 0 12px;
+}
+
+.project-summary{
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.project-links{
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+.project-links a{
+  text-decoration: underline;
+}
+.project-links .back-to-top{
+  float: right;
+}
+
+/* Visual separation between sections */
+.project-divider{
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  margin: 38px auto 44px;
+  max-width: 860px;
+}
+
+/* Smooth anchor scrolling and header offset */
+html{ scroll-behavior: smooth; }
+.anchor-target{ scroll-margin-top: 72px; }  /* adjust if your header height differs */
