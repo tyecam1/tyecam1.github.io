@@ -49,7 +49,7 @@
   status: past
   year: 2023
   stack: [PyTorch, RaisimGym, NumPy, Matplotlib]
-  summary_short: PPO baselines and curriculum learning for competing ANYmal-inspired agents.
+  summary_short: PPO baselines and curriculum learning for competitive quadruped ANYmal sumo agents.
   summary_long: Tournament setting with curriculum learning (including leap behaviour). Includes reward curves, evaluation protocol, and discussion of transferability.
   repo_url: https://github.com/tyecam1/KAIST-Anymal-Sumo
   image: /assets/img/anymal-sumo.png
@@ -60,7 +60,7 @@
   status: past
   year: 2024
   stack: [Python, NumPy, SciPy, Matplotlib]
-  summary_short: 2D wing geometry generator, constraint handling, principal stress evaluation.
+  summary_short: This custom FE solver finds the optimal geometry and material properties to provide the minimum stress & deformation of a 2d wing cross section under a constant area.
   summary_long: Custom FEA workflow with area targeting and sparse optimisation; includes geometry plots and stress visualisations.
   repo_url: https://github.com/tyecam1/AircraftWing-FEM-Solver
   image: /assets/img/fem-wing.png
@@ -71,7 +71,7 @@
   status: past
   year: 2025
   stack: [Python, MATLAB, Renewable Energy, Sustainability Analysis]
-  summary_short: Hybrid tidal–wind arrays for decarbonising a UK silicone plant.
+  summary_short: Hybrid tidal–wind energy park design portfolio in aid of the decarbonisation of a UK silicone plant.
   summary_long: Group design project modelling tidal and wind farm arrays, condition monitoring systems, and levelised cost of energy (LCOE) assessment. Conducted feasibility analysis using bathymetric and wind data, proposing optimal layouts for efficient energy generation and reliable grid connectivity. Demonstrated potential of marine renewables for industrial repowering in the Severn Estuary & Bristol Channel.
   repo_url: 
   image: /assets/img/tidal-array.png

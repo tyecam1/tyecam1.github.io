@@ -7,3 +7,47 @@
 .site-footer {
   display: none;
 }
+
+/* Widen content so there’s less blank space on the sides */
+.wrapper {
+  max-width: 1040px;   /* was ~800px in minima */
+  padding: 0 22px;
+}
+
+/* Tighter vertical rhythm */
+.page-content { padding: 24px 0; }
+.post-content h2 { margin-top: 2rem; margin-bottom: 0.75rem; }
+.post-content h3 { margin-top: 1.25rem; margin-bottom: 0.25rem; }
+hr { margin: 1.2rem 0; }
+
+/* Projects grid + cards (subtle, professional) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.project {
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.project:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.project h3 { margin-top: 0; }
+.project .stack { color: #666; font-size: 0.95rem; }
+.project .thumb {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 8px 0 12px;
+  display: block;
+}
+.project .summary { margin: 0.25rem 0 0.5rem; }
+.project .links a { text-decoration: underline; }
