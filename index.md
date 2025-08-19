@@ -1,9 +1,7 @@
 ---
 layout: home
-title: Home
+title: Hi, I'm Tye
 ---
-
-# Hi, I’m Tye
 
 I’m a First-Class (International) Engineering Master's graduate from Cardiff University with a KAIST exchange term.  
 I build robotics, reinforcement learning, and systems projects with a focus on clean code, clear documentation, and reproducible results.
@@ -12,7 +10,7 @@ I build robotics, reinforcement learning, and systems projects with a focus on c
 {% assign current = site.data.projects | where: "status", "current" %}
 <ul>
 {% for p in current %}
-  <li><strong>{{ p.title }}</strong> — {{ p.summary_short }}</li>
+  <li><strong>{{ p.title }}</strong> — {{ p.summary_short }}</li>  
 {% endfor %}
 </ul>
 
@@ -20,8 +18,8 @@ I build robotics, reinforcement learning, and systems projects with a focus on c
 {% assign featured = site.data.projects | where: "featured", true %}
 {% for p in featured %}
 ### {{ p.title }}
-{% if p.image %}![{{ p.title }}]({{ p.image }}){% endif %}
-<strong>Stack:</strong> {{ p.stack | join: " · " }}<br>  
+{% if p.image %}![{{ p.title }}]({{ p.image }}){% endif %}  
+<strong>Stack:</strong> {{ p.stack | join: " · " }}  
 <strong>Summary:</strong> {{ p.summary_short }}  
 {% if p.repo_url %}<strong>Repo:</strong> <a href="{{ p.repo_url }}">{{ p.repo_url }}</a>{% endif %}
 
