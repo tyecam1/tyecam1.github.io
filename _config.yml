@@ -1,0 +1,29 @@
+title: Tye Cameron-Robson
+description: Robotics • Reinforcement Learning • Systems Engineering
+url: https://YOURUSERNAME.github.io
+theme: minima
+
+# Show “Projects” and “Blog” in the top nav
+header_pages:
+  - projects.md
+  - blog/index.md
+
+# Basic author/meta
+author:
+  name: Tye Cameron
+  email: tyecameron@otmail.co.uk
+  github_username: tyecam1
+  linkedin: tye-cameron-866aa2203
+
+# Nice extras
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Optional: clean permalinks for posts
+permalink: /blog/:year/:month/:day/:title/
+
+# Optional: favicon / assets folder if you add them later
+# favicon: /assets/img/favicon.ico
+
