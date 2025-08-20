@@ -50,7 +50,7 @@ Dates in _data/projects.yml should be ISO strings: "YYYY-MM-DD".
         <div class="project-body">
           {% assign img = p.image | to_s | strip %}
           {% if img != "" %}
-            <figure class="project-media project-media-block">
+            <figure class="project-media">
               <img class="project-hero" src="{{ img }}" alt="{{ p.title }}">
               {% if p.media_caption %}
                 <figcaption class="project-caption">{{ p.media_caption }}</figcaption>
@@ -70,6 +70,7 @@ Dates in _data/projects.yml should be ISO strings: "YYYY-MM-DD".
             {% endif %}
           </div>
         </div>
+
       </section>
 
       {% unless forloop.last %}<hr class="project-divider">{% endunless %}
