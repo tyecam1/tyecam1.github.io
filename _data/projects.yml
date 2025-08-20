@@ -21,14 +21,14 @@
 
 - key: anymal-sumo 
   toc_title: RL Quadruped Sumo Tournament
-  title: Reinforcement Learning-Based Control of a Quadruped Agent in a simulated Sumo Arena
+  title: Reinforcement Learning-Based Control of a Quadruped Agent in a Simulated Sumo Arena
   status: past
   start_date: "2023-08-16"
   end_date: "2024-01-05"
-  stack: [PyTorch, RaisimGym, NumPy, Matplotlib]
+  stack: [PyTorch, RaisimGym, NumPy, Cuda, PPO]
   summary_short: >
-    Competitive ANYmal control in a sumo arena using PPO and curriculum learning, delivered as part
-    of Prof. Jemin Hwangbo’s RL module at KAIST.
+    Competitive ANYmal robot control in a class sumo tournament using PPO and curriculum learning, delivered as part
+    of Prof. Jemin Hwangbo’s Reinfocement Learning-based control module at KAIST.
   summary_long: >
     Agents were trained in raisimGym to compete head-to-head in a sumo-style arena. The project
     built on formal teaching of on-policy vs off-policy methods, Q-functions, policy gradients, and
@@ -47,8 +47,8 @@
   end_date: "2024-12-12"
   stack: [Python, NumPy, SciPy, Matplotlib, PyVista, Gmsh]
   summary_short: >
-    A custom 2D wing-section FEA solver built in Python: geometry generation, Gmsh meshing,
-    quadrature-based assembly, stress visualisation, and geometry/material optimisation.
+    A custom 2D wing-section FEA solver built in Python: geometry generation; Gmsh meshing;
+    quadrature-based assembly; stress and deformation visualisation and geometry/material optimisation.
   summary_long: >
     The package implements a full FEA pipeline with orthotropic elasticity, Gaussian quadrature,
     sparse global assembly, Dirichlet boundary conditions at the root, and stress recovery
@@ -78,15 +78,14 @@
   featured: false
 
 - key: hybrid-tidal-wind
-  title: Hybrid Tidal–Wind Farm Design Portfolio for Industrial Decarbonisation
+  title: A Feasability-Aware Portfolio for the Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary
   toc_title: Energy Park Design
   status: past
   start_date: "2024-09-18"
   end_date: "2025-05-01"
   stack: [Python, MATLAB, Renewable Energy, Sustainability Analysis]
   summary_short: >
-    Designed hybrid tidal–wind arrays to repower a UK silicone plant, combining resource assessment,
-    farm-layout optimisation, and LCOE modelling for industrial decarbonisation.
+    Assessed the feasibility of tidal and wind arrays in the Severn Estuary, from resource assessment to turbine design, topographic optimisation and the overall levelised cost of energy.
   summary_long: >
     Site feasibility was built from bathymetry of the Severn Estuary and wind data from the Bristol
     Channel. My contributions: (1) modelling tidal and wind array performance to maximise capture

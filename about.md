@@ -1,10 +1,8 @@
 ---
 layout: page
-title: About
+title: About me
 permalink: /about/
 ---
-
-# About Me
 
 I grew up on the Isle of Wight, surrounded by natural beauty and a community that valued both **creativity** and **sustainability**. True to those roots, my first piece of academic work was an Extended Project Qualification (EPQ) at age 17, titled *“Tidal Energy on the Isle of Wight”*. It was a technical deep dive into tidal energy conversion devices, their local applicability, and a comparison with other sustainable energy technologies.
 
@@ -24,17 +22,17 @@ I’m currently based on the Isle of Wight, reviewing the best opportunities to 
 
 ## My Timeline
 
-- Extended Project Qualification: *A feasibility study of Tidal Energy on the Isle of Wight*
-
+- Extended Project Qualification: *A feasibility study of Tidal Energy on the Isle of Wight*  
+  
 - First Class undergraduate Mechanical Engineering Degree:
 	- Programming focus
-	- Bosch Thermotechnology Ltd: Industrial placement, Quality & Test Rigs
-	- Dissertation: *Control of a Hydraulic Cylinder System under Varying Loads*<br>
-
+	- Bosch Thermotechnology Ltd: Industrial placement, Quality Dept.
+	- Dissertation: *Control of a Hydraulic Cylinder System under Varying Loads*  
+  
 - First Class Master's Mechanical Engineering Degree:
 	- Simulation & Mechatronics focus 
 	- KAIST (South Korea): Robotics, Reinforcement Learning, AI
-	- Energy Park Project: *A Feasable Portfolio for the Start-Finish Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary*
-	- Mechatronics Project: *The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System*<br>
-
+	- Energy Park Project: *A Feasability-Aware Portfolio for the Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary*
+	- Mechatronics Project: *The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System*  
+  
 - Now: Independent projects in software, RL, and systems engineering for robotics.
