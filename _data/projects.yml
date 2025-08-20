@@ -4,7 +4,7 @@
   status: past
   start_date: "2024-09-18"
   end_date: "2025-05-03"
-  stack: 
+  stack:
     - ROS Noetic
     - RTAB-Map (RGB-D VSLAM)
     - Hector-SLAM (LiDAR prototype)
@@ -59,7 +59,7 @@
   featured: true
 
 
-- key: anymal-sumo 
+- key: anymal-sumo
   toc_title: RL Quadruped Sumo Tournament
   title: Reinforcement Learning-Based Control of a Quadruped Agent in a Simulated Sumo Arena
   status: past
