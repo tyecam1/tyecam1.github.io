@@ -190,3 +190,63 @@ a { text-underline-offset: 2px; }
 
 .muted { color: var(--muted); }
 .nowrap { white-space: nowrap; }
+
+.projects-main .project-section .project-subhead {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  margin: 0 0 .4rem;
+  color: #444;
+}
+
+.projects-main .project-section .project-subsubhead {
+  font-size: .95rem;
+  font-weight: 700;
+  margin: 1rem 0 .25rem;
+  color: #444;
+}
+
+.project-list { margin: 0 0 .5rem 1rem; }
+
+.project-tags { margin: .25rem 0 .5rem; }
+.tag-chip {
+  display: inline-block;
+  font-size: .8rem;
+  padding: 2px 8px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  background: #fff;
+}
+
+.project-cta { margin-top: 12px; }
+.btn {
+  display: inline-block;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-right: 8px;
+}
+.btn:hover { background: #f3f3f3; }
+
+.project-notes summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: .75rem;
+}
+.project-notes .notes-body { margin-top: .5rem; }
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.project-gallery img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+}

@@ -4,20 +4,60 @@
   status: past
   start_date: "2024-09-18"
   end_date: "2025-05-03"
-  stack: [ROS, Intel RealSense (RGB-D), Python, Arduino (early), EEG logging]
+  stack: 
+    - ROS Noetic
+    - RTAB-Map (RGB-D VSLAM)
+    - Hector-SLAM (LiDAR prototype)
+    - Intel RealSense D435i
+    - Arduino Nano 33 BLE
+    - LattePanda Delta 3
+    - Python (PCL, custom ROS nodes)
+    - EEG logging
   summary_short: >
-    A wearable navigation system combining RGB-D vision, real-time mapping, and haptic feedback,
-    extended with EEG tagging to assess user cognitive load during navigation.
-  summary_long: >
-    This project developed and evaluated a wearable robotic navigation aid designed to assist
-    visually impaired users. The system integrated an Intel RealSense RGB-D camera for depth
-    perception, ROS for mapping/localisation, and microcontrollers for haptic actuators.
-    Multiple feedback strategies were compared under controlled scenarios. An EEG logging pipeline
-    synchronised haptic events and motor commands with the EEG timeline to correlate cognitive
-    load with navigation difficulty, providing insight into usability and mental workload.
+    A wearable robotic navigation system with haptic feedback and EEG logging, 
+    designed for visually impaired navigation and evaluated through controlled trials.
+  case_study:
+    background: >
+      Navigation assistance for visually impaired individuals often relies on canes or GPS-based 
+      systems, which can struggle in indoor, cluttered, or unstructured environments. This project 
+      aimed to design a wearable robotic aid combining RGB-D vision, real-time mapping, and 
+      haptic feedback, while also testing how different haptic feedback strategies and environmental 
+      conditions affect usability and cognitive load.
+    methods: >
+      The system used an Intel RealSense D435i RGB-D camera for depth perception, ROS Noetic for 
+      mapping/localisation, and Arduino-driven actuators for haptic cues. Two haptic feedback 
+      strategies were implemented and compared: (i) a compass system applying directional pressure 
+      with a fixed back reference point, and (ii) a pulling system tightening shoulder straps. EEG 
+      logging synchronised haptic and motor events with brain activity for workload analysis.
+    experiments: >
+      Four participants were tested in controlled indoor environments with and without patterned 
+      walls to investigate the effect of visual texture on VSLAM performance and user outcomes. 
+      Each participant trialled both haptic feedback systems while reaction times, collision frequency, 
+      odometry loss, and success rates were recorded.
+    results: >
+      The compass system consistently outperformed the pulling system, achieving higher success 
+      rates (83–77% vs. 50–66%), fewer collisions (0–0.42 vs. up to 1.17 per trial), lower odometry 
+      losses, and faster average reaction times (3.43–3.67s vs. ~4.5–4.9s). Qualitative feedback 
+      indicated compass cues were clearer, though the pulling system was more comfortable. 
+      Patterned walls improved mapping stability, but rapid turns remained a failure mode for VSLAM.
+    limitations: >
+      The study involved only four participants, and actuator torque limits reduced cue intensity. 
+      VSLAM performance degraded during rapid motion, and haptic comfort was not deeply optimised. 
+      EEG logging was implemented, but a full statistical analysis of cognitive load was not completed 
+      within the project timeframe.
+    future_work: >
+      Future improvements include stronger actuators, adaptive haptic intensity based on user 
+      response, multi-camera fusion for robust mapping, and larger-scale trials to validate 
+      statistical significance. EEG-based workload metrics should be fully analysed to strengthen 
+      insights into usability.
   repo_url: https://github.com/tyecam1/Mechatronic-Walkaide
   image: /assets/img/walkaide.png
+  gallery:
+    - /assets/img/walkaide-system.png
+    - /assets/img/walkaide-experiment.png
+    - /assets/img/walkaide-results.png
   featured: true
+
 
 - key: anymal-sumo 
   toc_title: RL Quadruped Sumo Tournament
