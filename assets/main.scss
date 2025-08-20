@@ -401,3 +401,19 @@ html { scroll-behavior: smooth; }
 /* Sidebar (ToC) small polish */
 .toc a { border-left: 3px solid transparent; padding: 6px 8px; }
 .toc a.active { border-left-color: #999; font-weight: 600; background: #f9f9f9; }
+
+.project-media-block {
+  display: block;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+}
+
+.project-hero {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.project-text {
+  text-align: justify;
+}
