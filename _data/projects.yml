@@ -1,138 +1,568 @@
 - key: walkaide
   title: The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System
-  toc_title: Robotic Walk-Aide
+  one_liner: Directional haptic feedback with RGB-D VSLAM reduced collisions and improved success rates in wearable navigation trials.
+  summary_short: >
+    A wearable robotic navigation system integrating RGB-D VSLAM, haptic feedback, and EEG logging.
+    Trials showed directional compass cues improved success, safety, and reaction times compared to pulling cues.
   status: past
-  start_date: "2024-09-18"
-  end_date: "2025-05-03"
+  dates:
+    start: "2024-09-18"
+    end: "2025-05-03"
+
+  role: Lead Developer (solo project)
+  domain: Robotics
   stack:
     - ROS Noetic
+    - Python (custom ROS nodes, PCL)
     - RTAB-Map (RGB-D VSLAM)
     - Hector-SLAM (LiDAR prototype)
     - Intel RealSense D435i
     - Arduino Nano 33 BLE
     - LattePanda Delta 3
-    - Python (PCL, custom ROS nodes)
-    - EEG logging
-  summary_short: >
-    A wearable robotic navigation system with haptic feedback and EEG logging, 
-    designed for visually impaired navigation and evaluated through controlled trials.
-  case_study:
-    background: >
-      Navigation assistance for visually impaired individuals often relies on canes or GPS-based 
-      systems, which can struggle in indoor, cluttered, or unstructured environments. This project 
-      aimed to design a wearable robotic aid combining RGB-D vision, real-time mapping, and 
-      haptic feedback, while also testing how different haptic feedback strategies and environmental 
-      conditions affect usability and cognitive load.
-    methods: >
-      The system used an Intel RealSense D435i RGB-D camera for depth perception, ROS Noetic for 
-      mapping/localisation, and Arduino-driven actuators for haptic cues. Two haptic feedback 
-      strategies were implemented and compared: (i) a compass system applying directional pressure 
-      with a fixed back reference point, and (ii) a pulling system tightening shoulder straps. EEG 
-      logging synchronised haptic and motor events with brain activity for workload analysis.
-    experiments: >
-      Four participants were tested in controlled indoor environments with and without patterned 
-      walls to investigate the effect of visual texture on VSLAM performance and user outcomes. 
-      Each participant trialled both haptic feedback systems while reaction times, collision frequency, 
-      odometry loss, and success rates were recorded.
-    results: >
-      The compass system consistently outperformed the pulling system, achieving higher success 
-      rates (83–77% vs. 50–66%), fewer collisions (0–0.42 vs. up to 1.17 per trial), lower odometry 
-      losses, and faster average reaction times (3.43–3.67s vs. ~4.5–4.9s). Qualitative feedback 
-      indicated compass cues were clearer, though the pulling system was more comfortable. 
-      Patterned walls improved mapping stability, but rapid turns remained a failure mode for VSLAM.
-    limitations: >
-      The study involved only four participants, and actuator torque limits reduced cue intensity. 
-      VSLAM performance degraded during rapid motion, and haptic comfort was not deeply optimised. 
-      EEG logging was implemented, but a full statistical analysis of cognitive load was not completed 
-      within the project timeframe.
-    future_work: >
-      Future improvements include stronger actuators, adaptive haptic intensity based on user 
-      response, multi-camera fusion for robust mapping, and larger-scale trials to validate 
-      statistical significance. EEG-based workload metrics should be fully analysed to strengthen 
-      insights into usability.
-  repo_url: https://github.com/tyecam1/Mechatronic-Walkaide
-  image: /assets/img/walkaide.png
-  gallery:
-    - /assets/img/walkaide-system.png
-    - /assets/img/walkaide-experiment.png
-    - /assets/img/walkaide-results.png
-  featured: true
+    - Raspberry Pi 4
+    - EEG logging (Emotiv, CYKIT)
+    - Artificial Potential Fields (navigation)
 
+  highlights:
+    - Built wearable navigation system integrating RGB-D VSLAM, APF, and haptic actuators.
+    - Compared two haptic strategies (compass vs pulling) under controlled blindfold trials.
+    - Logged synchronised EEG data for workload and usability analysis.
+    - Demonstrated VSLAM stability improvements with textured environments.
+    - Delivered reproducible ROS/Arduino testbed for future assistive robotics research.
+
+  impact_metrics:
+    - label: Success rate
+      value: "83–77% vs 50–66%"
+      note: Compass vs pulling systems
+    - label: Collisions per trial
+      value: "0–0.42 vs up to 1.17"
+      note: Compass vs pulling
+    - label: Reaction time
+      value: "3.43–3.67 s vs ~4.5–4.9 s"
+      note: Compass vs pulling feedback
+    - label: Participants
+      value: "4"
+      note: Blindfolded indoor trials in patterned vs plain environments
+
+  links:
+    repo: "https://github.com/tyecam1/Mechatronic-Walkaide"
+    docs: ""
+    demo: ""
+    video: ""
+    paper: ""
+    dataset: ""
+
+  media:
+    hero:
+      src: "/assets/img/walkaide.png"
+      alt: "Wearable harness with RGB-D depth camera and Arduino-driven haptic actuators"
+      caption: "Prototype wearable navigation system."
+    gallery:
+      - src: "/assets/img/walkaide-system.png"
+        alt: "Block diagram of WalkAid system architecture"
+        caption: "System design: perception, SLAM, and haptic control."
+      - src: "/assets/img/walkaide-experiment.png"
+        alt: "Participant trialling wearable harness in indoor environment"
+        caption: "Controlled blindfolded trials in textured vs plain rooms."
+      - src: "/assets/img/walkaide-results.png"
+        alt: "Results chart showing comparative success, collisions, and reaction times"
+        caption: "Compass vs pulling system performance comparison."
+
+  tags:
+    - Assistive Robotics
+    - Haptics
+    - VSLAM
+    - Human Factors
+    - SLAM
+
+  case_study:
+    problem: >
+      Visually impaired navigation aids often rely on canes or GPS, which struggle in cluttered,
+      indoor, or low-texture environments. This project explored whether wearable haptics coupled
+      with RGB-D SLAM could provide reliable, intuitive guidance.
+    approach: >
+      Designed a ROS-based pipeline combining RealSense D435i RGB-D perception,
+      RTAB-Map localisation, APF navigation, and Arduino-driven haptic actuators.
+      Two feedback modalities were implemented: (i) compass pressure with a back reference,
+      (ii) pulling straps tightening to indicate direction. EEG event logging
+      synchronised haptic/motor cues with neural activity.
+    experiments: >
+      Four blindfolded participants navigated indoor routes in both textured and plain environments,
+      trialling both haptic systems. Recorded metrics: task success, collisions, odometry loss,
+      reaction time, and qualitative feedback.
+    results: >
+      Compass cues achieved higher success (83–77% vs 50–66%), fewer collisions (0–0.42 vs 1.17),
+      and faster reactions (3.4s vs 4.8s). Textured walls improved SLAM stability, though rapid turns
+      remained a failure mode. Participants reported compass cues clearer, pulling more comfortable.
+      EEG was logged but not fully statistically analysed within timeframe.
+    challenges: >
+      - Servo torque limited haptic salience.
+      - VSLAM degraded during rapid turns and in plain environments.
+      - Small sample size (n=4) limited statistical significance.
+      - Multi-device ROS integration across WiFi and TF frames was error-prone.
+    learnings: >
+      - Body-referenced directional cues are clearer than pull-based cues for indoor navigation.
+      - Visual texture significantly stabilises VSLAM; lighting less critical.
+      - Event-synchronised EEG logging is feasible with ROS pipelines.
+      - Iterative debugging (Python 2→3 ports, SLAM parameter tuning) was critical.
+    next_steps: >
+      Develop lighter, stronger actuators with adaptive feedback,
+      integrate multi-camera or sensor fusion for robust SLAM,
+      run larger participant studies for statistical validation,
+      and complete EEG workload analysis to inform design choices.
+
+  ownership:
+    responsibilities:
+      - Designed overall system architecture and custom ROS nodes.
+      - Implemented APF navigation and haptic control logic.
+      - Integrated perception, mapping, and Arduino feedback.
+      - Conducted trials, logged metrics, and analysed outcomes.
+    team: []  # solo project
+
+  meta:
+    featured: true
+    order: 1
+    visibility: public
 
 - key: anymal-sumo
-  toc_title: RL Quadruped Sumo Tournament
   title: Reinforcement Learning-Based Control of a Quadruped Agent in a Simulated Sumo Arena
-  status: past
-  start_date: "2023-08-16"
-  end_date: "2024-01-05"
-  stack: [PyTorch, RaisimGym, NumPy, Cuda, PPO]
+  one_liner: Trained ANYmal robots with PPO and curriculum learning to compete in a class sumo tournament, achieving emergent leap-attack behaviours.
   summary_short: >
-    Competitive ANYmal robot control in a class sumo tournament using PPO and curriculum learning, delivered as part
-    of Prof. Jemin Hwangbo’s Reinfocement Learning-based control module at KAIST.
-  summary_long: >
-    Agents were trained in raisimGym to compete head-to-head in a sumo-style arena. The project
-    built on formal teaching of on-policy vs off-policy methods, Q-functions, policy gradients, and
-    SGD/Adam optimisation. I implemented a PPO baseline and curriculum scheduling to improve robustness,
-    yielding behaviours such as a leap attack that proved decisive in the class tournament. Results
-    included learning curves, trajectory visualisations, and reproducible configs.
-  repo_url: https://github.com/tyecam1/KAIST-Anymal-Sumo
-  image: /assets/img/anymal-sumo.png
-  featured: true
+    A competitive reinforcement learning project at KAIST where ANYmal robots,
+    trained with PPO and curriculum scheduling in RaisimGym, developed emergent
+    tactics like a leap attack. Ranked 24th in a tournament against PhD and MSc peers.
+  status: past
+  dates:
+    start: "2023-08-16"
+    end: "2024-01-05"
+
+  role: Reinforcement Learning Engineer (course project)
+  domain: Reinforcement Learning
+  stack:
+    - PyTorch
+    - RaiSim / RaisimGym
+    - PPO (on-policy)
+    - Curriculum Learning
+    - CUDA
+    - NumPy
+    - TensorBoard
+
+  highlights:
+    - Implemented PPO baseline with curriculum scheduling for ANYmal control.
+    - Trained full ANYmal model (no simplification) with joint torque actuation.
+    - Designed reward shaping and curriculum progression for robustness.
+    - Developed emergent “leap attack” behaviour that improved tournament results.
+    - Delivered reproducible configs, visualisations, and learning curve analysis.
+
+  impact_metrics:
+    - label: Tournament placement
+      value: "24th"
+      note: Among MSc/PhD peers in KAIST RL-based control course
+    - label: Training scale
+      value: "1M+ PPO iterations"
+      note: Parallel vectorised environments with GPU acceleration
+    - label: Emergent tactics
+      value: "Leap attack, edge pushing"
+      note: Strategies discovered during training, not hand-coded
+
+  links:
+    repo: "https://github.com/tyecam1/KAIST-Anymal-Sumo"
+    docs: ""
+    demo: ""
+    video: ""
+    paper: ""
+    dataset: ""
+
+  media:
+    hero:
+      src: "/assets/img/anymal-sumo.png"
+      alt: "ANYmal quadruped simulation in sumo arena"
+      caption: "ANYmal robot trained with PPO in RaisimGym sumo arena."
+    gallery: []
+
+  tags:
+    - Reinforcement Learning
+    - Robotics
+    - PPO
+    - Curriculum Learning
+    - Simulation
+
+  case_study:
+    problem: >
+      Quadruped locomotion and control in competitive, adversarial settings is
+      challenging due to contact dynamics, sparse rewards, and adversarial opponents.
+      The project required training ANYmal to push an opponent out of a circular arena.
+    approach: >
+      Implemented Proximal Policy Optimization (PPO) in PyTorch with RaisimGym,
+      vectorised environments, and curriculum learning. Observations included joint
+      positions, velocities, and opponent proximity; actions were joint torques.
+      Reward shaping encouraged stance stability, forward force, and opponent displacement.
+    experiments: >
+      Trained agents in parallelised environments with curriculum scheduling
+      (progressively increasing opponent difficulty and arena constraints).
+      Baseline PPO runs compared against curriculum-enhanced runs. Behaviour evaluated
+      qualitatively (emergent tactics) and quantitatively (reward curves, win rate).
+    results: >
+      Curriculum learning accelerated convergence and produced robust policies.
+      Learned behaviours included stance widening, edge pushing, and an emergent
+      leap attack which proved decisive in the class sumo tournament. Final ranking:
+      24th overall among international MSc/PhD students.
+    challenges: >
+      - Balancing reward shaping to avoid trivial locomotion collapse.
+      - Stabilising training under high variance with adversarial interactions.
+      - Debugging vectorised environment wrappers and curriculum callbacks.
+    learnings: >
+      - Curriculum learning improved robustness and convergence in adversarial RL.
+      - Complex emergent strategies can arise without explicit coding if reward
+        functions are carefully structured.
+      - Visualisation and reward decomposition were critical for debugging policies.
+    next_steps: >
+      Extend to multi-agent self-play with dynamic opponent pools, integrate
+      domain randomisation for sim-to-real transfer, and explore hybrid model-based
+      + model-free approaches for faster convergence.
+
+  ownership:
+    responsibilities:
+      - Implemented PPO training loop and curriculum scheduler.
+      - Designed reward shaping and environment configuration.
+      - Ran experiments on GPU clusters with TensorBoard monitoring.
+      - Analysed emergent behaviours and tournament outcomes.
+    team: []  # Individual project (within course competition)
+
+  meta:
+    featured: true
+    order: 2
+    visibility: public
+
+- key: hybrid-tidal-wind
+  title: A Feasibility-Aware Portfolio for the Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary
+  one_liner: Modelled tidal and wind arrays in the Severn Estuary, optimising layout, monitoring, and economics for industrial decarbonisation.
+  summary_short: >
+    A feasibility study for a hybrid tidal and wind farm in the Severn Estuary,
+    covering bathymetry-based site analysis, turbine array modelling, and LCOE
+    benchmarking to evaluate renewable integration for local industry.
+  status: past
+  dates:
+    start: "2024-09-18"
+    end: "2025-05-01"
+
+  role: Systems Analyst & Modeller
+  domain: Renewable Energy
+  stack:
+    - Python (resource modelling, LCOE analysis)
+    - MATLAB (turbine performance simulation)
+    - GIS & Bathymetry Data
+    - Wind & Tidal Resource Assessment
+    - Condition Monitoring Strategy
+    - Sustainability Analysis
+
+  highlights:
+    - Built bathymetric and wind resource model for Barry–Minehead channel.
+    - Designed tidal and wind turbine arrays optimised for capture and reliability.
+    - Benchmarked levelised cost of energy (LCOE) under multiple scenarios.
+    - Proposed condition monitoring strategy to reduce O&M downtime.
+    - Assessed resilience of hybrid arrays to downtime and resource intermittency.
+
+  impact_metrics:
+    - label: Target capacity factor
+      value: "35–45%"
+      note: Hybrid tidal + wind array design
+    - label: Site area
+      value: "Barry to Minehead channel"
+      note: Bathymetry-driven siting analysis
+    - label: LCOE
+      value: "£60–80/MWh"
+      note: Comparable to offshore wind benchmarks
+    - label: Contribution
+      value: "Industrial repowering potential"
+      note: Supply to chemical plant sustainability goals
+
+  links:
+    repo: ""
+    docs: ""
+    demo: ""
+    video: ""
+    paper: ""
+    dataset: ""
+
+  media:
+    hero:
+      src: "/assets/img/tidal-array.png"
+      alt: "Map of tidal and wind turbine array design in the Severn Estuary"
+      caption: "Hybrid tidal–wind feasibility design in the Severn Estuary."
+    gallery: []
+
+  tags:
+    - Renewable Energy
+    - Offshore Engineering
+    - Sustainability
+    - LCOE Analysis
+    - Hybrid Systems
+
+  case_study:
+    problem: >
+      The Severn Estuary has one of the UK’s highest tidal ranges but presents
+      challenges for turbine siting, grid integration, and economic viability.
+      The project aimed to evaluate whether a hybrid tidal–wind farm could deliver
+      reliable, cost-effective power for industrial decarbonisation.
+    approach: >
+      Site feasibility was built from bathymetry maps and wind data across the
+      Severn Estuary and Bristol Channel. Tidal turbines were arrayed to maximise
+      flow capture without excessive wake interference; wind layouts were modelled
+      for complementarity. A condition monitoring and O&M strategy was proposed
+      to reduce downtime. Economic modelling benchmarked LCOE under grid scenarios.
+    experiments: >
+      Simulations compared tidal-only, wind-only, and hybrid layouts. Performance
+      metrics included capacity factor, resilience to downtime, and sensitivity to
+      environmental conditions. Scenario analysis tested cost under different grid
+      connection and O&M strategies.
+    results: >
+      The hybrid portfolio improved resilience and smoothed supply variability,
+      with capacity factors up to 45% and competitive LCOE (£60–80/MWh).
+      Downtime resilience increased through cross-technology redundancy.
+      The results support tidal–wind synergy for industrial supply chains.
+    challenges: >
+      - Complex bathymetry limited turbine spacing flexibility.
+      - Grid integration required scenario-based assumptions.
+      - Limited real-world tidal turbine performance datasets.
+    learnings: >
+      - Combining wind and tidal improves reliability and reduces intermittency.
+      - Early integration of condition monitoring reduces projected O&M costs.
+      - Multi-criteria optimisation (energy + economic + environmental) is critical.
+    next_steps: >
+      Validate designs with higher-resolution CFD and long-term environmental data,
+      model environmental impacts (sediment transport, ecology), and extend economic
+      assessment to regional grid and policy incentives.
+
+  ownership:
+    responsibilities:
+      - Built site resource and bathymetric feasibility models.
+      - Designed array layouts and optimised capacity factor.
+      - Led LCOE benchmarking and sustainability analysis.
+      - Proposed condition monitoring and O&M framework.
+    team:
+      - name: Group of 4 MEng students
+        role: Co-designers of tidal/wind feasibility study
+        link: ""
+
+  meta:
+    featured: true
+    order: 3
+    visibility: public
 
 - key: fem-wing
-  title: Finite Element Method Solver for 2D Wing Stress, Geometry and Material Property Optimisation
-  toc_title: Custom FEA Solver
-  status: past
-  start_date: "2024-09-01"
-  end_date: "2024-12-12"
-  stack: [Python, NumPy, SciPy, Matplotlib, PyVista, Gmsh]
+  title: Finite Element Modelling and Optimisation of a 2D Composite Wing Section
+  toc_title: FEM Wing Optimisation
+  one_liner: >
+    Built a custom Python FEM solver and optimised wing geometry under drag loading,
+    reducing stresses by up to 25% while meeting strict area constraints.
   summary_short: >
-    A custom 2D wing-section FEA solver built in Python: geometry generation; Gmsh meshing;
-    quadrature-based assembly; stress and deformation visualisation and geometry/material optimisation.
-  summary_long: >
-    The package implements a full FEA pipeline with orthotropic elasticity, Gaussian quadrature,
-    sparse global assembly, Dirichlet boundary conditions at the root, and stress recovery
-    (principal, Von Mises, shear). Differential-evolution explores geometric angles (θ, ϕ) and
-    material parameters (E1, E2, G12); multiprocessing parallelises evaluations over design points.
-    Outputs include ParaView VTK files, sparsity plots, and eigenmode analysis for bending/torsion.
-  repo_url: https://github.com/tyecam1/AircraftWing-FEM-Solver
-  image: /assets/img/fem-wing.png
-  featured: true
+    Developed a Python FEM solver to optimise composite wing geometry under drag load.
+    Parametric sweeps and differential evolution reduced Von Mises stress by 25%
+    while maintaining <1% area error.
+  status: past
+  dates:
+    start: "2024-02-01"
+    end: "2024-05-01"
+
+  role: Lead Developer & Researcher
+  domain: Computational Mechanics | Optimisation | Aerospace Structures
+  stack:
+    - Python
+    - NumPy
+    - SciPy (differential evolution, fsolve)
+    - Custom FEM (quadratic elements, Gauss quadrature)
+    - Matplotlib (visualisation)
+
+  highlights:
+    - Implemented FEM solver with quadratic elements and Gauss quadrature
+    - Enforced geometric constraints via trigonometric formulations
+    - Automated stress analysis across θ–ϕ parameter space
+    - Reduced Von Mises stresses by ~25% through optimisation
+    - Achieved <1% deviation from 240 m² area constraint
+
+  impact_metrics:
+    - label: Von Mises stress reduction
+      value: "≈25%"
+      note: From parametric and optimisation runs
+    - label: Area accuracy
+      value: "<1% error"
+      note: Constraint enforcement maintained target area
+    - label: Optimal θ–ϕ range
+      value: "θ 60–64°, ϕ 83–87°"
+      note: Yielded best balance of stress and area
+    - label: Simulation scale
+      value: "500+ FEM runs"
+      note: Across multiple material property sets
+
+  links:
+    repo: ""   # add if code published
+    paper: ""  # optional — final PDF report if made public
+    docs: ""
+
+  media:
+    hero:
+      src: /assets/img/fem-wing.png
+      alt: FEM solver output with stress contours
+      caption: Stress field distribution in optimised wing section
+    gallery:
+      - src: /assets/img/fem-wing-mesh.png
+        alt: Custom FEM mesh of wing geometry
+        caption: Quadratic element mesh generated for solver
+      - src: /assets/img/fem-wing-heatmap.png
+        alt: θ–ϕ parametric sweep heatmap
+        caption: Von Mises stress across θ–ϕ design space
+      - src: /assets/img/fem-wing-optimisation.png
+        alt: Optimisation trajectory with differential evolution
+        caption: Convergence of stress reduction vs iterations
+
+  tags:
+    - FEM
+    - Optimisation
+    - Aerospace
+    - Computational Mechanics
+
+  case_study:
+    problem: >
+      Composite aircraft wings experience high stresses under aerodynamic loads.
+      The challenge was to minimise peak stresses while enforcing a fixed area
+      constraint (240 m²) and accounting for orthotropic material behaviour.
+    approach: >
+      Built a custom FEM solver in Python using 8-node quadratic elements,
+      Gauss quadrature, and orthotropic material models. Enforced wing area
+      via trigonometric constraint formulations and iterative solvers. Used
+      SciPy’s differential evolution to optimise θ–ϕ geometry parameters.
+    experiments: >
+      Performed parametric sweeps of θ and ϕ (60°–90°) across multiple material
+      properties (E₁, E₂, G₁₂). Benchmarked stresses and displacements across
+      500+ runs. Visualised stress distributions and convergence patterns.
+    results: >
+      Optimised geometries reduced peak Von Mises stress by ~25% compared to
+      baselines. Best designs emerged around θ = 60–64°, ϕ = 83–87°. FEM solver
+      maintained area constraint within <1% error. Stress redistribution was
+      confirmed by shear/normal stress balance across the section.
+    challenges: >
+      Handling singular Jacobians in constrained optimisation and eliminating
+      non-finite solutions. Addressed by robust error handling, mesh refinement,
+      and stability checks in optimisation loop.
+    learnings: >
+      Reinforced the importance of constraint enforcement and showed how small
+      angular variations in θ had strong effects on stress concentration.
+    next_steps: >
+      Extend to 3D wing sections with dynamic loading, apply multi-objective
+      optimisation (stress vs weight vs stiffness), and validate with CFD-FEM
+      coupled analysis.
+
+  ownership:
+    responsibilities:
+      - Designed and implemented FEM solver in Python
+      - Conducted parametric and optimisation studies
+      - Generated visualisations and convergence analyses
+      - Wrote final technical report
+    team:
+      - name: Individual project
+        role: Sole developer
+
+  meta:
+    featured: true
+    order: 4
+    visibility: public
 
 - key: rl-sim-pipeline
   title: Integrated RL Simulation & Telemetry Platform
-  toc_title: RL Simulation & Telemetry Platform
+  one_liner: A unified RL pipeline combining 2D gridworlds and 3D robotics tasks with live telemetry, reproducible runs, and PPO baselines.
+  summary_short: >
+    An end-to-end RL research platform under development, standardising environments,
+    training, and visualisation. Provides PPO baselines, live web dashboards, and
+    reproducible experiment logging across 2D/3D tasks.
   status: current
-  start_date: "2025-09-01"
-  stack: [Python, PyTorch, Gymnasium, NumPy, Matplotlib, Flask/Streamlit, Plotly, WebSocket, Unity-MLAgents, PyBullet]
-  summary_short: >
-    An end-to-end RL platform unifying gridworld and 3D tasks with PPO training, live telemetry
-    (web dashboard), and reproducible evaluation with saved rollouts, plots, and videos.
-  summary_long: >
-    The pipeline standardises env interfaces (reset/step/render), provides tabular and PPO baselines,
-    streams metrics and frames to a Flask/Streamlit dashboard via WebSockets, and stores artefacts
-    (checkpoints, logs, figures, videos) under timestamped runs. Config-driven experiments ensure
-    determinism and comparability across 2D/3D tasks.
-  repo_url:
-  #image: /assets/img/rl-sim-pipeline.png
-  featured: false
+  dates:
+    start: "2025-09-01"
+    end: ""
 
-- key: hybrid-tidal-wind
-  title: A Feasability-Aware Portfolio for the Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary
-  toc_title: Energy Park Design
-  status: past
-  start_date: "2024-09-18"
-  end_date: "2025-05-01"
-  stack: [Python, MATLAB, Renewable Energy, Sustainability Analysis]
-  summary_short: >
-    Assessed the feasibility of tidal and wind arrays in the Severn Estuary, from resource assessment to turbine design, topographic optimisation and the overall levelised cost of energy.
-  summary_long: >
-    Site feasibility was built from bathymetry of the Severn Estuary and wind data from the Bristol
-    Channel. My contributions: (1) modelling tidal and wind array performance to maximise capture
-    and reliability, (2) designing a condition-monitoring strategy to reduce O&M, and
-    (3) LCOE analysis benchmarking economic viability under grid constraints. Simulations compared
-    capacity factor, downtime resilience, and layout variants; results support the potential of
-    marine + wind renewables for industrial repowering in the region.
-  repo_url:
-  image: /assets/img/tidal-array.png
-  featured: true
+  role: Developer & Research Engineer
+  domain: Reinforcement Learning
+  stack:
+    - Python
+    - PyTorch
+    - Gymnasium
+    - Unity ML-Agents
+    - PyBullet
+    - NumPy
+    - Matplotlib
+    - Plotly
+    - Flask / Streamlit
+    - WebSocket
+
+  highlights:
+    - Unified reset/step/render API across custom gridworld and 3D robotic tasks.
+    - PPO and tabular baselines with config-driven training runs.
+    - Live telemetry streamed to dashboards with metrics, plots, and video frames.
+    - Checkpointing and artefact logging for reproducibility.
+    - Extensible design for integration with future robotics experiments.
+
+  impact_metrics: []   # not yet applicable, still under development
+
+  links:
+    repo: ""
+    docs: ""
+    demo: ""
+    video: ""
+    paper: ""
+    dataset: ""
+
+  media:
+    hero:
+      src: ""
+      alt: "Placeholder system diagram for RL Simulation & Telemetry Platform"
+      caption: "Planned architecture for the RL pipeline."
+    gallery: []
+
+  tags:
+    - Reinforcement Learning
+    - PPO
+    - Simulation
+    - Telemetry
+    - Research Tools
+
+  case_study:
+    problem: >
+      Reinforcement learning research often suffers from fragmented tooling:
+      different environments, inconsistent logging, and difficulty comparing
+      results across tasks. This project addresses reproducibility and visibility
+      by standardising pipelines.
+    approach: >
+      Develop a Python-based framework with config-driven experiments, baseline
+      algorithms (PPO, tabular), and unified interfaces. Real-time telemetry
+      delivered via WebSocket to a Streamlit/Flask dashboard, capturing plots,
+      metrics, and rendered frames.
+    experiments: >
+      Initial focus on classic control/gridworld tasks and PyBullet/Unity
+      environments. Designed for modular expansion to more complex robotics
+      domains.
+    results: >
+      Currently in progress — early prototypes stream training metrics and video
+      frames to dashboards, with working PPO baseline in 2D tasks.
+    challenges: >
+      - Designing lightweight but flexible telemetry.
+      - Ensuring determinism across multiple backends.
+      - Managing artefact storage for long-term reproducibility.
+    learnings: >
+      Early focus on config-driven reproducibility simplifies debugging and
+      benchmarking. Integrated telemetry reduces iteration time.
+    next_steps: >
+      Extend to full Unity ML-Agents integration, add multi-agent experiments,
+      and package into a reproducible open-source toolkit.
+
+  ownership:
+    responsibilities:
+      - Designed architecture and baseline PPO implementations.
+      - Built logging, checkpointing, and dashboard telemetry pipeline.
+      - Integrated Gymnasium and PyBullet environments.
+    team: []  # individual project
+
+  meta:
+    featured: false
+    order: 5
+    visibility: public
+

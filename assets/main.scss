@@ -250,3 +250,318 @@ a { text-underline-offset: 2px; }
   border: 1px solid #e7e7e7;
   border-radius: 8px;
 }
+
+/* ===========================
+   Projects page – polished UI
+   =========================== */
+
+/* Color tokens (auto-dark-mode) */
+:root {
+    --bg: #ffffff;
+    --card: #fafafa;
+    --ink: #121212;
+    --muted: #6b7280;
+    --border: #e6e6e6;
+    --chip-bg: #f1f5f9;
+    --chip-ink: #0f172a;
+    --metric-bg: #f8fafc;
+    --metric-ink: #0f172a;
+    --accent: #2563eb; /* blue-600 */
+    --accent-ink: #ffffff;
+    --link: #1d4ed8;
+    --shadow: 0 6px 24px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.04);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0b0d12;
+        --card: #11141a;
+        --ink: #e6e8ee;
+        --muted: #9aa3b2;
+        --border: #222837;
+        --chip-bg: #1a2030;
+        --chip-ink: #e6e8ee;
+        --metric-bg: #141a27;
+        --metric-ink: #e6e8ee;
+        --accent: #60a5fa;
+        --accent-ink: #0b0d12;
+        --link: #93c5fd;
+        --shadow: 0 10px 28px rgba(0,0,0,.35), 0 4px 12px rgba(0,0,0,.28);
+    }
+}
+
+/* Page layout */
+.projects-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 960px) {
+    .projects-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .toc {
+        position: sticky;
+        top: 0.5rem;
+        z-index: 5;
+        background: var(--bg);
+        padding-bottom: .5rem;
+    }
+}
+
+/* ToC */
+.toc nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.toc nav li + li {
+    margin-top: .35rem;
+}
+
+.toc a {
+    display: block;
+    padding: .55rem .7rem;
+    border-radius: .7rem;
+    text-decoration: none;
+    background: var(--card);
+    color: var(--ink);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    font-size: .95rem;
+}
+
+.toc a:hover {
+    border-color: var(--accent);
+}
+
+.toc a.active {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+}
+
+/* Section */
+.project-section {
+    scroll-margin-top: 80px;
+}
+
+.project-header {
+    margin-bottom: .6rem;
+}
+
+.project-header h2 {
+    margin: 0 0 .25rem 0;
+    line-height: 1.2;
+}
+
+.project-meta {
+    color: var(--muted);
+    font-size: .95rem;
+    margin-bottom: .35rem;
+}
+
+.project-stack {
+    color: var(--muted);
+    font-size: .92rem;
+}
+
+/* Tags (if you render them) */
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: .2rem .55rem;
+    border-radius: 999px;
+    background: var(--chip-bg);
+    color: var(--chip-ink);
+    border: 1px solid var(--border);
+    font-size: .85rem;
+    margin-right: .35rem;
+    margin-bottom: .35rem;
+    white-space: nowrap;
+}
+
+/* Media */
+.project-media {
+    margin: .75rem 0 1rem;
+}
+
+.project-hero {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: .9rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.project-media figcaption {
+    color: var(--muted);
+    font-size: .9rem;
+    margin-top: .4rem;
+}
+
+/* Overview + body */
+.project-body {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1rem 1.15rem;
+    box-shadow: var(--shadow);
+}
+
+.project-body > h3 {
+    margin: .25rem 0 .35rem;
+}
+
+.project-highlights {
+    margin: .5rem 0 .75rem;
+    padding-left: 1.05rem;
+}
+
+.project-highlights li {
+    margin: .2rem 0;
+}
+
+/* Metrics block */
+.impact-metrics {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(160px, 1fr) );
+    gap: .6rem;
+    margin: .8rem 0 1.1rem;
+}
+
+.impact-metrics .metric {
+    background: var(--metric-bg);
+    border: 1px solid var(--border);
+    border-radius: .8rem;
+    padding: .75rem .8rem;
+}
+
+.impact-metrics .metric strong {
+    display: block;
+    font-size: 1.05rem;
+    color: var(--ink);
+}
+
+.impact-metrics .metric span {
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.impact-metrics .metric small {
+    display: block;
+    color: var(--muted);
+    font-size: .8rem;
+    margin-top: .2rem;
+}
+
+/* Collapsible case study */
+details {
+    margin: .4rem 0 0;
+    border: 1px dashed var(--border);
+    border-radius: .75rem;
+    padding: .35rem .6rem;
+    background: transparent;
+}
+
+details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--link);
+    list-style: none;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details[open] {
+    background: rgba(99, 102, 241, 0.03); /* subtle */
+}
+
+details h3 {
+    margin-top: .8rem;
+}
+
+/* Links / CTAs */
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-top: .8rem;
+}
+
+.project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .45rem .75rem;
+    border-radius: .6rem;
+    text-decoration: none;
+    background: var(--bg);
+    color: var(--link);
+    border: 1px solid var(--border);
+}
+
+.project-links a:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+}
+
+/* Gallery grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .75rem;
+    margin-top: .9rem;
+}
+
+.gallery-grid figure {
+    margin: 0;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: .7rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.gallery-grid figcaption {
+    color: var(--muted);
+    font-size: .85rem;
+    margin-top: .25rem;
+}
+
+@media (max-width: 840px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dividers */
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+}
+
+/* Focus states (a11y) */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: .4rem;
+}
