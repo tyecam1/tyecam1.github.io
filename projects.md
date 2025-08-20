@@ -77,13 +77,23 @@ permalink: /projects/
           {% endif %}
 
           {% if p.links %}
-            <div class="project-links">
-              {% if p.links.repo %}<a href="{{ p.links.repo }}">💻 Repo</a>{% endif %}
-              {% if p.links.demo %}<a href="{{ p.links.demo }}">🔗 Demo</a>{% endif %}
-              {% if p.links.video %}<a href="{{ p.links.video }}">▶️ Video</a>{% endif %}
-              {% if p.links.paper %}<a href="{{ p.links.paper }}">📄 Paper</a>{% endif %}
-              {% if p.links.docs %}<a href="{{ p.links.docs }}">📑 Docs</a>{% endif %}
-              {% if p.links.dataset %}<a href="{{ p.links.dataset }}">📊 Dataset</a>{% endif %}
+              <div class="project-links">
+                {% if project.links.repo %}
+                  <a href="{{ project.links.repo }}" target="_blank" rel="noopener">Repo</a>
+                {% endif %}
+                {% if project.links.demo %}
+                  <a href="{{ project.links.demo }}" target="_blank" rel="noopener">Demo</a>
+                {% endif %}
+                {% if project.links.video %}
+                  <a href="{{ project.links.video }}" target="_blank" rel="noopener">Video</a>
+                {% endif %}
+                {% if project.links.paper %}
+                  <a href="{{ project.links.paper }}" target="_blank" rel="noopener">Paper</a>
+                {% endif %}
+                {% if project.links.docs %}
+                  <a href="{{ project.links.docs }}" target="_blank" rel="noopener">Docs</a>
+                {% endif %}
+              </div>
             </div>
           {% endif %}
         </div>

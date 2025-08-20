@@ -565,3 +565,78 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
     outline-offset: 2px;
     border-radius: .4rem;
 }
+
+/* === Projects page refinements (layout + styling) === */
+
+/* 1) Lighter palette (like before, no jet-black) */
+:root {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --ink: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --chip-bg: #f8fafc;
+  --chip-ink: #0f172a;
+  --metric-bg: #f8fafc;
+  --metric-ink: #0f172a;
+  --accent: #2563eb;
+  --accent-ink: #ffffff;
+  --link: #1d4ed8;
+  --shadow: 0 4px 14px rgba(0,0,0,.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1319;
+    --card: #131923;
+    --ink: #e6e8ee;
+    --muted: #9aa3b2;
+    --border: #243043;
+    --chip-bg: #192233;
+    --chip-ink: #e6e8ee;
+    --metric-bg: #172234;
+    --metric-ink: #e6e8ee;
+    --accent: #60a5fa;
+    --accent-ink: #0f1319;
+    --link: #93c5fd;
+    --shadow: 0 6px 18px rgba(0,0,0,.28);
+  }
+}
+
+/* 2) Keep ToC width the same, just shift whole layout left */
+.projects-layout {
+  max-width: 1180px;       /* generous width */
+  margin: 0 auto;
+  grid-template-columns: 260px minmax(0, 1fr); /* keep ToC wide */
+  gap: 1.5rem;
+  position: relative;
+  left: -40px;             /* nudge both ToC + content left */
+}
+
+@media (min-width: 1400px) {
+  .projects-layout { left: -60px; } /* stronger nudge on ultrawide */
+}
+
+/* 3) Reduce rounding for a sharper look */
+.project-body,
+.project-hero,
+.gallery-grid img,
+details,
+.project-links a,
+.toc a {
+  border-radius: .3rem;
+}
+
+/* 4) ToC chips — lighter, with active highlight */
+.toc a {
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.toc a.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
