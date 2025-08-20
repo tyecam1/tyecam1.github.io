@@ -32,7 +32,7 @@ permalink: /projects/
           {% endif %}
         </header>
 
-        {% if p.media.hero.src %}
+        {% if p.media.hero and p.media.hero.src %}
           <figure class="project-media">
             <img class="project-hero" src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt }}">
             {% if p.media.hero.caption %}
@@ -66,7 +66,8 @@ permalink: /projects/
           {% endif %}
 
           {% if p.case_study %}
-            <details><summary>Read full case study</summary>
+            <details id="case-study-{{ p.key }}" class="case-details">
+              <summary>Read full case study</summary>
               {% for sec in "problem,approach,experiments,results,challenges,learnings,next_steps" | split: "," %}
                 {% if p.case_study[sec] %}
                   <h3>{{ sec | capitalize }}</h3>
@@ -77,24 +78,17 @@ permalink: /projects/
           {% endif %}
 
           {% if p.links %}
+            {% assign has_any_link = p.links.repo or p.links.demo or p.links.video or p.links.paper or p.links.docs or p.links.dataset %}
+            {% if has_any_link %}
               <div class="project-links">
-                {% if project.links.repo %}
-                  <a href="{{ project.links.repo }}" target="_blank" rel="noopener">Repo</a>
-                {% endif %}
-                {% if project.links.demo %}
-                  <a href="{{ project.links.demo }}" target="_blank" rel="noopener">Demo</a>
-                {% endif %}
-                {% if project.links.video %}
-                  <a href="{{ project.links.video }}" target="_blank" rel="noopener">Video</a>
-                {% endif %}
-                {% if project.links.paper %}
-                  <a href="{{ project.links.paper }}" target="_blank" rel="noopener">Paper</a>
-                {% endif %}
-                {% if project.links.docs %}
-                  <a href="{{ project.links.docs }}" target="_blank" rel="noopener">Docs</a>
-                {% endif %}
+                {% if p.links.repo %}<a href="{{ p.links.repo }}" target="_blank" rel="noopener">💻 Repo</a>{% endif %}
+                {% if p.links.demo %}<a href="{{ p.links.demo }}" target="_blank" rel="noopener">🔗 Demo</a>{% endif %}
+                {% if p.links.video %}<a href="{{ p.links.video }}" target="_blank" rel="noopener">▶️ Video</a>{% endif %}
+                {% if p.links.paper %}<a href="{{ p.links.paper }}" target="_blank" rel="noopener">📄 Paper</a>{% endif %}
+                {% if p.links.docs %}<a href="{{ p.links.docs }}" target="_blank" rel="noopener">📑 Docs</a>{% endif %}
+                {% if p.links.dataset %}<a href="{{ p.links.dataset }}" target="_blank" rel="noopener">📊 Dataset</a>{% endif %}
               </div>
-            </div>
+            {% endif %}
           {% endif %}
         </div>
 
@@ -112,7 +106,6 @@ permalink: /projects/
         {% if p.ownership %}
           <div class="project-ownership">
             <h3>My Contributions</h3>
-            <ul>{% for r in p.ownership.responsibilities %}<li>{{ r }}</li>{% endfor %}</ul>
             {% if p.ownership.team %}
               <h4>Team</h4>
               <ul>{% for t in p.ownership.team %}<li>{{ t.name }} — {{ t.role }}</li>{% endfor %}</ul>
@@ -121,7 +114,9 @@ permalink: /projects/
         {% endif %}
       </section>
 
+
       {% unless forloop.last %}<hr>{% endunless %}
     {% endfor %}
   </main>
 </div>
+

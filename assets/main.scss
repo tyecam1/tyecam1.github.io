@@ -1,642 +1,337 @@
----
-# Required front matter so Jekyll compiles this file
----
-
-/* Use Minima as the base */
-@import "minima";
-
-/* ===========================
-   Global layout & typography
-   =========================== */
-
-:root {
-  --wrap-max: 1180px;       /* overall site width */
-  --content-max: 1000px;    /* content block width (e.g., project sections) */
-  --text-max: 70ch;         /* comfortable reading line length */
-  --muted: #666;
-  --border: #e7e7e7;
-  --card-bg: #fafafa;
-}
-
-/* widen the default minima wrapper slightly */
-.wrapper { max-width: var(--wrap-max); }
-
-/* headings spacing */
-.page-content h1,
-.page-content h2 { margin-top: 0.6rem; }
-
-/* images should never overflow */
-img { max-width: 100%; height: auto; }
-
-/* links */
-a { text-underline-offset: 2px; }
-
-/* ===========================
-   Footer (minimal + tidy)
-   =========================== */
-
-.site-footer {
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-/* ===========================
-   Projects page layout
-   =========================== */
-
-/* overall grid: simple two-column with a narrow sidebar */
-.projects-layout {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 24px;
-}
-
-/* make it single-column on small screens */
-@media (max-width: 960px) {
-  .projects-layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---- ToC sidebar ---- */
-.toc {
-  position: sticky;
-  top: 84px; /* below header */
-  align-self: start;
-}
-
-.toc nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.toc li + li { margin-top: 8px; }
-
-.toc a {
-  display: block;
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #fff;
-  color: inherit;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.toc a.active {
-  background: #f9f9f9;
-  font-weight: 600;
-  border-color: #d8d8d8;
-}
-
-/* ---- Main column ---- */
-.projects-main { min-width: 0; } /* prevent overflow from long titles */
-
-/* each project section */
-.project-section {
-  max-width: var(--content-max);
-  margin: 0 auto 48px;
-  scroll-margin-top: 72px; /* anchor offset under sticky header */
-}
-
-/* project header */
-.project-header h2 {
-  margin-bottom: 0.25rem;
-}
-
-.project-meta {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-bottom: 0.75rem;
-}
-
-/* ===========================
-   Media above text (stacked)
-   =========================== */
-
-.project-body { display: block; }
-
-/* media block (image + optional caption) */
-.project-media {
-  display: block;
-  margin: 0 0 1rem 0;
-  text-align: center;
-}
-
-.project-hero {
-  display: block;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
-}
-
-.project-caption {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-top: 6px;
-}
-
-/* text card */
-.project-text {
-  background: var(--card-bg);
-  border: 1px solid #ececec;
-  border-radius: 12px;
-  padding: 16px 18px;
-  max-width: var(--text-max);
-  margin: 0 auto;           /* center the text card */
-}
-
-/* short intro line */
-.project-summary {
-  font-weight: 600;
-  margin: 0 0 8px;
-}
-
-/* long description */
-.project-summary-long {
-  line-height: 1.66;
-  margin: 0;
-  /* If you prefer justified paragraphs, switch to 'justify' */
-  text-align: left;
-}
-
-/* repo link line */
-.project-links { margin-top: 10px; }
-
-/* divider between projects */
-.project-divider {
-  border: 0;
-  border-top: 1px solid #e5e5e5;
-  margin: 40px auto 56px;
-  max-width: var(--content-max);
-}
-
-/* ===========================
-   Index (Featured Projects) – optional light polish
-   =========================== */
-
-.featured-project img {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
-/* ===========================
-   Small utilities
-   =========================== */
-
-.muted { color: var(--muted); }
-.nowrap { white-space: nowrap; }
-
-.projects-main .project-section .project-subhead {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: .02em;
-  margin: 0 0 .4rem;
-  color: #444;
-}
-
-.projects-main .project-section .project-subsubhead {
-  font-size: .95rem;
-  font-weight: 700;
-  margin: 1rem 0 .25rem;
-  color: #444;
-}
-
-.project-list { margin: 0 0 .5rem 1rem; }
-
-.project-tags { margin: .25rem 0 .5rem; }
-.tag-chip {
-  display: inline-block;
-  font-size: .8rem;
-  padding: 2px 8px;
-  border: 1px solid #ddd;
-  border-radius: 999px;
-  margin-right: 6px;
-  margin-bottom: 6px;
-  background: #fff;
-}
-
-.project-cta { margin-top: 12px; }
-.btn {
-  display: inline-block;
-  border: 1px solid #ddd;
-  padding: 6px 10px;
-  border-radius: 8px;
-  text-decoration: none;
-  margin-right: 8px;
-}
-.btn:hover { background: #f3f3f3; }
-
-.project-notes summary {
-  cursor: pointer;
-  font-weight: 600;
-  margin-top: .75rem;
-}
-.project-notes .notes-body { margin-top: .5rem; }
-
-.project-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 12px;
-  margin-top: 14px;
-}
-.project-gallery img {
-  width: 100%;
-  height: auto;
-  border: 1px solid #e7e7e7;
-  border-radius: 8px;
-}
-
-/* ===========================
-   Projects page – polished UI
-   =========================== */
-
-/* Color tokens (auto-dark-mode) */
-:root {
-    --bg: #ffffff;
-    --card: #fafafa;
-    --ink: #121212;
-    --muted: #6b7280;
-    --border: #e6e6e6;
-    --chip-bg: #f1f5f9;
-    --chip-ink: #0f172a;
-    --metric-bg: #f8fafc;
-    --metric-ink: #0f172a;
-    --accent: #2563eb; /* blue-600 */
-    --accent-ink: #ffffff;
-    --link: #1d4ed8;
-    --shadow: 0 6px 24px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.04);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #0b0d12;
-        --card: #11141a;
-        --ink: #e6e8ee;
-        --muted: #9aa3b2;
-        --border: #222837;
-        --chip-bg: #1a2030;
-        --chip-ink: #e6e8ee;
-        --metric-bg: #141a27;
-        --metric-ink: #e6e8ee;
-        --accent: #60a5fa;
-        --accent-ink: #0b0d12;
-        --link: #93c5fd;
-        --shadow: 0 10px 28px rgba(0,0,0,.35), 0 4px 12px rgba(0,0,0,.28);
-    }
-}
-
-/* Page layout */
-.projects-layout {
-    display: grid;
-    grid-template-columns: 260px minmax(0, 1fr);
-    gap: 1.5rem;
-    align-items: start;
-}
-
-@media (max-width: 960px) {
-    .projects-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .toc {
-        position: sticky;
-        top: 0.5rem;
-        z-index: 5;
-        background: var(--bg);
-        padding-bottom: .5rem;
-    }
-}
-
-/* ToC */
-.toc nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.toc nav li + li {
-    margin-top: .35rem;
-}
-
-.toc a {
-    display: block;
-    padding: .55rem .7rem;
-    border-radius: .7rem;
-    text-decoration: none;
-    background: var(--card);
-    color: var(--ink);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    font-size: .95rem;
-}
-
-.toc a:hover {
-    border-color: var(--accent);
-}
-
-.toc a.active {
-    background: var(--accent);
-    color: var(--accent-ink);
-    border-color: var(--accent);
-}
-
-/* Section */
-.project-section {
-    scroll-margin-top: 80px;
-}
-
-.project-header {
-    margin-bottom: .6rem;
-}
-
-.project-header h2 {
-    margin: 0 0 .25rem 0;
-    line-height: 1.2;
-}
-
-.project-meta {
-    color: var(--muted);
-    font-size: .95rem;
-    margin-bottom: .35rem;
-}
-
-.project-stack {
-    color: var(--muted);
-    font-size: .92rem;
-}
-
-/* Tags (if you render them) */
-.tag-chip {
-    display: inline-flex;
-    align-items: center;
-    padding: .2rem .55rem;
-    border-radius: 999px;
-    background: var(--chip-bg);
-    color: var(--chip-ink);
-    border: 1px solid var(--border);
-    font-size: .85rem;
-    margin-right: .35rem;
-    margin-bottom: .35rem;
-    white-space: nowrap;
-}
-
-/* Media */
-.project-media {
-    margin: .75rem 0 1rem;
-}
-
-.project-hero {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: .9rem;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-}
-
-.project-media figcaption {
-    color: var(--muted);
-    font-size: .9rem;
-    margin-top: .4rem;
-}
-
-/* Overview + body */
-.project-body {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 1rem;
-    padding: 1rem 1.15rem;
-    box-shadow: var(--shadow);
-}
-
-.project-body > h3 {
-    margin: .25rem 0 .35rem;
-}
-
-.project-highlights {
-    margin: .5rem 0 .75rem;
-    padding-left: 1.05rem;
-}
-
-.project-highlights li {
-    margin: .2rem 0;
-}
-
-/* Metrics block */
-.impact-metrics {
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(160px, 1fr) );
-    gap: .6rem;
-    margin: .8rem 0 1.1rem;
-}
-
-.impact-metrics .metric {
-    background: var(--metric-bg);
-    border: 1px solid var(--border);
-    border-radius: .8rem;
-    padding: .75rem .8rem;
-}
-
-.impact-metrics .metric strong {
-    display: block;
-    font-size: 1.05rem;
-    color: var(--ink);
-}
-
-.impact-metrics .metric span {
-    color: var(--muted);
-    font-size: .9rem;
-}
-
-.impact-metrics .metric small {
-    display: block;
-    color: var(--muted);
-    font-size: .8rem;
-    margin-top: .2rem;
-}
-
-/* Collapsible case study */
-details {
-    margin: .4rem 0 0;
-    border: 1px dashed var(--border);
-    border-radius: .75rem;
-    padding: .35rem .6rem;
-    background: transparent;
-}
-
-details summary {
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--link);
-    list-style: none;
-}
-
-details summary::-webkit-details-marker {
-    display: none;
-}
-
-details[open] {
-    background: rgba(99, 102, 241, 0.03); /* subtle */
-}
-
-details h3 {
-    margin-top: .8rem;
-}
-
-/* Links / CTAs */
-.project-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-    margin-top: .8rem;
-}
-
-.project-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: .35rem;
-    padding: .45rem .75rem;
-    border-radius: .6rem;
-    text-decoration: none;
-    background: var(--bg);
-    color: var(--link);
-    border: 1px solid var(--border);
-}
-
-.project-links a:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow);
-}
-
-/* Gallery grid */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: .75rem;
-    margin-top: .9rem;
-}
-
-.gallery-grid figure {
-    margin: 0;
-}
-
-.gallery-grid img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: .7rem;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-}
-
-.gallery-grid figcaption {
-    color: var(--muted);
-    font-size: .85rem;
-    margin-top: .25rem;
-}
-
-@media (max-width: 840px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 520px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Dividers */
-hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 1.5rem 0;
-}
-
-/* Focus states (a11y) */
-a:focus-visible, button:focus-visible, summary:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: .4rem;
-}
-
-/* === Projects page refinements (layout + styling) === */
-
-/* 1) Lighter palette (like before, no jet-black) */
+/* ==========================================================================
+   MAIN STYLESHEET
+   Light theme, clean typography, and Projects page layout/components
+   ========================================================================== */
+
+/* -----------------------------
+   CSS Variables (Light Theme)
+   ----------------------------- */
 :root {
   --bg: #ffffff;
-  --card: #ffffff;
-  --ink: #111827;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --chip-bg: #f8fafc;
+  --card: #ffffff;          /* light card */
+  --ink: #111827;           /* slate-900 */
+  --muted: #6b7280;         /* slate-500 */
+  --border: #e5e7eb;        /* slate-200 */
+  --chip-bg: #f8fafc;       /* slate-50 */
   --chip-ink: #0f172a;
   --metric-bg: #f8fafc;
   --metric-ink: #0f172a;
-  --accent: #2563eb;
+  --accent: #2563eb;        /* blue-600 */
   --accent-ink: #ffffff;
-  --link: #1d4ed8;
-  --shadow: 0 4px 14px rgba(0,0,0,.05);
+  --link: #1d4ed8;          /* blue-700 */
+  --shadow: 0 4px 14px rgba(0,0,0,.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1319;
-    --card: #131923;
-    --ink: #e6e8ee;
-    --muted: #9aa3b2;
-    --border: #243043;
-    --chip-bg: #192233;
-    --chip-ink: #e6e8ee;
-    --metric-bg: #172234;
-    --metric-ink: #e6e8ee;
-    --accent: #60a5fa;
-    --accent-ink: #0f1319;
-    --link: #93c5fd;
-    --shadow: 0 6px 18px rgba(0,0,0,.28);
-  }
+/* -----------------------------
+   Base / Reset
+   ----------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
 }
 
-/* 2) Keep ToC width the same, just shift whole layout left */
+/* Selection */
+::selection { background: rgba(37, 99, 235, 0.18); color: var(--ink); }
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+  color: var(--ink);
+  line-height: 1.25;
+  margin: 0 0 .5rem 0;
+  font-weight: 700;
+}
+h1 { font-size: clamp(2rem, 1.2rem + 2vw, 2.6rem); }
+h2 { font-size: clamp(1.6rem, 1.1rem + 1.2vw, 2.0rem); }
+h3 { font-size: clamp(1.2rem, 1.05rem + .6vw, 1.35rem); }
+
+/* Paragraphs & lists */
+p { margin: .4rem 0 .9rem; }
+ul, ol { margin: .4rem 0 .9rem .95rem; }
+
+/* Links */
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+/* Code */
+code, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+pre {
+  background: var(--chip-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: .8rem;
+  overflow: auto;
+}
+
+/* Images */
+img { max-width: 100%; height: auto; display: block; }
+
+/* Buttons (utility class if needed) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .5rem .9rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn:hover { filter: brightness(0.97); text-decoration: none; }
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+/* Utility: ensure anchored sections don’t hide under fixed headers */
+.anchor-target { scroll-margin-top: 80px; }
+
+/* ==========================================================================
+   PROJECTS PAGE
+   Structure: sidebar ToC + main content
+   ========================================================================== */
+
+/* Layout: keep ToC width; shift whole block slightly left for centering */
 .projects-layout {
-  max-width: 1180px;       /* generous width */
+  max-width: 1180px;
   margin: 0 auto;
-  grid-template-columns: 260px minmax(0, 1fr); /* keep ToC wide */
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr); /* original ToC width preserved */
   gap: 1.5rem;
   position: relative;
-  left: -40px;             /* nudge both ToC + content left */
+  left: -40px; /* nudge ToC + content left so main content feels central */
 }
 
 @media (min-width: 1400px) {
-  .projects-layout { left: -60px; } /* stronger nudge on ultrawide */
+  .projects-layout { left: -60px; } /* stronger nudge on very wide screens */
+}
+@media (max-width: 960px) {
+  .projects-layout {
+    grid-template-columns: 1fr;
+    left: 0; /* no nudge on small screens */
+  }
 }
 
-/* 3) Reduce rounding for a sharper look */
-.project-body,
-.project-hero,
-.gallery-grid img,
-details,
-.project-links a,
-.toc a {
-  border-radius: .3rem;
-}
+/* ToC (sidebar) */
+.toc nav ul { margin: 0; padding: 0; list-style: none; }
+.toc nav li + li { margin-top: .35rem; }
 
-/* 4) ToC chips — lighter, with active highlight */
 .toc a {
+  display: block;
+  padding: .55rem .7rem;
+  border-radius: 4px;               /* sharper */
   background: var(--bg);
   color: var(--ink);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+  text-decoration: none;
+  font-size: .95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+.toc a:hover { border-color: var(--accent); text-decoration: none; }
 .toc a.active {
   background: var(--accent);
   color: var(--accent-ink);
   border-color: var(--accent);
 }
 
+/* Section header */
+.project-header { margin-bottom: .6rem; }
+.project-header h2 { margin: 0 0 .25rem 0; line-height: 1.2; }
+.project-meta, .project-stack { color: var(--muted); font-size: .95rem; }
+.project-stack { margin-top: .15rem; }
+
+/* Media */
+.project-media { margin: .6rem 0 .9rem; }
+.project-hero {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;               /* sharper */
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.project-media figcaption {
+  color: var(--muted);
+  font-size: .9rem;
+  margin-top: .35rem;
+  text-align: center;
+}
+
+/* Project body card */
+.project-body {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;               /* sharper */
+  padding: 1rem 1.15rem;
+  box-shadow: var(--shadow);
+}
+.project-body > h3 { margin: .25rem 0 .35rem; }
+
+/* Highlights */
+.project-highlights {
+  margin: .5rem 0 .75rem;
+  padding-left: 1.05rem;
+}
+.project-highlights li { margin: .2rem 0; }
+
+/* Impact metrics grid */
+.impact-metrics {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(160px, 1fr) );
+  gap: .55rem;
+  margin: .7rem 0 .95rem;
+}
+.impact-metrics .metric {
+  background: var(--metric-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: .65rem .7rem;
+}
+.impact-metrics .metric strong {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.impact-metrics .metric span {
+  color: var(--muted);
+  font-size: .9rem;
+}
+.impact-metrics .metric small {
+  display: block;
+  color: var(--muted);
+  font-size: .8rem;
+  margin-top: .2rem;
+}
+
+/* Case study collapsible block */
+.case-details {
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: .35rem .6rem;
+  background: transparent;
+  margin-top: .35rem;
+}
+.case-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--link);
+  list-style: none;
+  padding: .25rem 0;
+}
+.case-details summary::-webkit-details-marker { display: none; }
+.case-details[open] { background: rgba(37, 99, 235, 0.035); }
+
+/* Links (rendered only if present via Liquid) */
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .8rem;
+}
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .45rem .75rem;
+  border-radius: 4px;
+  text-decoration: none;
+  background: var(--bg);
+  color: var(--link);
+  border: 1px solid var(--border);
+}
+.project-links a:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+}
+
+/* Gallery grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .65rem;
+  margin-top: .9rem;
+}
+.gallery-grid figure { margin: 0; }
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.gallery-grid figcaption {
+  color: var(--muted);
+  font-size: .85rem;
+  margin-top: .25rem;
+  text-align: center;
+}
+@media (max-width: 840px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+
+/* Ownership section */
+.project-ownership {
+  margin-top: .9rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: .8rem .95rem;
+  box-shadow: var(--shadow);
+}
+.project-ownership h3 { margin-top: .1rem; }
+.project-ownership h4 { margin: .6rem 0 .35rem; }
+.project-ownership ul { margin: .35rem 0 .35rem 1rem; }
+
+/* Accessibility focus (global) */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Optional: make tables look presentable (for results tables elsewhere) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: .5rem 0 1rem;
+}
+th, td {
+  padding: .55rem .6rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+thead th { font-weight: 600; }
