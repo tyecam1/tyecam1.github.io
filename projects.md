@@ -34,15 +34,18 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
     {% for p in projects %}
     <section class="project-section" id="{{ p.key }}">
 
-      {%- assign has_hero = p.media and p.media.hero and p.media.hero.src and p.media.hero.src != '' -%}
-      {%- if has_hero -%}
+      {%- assign has_hero_src = p.media and p.media.hero and p.media.hero.src | default: '' | strip -%}
+      {%- if has_hero_src != '' -%}
         <figure class="project-hero">
-          <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}">
+          <img src="{{ p.media.hero.src }}"
+              alt="{{ p.media.hero.alt | default: p.title }}"
+              onerror="this.closest('figure').remove()">
           {%- if p.media.hero.caption and p.media.hero.caption != '' -%}
             <figcaption>{{ p.media.hero.caption }}</figcaption>
           {%- endif -%}
         </figure>
       {%- endif -%}
+
 
       <header class="project-header">
         <div class="title-row">
@@ -107,37 +110,45 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
       <section class="case-study">
         <details>
           <summary>Case study</summary>
+
           {% if cs.problem %}
             <h4>Problem</h4>
-            <p>{{ cs.problem }}</p>
+            <div class="md">{{ cs.problem | markdownify }}</div>
           {% endif %}
+
           {% if cs.approach %}
             <h4>Approach</h4>
-            <p>{{ cs.approach }}</p>
+            <div class="md">{{ cs.approach | markdownify }}</div>
           {% endif %}
+
           {% if cs.experiments %}
             <h4>Experiments</h4>
-            <p>{{ cs.experiments }}</p>
+            <div class="md">{{ cs.experiments | markdownify }}</div>
           {% endif %}
+
           {% if cs.results %}
             <h4>Results</h4>
-            <p>{{ cs.results }}</p>
+            <div class="md">{{ cs.results | markdownify }}</div>
           {% endif %}
+
           {% if cs.challenges %}
             <h4>Key challenges</h4>
-            <p>{{ cs.challenges }}</p>
+            <div class="md">{{ cs.challenges | markdownify }}</div>
           {% endif %}
+
           {% if cs.learnings %}
             <h4>What I learned</h4>
-            <p>{{ cs.learnings }}</p>
+            <div class="md">{{ cs.learnings | markdownify }}</div>
           {% endif %}
+
           {% if cs.next_steps %}
             <h4>Next steps</h4>
-            <p>{{ cs.next_steps }}</p>
+            <div class="md">{{ cs.next_steps | markdownify }}</div>
           {% endif %}
         </details>
       </section>
       {% endif %}
+
 
       {% assign repo    = p.links.repo    | default: '' %}
       {% assign docs    = p.links.docs    | default: '' %}
@@ -159,9 +170,10 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
       {% if p.media and p.media.gallery and p.media.gallery.size > 0 %}
       <section class="project-gallery" aria-label="Gallery">
         {% for g in p.media.gallery %}
-          {% if g.src and g.src != '' %}
+          {% assign gsrc = g.src | default: '' | strip %}
+          {% if gsrc != '' %}
           <figure>
-            <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}">
+            <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}" onerror="this.closest('figure').remove()">
             {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
           </figure>
           {% endif %}
@@ -169,20 +181,35 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
       </section>
       {% endif %}
 
+
       {% if p.ownership or p.responsibilities %}
       <section class="project-footer">
         <div class="ownership">
           <h4>My Contributions</h4>
-          {% assign resp = p.responsibilities | default: p.ownership.Responsibilities | default: p.ownership.responsibilities %}
-          {% if resp %}
+
+          {%- comment -%} Prefer an array at p.responsibilities; else fall back to ownership text {%- endcomment -%}
+          {% assign resp_list = nil %}
+          {% if p.responsibilities and p.responsibilities.size > 0 %}
+            {% assign resp_list = p.responsibilities %}
+          {% elsif p.ownership and (p.ownership.Responsibilities or p.ownership.responsibilities) %}
+            {% assign resp_raw = p.ownership.Responsibilities | default: p.ownership.responsibilities %}
+            {% if resp_raw contains '["' %}
+              {%- assign tmp = resp_raw | replace: '["','' | replace: '"]','' | replace: '", "', '||' -%}
+              {% assign resp_list = tmp | split: '||' %}
+            {% else %}
+              {% assign resp_list = resp_raw | newline_to_br | split: '<br />' %}
+            {% endif %}
+          {% endif %}
+
+          {% if resp_list %}
             <ul>
-              {% assign parts = resp | replace: '\n', ' ' | split: '. ' %}
-              {% for item in parts %}
-                {% assign s = item | strip %}
-                {% if s != '' %}<li>{{ s | append: '.' }}</li>{% endif %}
+              {% for item in resp_list %}
+                {% assign s = item | strip | remove: '[' | remove: ']' | remove: '"' %}
+                {% if s != '' %}<li>{{ s }}</li>{% endif %}
               {% endfor %}
             </ul>
           {% endif %}
+
           {% if p.ownership %}
             {% for k in p.ownership %}
               {% assign key = k[0] %}
@@ -195,6 +222,7 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
         </div>
       </section>
       {% endif %}
+
 
     </section>
     {% endfor %}

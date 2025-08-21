@@ -1,24 +1,26 @@
-/* =============================
-   Projects page styles (refined)
-   - Formal, technical aesthetic; better case-study UX
-   - Slight rounding, efficient spacing
-   - Accent: deep teal (change $accent here if desired)
-   ============================= */
+/* =========================================
+   Projects page styles — minimal & professional
+   - Palette: light panels, dark text/outlines
+   - Subtle slate accent that plays nicely with off-whites
+   - Better case-study spacing & readability
+   - Hide broken images automatically (paired with projects.md)
+   ========================================= */
 
-$ink: #0f172a;
-$muted: #64748b;
-$bg: #ffffff;
-$panel: #FBF9F6;         // warmer off-white to match the brown
-$border: #e2e8f0;
+$ink: #0f172a;          // primary text (very dark slate)
+$muted: #475569;        // secondary text (slate 600)
+$bg: #ffffff;           // page background
+$panel: #f8fafc;        // light panel (slate-50)
+$border: #e5e7eb;       // light border (slate-200)
 
-/* Light-brown accent */
-$accent: #E7D7C1;        // pick one of the light browns above
-$accent-dark: #3A2C22;   // matching dark for borders/text/icons
-$accent-ink: $accent-dark;
+/* Accent system:
+   - $accent: very light wash for subtle backgrounds
+   - $accent-ink: dark slate for outlines / emphasis
+*/
+$accent: #eef2f6;       // light blue-grey wash
+$accent-ink: #334155;   // slate-700 for outlines/text
 
-$radius: 6px;
+$radius: 6px;           // gentle rounding
 $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
-
 
 .projects-page {
   display: grid;
@@ -36,9 +38,9 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
   a { display: flex; align-items: center; justify-content: space-between; padding: .5rem .625rem; border-radius: $radius; color: $ink; text-decoration: none; border: 1px solid transparent; }
   a:hover { background: lighten($panel, 2%); }
-  a.active { border-color: $accent; box-shadow: inset 2px 0 0 $accent; }
+  a.active { border-color: $accent-ink; box-shadow: inset 2px 0 0 $accent-ink; }
   .toc-title { font-size: .92rem; line-height: 1.2; }
-  .toc-badge { font-size: .7rem; color: $accent; background: mix($accent, #fff, 8%); border: 1px solid mix($accent, #000, 10%); border-radius: 999px; padding: .15rem .5rem; margin-left: .5rem; white-space: nowrap; }
+  .toc-badge { font-size: .7rem; color: $accent-ink; background: mix($accent-ink, #fff, 90%); border: 1px solid mix($accent-ink, #000, 10%); border-radius: 999px; padding: .15rem .5rem; margin-left: .5rem; white-space: nowrap; }
   @media (max-width: 980px) { position: static; .toc-inner { position: sticky; top: 60px; z-index: 2; } }
 }
 
@@ -48,7 +50,10 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .project-section { background: $bg; border: 1px solid $border; border-radius: $radius; box-shadow: $shadow; overflow: hidden; }
 
 /* Hero */
-.project-hero { margin: 0; background: $panel; border-bottom: 1px solid $border; img { display: block; width: 100%; height: auto; } figcaption { font-size: .85rem; color: $muted; padding: .5rem 1rem 1rem; } }
+.project-hero { margin: 0; background: $panel; border-bottom: 1px solid $border;
+  img { display: block; width: 100%; height: auto; }
+  figcaption { font-size: .85rem; color: $muted; padding: .5rem 1rem 1rem; }
+}
 
 /* Header */
 .project-header { padding: 1.25rem 1.25rem 0; }
@@ -62,7 +67,7 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .chip { display: inline-flex; align-items: center; gap: .4rem; padding: .25rem .6rem; font-size: .82rem; border-radius: 999px; border: 1px solid $border; background: #fff; }
 .chip--muted { color: $muted; }
 .stack-list { margin: .9rem 0 0; padding-bottom: .9rem; border-bottom: 1px solid $border; display: flex; flex-wrap: wrap; gap: .4rem; }
-.stack-item { font-size: .8rem; padding: .25rem .5rem; border: 1px solid mix($accent, #000, 12%); background: mix($accent, #fff, 92%); color: $ink; border-radius: $radius; }
+.stack-item { font-size: .8rem; padding: .25rem .5rem; border: 1px solid mix($accent-ink, #000, 12%); background: mix($accent, #fff, 92%); color: $ink; border-radius: $radius; }
 
 /* Impact metrics */
 .impact-grid { display: grid; gap: .75rem; grid-template-columns: repeat(12, 1fr); padding: 1rem 1.25rem 0; }
@@ -70,7 +75,7 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 @media (max-width: 640px)  { .impact-grid { grid-template-columns: repeat(2, 1fr); } }
 .impact-card { grid-column: span 3; border: 1px solid $border; border-radius: $radius; background: $panel; padding: .75rem .8rem; }
 .impact-label { font-size: .75rem; color: $muted; }
-.impact-value { font-size: 1.05rem; font-weight: 700; margin-top: .15rem; color: $accent; }
+.impact-value { font-size: 1.05rem; font-weight: 700; margin-top: .15rem; color: $accent-ink; }
 .impact-note  { font-size: .78rem; color: $muted; margin-top: .25rem; }
 
 /* Summary */
@@ -82,20 +87,24 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .highlights ul { margin: 0 0 0 1.1rem; padding: 0; }
 .highlights li { margin: .25rem 0; }
 
-/* Case study — improved formatting */
+/* Case study — clearer structure & spacing */
 .case-study { padding: .75rem 1.25rem 0; }
 .case-study details { border: 1px solid $border; border-radius: $radius; background: #fff; overflow: hidden; }
 .case-study summary { cursor: pointer; list-style: none; padding: .8rem 1rem; font-weight: 600; position: relative; user-select: none; }
-.case-study summary::after { content: "▸"; position: absolute; right: .8rem; top: 50%; transform: translateY(-50%); font-size: 1rem; color: $accent; }
+.case-study summary::after { content: "▸"; position: absolute; right: .8rem; top: 50%; transform: translateY(-50%); font-size: 1rem; color: $accent-ink; }
 .case-study details[open] summary::after { content: "▾"; }
 .case-study summary:hover { background: mix($accent, #fff, 94%); }
-.case-study details > *:not(summary) { padding: .7rem 1rem; }
-.case-study h4 { margin: .4rem 0 .3rem; font-size: .95rem; color: $accent; letter-spacing: .01em; }
-.case-study p  { margin: 0 0 .6rem; line-height: 1.6; }
+.case-study details > *:not(summary) { padding: .8rem 1rem; }
+
+.case-study h4 { margin: .3rem 0 .2rem; font-size: .95rem; color: $ink; letter-spacing: .01em; }
+.case-study h4 + .md { margin-top: .2rem; }
+.case-study .md p { margin: 0 0 .6rem; line-height: 1.6; }
+.case-study .md ul { margin: .2rem 0 .8rem 1.1rem; }
+.case-study .md ol { margin: .2rem 0 .8rem 1.2rem; }
 
 /* Links */
 .project-links { padding: .75rem 1.25rem 0; display: flex; flex-wrap: wrap; gap: .5rem; }
-.btn-link { display: inline-block; padding: .45rem .7rem; font-size: .85rem; color: $accent; border: 1px solid $accent; background: #fff; border-radius: $radius; text-decoration: none; }
+.btn-link { display: inline-block; padding: .45rem .7rem; font-size: .85rem; color: $accent-ink; border: 1px solid $accent-ink; background: #fff; border-radius: $radius; text-decoration: none; }
 .btn-link:hover { background: mix($accent, #fff, 90%); }
 
 /* Gallery */
@@ -106,7 +115,7 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 @media (max-width: 1100px) { .project-gallery figure { grid-column: span 6; } }
 @media (max-width: 640px)  { .project-gallery figure { grid-column: span 12; } }
 
-/* Footer meta — simplified to contributions only */
+/* Footer — contributions only */
 .project-footer { padding: .75rem 1.25rem 1.25rem; margin-top: .5rem; border-top: 1px solid $border; }
 .project-footer .ownership { background: $panel; border: 1px solid $border; border-radius: $radius; padding: .75rem .9rem; }
 .project-footer .ownership h4 { margin: 0 0 .4rem; font-size: .95rem; color: $ink; }
@@ -114,23 +123,5 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .project-footer .ownership li { margin: .25rem 0; }
 .project-footer .label { color: $muted; margin-right: .35rem; }
 
-/* Spacing last element */
+/* Last-child spacing */
 .project-section > *:last-child { margin-bottom: 1rem; }
-
-/* Light-brown accent tuning */
-.projects-toc a.active { border-color: $accent-dark; box-shadow: inset 2px 0 0 $accent-dark; }
-.toc-badge { color: $accent-dark; background: mix($accent, #fff, 60%); border: 1px solid mix($accent-dark, #000, 10%); }
-
-.impact-value { color: $accent-dark; }
-.case-study summary::after { color: $accent-dark; }
-
-.stack-item {
-  border: 1px solid mix($accent-dark, #000, 12%);
-  background: mix($accent, #fff, 85%);
-}
-
-.btn-link {
-  color: $accent-dark;
-  border-color: $accent-dark;
-}
-.btn-link:hover { background: mix($accent, #fff, 88%); }
