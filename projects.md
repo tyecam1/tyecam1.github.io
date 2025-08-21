@@ -5,17 +5,8 @@ permalink: /projects/
 ---
 
 {% comment %}
-This page renders projects from _data/projects.yml.
-It expects (per project):
-- key (anchor id), title, status ("current"|"past"), dates: { start, end }
-- one_liner, summary_short, role, domain
-- stack: [ ... ], tags: [ ... ]
-- links: { repo, docs, demo, video, paper, dataset }
-- media: { hero: { src, alt, caption }, gallery: [ { src, alt, caption } ] }
-- highlights: [ ... ]
-- impact_metrics: [ { label, value, note } ]
-- ownership, meta (optional dicts)
-- case_study: { problem, approach, experiments, results, challenges, learnings, next_steps }
+Renders projects from _data/projects.yml with richer fields.
+Hides empty links/media; case study collapsed by default; removes non-portfolio metadata.
 {% endcomment %}
 
 {% assign current = site.data.projects | where: "status", "current" | sort: "dates.start" | reverse %}
@@ -43,11 +34,11 @@ It expects (per project):
     {% for p in projects %}
     <section class="project-section" id="{{ p.key }}">
 
-      {%- assign has_hero = p.media and p.media.hero and p.media.hero.src -%}
+      {%- assign has_hero = p.media and p.media.hero and p.media.hero.src and p.media.hero.src != '' -%}
       {%- if has_hero -%}
         <figure class="project-hero">
           <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}">
-          {%- if p.media.hero.caption -%}
+          {%- if p.media.hero.caption and p.media.hero.caption != '' -%}
             <figcaption>{{ p.media.hero.caption }}</figcaption>
           {%- endif -%}
         </figure>
@@ -65,19 +56,21 @@ It expects (per project):
           </div>
         </div>
 
+        {% if p.one_liner or p.summary_short %}
         <p class="project-oneliner">{{ p.one_liner | default: p.summary_short }}</p>
+        {% endif %}
 
         <div class="project-meta">
           {% if p.role %}<span class="chip" title="Role">{{ p.role }}</span>{% endif %}
           {% if p.domain %}<span class="chip" title="Domain">{{ p.domain }}</span>{% endif %}
           {% if p.tags %}
-            {% for t in p.tags %}<span class="chip chip--muted">{{ t }}</span>{% endfor %}
+            {% for t in p.tags %}{% if t and t != '' %}<span class="chip chip--muted">{{ t }}</span>{% endif %}{% endfor %}
           {% endif %}
         </div>
 
         {% if p.stack %}
           <div class="stack-list" aria-label="Tech stack">
-            {% for s in p.stack %}<span class="stack-item">{{ s }}</span>{% endfor %}
+            {% for s in p.stack %}{% if s and s != '' %}<span class="stack-item">{{ s }}</span>{% endif %}{% endfor %}
           </div>
         {% endif %}
       </header>
@@ -85,11 +78,13 @@ It expects (per project):
       {% if p.impact_metrics and p.impact_metrics.size > 0 %}
       <section class="impact-grid" aria-label="Impact metrics">
         {% for m in p.impact_metrics %}
+          {% if m and (m.label or m.value) %}
           <div class="impact-card">
-            <div class="impact-label">{{ m.label }}</div>
-            <div class="impact-value">{{ m.value }}</div>
+            {% if m.label %}<div class="impact-label">{{ m.label }}</div>{% endif %}
+            {% if m.value %}<div class="impact-value">{{ m.value }}</div>{% endif %}
             {% if m.note %}<div class="impact-note">{{ m.note }}</div>{% endif %}
           </div>
+          {% endif %}
         {% endfor %}
       </section>
       {% endif %}
@@ -102,7 +97,7 @@ It expects (per project):
       <section class="highlights">
         <h3>Highlights</h3>
         <ul>
-          {% for h in p.highlights %}<li>{{ h }}</li>{% endfor %}
+          {% for h in p.highlights %}{% if h and h != '' %}<li>{{ h }}</li>{% endif %}{% endfor %}
         </ul>
       </section>
       {% endif %}
@@ -110,7 +105,7 @@ It expects (per project):
       {% assign cs = p.case_study %}
       {% if cs and (cs.problem or cs.approach or cs.experiments or cs.results or cs.challenges or cs.learnings or cs.next_steps) %}
       <section class="case-study">
-        <details open>
+        <details>
           <summary>Case study</summary>
           {% if cs.problem %}
             <h4>Problem</h4>
@@ -144,44 +139,62 @@ It expects (per project):
       </section>
       {% endif %}
 
-      {% if p.links and (p.links.repo or p.links.docs or p.links.demo or p.links.video or p.links.paper or p.links.dataset) %}
+      {%- comment -%} Links: only render non-blank entries {%- endcomment -%}
+      {% assign repo   = p.links.repo   | default: '' %}
+      {% assign docs   = p.links.docs   | default: '' %}
+      {% assign demo   = p.links.demo   | default: '' %}
+      {% assign video  = p.links.video  | default: '' %}
+      {% assign paper  = p.links.paper  | default: '' %}
+      {% assign dataset= p.links.dataset| default: '' %}
+      {% if repo != '' or docs != '' or demo != '' or video != '' or paper != '' or dataset != '' %}
       <section class="project-links" aria-label="Project links">
-        {% if p.links.repo %}<a class="btn-link" href="{{ p.links.repo }}" target="_blank" rel="noopener">Repository</a>{% endif %}
-        {% if p.links.docs %}<a class="btn-link" href="{{ p.links.docs }}" target="_blank" rel="noopener">Docs</a>{% endif %}
-        {% if p.links.demo %}<a class="btn-link" href="{{ p.links.demo }}" target="_blank" rel="noopener">Demo</a>{% endif %}
-        {% if p.links.video %}<a class="btn-link" href="{{ p.links.video }}" target="_blank" rel="noopener">Video</a>{% endif %}
-        {% if p.links.paper %}<a class="btn-link" href="{{ p.links.paper }}" target="_blank" rel="noopener">Paper</a>{% endif %}
-        {% if p.links.dataset %}<a class="btn-link" href="{{ p.links.dataset }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
+        {% if repo   != '' %}<a class="btn-link" href="{{ repo }}"   target="_blank" rel="noopener">Repository</a>{% endif %}
+        {% if docs   != '' %}<a class="btn-link" href="{{ docs }}"   target="_blank" rel="noopener">Docs</a>{% endif %}
+        {% if demo   != '' %}<a class="btn-link" href="{{ demo }}"   target="_blank" rel="noopener">Demo</a>{% endif %}
+        {% if video  != '' %}<a class="btn-link" href="{{ video }}"  target="_blank" rel="noopener">Video</a>{% endif %}
+        {% if paper  != '' %}<a class="btn-link" href="{{ paper }}"  target="_blank" rel="noopener">Paper</a>{% endif %}
+        {% if dataset!= '' %}<a class="btn-link" href="{{ dataset }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
       </section>
       {% endif %}
 
       {% if p.media and p.media.gallery and p.media.gallery.size > 0 %}
       <section class="project-gallery" aria-label="Gallery">
         {% for g in p.media.gallery %}
+          {% if g.src and g.src != '' %}
           <figure>
             <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}">
             {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
           </figure>
+          {% endif %}
         {% endfor %}
       </section>
       {% endif %}
 
-      {% if p.ownership or p.meta %}
+      {% if p.ownership or p.responsibilities %}
       <section class="project-footer">
-        {% if p.ownership %}
-          <div class="ownership">
+        <div class="ownership">
+          <h4>My Contributions</h4>
+          {% assign resp = p.responsibilities | default: p.ownership.Responsibilities | default: p.ownership.responsibilities %}
+          {% if resp %}
+            <ul>
+              {% assign parts = resp | replace: '
+', ' ' | split: '. ' %}
+              {% for item in parts %}
+                {% assign s = item | strip %}
+                {% if s != '' %}<li>{{ s | append: '.' }}</li>{% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if p.ownership %}
             {% for k in p.ownership %}
-              <div><span class="label">{{ k[0] | replace: '_',' ' | capitalize }}:</span> <span>{{ k[1] }}</span></div>
+              {% assign key = k[0] %}
+              {% assign val = k[1] %}
+              {% unless key == 'Responsibilities' or key == 'responsibilities' %}
+              <div><span class="label">{{ key | replace: '_',' ' | capitalize }}:</span> <span>{{ val }}</span></div>
+              {% endunless %}
             {% endfor %}
-          </div>
-        {% endif %}
-        {% if p.meta %}
-          <div class="meta">
-            {% for k in p.meta %}
-              <div><span class="label">{{ k[0] | replace: '_',' ' | capitalize }}:</span> <span>{{ k[1] }}</span></div>
-            {% endfor %}
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </section>
       {% endif %}
 
