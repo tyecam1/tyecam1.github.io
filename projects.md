@@ -139,21 +139,20 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
       </section>
       {% endif %}
 
-      {%- comment -%} Links: only render non-blank entries {%- endcomment -%}
-      {% assign repo   = p.links.repo   | default: '' %}
-      {% assign docs   = p.links.docs   | default: '' %}
-      {% assign demo   = p.links.demo   | default: '' %}
-      {% assign video  = p.links.video  | default: '' %}
-      {% assign paper  = p.links.paper  | default: '' %}
-      {% assign dataset= p.links.dataset| default: '' %}
+      {% assign repo    = p.links.repo    | default: '' %}
+      {% assign docs    = p.links.docs    | default: '' %}
+      {% assign demo    = p.links.demo    | default: '' %}
+      {% assign video   = p.links.video   | default: '' %}
+      {% assign paper   = p.links.paper   | default: '' %}
+      {% assign dataset = p.links.dataset | default: '' %}
       {% if repo != '' or docs != '' or demo != '' or video != '' or paper != '' or dataset != '' %}
       <section class="project-links" aria-label="Project links">
-        {% if repo   != '' %}<a class="btn-link" href="{{ repo }}"   target="_blank" rel="noopener">Repository</a>{% endif %}
-        {% if docs   != '' %}<a class="btn-link" href="{{ docs }}"   target="_blank" rel="noopener">Docs</a>{% endif %}
-        {% if demo   != '' %}<a class="btn-link" href="{{ demo }}"   target="_blank" rel="noopener">Demo</a>{% endif %}
-        {% if video  != '' %}<a class="btn-link" href="{{ video }}"  target="_blank" rel="noopener">Video</a>{% endif %}
-        {% if paper  != '' %}<a class="btn-link" href="{{ paper }}"  target="_blank" rel="noopener">Paper</a>{% endif %}
-        {% if dataset!= '' %}<a class="btn-link" href="{{ dataset }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
+        {% if repo    != '' %}<a class="btn-link" href="{{ repo }}"    target="_blank" rel="noopener">Repository</a>{% endif %}
+        {% if docs    != '' %}<a class="btn-link" href="{{ docs }}"    target="_blank" rel="noopener">Docs</a>{% endif %}
+        {% if demo    != '' %}<a class="btn-link" href="{{ demo }}"    target="_blank" rel="noopener">Demo</a>{% endif %}
+        {% if video   != '' %}<a class="btn-link" href="{{ video }}"   target="_blank" rel="noopener">Video</a>{% endif %}
+        {% if paper   != '' %}<a class="btn-link" href="{{ paper }}"   target="_blank" rel="noopener">Paper</a>{% endif %}
+        {% if dataset != '' %}<a class="btn-link" href="{{ dataset }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
       </section>
       {% endif %}
 
@@ -177,8 +176,7 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
           {% assign resp = p.responsibilities | default: p.ownership.Responsibilities | default: p.ownership.responsibilities %}
           {% if resp %}
             <ul>
-              {% assign parts = resp | replace: '
-', ' ' | split: '. ' %}
+              {% assign parts = resp | replace: '\n', ' ' | split: '. ' %}
               {% for item in parts %}
                 {% assign s = item | strip %}
                 {% if s != '' %}<li>{{ s | append: '.' }}</li>{% endif %}
