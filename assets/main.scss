@@ -4,6 +4,7 @@
 
 /* Use Minima as the base */
 @import "minima";
+@import "projects";
 
 /* ===========================
    Global layout & typography
@@ -250,5 +251,3 @@ a { text-underline-offset: 2px; }
   border: 1px solid #e7e7e7;
   border-radius: 8px;
 }
-
-@import "projects";
