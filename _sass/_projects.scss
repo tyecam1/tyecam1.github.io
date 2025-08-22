@@ -18,11 +18,6 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 /* Expand the page wrapper on the Projects page only */
 .is-projects .page-content .wrapper { max-width: 1120px; }
 
-/* Optional: only apply :has(...) variant where supported */
-@supports selector(:has(*)) {
-  .page-content .wrapper:has(.projects-page) { max-width: 1120px; }
-}
-
 .projects-page {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
