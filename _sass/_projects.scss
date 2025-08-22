@@ -14,7 +14,7 @@ $accent-ink: #334155;   // outline/accent text
 $radius: 6px;
 $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 
-/* Expand the page wrapper on the Projects page only (wider than minima) */
+/* Wider canvas for Projects page */
 .is-projects .page-content .wrapper { max-width: 1280px; }
 
 .projects-page {
@@ -55,25 +55,23 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .project-title { margin: 0; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.2; }
 .project-dates { margin-left: auto; font-size: .9rem; color: $muted; white-space: nowrap; }
 
-/* New: role/domain line above intro */
+/* Role line above intro */
 .project-roleline { margin-top: .25rem; font-size: .9rem; color: $muted; }
 .project-roleline .role { color: $ink; font-weight: 600; }
 .project-roleline .sep { margin: 0 .4rem; color: $border; }
 
 .project-oneliner { margin: .5rem 0 0; color: $ink; font-size: 1rem; }
 
-/* Stack chips (kept, clamped in Liquid) */
+/* Stack chips (clamped in Liquid) */
 .stack-list { margin: .9rem 0 0; padding-bottom: .9rem; border-bottom: 1px solid $border; display: flex; flex-wrap: wrap; gap: .4rem; }
 .stack-item { font-size: .8rem; padding: .25rem .5rem; border: 1px solid mix($accent-ink, #000, 12%); background: mix($accent, #fff, 92%); color: $ink; border-radius: $radius; }
 .stack-more { font-weight: 600; }
 
-/* Impact metrics — single row, no wrap; scroll on small screens */
-.impact-grid {
-  display: flex; gap: .75rem; padding: 1rem 1.25rem 0;
-  overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;
-}
+/* Impact metrics — single row, scaled to fit (no scroll) */
+.impact-grid { padding: 1rem 1.25rem 0; }
+.impact-row { display: flex; gap: .75rem; transform-origin: left top; }
 .impact-card {
-  flex: 0 0 280px; scroll-snap-align: start;
+  width: 280px; /* base width used by scaler JS */
   border: 1px solid $border; border-radius: $radius; background: $panel; padding: .75rem .8rem; min-height: 96px;
 }
 .impact-label { font-size: .75rem; color: $muted; }
@@ -90,7 +88,7 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .highlights li { margin: .25rem 0; }
 .highlights li::marker { color: $muted; font-size: .85em; }
 
-/* Case-study (renamed to “Technical details”) — compact with labels */
+/* Case study — compact with labels */
 .case-study { padding: .75rem 1.25rem 0; }
 .case-study details { border: 1px solid $border; border-radius: $radius; background: #fff; overflow: hidden; }
 .case-study summary { cursor: pointer; list-style: none; padding: .8rem 1rem; font-weight: 600; position: relative; user-select: none; }
@@ -130,12 +128,4 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .project-footer .ownership ul { margin: 0 0 .1rem 1.3rem; padding: 0; }
 .project-footer .ownership li { margin: .25rem 0; }
 .project-footer .ownership li::marker { color: $muted; }
-.project-footer .team { margin-top: .35rem; color: $ink; }
-.project-footer .label { color: $muted; margin-right: .35rem; }
-
-/* Inline list for team arrays */
-.inline-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .35rem .8rem; }
-.inline-list li::marker { content: none; }
-
-/* Last-child spacing */
-.project-section > *:last-child { margin-bottom: 1rem; }
+.project-footer .

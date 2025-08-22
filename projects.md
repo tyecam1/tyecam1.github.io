@@ -4,17 +4,6 @@ title: Projects
 permalink: /projects/
 ---
 
-{% comment %}
-Refinements:
-- Wider wrapper (via body class added below).
-- Header shows title, dates, a compact role/domain line, then one-liner.
-- Stack chips clamped to 12 (+N).
-- Impact metrics: single row (no wrap); scrolls on small screens.
-- "Case study" renamed to "Technical details", with labelled chips ("Focus areas"), and compact sections.
-- Team renders cleanly (array/map/hash-string).
-- Images hidden if empty/404.
-{% endcomment %}
-
 {% assign current = site.data.projects | where: "status", "current" | sort: "dates.start" | reverse %}
 {% assign past    = site.data.projects | where: "status", "past"    | sort: "dates.end"   | reverse %}
 {% assign projects = current | concat: past %}
@@ -90,16 +79,18 @@ Refinements:
       </header>
 
       {% if p.impact_metrics and p.impact_metrics.size > 0 %}
-      <section class="impact-grid" aria-label="Impact metrics">
-        {% for m in p.impact_metrics %}
-          {% if m and (m.label or m.value) %}
-          <div class="impact-card">
-            {% if m.label %}<div class="impact-label">{{ m.label }}</div>{% endif %}
-            {% if m.value %}<div class="impact-value">{{ m.value }}</div>{% endif %}
-            {% if m.note %}<div class="impact-note">{{ m.note }}</div>{% endif %}
-          </div>
-          {% endif %}
-        {% endfor %}
+      <section class="impact-grid" aria-label="Impact metrics" data-fit="true">
+        <div class="impact-row">
+          {% for m in p.impact_metrics %}
+            {% if m and (m.label or m.value) %}
+            <div class="impact-card">
+              {% if m.label %}<div class="impact-label">{{ m.label }}</div>{% endif %}
+              {% if m.value %}<div class="impact-value">{{ m.value }}</div>{% endif %}
+              {% if m.note %}<div class="impact-note">{{ m.note }}</div>{% endif %}
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
       </section>
       {% endif %}
 
@@ -121,11 +112,11 @@ Refinements:
       {% if cs and (cs.problem or cs.approach or cs.experiments or cs.results or cs.challenges or cs.learnings or cs.next_steps) or show_tags %}
       <section class="case-study">
         <details>
-          <summary>Technical details</summary>
+          <summary>Case study</summary>
           <div class="panel">
 
             {% if show_tags %}
-              {% assign tag_max = 8 %}
+              {% assign tag_max = 6 %}
               <div class="meta-group">
                 <div class="meta-label">Focus areas</div>
                 <div class="meta-chips">
@@ -155,18 +146,57 @@ Refinements:
               <h4>Results</h4>
               <div class="md">{{ cs.results | markdownify }}</div>
             {% endif %}
+
+            {% comment %}
+            The next three fields can be either arrays or strings.
+            Detect arrays via jsonify's leading '[' and render bullets accordingly.
+            {% endcomment %}
+
             {% if cs.challenges %}
+              {% assign ch_head = cs.challenges | jsonify | slice: 0,1 %}
               <h4>Key challenges</h4>
-              <div class="md">{{ cs.challenges | markdownify }}</div>
+              {% if ch_head == '[' %}
+                <ul class="md">
+                  {% for item in cs.challenges %}
+                    {% assign s = item | strip %}
+                    {% if s != '' %}<li>{{ s }}</li>{% endif %}
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <div class="md">{{ cs.challenges | markdownify }}</div>
+              {% endif %}
             {% endif %}
+
             {% if cs.learnings %}
+              {% assign le_head = cs.learnings | jsonify | slice: 0,1 %}
               <h4>What I learned</h4>
-              <div class="md">{{ cs.learnings | markdownify }}</div>
+              {% if le_head == '[' %}
+                <ul class="md">
+                  {% for item in cs.learnings %}
+                    {% assign s = item | strip %}
+                    {% if s != '' %}<li>{{ s }}</li>{% endif %}
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <div class="md">{{ cs.learnings | markdownify }}</div>
+              {% endif %}
             {% endif %}
+
             {% if cs.next_steps %}
+              {% assign nx_head = cs.next_steps | jsonify | slice: 0,1 %}
               <h4>Next steps</h4>
-              <div class="md">{{ cs.next_steps | markdownify }}</div>
+              {% if nx_head == '[' %}
+                <ul class="md">
+                  {% for item in cs.next_steps %}
+                    {% assign s = item | strip %}
+                    {% if s != '' %}<li>{{ s }}</li>{% endif %}
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <div class="md">{{ cs.next_steps | markdownify }}</div>
+              {% endif %}
             {% endif %}
+
           </div>
         </details>
       </section>
@@ -287,4 +317,29 @@ document.body.classList.add('is-projects');
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach(s => io.observe(s));
 })();
+
+// Fit impact metrics into a single row by scaling if needed
+function fitImpactGrids() {
+  document.querySelectorAll('.impact-grid[data-fit="true"]').forEach(grid => {
+    const row = grid.querySelector('.impact-row');
+    if (!row) return;
+    // reset
+    row.style.transform = 'none';
+    grid.style.height = 'auto';
+
+    const available = grid.clientWidth;
+    const needed = row.scrollWidth; // total width of cards + gaps
+    const scale = Math.min(1, available / Math.max(1, needed));
+
+    row.style.transform = `scale(${scale})`;
+    row.style.transformOrigin = 'left top';
+
+    // after scaling, set container height to the scaled row height
+    const scaledHeight = row.getBoundingClientRect().height;
+    grid.style.height = `${scaledHeight}px`;
+  });
+}
+window.addEventListener('resize', fitImpactGrids);
+document.addEventListener('DOMContentLoaded', fitImpactGrids);
+fitImpactGrids();
 </script>
