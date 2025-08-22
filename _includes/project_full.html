@@ -1,56 +1,52 @@
-<section id="{{ project.key }}" class="project-section">
+{% assign p = include.project %}
+{% if p %}
+<section id="{{ p.key }}" class="project-section">
 
-  {%- if project.media and project.media.hero and project.media.hero.src -%}
+  {%- if p.media and p.media.hero and p.media.hero.src -%}
   <figure class="project-hero">
-    <img src="{{ project.media.hero.src | relative_url }}" alt="{{ project.media.hero.alt | escape }}">
-    {%- if project.media.hero.caption -%}
-      <figcaption>{{ project.media.hero.caption }}</figcaption>
-    {%- endif -%}
+    <img src="{{ p.media.hero.src | relative_url }}" alt="{{ p.media.hero.alt | escape }}">
+    {%- if p.media.hero.caption -%}<figcaption>{{ p.media.hero.caption }}</figcaption>{%- endif -%}
   </figure>
   {%- endif -%}
 
   <header class="project-header">
     <div class="title-row">
-      <h2 class="project-title">{{ project.title }}</h2>
-      {%- if project.dates -%}
-        {%- assign start = project.dates.start -%}
-        {%- assign end = project.dates.end -%}
+      <h2 class="project-title">{{ p.title }}</h2>
+      {%- if p.dates -%}
+        {%- assign start = p.dates.start -%}
+        {%- assign end = p.dates.end -%}
         <div class="project-dates">
           {%- if start -%}{{ start | date: "%b %Y" }}{%- endif -%}
           {%- if end -%}&nbsp;–&nbsp;{{ end | date: "%b %Y" }}
-          {%- elsif project.status == "current" -%}&nbsp;–&nbsp;Present{%- endif -%}
+          {%- elsif p.status == "current" -%}&nbsp;–&nbsp;Present{%- endif -%}
         </div>
       {%- endif -%}
     </div>
 
-    {%- if project.role or project.domain -%}
+    {%- if p.role or p.domain -%}
     <div class="project-roleline">
-      {%- if project.role -%}<span class="role">{{ project.role }}</span>{%- endif -%}
-      {%- if project.role and project.domain -%}<span class="sep">•</span>{%- endif -%}
-      {%- if project.domain -%}<span class="domain">{{ project.domain }}</span>{%- endif -%}
+      {%- if p.role -%}<span class="role">{{ p.role }}</span>{%- endif -%}
+      {%- if p.role and p.domain -%}<span class="sep">•</span>{%- endif -%}
+      {%- if p.domain -%}<span class="domain">{{ p.domain }}</span>{%- endif -%}
     </div>
     {%- endif -%}
 
-    {%- if project.one_liner -%}
-      <p class="project-oneliner">{{ project.one_liner }}</p>
+    {%- if p.one_liner -%}
+      <p class="project-oneliner">{{ p.one_liner }}</p>
     {%- endif -%}
 
-    {%- if project.stack and project.stack.size > 0 -%}
+    {%- if p.stack and p.stack.size > 0 -%}
       <ul class="stack-list">
         {%- assign max_stack = 12 -%}
-        {%- for s in project.stack limit:max_stack -%}
-          <li class="stack-item">{{ s }}</li>
-        {%- endfor -%}
-        {%- if project.stack.size > max_stack -%}
-          <li class="stack-item stack-more">+{{ project.stack.size | minus: max_stack }}</li>
-        {%- endif -%}
+        {%- for s in p.stack limit:max_stack -%}<li class="stack-item">{{ s }}</li>{%- endfor -%}
+        {%- if p.stack.size > max_stack -%}<li class="stack-item stack-more">+{{ p.stack.size | minus: max_stack }}</li>{%- endif -%}
       </ul>
     {%- endif -%}
   </header>
 
-  {%- if project.impact_metrics and project.impact_metrics.size > 0 -%}
-  <div class="impact-grid" style="--n: {{ project.impact_metrics.size }};">
-    {%- for m in project.impact_metrics -%}
+  {%- if p.impact_metrics and p.impact_metrics.size > 0 -%}
+  <div class="impact-grid" style="--n: {{ p.impact_metrics.size }};">
+    {%- for m in p.impact_metrics -%}
       <div class="impact-card">
         <div class="impact-label">{{ m.label }}</div>
         <div class="impact-value">{{ m.value }}</div>
@@ -60,71 +56,71 @@
   </div>
   {%- endif -%}
 
-  {%- if project.summary_short -%}
-  <div class="project-summary">{{ project.summary_short }}</div>
+  {%- if p.summary_short -%}
+  <div class="project-summary">{{ p.summary_short }}</div>
   {%- endif -%}
 
-  {%- if project.highlights and project.highlights.size > 0 -%}
+  {%- if p.highlights and p.highlights.size > 0 -%}
   <section class="highlights">
     <h3>Highlights</h3>
-    <ul>
-      {%- for h in project.highlights -%}<li>{{ h }}</li>{%- endfor -%}
-    </ul>
+    <ul>{%- for h in p.highlights -%}<li>{{ h }}</li>{%- endfor -%}</ul>
   </section>
   {%- endif -%}
 
-  {%- if project.case_study -%}
+  {%- if p.case_study -%}
   <section class="case-study">
     <details>
       <summary>Case study</summary>
       <div class="panel">
-        {%- if project.tags and project.tags.size > 0 -%}
+        {%- if p.tags and p.tags.size > 0 -%}
           <div class="meta-group">
             <div class="meta-label">Topics</div>
             <div class="meta-chips">
-              {%- for t in project.tags -%}<span class="chip">{{ t }}</span>{%- endfor -%}
+              {%- for t in p.tags -%}<span class="chip">{{ t }}</span>{%- endfor -%}
             </div>
           </div>
         {%- endif -%}
 
         <div class="md">
-          {%- if project.case_study.problem -%}<h4>Problem</h4><p>{{ project.case_study.problem }}</p>{%- endif -%}
-          {%- if project.case_study.approach -%}<h4>Approach</h4><p>{{ project.case_study.approach }}</p>{%- endif -%}
-          {%- if project.case_study.experiments -%}<h4>Experiments</h4><p>{{ project.case_study.experiments }}</p>{%- endif -%}
-          {%- if project.case_study.results -%}<h4>Results</h4><p>{{ project.case_study.results }}</p>{%- endif -%}
-          {%- if project.case_study.challenges and project.case_study.challenges.size > 0 -%}
+          {%- if p.case_study.problem -%}<h4>Problem</h4><p>{{ p.case_study.problem }}</p>{%- endif -%}
+          {%- if p.case_study.approach -%}<h4>Approach</h4><p>{{ p.case_study.approach }}</p>{%- endif -%}
+          {%- if p.case_study.experiments -%}<h4>Experiments</h4><p>{{ p.case_study.experiments }}</p>{%- endif -%}
+          {%- if p.case_study.results -%}<h4>Results</h4><p>{{ p.case_study.results }}</p>{%- endif -%}
+          {%- if p.case_study.challenges and p.case_study.challenges.size > 0 -%}
             <h4>Key challenges</h4>
-            <ul>{%- for c in project.case_study.challenges -%}<li>{{ c }}</li>{%- endfor -%}</ul>
+            <ul>{%- for c in p.case_study.challenges -%}<li>{{ c }}</li>{%- endfor -%}</ul>
           {%- endif -%}
-          {%- if project.case_study.learnings and project.case_study.learnings.size > 0 -%}
+          {%- if p.case_study.learnings and p.case_study.learnings.size > 0 -%}
             <h4>What I learned</h4>
-            <ul>{%- for l in project.case_study.learnings -%}<li>{{ l }}</li>{%- endfor -%}</ul>
+            <ul>{%- for l in p.case_study.learnings -%}<li>{{ l }}</li>{%- endfor -%}</ul>
           {%- endif -%}
-          {%- if project.case_study.next_steps -%}<h4>Next steps</h4><p>{{ project.case_study.next_steps }}</p>{%- endif -%}
+          {%- if p.case_study.next_steps -%}<h4>Next steps</h4><p>{{ p.case_study.next_steps }}</p>{%- endif -%}
         </div>
       </div>
     </details>
   </section>
   {%- endif -%}
 
-  {%- assign has_links = false -%}
-  {%- if project.links and (project.links.repo or project.links.docs or project.links.demo or project.links.video or project.links.paper or project.links.dataset) -%}
-    {%- assign has_links = true -%}
-  {%- endif -%}
-  {%- if has_links -%}
+  {%- assign repo    = p.links.repo    | default: '' | strip -%}
+  {%- assign docs    = p.links.docs    | default: '' | strip -%}
+  {%- assign demo    = p.links.demo    | default: '' | strip -%}
+  {%- assign video   = p.links.video   | default: '' | strip -%}
+  {%- assign paper   = p.links.paper   | default: '' | strip -%}
+  {%- assign dataset = p.links.dataset | default: '' | strip -%}
+  {%- if repo != '' or docs != '' or demo != '' or video != '' or paper != '' or dataset != '' -%}
   <div class="project-links">
-    {%- if project.links.repo -%}<a class="btn-link" href="{{ project.links.repo }}" target="_blank" rel="noopener">Repository</a>{%- endif -%}
-    {%- if project.links.docs -%}<a class="btn-link" href="{{ project.links.docs }}" target="_blank" rel="noopener">Docs</a>{%- endif -%}
-    {%- if project.links.demo -%}<a class="btn-link" href="{{ project.links.demo }}" target="_blank" rel="noopener">Demo</a>{%- endif -%}
-    {%- if project.links.video -%}<a class="btn-link" href="{{ project.links.video }}" target="_blank" rel="noopener">Video</a>{%- endif -%}
-    {%- if project.links.paper -%}<a class="btn-link" href="{{ project.links.paper }}" target="_blank" rel="noopener">Paper</a>{%- endif -%}
-    {%- if project.links.dataset -%}<a class="btn-link" href="{{ project.links.dataset }}" target="_blank" rel="noopener">Dataset</a>{%- endif -%}
+    {%- if repo    != '' -%}<a class="btn-link" href="{{ repo }}" target="_blank" rel="noopener">Repository</a>{%- endif -%}
+    {%- if docs    != '' -%}<a class="btn-link" href="{{ docs }}" target="_blank" rel="noopener">Docs</a>{%- endif -%}
+    {%- if demo    != '' -%}<a class="btn-link" href="{{ demo }}" target="_blank" rel="noopener">Demo</a>{%- endif -%}
+    {%- if video   != '' -%}<a class="btn-link" href="{{ video }}" target="_blank" rel="noopener">Video</a>{%- endif -%}
+    {%- if paper   != '' -%}<a class="btn-link" href="{{ paper }}" target="_blank" rel="noopener">Paper</a>{%- endif -%}
+    {%- if dataset != '' -%}<a class="btn-link" href="{{ dataset }}" target="_blank" rel="noopener">Dataset</a>{%- endif -%}
   </div>
   {%- endif -%}
 
-  {%- if project.media and project.media.gallery and project.media.gallery.size > 0 -%}
+  {%- if p.media and p.media.gallery and p.media.gallery.size > 0 -%}
   <section class="project-gallery">
-    {%- for g in project.media.gallery -%}
+    {%- for g in p.media.gallery -%}
       {%- if g.src -%}
       <figure>
         <img src="{{ g.src | relative_url }}" alt="{{ g.alt | escape }}">
@@ -135,19 +131,19 @@
   </section>
   {%- endif -%}
 
-  {%- if project.responsibilities or project.team -%}
+  {%- if p.responsibilities or p.team -%}
   <footer class="project-footer">
-    {%- if project.responsibilities and project.responsibilities.size > 0 -%}
+    {%- if p.responsibilities and p.responsibilities.size > 0 -%}
       <div class="ownership">
         <h4>My contributions</h4>
-        <ul>{%- for r in project.responsibilities -%}<li>{{ r }}</li>{%- endfor -%}</ul>
+        <ul>{%- for r in p.responsibilities -%}<li>{{ r }}</li>{%- endfor -%}</ul>
       </div>
     {%- endif -%}
-    {%- if project.team and project.team.size > 0 -%}
+    {%- if p.team and p.team.size > 0 -%}
       <div class="team">
         <span class="label">Team:</span>
         <ul class="inline-list">
-          {%- for t in project.team -%}
+          {%- for t in p.team -%}
             <li>
               {%- if t.link and t.link != "" -%}
                 <a href="{{ t.link }}" target="_blank" rel="noopener">{{ t.name }}</a>
@@ -164,3 +160,4 @@
   {%- endif -%}
 
 </section>
+{% endif %}
