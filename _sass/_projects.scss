@@ -47,8 +47,8 @@ html, body {
   /* Reverted comfortable TOC width; content gets the rest */
   grid-template-columns: clamp(220px, 17vw, 280px) minmax(0, 1fr);
   gap: 1.25rem; /* ↓ was ~2rem; tighter gutter gives content more room */
-  column-gap: .9rem
-  row-gap: 1.25rem
+  column-gap: .9rem;
+  row-gap: 1.25rem;
   align-items: start;
   overflow: visible; /* allow shadows to render; page root prevents H-scroll */
   @media (max-width: 980px) { grid-template-columns: 1fr; gap: 1.25rem; }
