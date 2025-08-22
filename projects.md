@@ -6,7 +6,10 @@ permalink: /projects/
 
 {% comment %}
 Renders projects from _data/projects.yml with richer fields.
-Hides empty links/media; case study collapsed by default; removes non-portfolio metadata.
+- TOC has no 'Current' badge; 'In progress...' stays in header.
+- Tags moved into case-study panel as compact chips.
+- Team rendered cleanly from array/map/hash-string.
+- Hides empty/broken images.
 {% endcomment %}
 
 {% assign current = site.data.projects | where: "status", "current" | sort: "dates.start" | reverse %}
@@ -22,7 +25,6 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
           <li>
             <a id="toc-{{ p.key }}" href="#{{ p.key }}">
               <span class="toc-title">{{ p.toc_title | default: p.title }}</span>
-              {% if p.status == "current" %}<span class="toc-badge">Current</span>{% endif %}
             </a>
           </li>
         {% endfor %}
@@ -37,15 +39,13 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
       {%- assign has_hero_src = p.media and p.media.hero and p.media.hero.src | default: '' | strip -%}
       {%- if has_hero_src != '' -%}
         <figure class="project-hero">
-          <img src="{{ p.media.hero.src }}"
-              alt="{{ p.media.hero.alt | default: p.title }}"
-              onerror="this.closest('figure').remove()">
+          <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}"
+               onerror="this.closest('figure').remove()">
           {%- if p.media.hero.caption and p.media.hero.caption != '' -%}
             <figcaption>{{ p.media.hero.caption }}</figcaption>
           {%- endif -%}
         </figure>
       {%- endif -%}
-
 
       <header class="project-header">
         <div class="title-row">
@@ -66,9 +66,7 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
         <div class="project-meta">
           {% if p.role %}<span class="chip" title="Role">{{ p.role }}</span>{% endif %}
           {% if p.domain %}<span class="chip" title="Domain">{{ p.domain }}</span>{% endif %}
-          {% if p.tags %}
-            {% for t in p.tags %}{% if t and t != '' %}<span class="chip chip--muted">{{ t }}</span>{% endif %}{% endfor %}
-          {% endif %}
+          {# NOTE: tags now live in the case-study panel #}
         </div>
 
         {% if p.stack %}
@@ -106,49 +104,49 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
       {% endif %}
 
       {% assign cs = p.case_study %}
-      {% if cs and (cs.problem or cs.approach or cs.experiments or cs.results or cs.challenges or cs.learnings or cs.next_steps) %}
+      {% if cs and (cs.problem or cs.approach or cs.experiments or cs.results or cs.challenges or cs.learnings or cs.next_steps or p.tags) %}
       <section class="case-study">
         <details>
           <summary>Case study</summary>
+          <div class="panel">
+            {% if p.tags and p.tags.size > 0 %}
+              <div class="meta-chips" aria-label="Focus areas & tags">
+                {% for t in p.tags %}{% if t and t != '' %}<span class="chip chip--muted">{{ t }}</span>{% endif %}{% endfor %}
+              </div>
+            {% endif %}
 
-          {% if cs.problem %}
-            <h4>Problem</h4>
-            <div class="md">{{ cs.problem | markdownify }}</div>
-          {% endif %}
-
-          {% if cs.approach %}
-            <h4>Approach</h4>
-            <div class="md">{{ cs.approach | markdownify }}</div>
-          {% endif %}
-
-          {% if cs.experiments %}
-            <h4>Experiments</h4>
-            <div class="md">{{ cs.experiments | markdownify }}</div>
-          {% endif %}
-
-          {% if cs.results %}
-            <h4>Results</h4>
-            <div class="md">{{ cs.results | markdownify }}</div>
-          {% endif %}
-
-          {% if cs.challenges %}
-            <h4>Key challenges</h4>
-            <div class="md">{{ cs.challenges | markdownify }}</div>
-          {% endif %}
-
-          {% if cs.learnings %}
-            <h4>What I learned</h4>
-            <div class="md">{{ cs.learnings | markdownify }}</div>
-          {% endif %}
-
-          {% if cs.next_steps %}
-            <h4>Next steps</h4>
-            <div class="md">{{ cs.next_steps | markdownify }}</div>
-          {% endif %}
+            {% if cs.problem %}
+              <h4>Problem</h4>
+              <div class="md">{{ cs.problem | markdownify }}</div>
+            {% endif %}
+            {% if cs.approach %}
+              <h4>Approach</h4>
+              <div class="md">{{ cs.approach | markdownify }}</div>
+            {% endif %}
+            {% if cs.experiments %}
+              <h4>Experiments</h4>
+              <div class="md">{{ cs.experiments | markdownify }}</div>
+            {% endif %}
+            {% if cs.results %}
+              <h4>Results</h4>
+              <div class="md">{{ cs.results | markdownify }}</div>
+            {% endif %}
+            {% if cs.challenges %}
+              <h4>Key challenges</h4>
+              <div class="md">{{ cs.challenges | markdownify }}</div>
+            {% endif %}
+            {% if cs.learnings %}
+              <h4>What I learned</h4>
+              <div class="md">{{ cs.learnings | markdownify }}</div>
+            {% endif %}
+            {% if cs.next_steps %}
+              <h4>Next steps</h4>
+              <div class="md">{{ cs.next_steps | markdownify }}</div>
+            {% endif %}
+          </div>
         </details>
       </section>
       {% endif %}
-
 
       {% assign repo    = p.links.repo    | default: '' %}
       {% assign docs    = p.links.docs    | default: '' %}
@@ -181,13 +179,12 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
       </section>
       {% endif %}
 
-
-      {% if p.ownership or p.responsibilities %}
+      {% if p.ownership or p.responsibilities or p.team or p.meta.Team %}
       <section class="project-footer">
         <div class="ownership">
           <h4>My Contributions</h4>
 
-          {%- comment -%} Prefer an array at p.responsibilities; else fall back to ownership text {%- endcomment -%}
+          {%- comment -%} Prefer array at p.responsibilities; else fall back to ownership text {%- endcomment -%}
           {% assign resp_list = nil %}
           {% if p.responsibilities and p.responsibilities.size > 0 %}
             {% assign resp_list = p.responsibilities %}
@@ -210,19 +207,37 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
             </ul>
           {% endif %}
 
-          {% if p.ownership %}
-            {% for k in p.ownership %}
-              {% assign key = k[0] %}
-              {% assign val = k[1] %}
-              {% unless key == 'Responsibilities' or key == 'responsibilities' %}
-              <div><span class="label">{{ key | replace: '_',' ' | capitalize }}:</span> <span>{{ val }}</span></div>
-              {% endunless %}
-            {% endfor %}
+          {%- comment -%} Team (array/map/hash-string) {%- endcomment -%}
+          {% assign team_raw = p.team | default: p.ownership.Team | default: p.meta.Team | default: '' %}
+          {% if team_raw != '' %}
+            <div class="team">
+              <span class="label">Team:</span>
+              {% if team_raw contains '=>' %}
+                {% assign cleaned = team_raw | replace: '{','' | replace:'}','' | replace:'"','' | replace: '=>', ':' %}
+                {% assign parts = cleaned | split: ',' %}
+                {% assign t_name = '' %}{% assign t_role = '' %}{% assign t_link = '' %}
+                {% for part in parts %}
+                  {% assign kv = part | strip | split: ':' %}
+                  {% assign k = kv[0] | downcase | strip %}
+                  {% assign v = kv[1] | join: ':' | strip %}
+                  {% if k == 'name' %}{% assign t_name = v %}{% endif %}
+                  {% if k == 'role' or k == 'roles' %}{% assign t_role = v %}{% endif %}
+                  {% if k == 'link' %}{% assign t_link = v %}{% endif %}
+                {% endfor %}
+                {% if t_link != '' and t_link != 'nil' %}<a href="{{ t_link }}" target="_blank" rel="noopener">{{ t_name }}</a>{% else %}{{ t_name }}{% endif %}
+                {% if t_role != '' and t_role != 'nil' %} — {{ t_role }}{% endif %}
+              {% elsif team_raw.first %}
+                <ul class="inline-list">
+                  {% for member in team_raw %}<li>{{ member }}</li>{% endfor %}
+                </ul>
+              {% else %}
+                {{ team_raw }}
+              {% endif %}
+            </div>
           {% endif %}
         </div>
       </section>
       {% endif %}
-
 
     </section>
     {% endfor %}
@@ -230,7 +245,6 @@ Hides empty links/media; case study collapsed by default; removes non-portfolio 
 </div>
 
 <script>
-// Sticky TOC active-state on scroll
 (function() {
   const sections = Array.from(document.querySelectorAll('.project-section'));
   const map = new Map(sections.map(s => [s.id, document.getElementById('toc-' + s.id)]));

@@ -1,25 +1,18 @@
 /* =========================================
    Projects page styles — minimal & professional
-   - Palette: light panels, dark text/outlines
-   - Subtle slate accent that plays nicely with off-whites
-   - Better case-study spacing & readability
-   - Hide broken images automatically (paired with projects.md)
    ========================================= */
 
 $ink: #0f172a;          // primary text (very dark slate)
 $muted: #475569;        // secondary text (slate 600)
 $bg: #ffffff;           // page background
 $panel: #f8fafc;        // light panel (slate-50)
-$border: #e5e7eb;       // light border (slate-200)
+$border: #e5e7eb;       // light border
 
-/* Accent system:
-   - $accent: very light wash for subtle backgrounds
-   - $accent-ink: dark slate for outlines / emphasis
-*/
+/* Accent: subtle wash + dark outline color */
 $accent: #eef2f6;       // light blue-grey wash
 $accent-ink: #334155;   // slate-700 for outlines/text
 
-$radius: 6px;           // gentle rounding
+$radius: 6px;
 $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 
 .projects-page {
@@ -40,7 +33,6 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
   a:hover { background: lighten($panel, 2%); }
   a.active { border-color: $accent-ink; box-shadow: inset 2px 0 0 $accent-ink; }
   .toc-title { font-size: .92rem; line-height: 1.2; }
-  .toc-badge { font-size: .7rem; color: $accent-ink; background: mix($accent-ink, #fff, 90%); border: 1px solid mix($accent-ink, #000, 10%); border-radius: 999px; padding: .15rem .5rem; margin-left: .5rem; white-space: nowrap; }
   @media (max-width: 980px) { position: static; .toc-inner { position: sticky; top: 60px; z-index: 2; } }
 }
 
@@ -61,11 +53,13 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .project-title { margin: 0; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.2; }
 .project-dates { margin-left: auto; font-size: .9rem; color: $muted; white-space: nowrap; }
 .project-oneliner { margin: .5rem 0 0; color: $ink; font-size: 1rem; }
-.project-meta { margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; }
 
-/* Chips & stack */
+/* Meta chips (header): role + domain only */
+.project-meta { margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; }
 .chip { display: inline-flex; align-items: center; gap: .4rem; padding: .25rem .6rem; font-size: .82rem; border-radius: 999px; border: 1px solid $border; background: #fff; }
 .chip--muted { color: $muted; }
+
+/* Stack chips */
 .stack-list { margin: .9rem 0 0; padding-bottom: .9rem; border-bottom: 1px solid $border; display: flex; flex-wrap: wrap; gap: .4rem; }
 .stack-item { font-size: .8rem; padding: .25rem .5rem; border: 1px solid mix($accent-ink, #000, 12%); background: mix($accent, #fff, 92%); color: $ink; border-radius: $radius; }
 
@@ -87,20 +81,21 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .highlights ul { margin: 0 0 0 1.1rem; padding: 0; }
 .highlights li { margin: .25rem 0; }
 
-/* Case study — clearer structure & spacing */
+/* Case study — compact layout + tags inside */
 .case-study { padding: .75rem 1.25rem 0; }
 .case-study details { border: 1px solid $border; border-radius: $radius; background: #fff; overflow: hidden; }
 .case-study summary { cursor: pointer; list-style: none; padding: .8rem 1rem; font-weight: 600; position: relative; user-select: none; }
 .case-study summary::after { content: "▸"; position: absolute; right: .8rem; top: 50%; transform: translateY(-50%); font-size: 1rem; color: $accent-ink; }
 .case-study details[open] summary::after { content: "▾"; }
 .case-study summary:hover { background: mix($accent, #fff, 94%); }
-.case-study details > *:not(summary) { padding: .8rem 1rem; }
 
-.case-study h4 { margin: .3rem 0 .2rem; font-size: .95rem; color: $ink; letter-spacing: .01em; }
-.case-study h4 + .md { margin-top: .2rem; }
-.case-study .md p { margin: 0 0 .6rem; line-height: 1.6; }
-.case-study .md ul { margin: .2rem 0 .8rem 1.1rem; }
-.case-study .md ol { margin: .2rem 0 .8rem 1.2rem; }
+.case-study .panel { padding: .75rem 1rem .9rem; }
+.case-study .meta-chips { margin: .25rem 0 .65rem; display: flex; flex-wrap: wrap; gap: .35rem; }
+.case-study .meta-chips .chip { font-size: .78rem; border-color: $border; color: $muted; background: #fff; }
+
+.case-study h4 { margin: .4rem 0 .2rem; font-size: .95rem; color: $ink; letter-spacing: .01em; }
+.case-study .md p { margin: 0 0 .55rem; line-height: 1.7; }
+.case-study .md ul, .case-study .md ol { margin: .2rem 0 .7rem 1.1rem; }
 
 /* Links */
 .project-links { padding: .75rem 1.25rem 0; display: flex; flex-wrap: wrap; gap: .5rem; }
@@ -115,12 +110,13 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 @media (max-width: 1100px) { .project-gallery figure { grid-column: span 6; } }
 @media (max-width: 640px)  { .project-gallery figure { grid-column: span 12; } }
 
-/* Footer — contributions only */
+/* Footer — contributions + team */
 .project-footer { padding: .75rem 1.25rem 1.25rem; margin-top: .5rem; border-top: 1px solid $border; }
 .project-footer .ownership { background: $panel; border: 1px solid $border; border-radius: $radius; padding: .75rem .9rem; }
 .project-footer .ownership h4 { margin: 0 0 .4rem; font-size: .95rem; color: $ink; }
-.project-footer .ownership ul { margin: 0 0 0 1rem; padding: 0; }
+.project-footer .ownership ul { margin: 0 0 .1rem 1rem; padding: 0; }
 .project-footer .ownership li { margin: .25rem 0; }
+.project-footer .team { margin-top: .35rem; color: $ink; }
 .project-footer .label { color: $muted; margin-right: .35rem; }
 
 /* Last-child spacing */
