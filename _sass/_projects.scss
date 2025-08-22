@@ -1,26 +1,25 @@
 /* =========================================
-   Projects page styles — minimal & professional
+   Projects page styles — refined, minimal, professional
    ========================================= */
 
-$ink: #0f172a;          // primary text (very dark slate)
-$muted: #475569;        // secondary text (slate 600)
+$ink: #0f172a;          // primary text
+$muted: #475569;        // secondary text
 $bg: #ffffff;           // page background
-$panel: #f8fafc;        // light panel (slate-50)
+$panel: #f8fafc;        // light panel
 $border: #e5e7eb;       // light border
 
-/* Accent: subtle wash + dark outline color */
-$accent: #eef2f6;       // light blue-grey wash
-$accent-ink: #334155;   // slate-700 for outlines/text
+$accent: #eef2f6;       // subtle wash
+$accent-ink: #334155;   // outline/accent text
 
 $radius: 6px;
 $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 
-/* Expand the page wrapper on the Projects page only */
-.is-projects .page-content .wrapper { max-width: 1120px; }
+/* Expand the page wrapper on the Projects page only (wider than minima) */
+.is-projects .page-content .wrapper { max-width: 1280px; }
 
 .projects-page {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
+  grid-template-columns: 280px minmax(0, 1fr);
   gap: 2rem;
   align-items: start;
   @media (max-width: 980px) { grid-template-columns: 1fr; }
@@ -55,21 +54,28 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .title-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem 1rem; }
 .project-title { margin: 0; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.2; }
 .project-dates { margin-left: auto; font-size: .9rem; color: $muted; white-space: nowrap; }
+
+/* New: role/domain line above intro */
+.project-roleline { margin-top: .25rem; font-size: .9rem; color: $muted; }
+.project-roleline .role { color: $ink; font-weight: 600; }
+.project-roleline .sep { margin: 0 .4rem; color: $border; }
+
 .project-oneliner { margin: .5rem 0 0; color: $ink; font-size: 1rem; }
 
-/* Meta chips (header): role + domain only */
-.project-meta { margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; }
-.chip { display: inline-flex; align-items: center; gap: .4rem; padding: .25rem .6rem; font-size: .82rem; border-radius: 999px; border: 1px solid $border; background: #fff; }
-.chip--muted { color: $muted; }
-
-/* Stack chips (clamped) */
+/* Stack chips (kept, clamped in Liquid) */
 .stack-list { margin: .9rem 0 0; padding-bottom: .9rem; border-bottom: 1px solid $border; display: flex; flex-wrap: wrap; gap: .4rem; }
 .stack-item { font-size: .8rem; padding: .25rem .5rem; border: 1px solid mix($accent-ink, #000, 12%); background: mix($accent, #fff, 92%); color: $ink; border-radius: $radius; }
 .stack-more { font-weight: 600; }
 
-/* Impact metrics — auto-fit */
-.impact-grid { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); padding: 1rem 1.25rem 0; }
-.impact-card { border: 1px solid $border; border-radius: $radius; background: $panel; padding: .75rem .8rem; min-height: 96px; }
+/* Impact metrics — single row, no wrap; scroll on small screens */
+.impact-grid {
+  display: flex; gap: .75rem; padding: 1rem 1.25rem 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;
+}
+.impact-card {
+  flex: 0 0 280px; scroll-snap-align: start;
+  border: 1px solid $border; border-radius: $radius; background: $panel; padding: .75rem .8rem; min-height: 96px;
+}
 .impact-label { font-size: .75rem; color: $muted; }
 .impact-value { font-size: 1.05rem; font-weight: 700; margin-top: .15rem; color: $accent-ink; }
 .impact-note  { font-size: .78rem; color: $muted; margin-top: .25rem; }
@@ -77,13 +83,14 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 /* Summary */
 .project-summary { padding: 1rem 1.25rem 0; color: $ink; }
 
-/* Highlights */
+/* Highlights — lighter markers + proper indent */
 .highlights { padding: .5rem 1.25rem 0; }
 .highlights h3 { font-size: 1rem; margin: .75rem 0 .25rem; }
-.highlights ul { margin: 0 0 0 1.1rem; padding: 0; }
+.highlights ul { margin: 0 0 0 1.3rem; padding: 0; }
 .highlights li { margin: .25rem 0; }
+.highlights li::marker { color: $muted; font-size: .85em; }
 
-/* Case study — compact layout + tags inside */
+/* Case-study (renamed to “Technical details”) — compact with labels */
 .case-study { padding: .75rem 1.25rem 0; }
 .case-study details { border: 1px solid $border; border-radius: $radius; background: #fff; overflow: hidden; }
 .case-study summary { cursor: pointer; list-style: none; padding: .8rem 1rem; font-weight: 600; position: relative; user-select: none; }
@@ -92,13 +99,16 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .case-study summary:hover { background: mix($accent, #fff, 94%); }
 
 .case-study .panel { padding: .6rem 1rem .9rem; }
-.case-study .meta-chips { margin: .15rem 0 .55rem; display: flex; flex-wrap: wrap; gap: .35rem; }
-.case-study .meta-chips .chip { font-size: .78rem; border-color: $border; color: $muted; background: #fff; }
+.case-study .meta-group { margin: .1rem 0 .6rem; display: grid; gap: .35rem; }
+.case-study .meta-label { font-size: .78rem; color: $muted; letter-spacing: .02em; text-transform: uppercase; }
+.case-study .meta-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+.case-study .meta-chips .chip { font-size: .78rem; border: 1px solid $border; color: $muted; background: #fff; border-radius: 999px; padding: .22rem .5rem; }
 
 .case-study h4 { margin: .35rem 0 .2rem; padding-top: .35rem; font-size: .95rem; color: $ink; letter-spacing: .01em; border-top: 1px solid $border; }
 .case-study h4:first-of-type { border-top: 0; padding-top: 0; }
 .case-study .md p { margin: 0 0 .5rem; line-height: 1.65; }
-.case-study .md ul, .case-study .md ol { margin: .15rem 0 .6rem 1.1rem; }
+.case-study .md ul, .case-study .md ol { margin: .15rem 0 .6rem 1.3rem; }
+.case-study .md li::marker { color: $muted; }
 
 /* Links */
 .project-links { padding: .75rem 1.25rem 0; display: flex; flex-wrap: wrap; gap: .5rem; }
@@ -117,8 +127,9 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 .project-footer { padding: .75rem 1.25rem 1.25rem; margin-top: .5rem; border-top: 1px solid $border; }
 .project-footer .ownership { background: $panel; border: 1px solid $border; border-radius: $radius; padding: .75rem .9rem; }
 .project-footer .ownership h4 { margin: 0 0 .4rem; font-size: .95rem; color: $ink; }
-.project-footer .ownership ul { margin: 0 0 .1rem 1rem; padding: 0; }
+.project-footer .ownership ul { margin: 0 0 .1rem 1.3rem; padding: 0; }
 .project-footer .ownership li { margin: .25rem 0; }
+.project-footer .ownership li::marker { color: $muted; }
 .project-footer .team { margin-top: .35rem; color: $ink; }
 .project-footer .label { color: $muted; margin-right: .35rem; }
 

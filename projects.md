@@ -5,13 +5,14 @@ permalink: /projects/
 ---
 
 {% comment %}
-Renders projects from _data/projects.yml with richer fields.
-- TOC with titles only.
-- Tags moved to case-study; header shows role + domain only.
-- Wider wrapper on this page.
+Refinements:
+- Wider wrapper (via body class added below).
+- Header shows title, dates, a compact role/domain line, then one-liner.
 - Stack chips clamped to 12 (+N).
-- Team renders cleanly from array/map/hash-string.
-- Hides empty/broken images.
+- Impact metrics: single row (no wrap); scrolls on small screens.
+- "Case study" renamed to "Technical details", with labelled chips ("Focus areas"), and compact sections.
+- Team renders cleanly (array/map/hash-string).
+- Images hidden if empty/404.
 {% endcomment %}
 
 {% assign current = site.data.projects | where: "status", "current" | sort: "dates.start" | reverse %}
@@ -61,14 +62,17 @@ Renders projects from _data/projects.yml with richer fields.
           </div>
         </div>
 
-        {% if p.one_liner or p.summary_short %}
-        <p class="project-oneliner">{{ p.one_liner | default: p.summary_short }}</p>
+        {% if p.role or p.domain %}
+          <div class="project-roleline">
+            {% if p.role %}<span class="role">{{ p.role }}</span>{% endif %}
+            {% if p.role and p.domain %}<span class="sep">·</span>{% endif %}
+            {% if p.domain %}<span class="domain">{{ p.domain }}</span>{% endif %}
+          </div>
         {% endif %}
 
-        <div class="project-meta">
-          {% if p.role %}<span class="chip" title="Role">{{ p.role }}</span>{% endif %}
-          {% if p.domain %}<span class="chip" title="Domain">{{ p.domain }}</span>{% endif %}
-        </div>
+        {% if p.one_liner or p.summary_short %}
+          <p class="project-oneliner">{{ p.one_liner | default: p.summary_short }}</p>
+        {% endif %}
 
         {% if p.stack %}
           {% assign max_stack = 12 %}
@@ -113,14 +117,25 @@ Renders projects from _data/projects.yml with richer fields.
       {% endif %}
 
       {% assign cs = p.case_study %}
-      {% if cs and (cs.problem or cs.approach or cs.experiments or cs.results or cs.challenges or cs.learnings or cs.next_steps or p.tags) %}
+      {% assign show_tags = p.tags and p.tags.size > 0 %}
+      {% if cs and (cs.problem or cs.approach or cs.experiments or cs.results or cs.challenges or cs.learnings or cs.next_steps) or show_tags %}
       <section class="case-study">
         <details>
-          <summary>Case study</summary>
+          <summary>Technical details</summary>
           <div class="panel">
-            {% if p.tags and p.tags.size > 0 %}
-              <div class="meta-chips" aria-label="Focus areas & tags">
-                {% for t in p.tags %}{% if t and t != '' %}<span class="chip chip--muted">{{ t }}</span>{% endif %}{% endfor %}
+
+            {% if show_tags %}
+              {% assign tag_max = 8 %}
+              <div class="meta-group">
+                <div class="meta-label">Focus areas</div>
+                <div class="meta-chips">
+                  {% for t in p.tags %}
+                    {% if t and t != '' and forloop.index <= tag_max %}<span class="chip">{{ t }}</span>{% endif %}
+                  {% endfor %}
+                  {% if p.tags.size > tag_max %}
+                    <span class="chip">+{{ p.tags.size | minus: tag_max }}</span>
+                  {% endif %}
+                </div>
               </div>
             {% endif %}
 
