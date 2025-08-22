@@ -23,8 +23,14 @@ html, body {
   html, body { overflow-x: clip; }  /* blocks tiny left/right nudge */
 }
 
-/* Wider canvas for Projects page */
-.is-projects .page-content .wrapper { max-width: 1280px; }
+/* Wider, fluid canvas on desktop; tidy, small margins */
+.is-projects .site-header .wrapper,
+.is-projects .page-content .wrapper,
+.is-projects .site-footer .wrapper {
+  max-width: min(96vw, 1440px);   /* fill the screen, but cap for huge monitors */
+  padding-left: clamp(12px, 2vw, 24px);
+  padding-right: clamp(12px, 2vw, 24px);
+}
 
 /* -------- Images may never set layout width -------- */
 .project-section img {
@@ -38,8 +44,8 @@ html, body {
 .projects-page {
   max-width: 100%;
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  gap: 2rem;
+  grid-template-columns: clamp(220px, 17vw, 280px) minmax(0, 1fr);
+  gap: 1.75rem;
   align-items: start;
   /* IMPORTANT: allow shadows to render; do not clip here */
   overflow: visible;
