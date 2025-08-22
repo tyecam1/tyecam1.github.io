@@ -6,9 +6,11 @@ permalink: /projects/
 
 {% comment %}
 Renders projects from _data/projects.yml with richer fields.
-- TOC has no 'Current' badge; 'In progress...' stays in header.
-- Tags moved into case-study panel as compact chips.
-- Team rendered cleanly from array/map/hash-string.
+- TOC with titles only.
+- Tags moved to case-study; header shows role + domain only.
+- Wider wrapper on this page.
+- Stack chips clamped to 12 (+N).
+- Team renders cleanly from array/map/hash-string.
 - Hides empty/broken images.
 {% endcomment %}
 
@@ -66,12 +68,19 @@ Renders projects from _data/projects.yml with richer fields.
         <div class="project-meta">
           {% if p.role %}<span class="chip" title="Role">{{ p.role }}</span>{% endif %}
           {% if p.domain %}<span class="chip" title="Domain">{{ p.domain }}</span>{% endif %}
-          {# NOTE: tags now live in the case-study panel #}
         </div>
 
         {% if p.stack %}
+          {% assign max_stack = 12 %}
           <div class="stack-list" aria-label="Tech stack">
-            {% for s in p.stack %}{% if s and s != '' %}<span class="stack-item">{{ s }}</span>{% endif %}{% endfor %}
+            {% for s in p.stack %}
+              {% if s and s != '' %}
+                {% if forloop.index <= max_stack %}<span class="stack-item">{{ s }}</span>{% endif %}
+              {% endif %}
+            {% endfor %}
+            {% if p.stack.size > max_stack %}
+              <span class="stack-item stack-more">+{{ p.stack.size | minus: max_stack }}</span>
+            {% endif %}
           </div>
         {% endif %}
       </header>
@@ -184,7 +193,6 @@ Renders projects from _data/projects.yml with richer fields.
         <div class="ownership">
           <h4>My Contributions</h4>
 
-          {%- comment -%} Prefer array at p.responsibilities; else fall back to ownership text {%- endcomment -%}
           {% assign resp_list = nil %}
           {% if p.responsibilities and p.responsibilities.size > 0 %}
             {% assign resp_list = p.responsibilities %}
@@ -207,12 +215,17 @@ Renders projects from _data/projects.yml with richer fields.
             </ul>
           {% endif %}
 
-          {%- comment -%} Team (array/map/hash-string) {%- endcomment -%}
           {% assign team_raw = p.team | default: p.ownership.Team | default: p.meta.Team | default: '' %}
           {% if team_raw != '' %}
             <div class="team">
               <span class="label">Team:</span>
-              {% if team_raw contains '=>' %}
+              {% if team_raw.first and team_raw.first.name %}
+                <ul class="inline-list">
+                  {% for m in team_raw %}
+                    <li>{% if m.link %}<a href="{{ m.link }}" target="_blank" rel="noopener">{{ m.name }}</a>{% else %}{{ m.name }}{% endif %}{% if m.role %} — {{ m.role }}{% endif %}</li>
+                  {% endfor %}
+                </ul>
+              {% elsif team_raw contains '=>' %}
                 {% assign cleaned = team_raw | replace: '{','' | replace:'}','' | replace:'"','' | replace: '=>', ':' %}
                 {% assign parts = cleaned | split: ',' %}
                 {% assign t_name = '' %}{% assign t_role = '' %}{% assign t_link = '' %}
@@ -226,10 +239,6 @@ Renders projects from _data/projects.yml with richer fields.
                 {% endfor %}
                 {% if t_link != '' and t_link != 'nil' %}<a href="{{ t_link }}" target="_blank" rel="noopener">{{ t_name }}</a>{% else %}{{ t_name }}{% endif %}
                 {% if t_role != '' and t_role != 'nil' %} — {{ t_role }}{% endif %}
-              {% elsif team_raw.first %}
-                <ul class="inline-list">
-                  {% for member in team_raw %}<li>{{ member }}</li>{% endfor %}
-                </ul>
               {% else %}
                 {{ team_raw }}
               {% endif %}
@@ -245,6 +254,10 @@ Renders projects from _data/projects.yml with richer fields.
 </div>
 
 <script>
+// Mark body so SCSS can widen the wrapper on this page
+document.body.classList.add('is-projects');
+
+// Sticky TOC active-state on scroll
 (function() {
   const sections = Array.from(document.querySelectorAll('.project-section'));
   const map = new Map(sections.map(s => [s.id, document.getElementById('toc-' + s.id)]));
