@@ -343,19 +343,35 @@ permalink: /projects/
 // Mark body so SCSS can widen the wrapper on this page
 document.body.classList.add('is-projects');
 
-// Sticky TOC active-state on scroll
-(function() {
-  const sections = Array.from(document.querySelectorAll('.project-section'));
-  const map = new Map(sections.map(s => [s.id, document.getElementById('toc-' + s.id)]));
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        map.forEach(a => a && a.classList.remove('active'));
-        const a = map.get(e.target.id);
-        if (a) a.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-  sections.forEach(s => io.observe(s));
+(function setupTOCHighlight() {
+  const mq = window.matchMedia('(max-width: 820px)');
+  let io = null;
+
+  function enable() {
+    const sections = Array.from(document.querySelectorAll('.project-section'));
+    const map = new Map(sections.map(s => [s.id, document.getElementById('toc-' + s.id)]));
+    io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          map.forEach(a => a && a.classList.remove('active'));
+          const a = map.get(e.target.id);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => io.observe(s));
+  }
+
+  function disable() {
+    if (io) { io.disconnect(); io = null; }
+    document.querySelectorAll('.projects-toc a.active').forEach(a => a.classList.remove('active'));
+  }
+
+  function apply() {
+    if (mq.matches) disable(); else enable();
+  }
+
+  mq.addEventListener('change', apply);
+  apply();
 })();
 </script>
