@@ -79,18 +79,16 @@ permalink: /projects/
       </header>
 
       {% if p.impact_metrics and p.impact_metrics.size > 0 %}
-      <section class="impact-grid" aria-label="Impact metrics" data-fit="true">
-        <div class="impact-row">
-          {% for m in p.impact_metrics %}
-            {% if m and (m.label or m.value) %}
-            <div class="impact-card">
-              {% if m.label %}<div class="impact-label">{{ m.label }}</div>{% endif %}
-              {% if m.value %}<div class="impact-value">{{ m.value }}</div>{% endif %}
-              {% if m.note %}<div class="impact-note">{{ m.note }}</div>{% endif %}
-            </div>
-            {% endif %}
-          {% endfor %}
-        </div>
+      <section class="impact-grid" aria-label="Impact metrics" style="--n: {{ p.impact_metrics.size }}">
+        {% for m in p.impact_metrics %}
+          {% if m and (m.label or m.value) %}
+          <div class="impact-card">
+            {% if m.label %}<div class="impact-label">{{ m.label }}</div>{% endif %}
+            {% if m.value %}<div class="impact-value">{{ m.value }}</div>{% endif %}
+            {% if m.note %}<div class="impact-note">{{ m.note }}</div>{% endif %}
+          </div>
+          {% endif %}
+        {% endfor %}
       </section>
       {% endif %}
 
@@ -147,10 +145,10 @@ permalink: /projects/
               <div class="md">{{ cs.results | markdownify }}</div>
             {% endif %}
 
-            {% comment %}
-            The next three fields can be either arrays or strings.
-            Detect arrays via jsonify's leading '[' and render bullets accordingly.
-            {% endcomment %}
+            {%- comment -%}
+            The next three can be arrays OR strings. If strings and they look like
+            " - a - b - c" on one line, split them into bullets.
+            {%- endcomment -%}
 
             {% if cs.challenges %}
               {% assign ch_head = cs.challenges | jsonify | slice: 0,1 %}
@@ -163,7 +161,20 @@ permalink: /projects/
                   {% endfor %}
                 </ul>
               {% else %}
-                <div class="md">{{ cs.challenges | markdownify }}</div>
+                {% assign raw = cs.challenges | strip %}
+                {% assign parts = raw | split: ' - ' %}
+                {% if parts.size > 2 %}
+                  <ul class="md">
+                    {% for ptxt in parts %}
+                      {% assign s = ptxt | strip %}
+                      {% unless forloop.first and s == '' %}
+                        {% if s != '' %}<li>{{ s }}</li>{% endif %}
+                      {% endunless %}
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <div class="md">{{ cs.challenges | markdownify }}</div>
+                {% endif %}
               {% endif %}
             {% endif %}
 
@@ -178,7 +189,20 @@ permalink: /projects/
                   {% endfor %}
                 </ul>
               {% else %}
-                <div class="md">{{ cs.learnings | markdownify }}</div>
+                {% assign raw = cs.learnings | strip %}
+                {% assign parts = raw | split: ' - ' %}
+                {% if parts.size > 2 %}
+                  <ul class="md">
+                    {% for ptxt in parts %}
+                      {% assign s = ptxt | strip %}
+                      {% unless forloop.first and s == '' %}
+                        {% if s != '' %}<li>{{ s }}</li>{% endif %}
+                      {% endunless %}
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <div class="md">{{ cs.learnings | markdownify }}</div>
+                {% endif %}
               {% endif %}
             {% endif %}
 
@@ -193,7 +217,20 @@ permalink: /projects/
                   {% endfor %}
                 </ul>
               {% else %}
-                <div class="md">{{ cs.next_steps | markdownify }}</div>
+                {% assign raw = cs.next_steps | strip %}
+                {% assign parts = raw | split: ' - ' %}
+                {% if parts.size > 2 %}
+                  <ul class="md">
+                    {% for ptxt in parts %}
+                      {% assign s = ptxt | strip %}
+                      {% unless forloop.first and s == '' %}
+                        {% if s != '' %}<li>{{ s }}</li>{% endif %}
+                      {% endunless %}
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <div class="md">{{ cs.next_steps | markdownify }}</div>
+                {% endif %}
               {% endif %}
             {% endif %}
 
@@ -247,7 +284,11 @@ permalink: /projects/
               {%- assign tmp = resp_raw | replace: '["','' | replace: '"]','' | replace: '", "', '||' -%}
               {% assign resp_list = tmp | split: '||' %}
             {% else %}
-              {% assign resp_list = resp_raw | newline_to_br | split: '<br />' %}
+              {% assign tmp = resp_raw | newline_to_br | split: '<br />' %}
+              {% if tmp.size <= 1 %}
+                {% assign tmp = resp_raw | replace: ' • ', '||' | replace: '· ', '||' | replace: '., ', '||' | replace: '; ', '||' | replace: ', ', '||' | split: '||' %}
+              {% endif %}
+              {% assign resp_list = tmp %}
             {% endif %}
           {% endif %}
 
@@ -317,29 +358,4 @@ document.body.classList.add('is-projects');
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach(s => io.observe(s));
 })();
-
-// Fit impact metrics into a single row by scaling if needed
-function fitImpactGrids() {
-  document.querySelectorAll('.impact-grid[data-fit="true"]').forEach(grid => {
-    const row = grid.querySelector('.impact-row');
-    if (!row) return;
-    // reset
-    row.style.transform = 'none';
-    grid.style.height = 'auto';
-
-    const available = grid.clientWidth;
-    const needed = row.scrollWidth; // total width of cards + gaps
-    const scale = Math.min(1, available / Math.max(1, needed));
-
-    row.style.transform = `scale(${scale})`;
-    row.style.transformOrigin = 'left top';
-
-    // after scaling, set container height to the scaled row height
-    const scaledHeight = row.getBoundingClientRect().height;
-    grid.style.height = `${scaledHeight}px`;
-  });
-}
-window.addEventListener('resize', fitImpactGrids);
-document.addEventListener('DOMContentLoaded', fitImpactGrids);
-fitImpactGrids();
 </script>
