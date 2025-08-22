@@ -2,6 +2,12 @@
    Projects page — natural, minimal, no H-scroll
    ========================================= */
 
+/* Kill tiny horizontal nudge on large screens only */
+@media (min-width: 1024px) {
+  html, body { overflow-x: hidden; }
+  .is-projects .page-content { overflow-x: hidden; }
+}
+
 /* Palette (natural “stone + sage”) */
 $ink: #0f172a;          // primary text (very dark slate)
 $muted: #4b5563;        // secondary text
@@ -25,6 +31,22 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
   gap: 2rem;
   align-items: start;
   @media (max-width: 980px) { grid-template-columns: 1fr; }
+}
+
+/* Prevent long content from widening the page */
+.projects-page,
+.projects-main,
+.project-section,
+.project-header,
+.impact-grid { min-width: 0; }
+
+.stack-list,
+.stack-item,
+.chip,
+.project-title,
+.project-oneliner {
+  overflow-wrap: anywhere;   /* allow very long tokens to break */
+  word-break: normal;        /* fallback */
 }
 
 /* ===== TOC ===== */
