@@ -122,10 +122,56 @@ $shadow: 0 1px 2px rgba(2,6,23,.06), 0 8px 24px rgba(2,6,23,.04);
 @media (max-width: 640px)  { .project-gallery figure { grid-column: span 12; } }
 
 /* Footer — contributions + team */
-.project-footer { padding: .75rem 1.25rem 1.25rem; margin-top: .5rem; border-top: 1px solid $border; }
-.project-footer .ownership { background: $panel; border: 1px solid $border; border-radius: $radius; padding: .75rem .9rem; }
-.project-footer .ownership h4 { margin: 0 0 .4rem; font-size: .95rem; color: $ink; }
-.project-footer .ownership ul { margin: 0 0 .1rem 1.3rem; padding: 0; }
-.project-footer .ownership li { margin: .25rem 0; }
-.project-footer .ownership li::marker { color: $muted; }
-.project-footer .
+.project-footer {
+  padding: .75rem 1.25rem 1.25rem;
+  margin-top: .5rem;
+  border-top: 1px solid $border;
+}
+
+.project-footer .ownership {
+  background: $panel;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: .75rem .9rem;
+}
+
+.project-footer .ownership h4 {
+  margin: 0 0 .4rem;
+  font-size: .95rem;
+  color: $ink;
+}
+
+.project-footer .ownership ul {
+  margin: 0 0 .1rem 1.3rem;
+  padding: 0;
+}
+
+.project-footer .ownership li {
+  margin: .25rem 0;
+}
+
+.project-footer .ownership li::marker {
+  color: $muted;
+}
+
+.project-footer .team {
+  margin-top: .35rem;
+  color: $ink;
+}
+
+.project-footer .label {
+  color: $muted;
+  margin-right: .35rem;
+}
+
+/* Inline list for team arrays */
+.inline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem .8rem;
+}
+
+.inline-list li::marker { content: none; }
