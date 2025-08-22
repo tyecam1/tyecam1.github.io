@@ -1,5 +1,5 @@
 # ==========================
-# CURRENT / IN-PROGRESS
+# CURRENT / IN-PROGRESS (concise)
 # ==========================
 
 - key: rl-telemetry
@@ -7,80 +7,44 @@
   status: current
   toc_title: Integrated RL Simulation & Telemetry Platform
   title: Integrated RL Simulation & Telemetry Platform
-  dates: { start: 2025-09-01 }
+  dates:
+    start: 2025-09-01
   role: Developer & Research Engineer
   domain: Reinforcement Learning
   one_liner: >
-    A unified RL pipeline spanning 2D gridworlds and 3D robotics with live telemetry, reproducible runs,
-    experiment logging, and PPO baselines.
+    Unified RL pipeline for 2D/3D tasks with live telemetry and reproducible runs.
   summary_short: >
-    End-to-end research platform standardising environments, training, and visualisation. Provides PPO/tabular baselines,
-    live dashboards, and reproducible artefact logging across 2D/3D tasks.
-  tags:
-    - RL platforms
-    - Experiment reproducibility
-    - Telemetry & dashboards
-    - Robotics integration
-    - PPO baselines
-    - Research tooling
-  stack:
-    - Python
-    - PyTorch
-    - Gymnasium
-    - Unity ML-Agents
-    - PyBullet
-    - NumPy
-    - Matplotlib
-    - Plotly
-    - Flask / Streamlit
-    - WebSocket
-    - Docker
-    - DVC
+    MVP under development with PPO baselines, config-driven runs, and a live dashboard streaming metrics and frames.
+  tags: [RL platforms, Reproducibility, Telemetry, PPO, Robotics]
+  stack: [Python, PyTorch, Gymnasium, Unity ML-Agents, PyBullet, Flask/Streamlit, WebSocket, Docker]
   impact_metrics:
-    - { label: Prototype maturity, value: "MVP", note: "Baseline PPO + live telemetry in 2D tasks" }
-    - { label: Reproducibility, value: "Config-driven", note: "Seeds, manifests, checkpoints" }
-    - { label: Coverage, value: "2D + 3D", note: "Gridworlds, PyBullet/Unity" }
-    - { label: Dashboards, value: "Live", note: "Metrics, plots, video frames" }
+    - { label: Prototype, value: "MVP", note: "PPO + live telemetry (2D)" }
+    - { label: Coverage, value: "2D → 3D", note: "Gridworlds then PyBullet/Unity" }
+    - { label: Runs, value: "Config-first", note: "Seeds, manifests, checkpoints" }
   highlights:
-    - Unified reset/step/render API across custom gridworld and 3D tasks
-    - PPO + tabular baselines with config-driven runs
-    - WebSocket telemetry for plots, metrics, and frames
-    - Checkpointing and artefact logging for reproducibility
-    - Extensible design for future robotics integrations
+    - Unified reset/step/render API across tasks
+    - WebSocket telemetry to dashboard (metrics, plots, frames)
+    - Artefact logging for reproducibility
+    - Extensible interface for new environments
   case_study:
-    problem: |
-      RL research is slowed by fragmented tooling, inconsistent logging, and hard-to-compare runs.
-      The goal: a single, reproducible pipeline with first-class visibility.
-    approach: |
-      Python framework with config-first experiments and baselines (PPO/tabular).
-      Stream live telemetry to a Streamlit/Flask dashboard; standardise artefacts for later analysis.
-    experiments: |
-      Classic control/gridworlds, then PyBullet/Unity. Compare baselines vs tuned runs; validate determinism under seeding.
-    results: |
-      MVP complete: baseline PPO + live telemetry for 2D tasks; 3D envs integrated and under tuning.
-    challenges:
-      - Low-overhead telemetry without frame drops
-      - Determinism across diverse backends
-      - Artefact volume and long-term storage hygiene
-    learnings:
-      - Config-first design speeds debugging and benchmarking
-      - Integrated telemetry shortens iteration cycles
-      - Small, composable interfaces ease adding new tasks
+    problem: >
+      Fragmented RL tooling makes runs hard to compare and reproduce.
+    approach: >
+      Config-first experiments with PPO/tabular; live telemetry to a Streamlit/Flask UI; standardised artefacts.
+    results: >
+      Baseline PPO + live streaming operational on 2D tasks; 3D envs integrated and tuning in progress.
     next_steps:
-      - Full Unity ML-Agents integration and multi-agent experiments
-      - Open-source packaging with examples/docs
-      - Self-play, curriculum tools, and GPU multi-env runners
+      - Unity ML-Agents integration and multi-agent experiments
+      - Open-source packaging with examples and docs
+      - Self-play and curriculum support
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero:
-      src: /assets/projects/rl-telemetry/hero.png
-      alt: Placeholder system diagram for RL Simulation & Telemetry Platform
-      caption: Planned architecture for the RL pipeline
+    hero: { src: /assets/projects/rl-telemetry/hero.png, alt: "RL platform system diagram", caption: "Planned architecture and telemetry" }
     gallery: []
   responsibilities:
-    - Designed architecture and baseline PPO implementations
-    - Built logging, checkpointing, and telemetry pipeline
-    - Integrated Gymnasium and PyBullet environments
+    - Designed architecture and PPO baseline
+    - Built logging, checkpointing, and telemetry
+    - Integrated Gymnasium and PyBullet
   team: []
 
 - key: archlinux-migration
@@ -88,76 +52,44 @@
   status: current
   toc_title: Arch Linux Migration & Dev Environment Automation
   title: Arch Linux Migration & Dev Environment Automation
-  dates: { start: 2025-10-01 }
+  dates:
+    start: 2025-10-01
   role: Systems Engineer (personal infrastructure)
   domain: Developer Experience | Linux
   one_liner: >
-    Migrating from Windows to Arch with a reproducible, GPU-ready dev stack and a one-command bootstrap.
+    NVIDIA 3060 laptop on Arch: reproducible, CUDA-ready, one-command bootstrap.
   summary_short: >
-    Standardising my RL/robotics workflow on Arch Linux (NVIDIA 3060). CUDA-enabled, containerised toolchains (Docker),
-    versioned dotfiles, and an idempotent machine bootstrap—optionally orchestrated via Ansible playbooks.
-  tags:
-    - Arch Linux
-    - Reproducible infra
-    - GPU compute
-    - Dotfiles
-    - Automation
-    - Ansible
-  stack:
-    - Arch Linux
-    - systemd-boot
-    - btrfs snapshots
-    - pacman / paru (AUR)
-    - NVIDIA + CUDA
-    - Docker
-    - Python (uv/venv)
-    - Make
-    - Ansible (roles, handlers, tags)
+    Scripted install (bootloader→CUDA→Docker→dotfiles) plus an optional Ansible playbook for idempotent rebuilds.
+  tags: [Arch Linux, CUDA, Docker, Dotfiles, Automation, Ansible]
+  stack: [Arch Linux, systemd-boot, btrfs, pacman/paru, NVIDIA + CUDA, Docker, Python, Make, Ansible]
   impact_metrics:
-    - { label: Bootstrap,   value: "≤15 min",   note: "Bare OS to ready-to-code" }
-    - { label: Repro time,  value: "1 command", note: "make bootstrap" }
-    - { label: GPU,         value: "Accelerated", note: "CUDA validated" }
-    - { label: Config,      value: "Dotfiles",  note: "Shell/editor/terminal/WM" }
+    - { label: Bootstrap, value: "≤15 min", note: "Bare OS → dev ready" }
+    - { label: Repro, value: "1 command", note: "make bootstrap" }
+    - { label: GPU, value: "CUDA OK", note: "Validated on host + Docker" }
   highlights:
-    - Idempotent setup script installing core packages and tools
-    - Dotfiles for shell/editor/terminal with sensible defaults
-    - NVIDIA driver + CUDA install and validation
-    - Docker workflows for Python + RL sims
-    - Ansible playbook with roles (bootstrap/devtools/gpu/containers), handlers and tags to re-run sections safely
-      against a local or remote inventory (agentless SSH)
+    - Idempotent shell bootstrap for packages, drivers, and tools
+    - Versioned dotfiles (shell/editor/terminal/WM)
+    - Docker workflow for RL/robotics stacks
+    - Ansible playbook with roles, handlers, and tags against a local or remote inventory
   case_study:
-    problem: |
-      Windows made GPU tooling and reproducibility awkward. I want a lean, controllable environment I can rebuild fast.
-    approach: |
-      Use Arch for currency + transparency. Script bootloader, FS, drivers, packages, dotfiles, dev containers, and Python toolchains.
-      Provide a single entry point (make bootstrap) and mirror those steps in an Ansible playbook for multi-host or headless rebuilds.
-    experiments: |
-      Validate with Python builds, OpenGL/Vulkan demos, CUDA samples, and a small PPO run; compare host vs container performance.
-    results: |
-      Reproducible dev box with one-command setup, working CUDA, and faster context switching; playbook enables unattended rebuilds.
-    challenges:
-      - GPU drivers + containers without surprises
-      - Balancing rolling releases with stability
-      - Keeping bootstrap and playbook cleanly idempotent
-    learnings:
-      - Documented decisions + declarative automation pay back on every rebuild
-      - Containers reduce “works on my machine” drift
-      - Small defaults (prompt/aliases/editor) compound daily
+    problem: >
+      Windows slowed GPU workflows and reproducibility; I wanted a lean, rebuildable dev box.
+    approach: >
+      Automate the full stack (bootloader, FS, drivers, packages, dotfiles, containers, Python). Mirror steps in Ansible for unattended rebuilds.
+    results: >
+      One-command setup with working CUDA; faster context switching; playbook enables headless or multi-host rebuilds.
     next_steps:
-      - Publish dotfiles/bootstrap + CI checks
+      - Publish dotfiles/bootstrap with CI checks
       - Optional Nix packaging for brittle toolchains
-      - Scripted backup/sync for laptop↔workstation
+      - Scripted backup/sync across machines
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero:
-      src: /assets/projects/archlinux/hero.png
-      alt: Arch desktop with terminal and telemetry dashboard
-      caption: Reproducible development environment on Arch
+    hero: { src: /assets/projects/archlinux/hero.png, alt: "Arch desktop with terminal and telemetry", caption: "Reproducible CUDA dev environment" }
     gallery: []
   responsibilities:
-    - Authored bootstrap script and dotfiles
-    - Validated CUDA in Docker and on host
-    - Wrote Ansible roles and inventory; documented rebuild path
+    - Authored bootstrap and dotfiles
+    - Validated CUDA on host and Docker
+    - Wrote Ansible roles and inventory
   team: []
 
 - key: phd-planning
@@ -165,76 +97,48 @@
   status: current
   toc_title: PhD Planning — Robot Learning for Assistive Navigation
   title: PhD Planning — Robot Learning for Assistive Navigation
-  dates: { start: 2025-09-01 }
+  dates:
+    start: 2025-09-01
   role: Candidate (self-directed research planning)
   domain: Robot Learning | HRI
   one_liner: >
     Long-term interest: safe, co-adaptive RL for assistive navigation—pursued alongside a full-time role.
   summary_short: >
-    Structured planning with proposals, reading programme, small prototypes, and outreach to potential supervisors
-    (e.g., Brighton, Nottingham, and European HRI labs).
-  tags:
-    - Safe RL
-    - Co-adaptive control
-    - Human intent estimation
-    - Haptic guidance
-    - Reproducibility
-  stack:
-    - Python
-    - PyTorch
-    - ROS
-    - RTAB-Map
-    - Unity / Gazebo (prototyping)
-    - Jupyter
-    - Zotero / Obsidian (notes)
+    Proposals, reading plan, small prototypes; outreach to Brighton, Nottingham, and European HRI labs.
+  tags: [Safe RL, Co-adaptive control, Intent estimation, Haptic guidance, Reproducibility]
+  stack: [Python, PyTorch, ROS, RTAB-Map, Unity/Gazebo, Jupyter, Zotero/Obsidian]
   impact_metrics:
-    - { label: Proposals,  value: "2–3 drafts", note: "Framing + methodology" }
-    - { label: Reading,    value: "80–120 papers", note: "Notes + summaries" }
+    - { label: Proposals, value: "2–3", note: "Framing + methods" }
     - { label: Prototypes, value: "2", note: "Navigation + eval demos" }
-    - { label: Outreach,   value: "Shortlist", note: "Potential supervisors" }
+    - { label: Reading, value: "80–120", note: "With notes" }
   highlights:
-    - Defined problem axes (task uncertainty, perception ambiguity, human-in-the-loop)
-    - Reproducible experiment and evaluation plan
-    - Small prototypes to derisk perception/reward shaping
-    - Curated reading log (notes + gaps)
+    - Problem axes defined (uncertainty, perception ambiguity, human-in-loop)
+    - Reproducible experiment & evaluation plan
+    - Prototypes to de-risk perception and reward design
   case_study:
-    problem: |
-      Assistive navigation suffers from perception ambiguity and brittle policies. The goal is safe, adaptive collaboration
-      that earns user trust under uncertainty—without relying on force sensing.
-    approach: |
-      Co-adaptive control + game-theoretic RL; pre-registration-style experiment plans; evaluate with simulation metrics
-      and human-centred measures (clarity, predictability).
-    experiments: |
-      (1) Perception-aware goal guidance with uncertainty-conditioned rewards.
-      (2) Safe RL with constraint handling and preference learning for comfort/trust.
-    results: |
-      Refined two proposal drafts, identified potential collaborators, and proved a minimal reproducibility harness.
-    challenges:
-      - Tractable scope for year one
-      - Ethical, informative human-in-the-loop evaluation
-    learnings:
-      - Upfront evaluation design sharpens research questions
-      - Small prototypes surface risks earlier than literature alone
+    problem: >
+      Assistive navigation needs policies that adapt safely to people and uncertainty.
+    approach: >
+      Explore co-adaptive safe RL and preference-informed guidance; evaluate with simulation metrics and human-centred measures.
+    results: >
+      Two proposal drafts refined; reproducibility harness in place; supervisor shortlist identified.
     next_steps:
-      - Supervisor alignment, applications, and pilot planning
-      - Extend prototypes with richer perception and ablations
+      - Supervisor alignment and pilot planning
+      - Richer perception; preference learning studies
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero:
-      src: /assets/projects/phd/hero.png
-      alt: Planning board with research themes and prototype screenshots
-      caption: Proposal themes, prototypes, and evaluation plan
+    hero: { src: /assets/projects/phd/hero.png, alt: "Planning board and prototype screenshots", caption: "Themes, prototypes, and evaluation plan" }
     gallery: []
   responsibilities:
     - Drafted proposals and reading plan
-    - Built small prototypes + reproducibility harness
-    - Reached out to prospective labs
+    - Built small prototypes and harness
+    - Contacted prospective labs
   team:
-    - { name: "Dr. Yanan Li", role: "Prospective supervisor (discussions/reading)", link: "" }
+    - { name: "Dr. Yanan Li", role: "Prospective supervisor (interest)", link: "" }
     - { name: "Dr. Shou-Han Zhou", role: "Academic mentor (Cardiff)", link: "" }
 
 # ==========================
-# PAST PROJECTS
+# PAST / COMPLETED (expanded)
 # ==========================
 
 - key: walkaide
@@ -242,14 +146,16 @@
   status: past
   toc_title: Wearable Haptic Navigation System (RGB-D VSLAM)
   title: The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System
-  dates: { start: 2024-09-01, end: 2025-05-01 }
+  dates:
+    start: 2024-09-01
+    end: 2025-05-01
   role: Lead Developer (solo project)
   domain: Robotics | Assistive Robotics | Haptics | VSLAM | Human Factors
   one_liner: >
-    Directional haptic feedback with RGB-D VSLAM reduced collisions and improved success rates in wearable navigation trials.
+    Directional haptic cues with RGB-D VSLAM reduced collisions and improved success in blindfolded navigation trials.
   summary_short: >
-    Wearable navigation system integrating RGB-D VSLAM, haptic feedback, and EEG logging. Trials showed compass cues
-    improved success, safety, and reaction time vs pulling cues.
+    Built a wearable navigation system (RGB-D VSLAM, APF navigation, haptic actuation) with EEG event logging. Trials showed
+    compass-style cues outperformed pull-based straps on success, safety, and reaction time.
   tags:
     - SLAM
     - ROS Noetic
@@ -269,41 +175,43 @@
     - Arduino Nano 33 BLE
     - EEG logging (Emotiv, CYKIT)
   impact_metrics:
-    - { label: Success rate, value: "83–77% vs 50–66%", note: "Compass vs pulling systems" }
+    - { label: Success rate, value: "83–77% vs 50–66%", note: "Compass vs pulling" }
     - { label: Collisions per trial, value: "0–0.42 vs up to 1.17", note: "Compass vs pulling" }
     - { label: Reaction time, value: "3.43–3.67 s vs ~4.5–4.9 s", note: "Compass vs pulling feedback" }
-    - { label: Participants, value: "4", note: "Blindfolded indoor trials" }
+    - { label: Participants, value: "4", note: "Blindfolded indoor trials (textured vs plain)" }
   highlights:
-    - Built navigation system integrating RGB-D VSLAM, APF, and haptic actuators
-    - Compared compass vs pulling strategies under controlled blindfold trials
-    - Logged synchronised EEG events for later workload/usability analysis
-    - Improved VSLAM stability with textured environments
-    - Delivered reproducible ROS/Arduino testbed
+    - End-to-end wearable system with RGB-D perception, VSLAM, haptic actuation, and APF
+    - Controlled comparison of compass vs pull-based feedback
+    - EEG event logging aligned to haptic/motor cues for later analysis
+    - Reproducible ROS/Arduino testbed for assistive robotics
   case_study:
     problem: |
-      Can wearable haptic cues with RGB-D SLAM guide users more effectively than pull-based straps in GPS-denied indoor spaces?
+      Indoors, GPS is unreliable. Can haptic compass cues paired with RGB-D SLAM guide users more clearly
+      than pull-based straps, and what environmental factors matter?
     approach: |
-      ROS pipeline with RealSense RGB-D perception, RTAB-Map localisation, APF navigation, and Arduino haptics.
-      Two modalities: (i) compass pressure with back reference; (ii) pulling straps.
-      Event logging aligned haptic/motor cues with EEG for later analysis.
+      ROS pipeline with RealSense RGB-D perception, RTAB-Map localisation, APF navigation, and Arduino-driven actuators.
+      Two feedback modalities were implemented: (i) compass pressure with a back reference, and (ii) tightening pull straps.
+      All cues and motor commands were timestamped and logged, together with EEG event markers, for later workload analysis.
     experiments: |
-      Four blindfolded participants navigated routes in textured vs plain rooms, trialling both systems.
-      Metrics: task success, collisions, odometry loss, reaction time, qualitative feedback.
+      Four blindfolded participants navigated fixed routes in textured and plain rooms with both systems.
+      Metrics included success, collisions, odometry loss, reaction time, and qualitative feedback. SLAM stability was
+      analysed under texture and turning-rate changes.
     results: |
-      Compass cues outperformed pulling on success, collisions, and reaction time. Textured walls improved SLAM stability.
-      Participants rated compass clearer; pulling more comfortable.
+      Compass cues achieved higher success (83–77% vs 50–66%), fewer collisions (0–0.42 vs ≤1.17), and faster reactions
+      (3.4–3.7 s vs ~4.5–4.9 s). Textured environments stabilised VSLAM, while rapid turns remained a failure mode.
+      Participants reported compass cues clearer and more intuitive; pulling was rated more comfortable.
     challenges:
-      - Servo torque limited haptic salience
+      - Limited servo torque constrained haptic salience
       - VSLAM degraded during rapid turns and in plain environments
-      - Small sample size limited significance
-      - Multi-device ROS integration (Wi-Fi/TF frames) was error-prone
+      - Small sample size limited statistical power
+      - Multi-device ROS over Wi-Fi/TF frames introduced timing complexity
     learnings:
-      - Body-referenced directional cues are clearer indoors than pull-based cues
-      - Visual texture stabilises VSLAM more than lighting
-      - EEG event logging is feasible and useful for later analysis
+      - Body-referenced compass cues are clearer than pull-based cues indoors
+      - Visual texture drives VSLAM robustness more than lighting
+      - Event-synchronised EEG logging is practical and informative for later analysis
     next_steps:
-      - Lighter, stronger actuators with adaptive feedback
-      - Multi-camera/fusion for robust SLAM; larger studies
+      - Lighter, higher-torque actuators with adaptive feedback
+      - Multi-camera or fusion for robust SLAM; larger participant study
   links:
     repo: https://github.com/tyecam1/Mechatronic-Walkaide
     docs: ""
@@ -312,14 +220,11 @@
     paper: https://github.com/tyecam1/Mechatronic-Walkaide/blob/main/Report%20Write%20Up/WearableNavigationAid-FinalReport.pdf
     dataset: ""
   media:
-    hero:
-      src: /assets/projects/walkaide/hero.jpg
-      alt: Participant wearing haptic harness with RGB-D camera
-      caption: Prototype wearable navigation system
+    hero: { src: /assets/projects/walkaide/hero.jpg, alt: "Participant wearing haptic harness with RGB-D camera", caption: "Prototype wearable navigation system" }
     gallery: []
   responsibilities:
     - Designed system architecture and custom ROS nodes
-    - Implemented APF navigation and haptic control logic
+    - Implemented APF navigation and haptic control
     - Integrated perception, mapping, and Arduino feedback
     - Implemented EEG logging & synchronisation; handed over for analysis
   team: []
@@ -329,57 +234,54 @@
   status: past
   toc_title: Hybrid Tidal–Wind Feasibility (Severn Estuary)
   title: A Feasibility-Aware Portfolio for the Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary
-  dates: { start: 2024-09-01, end: 2025-05-01 }
+  dates:
+    start: 2024-09-01
+    end: 2025-05-01
   role: Systems Analyst & Modeller
   domain: Renewable Energy | Offshore Engineering | Sustainability
   one_liner: >
-    Modelled tidal and wind arrays in the Severn Estuary, optimising layout, monitoring, and economics for industrial decarbonisation.
+    Bathymetry-driven siting and array modelling for a hybrid tidal–wind project in the Severn Estuary.
   summary_short: >
-    Feasibility study covering bathymetry-based siting, array modelling, and LCOE benchmarking to evaluate renewable integration
-    for local industry.
+    Developed resource models and layouts, benchmarked LCOE, and proposed condition monitoring to reduce O&M downtime;
+    results indicate competitive LCOE and improved resilience via hybridisation.
   tags: [Resource assessment, Bathymetry & GIS, Condition monitoring, Hybrid arrays, LCOE analysis, Resilience]
-  stack: [Python (resource modelling, LCOE), MATLAB (turbine performance), GIS & bathymetry data]
+  stack: [Python (resource modelling, LCOE), MATLAB (turbine performance), GIS & bathymetry]
   impact_metrics:
-    - { label: Target capacity factor, value: "35–45%", note: "Hybrid tidal + wind" }
-    - { label: Site area, value: "Barry–Minehead", note: "Bathymetry-driven siting analysis" }
-    - { label: LCOE, value: "£60–80/MWh", note: "Comparable to offshore wind benchmarks" }
+    - { label: Capacity factor, value: "35–45%", note: "Hybrid array scenarios" }
+    - { label: Site extent, value: "Barry–Minehead", note: "Bathymetry constraints" }
+    - { label: LCOE, value: "£60–80/MWh", note: "Comparable to offshore wind" }
     - { label: Contribution, value: "Industrial supply", note: "Potential repowering" }
   highlights:
-    - Built bathymetry and resource models
-    - Designed tidal/wind arrays for capture and reliability
-    - Benchmarked LCOE under scenarios
-    - Proposed condition monitoring to reduce O&M downtime
-    - Assessed hybrid resilience to intermittency
+    - Built bathymetry and wind/tidal resource models
+    - Designed arrays for capture and reliability; wake-aware spacing
+    - Benchmarked LCOE under grid and O&M scenarios
+    - Condition monitoring strategy to reduce downtime
   case_study:
     problem: |
-      Could a hybrid tidal–wind farm deliver reliable, cost-effective power despite complex bathymetry and grid constraints?
+      The Severn Estuary offers strong tides but complex bathymetry. Can a hybrid tidal–wind portfolio
+      deliver reliable power at competitive cost for local industry?
     approach: |
-      Feasibility from bathymetry and wind data; array layouts for complementarity; O&M strategy; LCOE benchmarking.
+      Combined bathymetry mapping with wind/tidal resource assessment to identify feasible corridors.
+      Array designs balanced capture, reliability, and maintainability. Economics assessed via LCOE under multiple scenarios.
     experiments: |
-      Tidal-only vs wind-only vs hybrid; metrics: capacity factor, downtime resilience, environmental sensitivity; grid scenarios.
+      Compared tidal-only, wind-only, and hybrid layouts. Sensitivity to downtime, resource intermittency, and grid connection options.
     results: |
-      Hybrid portfolio smoothed variability (up to ~45% CF) with competitive LCOE; redundancy improved downtime resilience.
-    challenges:
-      - Tight siting constraints
-      - Uncertain grid connection options
-      - Limited open datasets for tidal turbines
+      Hybrid layouts smoothed supply variability, improved downtime resilience, and achieved competitive LCOE.
+      The approach highlighted siting constraints around channels and shipping lanes.
     learnings:
-      - Hybrid arrays improve reliability vs single-tech layouts
-      - Early condition monitoring reduces O&M costs
+      - Hybridisation improves reliability over single-technology fields
+      - Early condition-monitoring integration reduces projected O&M costs
     next_steps:
-      - Higher-resolution CFD; longer-term environmental data; extended economics
+      - High-resolution CFD; longer environmental series; extended policy-aware economics
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero:
-      src: /assets/projects/hybrid/hero.jpg
-      alt: Map of tidal and wind turbine array design in the Severn Estuary
-      caption: Hybrid tidal–wind feasibility design
+    hero: { src: /assets/projects/hybrid/hero.jpg, alt: "Map of hybrid tidal and wind array design", caption: "Hybrid tidal–wind feasibility design" }
     gallery: []
   responsibilities:
-    - Built site resource and bathymetric models
+    - Built resource and bathymetric models
     - Designed array layouts and optimised capacity factor
     - Led LCOE benchmarking and sustainability analysis
-    - Proposed condition monitoring framework
+    - Proposed condition-monitoring framework
   team:
     - { name: "Group of 4 MEng students", role: "Co-designers", link: "" }
 
@@ -388,49 +290,42 @@
   status: past
   toc_title: FEM Wing Optimisation (Composite, 2D)
   title: Finite Element Modelling and Optimisation of a 2D Composite Wing Section
-  dates: { start: 2024-02-01, end: 2024-05-01 }
+  dates:
+    start: 2024-02-01
+    end: 2024-05-01
   role: Lead Developer & Researcher
   domain: Computational Mechanics | Optimisation | Aerospace Structures
   one_liner: >
-    Built a custom Python FEM solver and optimised wing geometry, reducing stresses by ~25% while meeting area constraints.
+    Custom Python FEM with differential evolution cut Von Mises stress by ~25% at <1% area error.
   summary_short: >
-    Python FEM with quadratic elements and Gauss quadrature; parametric sweeps + differential evolution cut Von Mises by ~25%
-    with <1% area error.
-  tags:
-    - Custom FEM
-    - Quadratic elements
-    - Gauss quadrature
-    - Constraint handling
-    - Differential evolution
-    - Visualisation
+    Implemented 8-node quadratic elements with Gauss quadrature; θ–ϕ parametric sweeps and optimisation
+    identified a robust sweet spot while enforcing area and orthotropic behaviour.
+  tags: [Custom FEM, Quadratic elements, Gauss quadrature, Constraint handling, Differential evolution, Visualisation]
   stack: [Python, NumPy, SciPy (differential evolution, fsolve), Matplotlib]
   impact_metrics:
-    - { label: Von Mises reduction, value: "≈25%", note: "From parametric + optimisation runs" }
-    - { label: Area accuracy, value: "<1% error", note: "240 m² constraint" }
+    - { label: Von Mises reduction, value: "≈25%", note: "Parametric + optimisation" }
+    - { label: Area accuracy, value: "<1% error", note: "240 m² target" }
     - { label: Sweet spot, value: "θ 60–64°, ϕ 83–87°", note: "Best trade-off region" }
-    - { label: Simulation scale, value: "500+ runs", note: "Multiple material sets" }
+    - { label: Scale, value: "500+ runs", note: "Multiple materials" }
   highlights:
-    - Implemented FEM solver with 8-node quadratic elements
-    - Enforced geometric constraints via trigonometric formulations
-    - Automated stress analysis across θ–ϕ parameter space
-    - ~25% stress reduction with <1% area deviation
+    - Implemented solver with 8-node quadratic elements
+    - Enforced constraints via trigonometric formulation
+    - Automated θ–ϕ sweeps and convergence checks
   case_study:
     problem: |
-      Minimise peak stresses in a composite wing section while enforcing fixed area and orthotropic behaviour.
+      Reduce peak stress in a composite wing section while strictly maintaining area and orthotropic response.
     approach: |
-      8-node elements + Gauss quadrature; constraint enforcement + iterative solvers; differential evolution over θ–ϕ.
+      Python FEM with Gauss quadrature; constraint enforcement via trigonometric forms and iterative solvers;
+      differential evolution across θ–ϕ parameters.
     experiments: |
-      Sweeps across θ and ϕ (60–90°), multiple material properties (E₁, E₂, G₁₂); 500+ runs.
+      Sweeps over θ, ϕ (60–90°) across material sets (E₁, E₂, G₁₂). Visualised stress fields and convergence.
     results: |
-      ~25% reduction; best region θ=60–64°, ϕ=83–87°; area error <1%.
-    challenges:
-      - Singular Jacobians during constrained optimisation
-      - Eliminating non-finite solutions robustly
+      ~25% reduction vs baselines; best region θ=60–64°, ϕ=83–87°; <1% area deviation; stress redistribution confirmed across the section.
     learnings:
-      - Small angular changes in θ move stress concentrations significantly
-      - Constraint quality dominates optimisation stability
+      - Stability hinges on constraint enforcement and eliminating non-finite solutions
+      - Small angular changes in θ have outsized effects on stress concentrations
     next_steps:
-      - Extend to 3D with dynamic loading and multi-objective optimisation
+      - Extend to 3D with dynamic loads and multi-objective optimisation (stress, weight, stiffness)
   links:
     repo: https://github.com/tyecam1/AircraftWing-FEM-Solver
     docs: ""
@@ -439,15 +334,12 @@
     paper: https://github.com/tyecam1/AircraftWing-FEM-Solver/blob/main/docs/FinalReport.pdf
     dataset: ""
   media:
-    hero:
-      src: /assets/projects/fem-wing/hero.png
-      alt: FEM solver output with stress contours
-      caption: Stress distribution in optimised wing section
+    hero: { src: /assets/projects/fem-wing/hero.png, alt: "Stress contour field", caption: "Stress distribution in optimised wing section" }
     gallery: []
   responsibilities:
     - Designed and implemented FEM solver
     - Ran parametric and optimisation studies
-    - Produced visualisations and report
+    - Produced visualisations and final report
   team:
     - { name: "Individual project", role: "Sole developer", link: "" }
 
@@ -456,47 +348,39 @@
   status: past
   toc_title: RL Quadruped Sumo (ANYmal, PPO)
   title: Reinforcement Learning-Based Control of a Quadruped Agent in a Simulated Sumo Arena
-  dates: { start: 2023-08-01, end: 2024-01-01 }
+  dates:
+    start: 2023-08-01
+    end: 2024-01-01
   role: Reinforcement Learning Engineer (course project)
   domain: Reinforcement Learning | Robotics | Simulation
   one_liner: >
-    Trained ANYmal robots with PPO and curriculum learning to compete in a class tournament; emergent leap-attack behaviours observed.
+    PPO + curriculum in RaisimGym; emergent leap-attack; 24th in a class tournament.
   summary_short: >
-    KAIST project using PPO + curriculum in RaisimGym; emergent tactics (leap-attack, edge pushing). Ranked 24th among MSc/PhD peers.
-  tags:
-    - PPO (on-policy)
-    - Curriculum learning
-    - Vectorised environments
-    - Reward shaping
-    - Emergent behaviour
-    - Training analysis
-  stack: [PyTorch, RaiSim / RaisimGym, CUDA, NumPy, TensorBoard]
+    Trained full ANYmal with torque control and curriculum scheduling; analysed learning curves and strategies.
+  tags: [PPO, Curriculum learning, Vectorised envs, Reward shaping, Emergent behaviour, Analysis]
+  stack: [PyTorch, RaiSim/RaisimGym, CUDA, NumPy, TensorBoard]
   impact_metrics:
-    - { label: Placement,  value: "24th", note: "MSc/PhD cohort tournament" }
-    - { label: Scale,      value: "1M+ iters", note: "Vectorised envs with GPU" }
-    - { label: Behaviours, value: "Leap attack, edge pushing", note: "Emergent, not scripted" }
+    - { label: Placement, value: "24th", note: "MSc/PhD cohort tournament" }
+    - { label: Scale, value: "1M+ iters", note: "Vectorised environments" }
+    - { label: Behaviours, value: "Leap-attack, edge pushing", note: "Emergent, not scripted" }
   highlights:
-    - Implemented PPO baseline with curriculum scheduler
-    - Trained full ANYmal model with joint torque control
-    - Designed reward shaping and curriculum progression
-    - Analysed learning curves and behaviours
+    - Implemented PPO baseline and curriculum scheduler
+    - Reward shaping for stance stability and opponent displacement
+    - Full-model ANYmal training with joint torque actuation
   case_study:
     problem: |
-      Adversarial quadruped control is challenging due to contact dynamics and sparse rewards.
+      Quadruped control in adversarial contact settings is high-variance and sparse-reward.
     approach: |
-      PPO in PyTorch with RaisimGym, vectorised envs, curriculum difficulty; observations include joint states + opponent cues.
+      PPO in PyTorch with vectorised environments and curriculum difficulty; observations include joint states and opponent proximity.
     experiments: |
-      Baseline PPO vs curriculum runs; evaluate win rate, reward progression, and qualitative behaviours.
+      Baseline PPO vs curriculum; measured win rate and reward progression; qualitative behaviour analysis.
     results: |
-      Curriculum accelerated convergence and improved robustness; emergent leap-attack helped in the tournament.
-    challenges:
-      - Reward shaping without degenerate behaviours
-      - High variance under adversarial interactions
+      Curriculum accelerated convergence and improved robustness; policies discovered leap-attack and edge-pushing tactics.
     learnings:
-      - Curriculum learning improved robustness and convergence
-      - Visualisation + component rewards were vital for debugging
+      - Curriculum design materially affects sample efficiency
+      - Visualisation and component rewards are critical for debugging
     next_steps:
-      - Multi-agent self-play and domain randomisation
+      - Multi-agent self-play and domain randomisation for robustness
   links:
     repo: https://github.com/tyecam1/KAIST-Anymal-Sumo
     docs: ""
@@ -505,15 +389,12 @@
     paper: https://github.com/tyecam1/KAIST-Anymal-Sumo/blob/master/ME491_project/report/TyeCameronFinalReport.pdf
     dataset: ""
   media:
-    hero:
-      src: /assets/projects/rl-sumo/hero.jpg
-      alt: ANYmal quadruped simulation in sumo arena
-      caption: ANYmal robot trained with PPO in RaisimGym
+    hero: { src: /assets/projects/rl-sumo/hero.jpg, alt: "ANYmal robots in a simulated sumo arena", caption: "ANYmal trained with PPO in RaisimGym" }
     gallery: []
   responsibilities:
-    - Implemented PPO training loop and curriculum
-    - Designed reward shaping and environment configuration
-    - Ran experiments on GPU clusters and analysed behaviours
+    - Implemented PPO loop and curriculum
+    - Tuned reward shaping and environment configuration
+    - Ran GPU training and analysed behaviours
   team: []
   references:
     - https://github.com/jhwangbo/raisimLib
