@@ -33,14 +33,16 @@ class: is-projects
   <!-- ================= MAIN ================= -->
   <main class="projects-main">
 
-    <!-- ======= In-Progress (single compact panel) ======= -->
+    <!-- ======= In-Progress (single consolidated panel) ======= -->
     {% if inprogress and inprogress.size > 0 %}
     <section id="in-progress" class="project-section inprogress-section">
       <header class="project-header">
         <div class="title-row">
           <h2 class="project-title">In-Progress</h2>
         </div>
-        <p class="project-oneliner">Active builds and planning that directly support my target roles. Concise snapshots; details inside each card.</p>
+        <p class="project-oneliner">
+          Active builds and planning that directly support my target roles. Concise snapshots; details inside each card.
+        </p>
       </header>
 
       <div class="ip-grid">
@@ -48,14 +50,10 @@ class: is-projects
         <article class="ip-card" id="{{ p.key }}">
           <div class="ip-head">
             <h3 class="ip-title">{{ p.title }}</h3>
-            {% if p.role %}
-              <div class="ip-role">{{ p.role }}</div>
-            {% endif %}
+            {% if p.role %}<div class="ip-role">{{ p.role }}</div>{% endif %}
           </div>
 
-          {% if p.one_liner %}
-            <p class="ip-one">{{ p.one_liner }}</p>
-          {% endif %}
+          {% if p.one_liner %}<p class="ip-one">{{ p.one_liner }}</p>{% endif %}
 
           {% assign show_tags = p.tags | slice: 0, 4 %}
           {% if show_tags and show_tags.size > 0 %}
@@ -70,15 +68,14 @@ class: is-projects
             {% if mcount > 3 %}{% assign mcount = 3 %}{% endif %}
             <div class="ip-metrics" style="--m: {{ mcount }};">
               {% for metric in p.impact_metrics limit:3 %}
-                <div class="ip-metric">
-                  <div class="label">{{ metric.label }}</div>
-                  <div class="value">{{ metric.value }}</div>
-                  {% if metric.note %}<div class="note">{{ metric.note }}</div>{% endif %}
-                </div>
+              <div class="ip-metric">
+                <div class="label">{{ metric.label }}</div>
+                <div class="value">{{ metric.value }}</div>
+                {% if metric.note %}<div class="note">{{ metric.note }}</div>{% endif %}
+              </div>
               {% endfor %}
             </div>
           {% endif %}
-
 
           {% if p.case_study %}
           <details class="ip-details">
@@ -92,15 +89,26 @@ class: is-projects
           </details>
           {% endif %}
 
-          {% assign any_link = p.links.repo | append:p.links.docs | append:p.links.demo | append:p.links.video | append:p.links.paper | append:p.links.dataset %}
-          {% if any_link %}
+          {%- comment -%} Links: render only if non-blank {%- endcomment -%}
+          {% assign repo    = p.links.repo    | default: '' | strip %}
+          {% assign docs    = p.links.docs    | default: '' | strip %}
+          {% assign demo    = p.links.demo    | default: '' | strip %}
+          {% assign video   = p.links.video   | default: '' | strip %}
+          {% assign paper   = p.links.paper   | default: '' | strip %}
+          {% assign dataset = p.links.dataset | default: '' | strip %}
+          {% assign has_links = false %}
+          {% if repo != '' or docs != '' or demo != '' or video != '' or paper != '' or dataset != '' %}
+            {% assign has_links = true %}
+          {% endif %}
+
+          {% if has_links %}
           <div class="project-links ip-links">
-            {% if p.links.repo %}<a class="btn-link" href="{{ p.links.repo }}" target="_blank" rel="noopener">Repository</a>{% endif %}
-            {% if p.links.docs %}<a class="btn-link" href="{{ p.links.docs }}" target="_blank" rel="noopener">Docs</a>{% endif %}
-            {% if p.links.demo %}<a class="btn-link" href="{{ p.links.demo }}" target="_blank" rel="noopener">Demo</a>{% endif %}
-            {% if p.links.video %}<a class="btn-link" href="{{ p.links.video }}" target="_blank" rel="noopener">Video</a>{% endif %}
-            {% if p.links.paper %}<a class="btn-link" href="{{ p.links.paper }}" target="_blank" rel="noopener">Paper</a>{% endif %}
-            {% if p.links.dataset %}<a class="btn-link" href="{{ p.links.dataset }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
+            {% if repo    != '' %}<a class="btn-link" href="{{ repo }}"    target="_blank" rel="noopener">Repository</a>{% endif %}
+            {% if docs    != '' %}<a class="btn-link" href="{{ docs }}"    target="_blank" rel="noopener">Docs</a>{% endif %}
+            {% if demo    != '' %}<a class="btn-link" href="{{ demo }}"    target="_blank" rel="noopener">Demo</a>{% endif %}
+            {% if video   != '' %}<a class="btn-link" href="{{ video }}"   target="_blank" rel="noopener">Video</a>{% endif %}
+            {% if paper   != '' %}<a class="btn-link" href="{{ paper }}"   target="_blank" rel="noopener">Paper</a>{% endif %}
+            {% if dataset != '' %}<a class="btn-link" href="{{ dataset }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
           </div>
           {% endif %}
         </article>
