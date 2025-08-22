@@ -123,14 +123,14 @@
     - Dotfiles for shell/editor/terminal with sensible defaults
     - NVIDIA driver + CUDA install and validation
     - Docker workflows for Python + RL sims
-    - **Ansible playbook** with roles (bootstrap/devtools/gpu/containers), handlers and **tags** to re-run sections safely
-      against a local or remote **inventory** (agentless SSH)
+    - Ansible playbook with roles (bootstrap/devtools/gpu/containers), handlers and tags to re-run sections safely
+      against a local or remote inventory (agentless SSH)
   case_study:
     problem: |
       Windows made GPU tooling and reproducibility awkward. I want a lean, controllable environment I can rebuild fast.
     approach: |
       Use Arch for currency + transparency. Script bootloader, FS, drivers, packages, dotfiles, dev containers, and Python toolchains.
-      Provide a single entry point (make bootstrap) and mirror those steps in an **Ansible** playbook for multi-host or headless rebuilds.
+      Provide a single entry point (make bootstrap) and mirror those steps in an Ansible playbook for multi-host or headless rebuilds.
     experiments: |
       Validate with Python builds, OpenGL/Vulkan demos, CUDA samples, and a small PPO run; compare host vs container performance.
     results: |
