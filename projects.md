@@ -66,16 +66,19 @@ class: is-projects
           {% endif %}
 
           {% if p.impact_metrics and p.impact_metrics.size > 0 %}
-          <div class="ip-metrics" style="--m: {{ [p.impact_metrics.size, 3] | sort | first }};">
-            {% for m in p.impact_metrics limit:3 %}
-            <div class="ip-metric">
-              <div class="label">{{ m.label }}</div>
-              <div class="value">{{ m.value }}</div>
-              {% if m.note %}<div class="note">{{ m.note }}</div>{% endif %}
+            {% assign mcount = p.impact_metrics | size %}
+            {% if mcount > 3 %}{% assign mcount = 3 %}{% endif %}
+            <div class="ip-metrics" style="--m: {{ mcount }};">
+              {% for metric in p.impact_metrics limit:3 %}
+                <div class="ip-metric">
+                  <div class="label">{{ metric.label }}</div>
+                  <div class="value">{{ metric.value }}</div>
+                  {% if metric.note %}<div class="note">{{ metric.note }}</div>{% endif %}
+                </div>
+              {% endfor %}
             </div>
-            {% endfor %}
-          </div>
           {% endif %}
+
 
           {% if p.case_study %}
           <details class="ip-details">
