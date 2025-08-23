@@ -39,7 +39,7 @@
       - Self-play and curriculum support
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero: { src: /assets/projects/rl-telemetry/hero.png, alt: "RL platform system diagram", caption: "Planned architecture and telemetry" }
+    hero: { src: /assets/img/rl-telemetry/hero.png, alt: "RL platform system diagram", caption: "Planned architecture and telemetry" }
     gallery: []
   responsibilities:
     - Designed architecture and PPO baseline
@@ -220,7 +220,7 @@
     paper: https://github.com/tyecam1/Mechatronic-Walkaide/blob/main/Report%20Write%20Up/WearableNavigationAid-FinalReport.pdf
     dataset: ""
   media:
-    hero: { src: /assets/projects/walkaide/hero.jpg, alt: "Participant wearing haptic harness with RGB-D camera", caption: "Prototype wearable navigation system" }
+    hero: { src: /assets/img/walkaide.png, alt: "Participant wearing haptic harness with RGB-D camera", caption: "Prototype wearable navigation system" }
     gallery: []
   responsibilities:
     - Designed system architecture and custom ROS nodes
@@ -275,7 +275,7 @@
       - High-resolution CFD; longer environmental series; extended policy-aware economics
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero: { src: /assets/projects/hybrid/hero.jpg, alt: "Map of hybrid tidal and wind array design", caption: "Hybrid tidal–wind feasibility design" }
+    hero: { src: /assets/projects/img/tidal-array.png, alt: "Map of hybrid tidal and wind array design", caption: "Hybrid tidal–wind feasibility design" }
     gallery: []
   responsibilities:
     - Built resource and bathymetric models
@@ -334,7 +334,7 @@
     paper: https://github.com/tyecam1/AircraftWing-FEM-Solver/blob/main/docs/FinalReport.pdf
     dataset: ""
   media:
-    hero: { src: /assets/projects/fem-wing/hero.png, alt: "Stress contour field", caption: "Stress distribution in optimised wing section" }
+    hero: { src: /assets/img/fem-wing.png, alt: "Stress contour field", caption: "Stress distribution in optimised wing section" }
     gallery: []
   responsibilities:
     - Designed and implemented FEM solver
@@ -389,7 +389,7 @@
     paper: https://github.com/tyecam1/KAIST-Anymal-Sumo/blob/master/ME491_project/report/TyeCameronFinalReport.pdf
     dataset: ""
   media:
-    hero: { src: /assets/projects/rl-sumo/hero.jpg, alt: "ANYmal robots in a simulated sumo arena", caption: "ANYmal trained with PPO in RaisimGym" }
+    hero: { src: /assets/img/anymal-sumo.png, alt: "ANYmal robots in a simulated sumo arena", caption: "ANYmal trained with PPO in RaisimGym" }
     gallery: []
   responsibilities:
     - Implemented PPO loop and curriculum
