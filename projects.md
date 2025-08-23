@@ -33,16 +33,14 @@ class: is-projects
   <!-- ================= MAIN ================= -->
   <main class="projects-main">
 
-    <!-- ======= In-Progress (single consolidated panel) ======= -->
+    <!-- ======= In-Progress (single compact panel) ======= -->
     {% if inprogress and inprogress.size > 0 %}
     <section id="in-progress" class="project-section inprogress-section">
       <header class="project-header">
         <div class="title-row">
           <h2 class="project-title">In-Progress</h2>
         </div>
-        <p class="project-oneliner">
-          Active builds and planning that directly support my target roles. Concise snapshots; details inside each card.
-        </p>
+        <p class="project-oneliner">Active builds and planning that directly support my target roles. Concise snapshots; details inside each card.</p>
       </header>
 
       <div class="ip-grid">
@@ -50,10 +48,14 @@ class: is-projects
         <article class="ip-card" id="{{ p.key }}">
           <div class="ip-head">
             <h3 class="ip-title">{{ p.title }}</h3>
-            {% if p.role %}<div class="ip-role">{{ p.role }}</div>{% endif %}
+            {% if p.role %}
+              <div class="ip-role">{{ p.role }}</div>
+            {% endif %}
           </div>
 
-          {% if p.one_liner %}<p class="ip-one">{{ p.one_liner }}</p>{% endif %}
+          {% if p.one_liner %}
+            <p class="ip-one">{{ p.one_liner }}</p>
+          {% endif %}
 
           {% assign show_tags = p.tags | slice: 0, 4 %}
           {% if show_tags and show_tags.size > 0 %}
@@ -68,11 +70,11 @@ class: is-projects
             {% if mcount > 3 %}{% assign mcount = 3 %}{% endif %}
             <div class="ip-metrics" style="--m: {{ mcount }};">
               {% for metric in p.impact_metrics limit:3 %}
-              <div class="ip-metric">
-                <div class="label">{{ metric.label }}</div>
-                <div class="value">{{ metric.value }}</div>
-                {% if metric.note %}<div class="note">{{ metric.note }}</div>{% endif %}
-              </div>
+                <div class="ip-metric">
+                  <div class="label">{{ metric.label }}</div>
+                  <div class="value">{{ metric.value }}</div>
+                  {% if metric.note %}<div class="note">{{ metric.note }}</div>{% endif %}
+                </div>
               {% endfor %}
             </div>
           {% endif %}
@@ -89,19 +91,14 @@ class: is-projects
           </details>
           {% endif %}
 
-          {%- comment -%} Links: render only if non-blank {%- endcomment -%}
+          {%- comment -%} Render link buttons only if a non-blank URL exists {%- endcomment -%}
           {% assign repo    = p.links.repo    | default: '' | strip %}
           {% assign docs    = p.links.docs    | default: '' | strip %}
           {% assign demo    = p.links.demo    | default: '' | strip %}
           {% assign video   = p.links.video   | default: '' | strip %}
           {% assign paper   = p.links.paper   | default: '' | strip %}
           {% assign dataset = p.links.dataset | default: '' | strip %}
-          {% assign has_links = false %}
           {% if repo != '' or docs != '' or demo != '' or video != '' or paper != '' or dataset != '' %}
-            {% assign has_links = true %}
-          {% endif %}
-
-          {% if has_links %}
           <div class="project-links ip-links">
             {% if repo    != '' %}<a class="btn-link" href="{{ repo }}"    target="_blank" rel="noopener">Repository</a>{% endif %}
             {% if docs    != '' %}<a class="btn-link" href="{{ docs }}"    target="_blank" rel="noopener">Docs</a>{% endif %}
@@ -117,14 +114,331 @@ class: is-projects
     </section>
     {% endif %}
 
-    <!-- ======= Featured past projects ======= -->
+    <!-- ======= Featured past projects (INLINED) ======= -->
     {% for p in featured_past %}
-      {% include project_full.html project=p %}
+    <section id="{{ p.key }}" class="project-section">
+
+      {% if p.media and p.media.hero and p.media.hero.src %}
+      <figure class="project-hero">
+        <img src="{{ p.media.hero.src | relative_url }}" alt="{{ p.media.hero.alt | escape }}">
+        {% if p.media.hero.caption %}<figcaption>{{ p.media.hero.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endif %}
+
+      <header class="project-header">
+        <div class="title-row">
+          <h2 class="project-title">{{ p.title }}</h2>
+          {% if p.dates %}
+            {% assign start = p.dates.start %}
+            {% assign end = p.dates.end %}
+            <div class="project-dates">
+              {% if start %}{{ start | date: "%b %Y" }}{% endif %}
+              {% if end %}&nbsp;–&nbsp;{{ end | date: "%b %Y" }}{% elsif p.status == "current" %}&nbsp;–&nbsp;Present{% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if p.role or p.domain %}
+        <div class="project-roleline">
+          {% if p.role %}<span class="role">{{ p.role }}</span>{% endif %}
+          {% if p.role and p.domain %}<span class="sep">•</span>{% endif %}
+          {% if p.domain %}<span class="domain">{{ p.domain }}</span>{% endif %}
+        </div>
+        {% endif %}
+
+        {% if p.one_liner %}
+          <p class="project-oneliner">{{ p.one_liner }}</p>
+        {% endif %}
+
+        {% if p.stack and p.stack.size > 0 %}
+          <ul class="stack-list">
+            {% assign max_stack = 12 %}
+            {% for s in p.stack limit:max_stack %}<li class="stack-item">{{ s }}</li>{% endfor %}
+            {% if p.stack.size > max_stack %}<li class="stack-item stack-more">+{{ p.stack.size | minus: max_stack }}</li>{% endif %}
+          </ul>
+        {% endif %}
+      </header>
+
+      {% if p.impact_metrics and p.impact_metrics.size > 0 %}
+      <div class="impact-grid" style="--n: {{ p.impact_metrics.size }}">
+        {% for m in p.impact_metrics %}
+          <div class="impact-card">
+            <div class="impact-label">{{ m.label }}</div>
+            <div class="impact-value">{{ m.value }}</div>
+            {% if m.note %}<div class="impact-note">{{ m.note }}</div>{% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if p.summary_short %}
+      <div class="project-summary">{{ p.summary_short }}</div>
+      {% endif %}
+
+      {% if p.highlights and p.highlights.size > 0 %}
+      <section class="highlights">
+        <h3>Highlights</h3>
+        <ul>{% for h in p.highlights %}<li>{{ h }}</li>{% endfor %}</ul>
+      </section>
+      {% endif %}
+
+      {% if p.case_study %}
+      <section class="case-study">
+        <details>
+          <summary>Case study</summary>
+          <div class="panel">
+            {% if p.tags and p.tags.size > 0 %}
+              <div class="meta-group">
+                <div class="meta-label">Topics</div>
+                <div class="meta-chips">
+                  {% for t in p.tags %}<span class="chip">{{ t }}</span>{% endfor %}
+                </div>
+              </div>
+            {% endif %}
+
+            <div class="md">
+              {% if p.case_study.problem %}<h4>Problem</h4><p>{{ p.case_study.problem }}</p>{% endif %}
+              {% if p.case_study.approach %}<h4>Approach</h4><p>{{ p.case_study.approach }}</p>{% endif %}
+              {% if p.case_study.experiments %}<h4>Experiments</h4><p>{{ p.case_study.experiments }}</p>{% endif %}
+              {% if p.case_study.results %}<h4>Results</h4><p>{{ p.case_study.results }}</p>{% endif %}
+              {% if p.case_study.challenges and p.case_study.challenges.size > 0 %}
+                <h4>Key challenges</h4>
+                <ul>{% for c in p.case_study.challenges %}<li>{{ c }}</li>{% endfor %}</ul>
+              {% endif %}
+              {% if p.case_study.learnings and p.case_study.learnings.size > 0 %}
+                <h4>What I learned</h4>
+                <ul>{% for l in p.case_study.learnings %}<li>{{ l }}</li>{% endfor %}</ul>
+              {% endif %}
+              {% if p.case_study.next_steps %}<h4>Next steps</h4><p>{{ p.case_study.next_steps }}</p>{% endif %}
+            </div>
+          </div>
+        </details>
+      </section>
+      {% endif %}
+
+      {% assign repo    = p.links.repo    | default: '' | strip %}
+      {% assign docs    = p.links.docs    | default: '' | strip %}
+      {% assign demo    = p.links.demo    | default: '' | strip %}
+      {% assign video   = p.links.video   | default: '' | strip %}
+      {% assign paper   = p.links.paper   | default: '' | strip %}
+      {% assign dataset = p.links.dataset | default: '' | strip %}
+      {% if repo != '' or docs != '' or demo != '' or video != '' or paper != '' or dataset != '' %}
+      <div class="project-links">
+        {% if repo    != '' %}<a class="btn-link" href="{{ repo }}" target="_blank" rel="noopener">Repository</a>{% endif %}
+        {% if docs    != '' %}<a class="btn-link" href="{{ docs }}" target="_blank" rel="noopener">Docs</a>{% endif %}
+        {% if demo    != '' %}<a class="btn-link" href="{{ demo }}" target="_blank" rel="noopener">Demo</a>{% endif %}
+        {% if video   != '' %}<a class="btn-link" href="{{ video }}" target="_blank" rel="noopener">Video</a>{% endif %}
+        {% if paper   != '' %}<a class="btn-link" href="{{ paper }}" target="_blank" rel="noopener">Paper</a>{% endif %}
+        {% if dataset != '' %}<a class="btn-link" href="{{ dataset }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
+      </div>
+      {% endif %}
+
+      {% if p.media and p.media.gallery and p.media.gallery.size > 0 %}
+      <section class="project-gallery">
+        {% for g in p.media.gallery %}
+          {% if g.src %}
+          <figure>
+            <img src="{{ g.src | relative_url }}" alt="{{ g.alt | escape }}">
+            {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
+          </figure>
+          {% endif %}
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if p.responsibilities or p.team %}
+      <footer class="project-footer">
+        {% if p.responsibilities and p.responsibilities.size > 0 %}
+          <div class="ownership">
+            <h4>My contributions</h4>
+            <ul>{% for r in p.responsibilities %}<li>{{ r }}</li>{% endfor %}</ul>
+          </div>
+        {% endif %}
+        {% if p.team and p.team.size > 0 %}
+          <div class="team">
+            <span class="label">Team:</span>
+            <ul class="inline-list">
+              {% for t in p.team %}
+                <li>
+                  {% if t.link and t.link != "" %}
+                    <a href="{{ t.link }}" target="_blank" rel="noopener">{{ t.name }}</a>
+                  {% else %}
+                    {{ t.name }}
+                  {% endif %}
+                  {% if t.role %} — {{ t.role }}{% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </footer>
+      {% endif %}
+
+    </section>
     {% endfor %}
 
-    <!-- ======= Other past projects ======= -->
+    <!-- ======= Other past projects (INLINED) ======= -->
     {% for p in past_nonfeatured %}
-      {% include project_full.html project=p %}
+      <!-- identical markup reused for nonfeatured -->
+      <section id="{{ p.key }}" class="project-section">
+
+        {% if p.media and p.media.hero and p.media.hero.src %}
+        <figure class="project-hero">
+          <img src="{{ p.media.hero.src | relative_url }}" alt="{{ p.media.hero.alt | escape }}">
+          {% if p.media.hero.caption %}<figcaption>{{ p.media.hero.caption }}</figcaption>{% endif %}
+        </figure>
+        {% endif %}
+
+        <header class="project-header">
+          <div class="title-row">
+            <h2 class="project-title">{{ p.title }}</h2>
+            {% if p.dates %}
+              {% assign start = p.dates.start %}
+              {% assign end = p.dates.end %}
+              <div class="project-dates">
+                {% if start %}{{ start | date: "%b %Y" }}{% endif %}
+                {% if end %}&nbsp;–&nbsp;{{ end | date: "%b %Y" }}{% elsif p.status == "current" %}&nbsp;–&nbsp;Present{% endif %}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if p.role or p.domain %}
+          <div class="project-roleline">
+            {% if p.role %}<span class="role">{{ p.role }}</span>{% endif %}
+            {% if p.role and p.domain %}<span class="sep">•</span>{% endif %}
+            {% if p.domain %}<span class="domain">{{ p.domain }}</span>{% endif %}
+          </div>
+          {% endif %}
+
+          {% if p.one_liner %}
+            <p class="project-oneliner">{{ p.one_liner }}</p>
+          {% endif %}
+
+          {% if p.stack and p.stack.size > 0 %}
+            <ul class="stack-list">
+              {% assign max_stack = 12 %}
+              {% for s in p.stack limit:max_stack %}<li class="stack-item">{{ s }}</li>{% endfor %}
+              {% if p.stack.size > max_stack %}<li class="stack-item stack-more">+{{ p.stack.size | minus: max_stack }}</li>{% endif %}
+            </ul>
+          {% endif %}
+        </header>
+
+        {% if p.impact_metrics and p.impact_metrics.size > 0 %}
+        <div class="impact-grid" style="--n: {{ p.impact_metrics.size }}">
+          {% for m in p.impact_metrics %}
+            <div class="impact-card">
+              <div class="impact-label">{{ m.label }}</div>
+              <div class="impact-value">{{ m.value }}</div>
+              {% if m.note %}<div class="impact-note">{{ m.note }}</div>{% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if p.summary_short %}
+        <div class="project-summary">{{ p.summary_short }}</div>
+        {% endif %}
+
+        {% if p.highlights and p.highlights.size > 0 %}
+        <section class="highlights">
+          <h3>Highlights</h3>
+          <ul>{% for h in p.highlights %}<li>{{ h }}</li>{% endfor %}</ul>
+        </section>
+        {% endif %}
+
+        {% if p.case_study %}
+        <section class="case-study">
+          <details>
+            <summary>Case study</summary>
+            <div class="panel">
+              {% if p.tags and p.tags.size > 0 %}
+                <div class="meta-group">
+                  <div class="meta-label">Topics</div>
+                  <div class="meta-chips">
+                    {% for t in p.tags %}<span class="chip">{{ t }}</span>{% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+
+              <div class="md">
+                {% if p.case_study.problem %}<h4>Problem</h4><p>{{ p.case_study.problem }}</p>{% endif %}
+                {% if p.case_study.approach %}<h4>Approach</h4><p>{{ p.case_study.approach }}</p>{% endif %}
+                {% if p.case_study.experiments %}<h4>Experiments</h4><p>{{ p.case_study.experiments }}</p>{% endif %}
+                {% if p.case_study.results %}<h4>Results</h4><p>{{ p.case_study.results }}</p>{% endif %}
+                {% if p.case_study.challenges and p.case_study.challenges.size > 0 %}
+                  <h4>Key challenges</h4>
+                  <ul>{% for c in p.case_study.challenges %}<li>{{ c }}</li>{% endfor %}</ul>
+                {% endif %}
+                {% if p.case_study.learnings and p.case_study.learnings.size > 0 %}
+                  <h4>What I learned</h4>
+                  <ul>{% for l in p.case_study.learnings %}<li>{{ l }}</li>{% endfor %}</ul>
+                {% endif %}
+                {% if p.case_study.next_steps %}<h4>Next steps</h4><p>{{ p.case_study.next_steps }}</p>{% endif %}
+              </div>
+            </div>
+          </details>
+        </section>
+        {% endif %}
+
+        {% assign repo    = p.links.repo    | default: '' | strip %}
+        {% assign docs    = p.links.docs    | default: '' | strip %}
+        {% assign demo    = p.links.demo    | default: '' | strip %}
+        {% assign video   = p.links.video   | default: '' | strip %}
+        {% assign paper   = p.links.paper   | default: '' | strip %}
+        {% assign dataset = p.links.dataset | default: '' | strip %}
+        {% if repo != '' or docs != '' or demo != '' or video != '' or paper != '' or dataset != '' %}
+        <div class="project-links">
+          {% if repo    != '' %}<a class="btn-link" href="{{ repo }}" target="_blank" rel="noopener">Repository</a>{% endif %}
+          {% if docs    != '' %}<a class="btn-link" href="{{ docs }}" target="_blank" rel="noopener">Docs</a>{% endif %}
+          {% if demo    != '' %}<a class="btn-link" href="{{ demo }}" target="_blank" rel="noopener">Demo</a>{% endif %}
+          {% if video   != '' %}<a class="btn-link" href="{{ video }}" target="_blank" rel="noopener">Video</a>{% endif %}
+          {% if paper   != '' %}<a class="btn-link" href="{{ paper }}" target="_blank" rel="noopener">Paper</a>{% endif %}
+          {% if dataset != '' %}<a class="btn-link" href="{{ dataset }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
+        </div>
+        {% endif %}
+
+        {% if p.media and p.media.gallery and p.media.gallery.size > 0 %}
+        <section class="project-gallery">
+          {% for g in p.media.gallery %}
+            {% if g.src %}
+            <figure>
+              <img src="{{ g.src | relative_url }}" alt="{{ g.alt | escape }}">
+              {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
+            </figure>
+            {% endif %}
+          {% endfor %}
+        </section>
+        {% endif %}
+
+        {% if p.responsibilities or p.team %}
+        <footer class="project-footer">
+          {% if p.responsibilities and p.responsibilities.size > 0 %}
+            <div class="ownership">
+              <h4>My contributions</h4>
+              <ul>{% for r in p.responsibilities %}<li>{{ r }}</li>{% endfor %}</ul>
+            </div>
+          {% endif %}
+          {% if p.team and p.team.size > 0 %}
+            <div class="team">
+              <span class="label">Team:</span>
+              <ul class="inline-list">
+                {% for t in p.team %}
+                  <li>
+                    {% if t.link and t.link != "" %}
+                      <a href="{{ t.link }}" target="_blank" rel="noopener">{{ t.name }}</a>
+                    {% else %}
+                      {{ t.name }}
+                    {% endif %}
+                    {% if t.role %} — {{ t.role }}{% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        </footer>
+        {% endif %}
+
+      </section>
     {% endfor %}
 
   </main>
