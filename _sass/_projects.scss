@@ -327,3 +327,32 @@ html, body {
 
 /* (nice-to-have) smoother details panel spacing */
 .ip-details > .panel { margin-top: .5rem; }
+
+/* --- In-Progress: prevent neighbour cards from stretching when one opens --- */
+
+/* 1) Make the grid size rows to content, not equal heights */
+#in-progress .ip-grid,
+#in-progress .projects-grid,
+#in-progress .cards {
+  align-items: start !important;         /* stop stretch */
+  grid-auto-rows: auto !important;       /* kill 1fr equal-height rows */
+}
+
+/* 2) Ensure each card follows its own content height */
+#in-progress .ip-card,
+#in-progress .project-card,
+#in-progress .card {
+  height: auto !important;               /* override any 100%/fixed heights */
+  align-self: start !important;          /* don’t stretch to row height */
+}
+
+/* 3) Some themes use flex to equalize card heights—neutralise that locally */
+#in-progress .card {
+  display: block !important;             /* avoid flex “fill” behaviour */
+}
+#in-progress .card > * {
+  flex: initial !important;              /* children no longer forced to fill */
+}
+
+/* Optional nicety: tighter spacing for the open panel */
+#in-progress .ip-details > .panel { margin-top: .5rem; }
