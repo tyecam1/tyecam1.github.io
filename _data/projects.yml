@@ -221,7 +221,12 @@
     dataset: ""
   media:
     hero: { src: /assets/img/walkaide.png, alt: "Participant wearing haptic harness with RGB-D camera", caption: "Prototype wearable navigation system" }
-    gallery: []
+    gallery:
+      - { src: /assets/img/walkaide2.png, alt: "Electronics & harness layout", caption: "Electronics & harness" }
+      - { src: /assets/img/walkaide3.png, alt: "Project poster", caption: "Poster" }
+      - { src: /assets/img/walkaide4.png, alt: "Navigation scene with obstacles", caption: "Navigation scene" }
+      - { src: /assets/img/walkaide5.png, alt: "APF obstacle map", caption: "APF map" }
+      - { src: /assets/img/walkaide6.png, alt: "Trial still", caption: "Trial still" }
   responsibilities:
     - Designed system architecture and custom ROS nodes
     - Implemented APF navigation and haptic control
@@ -334,8 +339,17 @@
     paper: https://github.com/tyecam1/AircraftWing-FEM-Solver/blob/main/docs/FinalReport.pdf
     dataset: ""
   media:
-    hero: { src: /assets/img/fem-wing.png, alt: "Stress contour field", caption: "Stress distribution in optimised wing section" }
-    gallery: []
+    hero: { src: /assets/img/fem-wing-hero-MaxVM.png, alt: "Von Mises stress field (max VM)", caption: "Max Von Mises stress in composite wing" }
+    gallery:
+      - { src: /assets/img/fem-wing-4NodeComparison.png, alt: "4-node vs 8-node elements (subset)", caption: "4-node vs 8-node comparison" }
+      - { src: /assets/img/fem-wing-8NodeComparison.png, alt: "8-node quadratic element stress", caption: "8-node quadratic elements" }
+      - { src: /assets/img/fem-wing-EigenVec1.png, alt: "Eigenvector mode 1", caption: "Eigenvector 1" }
+      - { src: /assets/img/fem-wing-EigenVec2.png, alt: "Eigenvector mode 2", caption: "Eigenvector 2" }
+      - { src: /assets/img/fem-wing-MaxPrincipleShear.png, alt: "Max principal shear", caption: "Max principal shear" }
+      - { src: /assets/img/fem-wing-PrincipleSurface.png, alt: "Principal stress surface", caption: "Principal stress surface" }
+      - { src: /assets/img/fem-wing-stressXX.png, alt: "σxx stress field", caption: "Stress XX" }
+      - { src: /assets/img/fem-wing-stressYY.png, alt: "σyy stress field", caption: "Stress YY" }
+      - { src: /assets/img/fem-wing-VMsurface.png, alt: "Von Mises surface", caption: "Von Mises surface" }
   responsibilities:
     - Designed and implemented FEM solver
     - Ran parametric and optimisation studies
@@ -389,8 +403,11 @@
     paper: https://github.com/tyecam1/KAIST-Anymal-Sumo/blob/master/ME491_project/report/TyeCameronFinalReport.pdf
     dataset: ""
   media:
-    hero: { src: /assets/img/anymal-sumo.png, alt: "ANYmal robots in a simulated sumo arena", caption: "ANYmal trained with PPO in RaisimGym" }
-    gallery: []
+    hero: { src: /assets/img/anymal-sumo-hero.png, alt: "ANYmal robots in a simulated sumo arena", caption: "ANYmal trained with PPO in RaisimGym" }
+    gallery:
+      - { src: /assets/img/anymal-sumo-2-boxTraining.png, alt: "ANYmal in box training stage", caption: "Curriculum: box training" }
+      - { src: /assets/img/anymal-sumo-3-ArenaLayout.png, alt: "Top-down of the sumo arena", caption: "Arena layout" }
+      - { src: /assets/img/anymal-sumo-4-Demo.png, alt: "Demo match still", caption: "Demo bout" }
   responsibilities:
     - Implemented PPO loop and curriculum
     - Tuned reward shaping and environment configuration
