@@ -22,7 +22,7 @@ I’m currently based on the Isle of Wight, reviewing the best opportunities to 
 
 ## My Timeline
 
-- Extended Project Qualification: *A feasibility study of Tidal Energy on the Isle of Wight*  
+- Extended Project Qualification: *A feasibility study of Tidal Energy on the Isle of Wight*
   
 - First Class undergraduate Mechanical Engineering Degree:
 	- Programming focus
