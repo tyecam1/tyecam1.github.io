@@ -313,3 +313,17 @@ html, body {
     background: transparent !important;
   }
 }
+
+/* --- In-Progress cards: independent heights & no stretch --- */
+.ip-grid {
+  /* if you’re using CSS Grid already, keep it */
+  align-items: start;         /* don’t stretch items to row height */
+}
+
+.ip-card {
+  align-self: start;          /* each card sizes to its content */
+  height: auto !important;    /* override any 100%/fixed height */
+}
+
+/* (nice-to-have) smoother details panel spacing */
+.ip-details > .panel { margin-top: .5rem; }

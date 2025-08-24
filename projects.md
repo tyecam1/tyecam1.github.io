@@ -423,3 +423,18 @@ document.body.classList.add('is-projects');
   apply();
 })();
 </script>
+
+<script>
+/* Accordion behaviour for in-progress cards */
+(function oneOpenAtATime() {
+  const detailsList = Array.from(document.querySelectorAll('.ip-details'));
+  detailsList.forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (!d.open) return;
+      detailsList.forEach(other => {
+        if (other !== d && other.open) other.open = false;
+      });
+    });
+  });
+})();
+</script>
