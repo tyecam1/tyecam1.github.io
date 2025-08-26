@@ -227,6 +227,9 @@
       - { src: /assets/img/walkaide4.png, alt: "Navigation scene with obstacles", caption: "Navigation scene" }
       - { src: /assets/img/walkaide5.png, alt: "APF obstacle map", caption: "APF map" }
       - { src: /assets/img/walkaide6.png, alt: "Trial still", caption: "Trial still" }
+  videos:
+    - id: hjoRbiRpzas
+      title: Haptic Feedback Methods and Environmental Impacts — Testing
   responsibilities:
     - Designed system architecture and custom ROS nodes
     - Implemented APF navigation and haptic control
@@ -282,6 +285,9 @@
   media:
     hero: { src: /assets/projects/img/tidal-array.png, alt: "Map of hybrid tidal and wind array design", caption: "Hybrid tidal–wind feasibility design" }
     gallery: []
+  videos:
+    - id: R84wCpUQfaM
+      title: Renewable Energy Park Design Documentary
   responsibilities:
     - Built resource and bathymetric models
     - Designed array layouts and optimised capacity factor
