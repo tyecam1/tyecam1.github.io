@@ -76,6 +76,20 @@ class: is-projects
             </div>
           {% endif %}
 
+          {% if p.videos and p.videos.size > 0 %}
+          <div class="video-embeds">
+            {% for v in p.videos %}
+              <div class="video">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/{{ v.id }}"
+                  title="{{ v.title | default: 'Project video' }}"
+                  loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+              </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
           {% if p.case_study %}
           <details class="ip-details">
             <summary>More details</summary>
@@ -112,7 +126,7 @@ class: is-projects
 
     <!-- ======= Past projects (featured first) ======= -->
     {% for p in list_past %}
-    <section class="project-section anchor-target" id="{{ p.key }}">
+    <section class="project-section anchor-target{% if p.images or p.videos %} has-media{% endif %}" id="{{ p.key }}">
 
       {%- assign has_hero_src = p.media and p.media.hero and p.media.hero.src | default: '' | strip -%}
       {%- if has_hero_src != '' -%}
@@ -178,6 +192,20 @@ class: is-projects
       {% endif %}
 
       {% if p.summary_short %}<p class="project-summary">{{ p.summary_short }}</p>{% endif %}
+
+      {% if p.videos and p.videos.size > 0 %}
+      <div class="video-embeds">
+        {% for v in p.videos %}
+          <div class="video">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/{{ v.id }}"
+              title="{{ v.title | default: 'Project video' }}"
+              loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
 
       {% if p.highlights and p.highlights.size > 0 %}
       <section class="highlights">

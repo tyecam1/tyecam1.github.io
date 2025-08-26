@@ -341,8 +341,8 @@
   media:
     hero: { src: /assets/img/fem-wing-hero-MaxVM.png, alt: "Von Mises stress field (max VM)", caption: "Max Von Mises stress in composite wing" }
     gallery:
-      - { src: /assets/img/fem-wing-4NodeComparison.png, alt: "4-node vs 8-node elements (subset)", caption: "4-node vs 8-node comparison" }
-      - { src: /assets/img/fem-wing-8NodeComparison.png, alt: "8-node quadratic element stress", caption: "8-node quadratic elements" }
+      - { src: /assets/img/fem-wing-4NodeComparison.png, alt: "4-node quadratic elements", caption: "4-node quadratic elements" }
+      - { src: /assets/img/fem-wing-8NodeComparison.png, alt: "8-node quadratic elements", caption: "8-node quadratic elements" }
       - { src: /assets/img/fem-wing-EigenVec1.png, alt: "Eigenvector mode 1", caption: "Eigenvector 1" }
       - { src: /assets/img/fem-wing-EigenVec2.png, alt: "Eigenvector mode 2", caption: "Eigenvector 2" }
       - { src: /assets/img/fem-wing-MaxPrincipleShear.png, alt: "Max principal shear", caption: "Max principal shear" }
