@@ -76,24 +76,11 @@ class: is-projects
             </div>
           {% endif %}
 
-          {% if p.videos and p.videos.size > 0 %}
-          <div class="video-embeds">
-            {% for v in p.videos %}
-              <div class="video">
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/{{ v.id }}"
-                  title="{{ v.title | default: 'Project video' }}"
-                  loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                </iframe>
-              </div>
-            {% endfor %}
-          </div>
-          {% endif %}
-
           {% if p.case_study %}
           <details class="ip-details">
             <summary>More details</summary>
-            <div class="panel md">
+            <div class="ip-modal panel md">
+              <button class="ip-modal-close" type="button" data-close-ip aria-label="Close">×</button>
               {% if p.case_study.problem %}<h4>Problem</h4><p>{{ p.case_study.problem }}</p>{% endif %}
               {% if p.case_study.approach %}<h4>Approach</h4><p>{{ p.case_study.approach }}</p>{% endif %}
               {% if p.case_study.results %}<h4>Current state</h4><p>{{ p.case_study.results }}</p>{% endif %}
@@ -127,16 +114,6 @@ class: is-projects
     <!-- ======= Past projects (featured first) ======= -->
     {% for p in list_past %}
     <section class="project-section anchor-target" id="{{ p.key }}">
-
-      {%- assign has_hero_src = p.media and p.media.hero and p.media.hero.src | default: '' | strip -%}
-      {%- if has_hero_src != '' -%}
-        <figure class="project-hero">
-          <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}" onerror="this.closest('figure').remove()">
-          {%- if p.media.hero.caption and p.media.hero.caption != '' -%}
-            <figcaption>{{ p.media.hero.caption }}</figcaption>
-          {%- endif -%}
-        </figure>
-      {%- endif -%}
 
       <header class="project-header">
         <div class="title-row">
@@ -177,6 +154,18 @@ class: is-projects
         {% endif %}
       </header>
 
+{%- assign has_hero_src = p.media and p.media.hero and p.media.hero.src | default: '' | strip -%}
+      {%- if has_hero_src != '' -%}
+        <figure class="project-hero">
+          <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}" onerror="this.closest('figure').remove()">
+          {%- if p.media.hero.caption and p.media.hero.caption != '' -%}
+            <figcaption>{{ p.media.hero.caption }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endif -%}
+
+      
+
       {% if p.impact_metrics and p.impact_metrics.size > 0 %}
       <section class="impact-grid" aria-label="Impact metrics" style="--n: {{ p.impact_metrics.size }}">
         {% for m in p.impact_metrics %}
@@ -192,20 +181,6 @@ class: is-projects
       {% endif %}
 
       {% if p.summary_short %}<p class="project-summary">{{ p.summary_short }}</p>{% endif %}
-
-      {% if p.videos and p.videos.size > 0 %}
-      <div class="video-embeds">
-        {% for v in p.videos %}
-          <div class="video">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/{{ v.id }}"
-              title="{{ v.title | default: 'Project video' }}"
-              loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-            </iframe>
-          </div>
-        {% endfor %}
-      </div>
-      {% endif %}
 
       {% if p.highlights and p.highlights.size > 0 %}
       <section class="highlights">
@@ -231,8 +206,7 @@ class: is-projects
                   {% for t in p.tags %}
                     {% if t and t != '' and forloop.index <= tag_max %}<span class="chip">{{ t }}</span>{% endif %}
                   {% endfor %}
-                  {% if p.tags.size > tag_max %}<span class="chip">+{{ p.tags.size | minus: tag_max }}</span>
-                  {% endif %}
+                  {% if p.tags.size > tag_max %}<span class="chip">+{{ p.tags.size | minus: tag_max }}</span>{% endif %}
                 </div>
               </div>
             {% endif %}
@@ -339,35 +313,17 @@ class: is-projects
       {% endif %}
 
       {% if p.media and p.media.gallery and p.media.gallery.size > 0 %}
-      <!-- Collapsible gallery with 1–2 column thumbnails -->
       <section class="project-gallery" aria-label="Gallery">
-        <details>
-          <summary>Image gallery ({{ p.media.gallery | size }})</summary>
-          <div class="gallery-grid">
-            {% for g in p.media.gallery %}
-              {% assign gsrc = g.src | default: '' | strip %}
-              {% if gsrc != '' %}
-              <a class="gallery-thumb" href="#{{ p.key }}-img-{{ forloop.index }}">
-                <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}" loading="lazy">
-              </a>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </details>
+        {% for g in p.media.gallery %}
+          {% assign gsrc = g.src | default: '' | strip %}
+          {% if gsrc != '' %}
+          <figure>
+            <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}" onerror="this.closest('figure').remove()">
+            {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
+          </figure>
+          {% endif %}
+        {% endfor %}
       </section>
-
-      <!-- Lightbox targets (pure CSS via :target) -->
-      {% for g in p.media.gallery %}
-        {% assign gsrc = g.src | default: '' | strip %}
-        {% if gsrc != '' %}
-        <figure class="lightbox" id="{{ p.key }}-img-{{ forloop.index }}">
-          <a class="lightbox-backdrop" href="#{{ p.key }}" aria-label="Close"></a>
-          <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}">
-          {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
-          <a class="lightbox-close" href="#{{ p.key }}" aria-label="Close">×</a>
-        </figure>
-        {% endif %}
-      {% endfor %}
       {% endif %}
 
       {% if p.ownership or p.responsibilities or p.team or p.meta.Team %}
@@ -469,7 +425,9 @@ document.body.classList.add('is-projects');
   mq.addEventListener('change', apply);
   apply();
 })();
+</script>
 
+<script>
 /* Accordion behaviour for in-progress cards */
 (function oneOpenAtATime() {
   const detailsList = Array.from(document.querySelectorAll('.ip-details'));
@@ -480,6 +438,27 @@ document.body.classList.add('is-projects');
         if (other !== d && other.open) other.open = false;
       });
     });
+  });
+})();
+
+
+/* In-progress details as modal (no layout shift) */
+(function ipDetailsModal() {
+  const detailsList = Array.from(document.querySelectorAll('.ip-details'));
+  // Only one open at a time
+  detailsList.forEach(d => d.addEventListener('toggle', () => {
+    if (!d.open) return;
+    detailsList.forEach(o => { if (o !== d && o.open) o.open = false; });
+  }));
+  // Close buttons and ESC
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-close-ip]');
+    if (!btn) return;
+    const det = btn.closest('.ip-details');
+    if (det) det.open = false;
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') detailsList.forEach(d => d.open = false);
   });
 })();
 </script>
