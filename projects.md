@@ -126,7 +126,7 @@ class: is-projects
 
     <!-- ======= Past projects (featured first) ======= -->
     {% for p in list_past %}
-    <section class="project-section anchor-target{% if p.images or p.videos %} has-media{% endif %}" id="{{ p.key }}">
+    <section class="project-section anchor-target" id="{{ p.key }}">
 
       {%- assign has_hero_src = p.media and p.media.hero and p.media.hero.src | default: '' | strip -%}
       {%- if has_hero_src != '' -%}
@@ -231,7 +231,8 @@ class: is-projects
                   {% for t in p.tags %}
                     {% if t and t != '' and forloop.index <= tag_max %}<span class="chip">{{ t }}</span>{% endif %}
                   {% endfor %}
-                  {% if p.tags.size > tag_max %}<span class="chip">+{{ p.tags.size | minus: tag_max }}</span>{% endif %}
+                  {% if p.tags.size > tag_max %}<span class="chip">+{{ p.tags.size | minus: tag_max }}</span>
+                  {% endif %}
                 </div>
               </div>
             {% endif %}
@@ -338,17 +339,35 @@ class: is-projects
       {% endif %}
 
       {% if p.media and p.media.gallery and p.media.gallery.size > 0 %}
+      <!-- Collapsible gallery with 1–2 column thumbnails -->
       <section class="project-gallery" aria-label="Gallery">
-        {% for g in p.media.gallery %}
-          {% assign gsrc = g.src | default: '' | strip %}
-          {% if gsrc != '' %}
-          <figure>
-            <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}" onerror="this.closest('figure').remove()">
-            {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
-          </figure>
-          {% endif %}
-        {% endfor %}
+        <details>
+          <summary>Image gallery ({{ p.media.gallery | size }})</summary>
+          <div class="gallery-grid">
+            {% for g in p.media.gallery %}
+              {% assign gsrc = g.src | default: '' | strip %}
+              {% if gsrc != '' %}
+              <a class="gallery-thumb" href="#{{ p.key }}-img-{{ forloop.index }}">
+                <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}" loading="lazy">
+              </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </details>
       </section>
+
+      <!-- Lightbox targets (pure CSS via :target) -->
+      {% for g in p.media.gallery %}
+        {% assign gsrc = g.src | default: '' | strip %}
+        {% if gsrc != '' %}
+        <figure class="lightbox" id="{{ p.key }}-img-{{ forloop.index }}">
+          <a class="lightbox-backdrop" href="#{{ p.key }}" aria-label="Close"></a>
+          <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}">
+          {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
+          <a class="lightbox-close" href="#{{ p.key }}" aria-label="Close">×</a>
+        </figure>
+        {% endif %}
+      {% endfor %}
       {% endif %}
 
       {% if p.ownership or p.responsibilities or p.team or p.meta.Team %}
@@ -450,9 +469,7 @@ document.body.classList.add('is-projects');
   mq.addEventListener('change', apply);
   apply();
 })();
-</script>
 
-<script>
 /* Accordion behaviour for in-progress cards */
 (function oneOpenAtATime() {
   const detailsList = Array.from(document.querySelectorAll('.ip-details'));
