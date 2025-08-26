@@ -382,3 +382,34 @@ html, body {
   text-decoration: none; color: #fff;
   font-size: 2rem; line-height: 1;
 }
+
+/* === In-Progress: two independent vertical stacks (no cross-column reflow) === */
+.is-projects #in-progress .ip-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+@media (min-width: 980px) {
+  .is-projects #in-progress .ip-columns { grid-template-columns: 1fr 1fr; }
+}
+.is-projects #in-progress .ip-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+/* Neutralize any legacy ip-grid inside In-Progress (so rows don't sync heights) */
+#in-progress .ip-grid {
+  display: contents !important;
+  padding: 0 !important;
+  grid-template-columns: none !important;
+  column-count: initial !important;
+}
+
+/* Each card sizes itself; never stretch to a row height */
+#in-progress .ip-card {
+  align-self: start !important;
+  height: auto !important;
+}
