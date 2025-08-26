@@ -464,3 +464,30 @@ html, body {
   .btn-link { display: inline-block; padding: .35rem .65rem; border: 1px solid rgba(0,0,0,.12); border-radius: 8px; text-decoration: none; }
 }
 
+/* Masonry-style layout for In-Progress cards */
+.is-projects {
+  /* Use multi-column layout so columns stack independently */
+  .ip-grid {
+    column-count: 2;         /* two columns on desktop */
+    column-gap: 1rem;
+  }
+  @media (max-width: 860px) {
+    .ip-grid { column-count: 1; }
+  }
+
+  /* Each card becomes a column item that won’t split across columns */
+  .ip-card {
+    display: inline-block;    /* critical: makes cards flow inside columns */
+    width: 100%;
+    margin: 0 0 1rem;
+    break-inside: avoid;      /* standard */
+    -webkit-column-break-inside: avoid; /* Safari */
+    page-break-inside: avoid; /* print fallback */
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 12px;
+    padding: 1rem;
+    background: #fff;
+  }
+
+  /* Keep the rest of your existing styling (chips, buttons, etc.) */
+}
