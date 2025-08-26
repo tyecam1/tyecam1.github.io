@@ -101,7 +101,6 @@ class: is-projects
             </div>
           </details>
           {% endif %}
-
           {% assign repo    = p.links.repo    | default: '' | strip %}
           {% assign docs    = p.links.docs    | default: '' | strip %}
           {% assign demo    = p.links.demo    | default: '' | strip %}
