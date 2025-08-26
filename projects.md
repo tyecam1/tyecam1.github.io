@@ -48,7 +48,8 @@ class: is-projects
         <!-- Left column: even indexes (0,2,4,...) -->
         <div class="ip-col">
           {% for p in inprogress %}
-            {% if forloop.index0 | modulo: 2 == 0 %}
+            {% assign parity = forloop.index0 | modulo: 2 %}
+            {% if parity == 0 %}
             <article class="ip-card" id="{{ p.key }}">
               <div class="ip-head">
                 <h3 class="ip-title">{{ p.title }}</h3>
@@ -128,7 +129,8 @@ class: is-projects
         <!-- Right column: odd indexes (1,3,5,...) -->
         <div class="ip-col">
           {% for p in inprogress %}
-            {% if forloop.index0 | modulo: 2 == 1 %}
+            {% assign parity = forloop.index0 | modulo: 2 %}
+            {% if parity == 1 %}
             <article class="ip-card" id="{{ p.key }}">
               <div class="ip-head">
                 <h3 class="ip-title">{{ p.title }}</h3>
@@ -207,6 +209,7 @@ class: is-projects
       </div>
     </section>
     {% endif %}
+
 
     <!-- ======= Past projects (featured first) ======= -->
     {% for p in list_past %}
