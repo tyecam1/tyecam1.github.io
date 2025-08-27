@@ -1,379 +1,194 @@
 ---
-# Only the main Sass file needs front matter for Jekyll to compile it
+# SCSS is built by Jekyll; front-matter required
 ---
 
-@import "minima";
-
-/* ===========================
-   Home (is-home) — site-wide safe
-   =========================== */
-
-/* Hide the layout's default page title on the home page */
-.is-home .page-title,
-.is-home h1.page-title { display: none !important; }
-
-/* --- Hero --- */
-.is-home .home-hero.compact {
-  padding: clamp(10px, 2.6vw, 18px) 0 0;
-  border-bottom: 1px solid #efefef;       /* gentle divider */
-  margin-bottom: clamp(10px, 2vw, 18px);
-}
-.is-home .home-hero .hh-inner {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 clamp(16px, 2.5vw, 24px);
-  text-align: center;
-}
-.is-home .home-hero .hh-title {
-  margin: 0 0 .25rem;
-  font-size: clamp(26px, 4.2vw, 36px);
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: .01em;
-}
-.is-home .home-hero .hh-tag {
-  margin: .3rem auto 0;
-  color: #475569;
-  max-width: 68ch;
-}
-.is-home .home-hero .hh-pills {
-  margin: .7rem 0 0;
-  padding: 0;
-  list-style: none;
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: .45rem .55rem;
-}
-.is-home .home-hero .hh-pills li {
-  font-size: .9rem;
-  padding: .24rem .62rem;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: #fff;
-  color: #111827;
-  transition: background .15s ease, box-shadow .15s ease, transform .05s ease;
-}
-.is-home .home-hero .hh-pills li:hover {
-  background: #f7f7f7;
-  box-shadow: 0 1px 4px rgba(0,0,0,.04);
-  transform: translateY(-1px);
-}
-/* Nudge the first section up a touch so the hero feels connected */
-.is-home .home-hero + h2,
-.is-home .home-hero + h2 + p { margin-top: clamp(14px, 2.2vw, 20px); }
-
-/* --- Skills as tidy chips --- */
-.is-home .skills-list {
-  list-style: none;
-  padding: 0;
-  margin: .4rem 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem .5rem;
-  max-width: 92ch;
-}
-.is-home .skills-list li {
-  font-size: .85rem;
-  padding: .22rem .5rem;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: #fafafa;
-  color: #111827;
-}
-
-/* Optional: soften section headings to match hero scale */
-.is-home h2 {
-  font-size: clamp(20px, 3vw, 28px);
-  line-height: 1.25;
-  margin-top: clamp(18px, 3vw, 28px);
-  margin-bottom: .35rem;
-}
-
-/* Keep long prose readable width under headings on the home page */
-.is-home h2 + p { max-width: 80ch; }
-
-/* --- Buttons in project cards (existing markup) --- */
-.btn.btn-sm {
-  padding: .35rem .6rem;
-  border-radius: 8px;
-  font-size: .85rem;
-  border: 1px solid #d1d5db;
-  color: #111827;
-  background: #fff;
-}
-.btn.btn-sm:hover { background: #f9fafb; }
-
-/* (No other pages are affected; all selectors are under .is-home) */
-
-/* ---------- Featured grid ---------- */
-.featured-grid {
-  display:grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  align-items: start;
-}
-.feat-card {
-  background:var(--card-bg, #fff); border:1px solid rgba(0,0,0,.06);
-  border-radius:.9rem; padding:.9rem; overflow:hidden;
-  transition: transform .12s ease, box-shadow .15s ease;
-}
-.feat-card:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,0,0,.08); }
-.fc-thumb { width:100%; height:160px; object-fit:cover; border-radius:.5rem; margin-bottom:.6rem; }
-.fc-title { margin:.1rem 0 .35rem; font-size:1.05rem; line-height:1.25; }
-.fc-title-link { color:inherit; text-decoration:none; }
-.fc-title-link:hover { text-decoration:underline; }
-.fc-blurb {
-  margin:.25rem 0 .6rem;
-  display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;
-}
-.fc-tags { display:flex; flex-wrap:wrap; gap:.35rem; margin:0 0 .6rem; padding:0; list-style:none; }
-.fc-tags li { padding:.18rem .45rem; border:1px solid rgba(0,0,0,.08); border-radius:.5rem; font-size:.8rem; }
-.fc-meta { display:flex; justify-content:space-between; align-items:center; font-size:.85rem; opacity:.85; }
-.more-link { margin-top:.6rem; }
-
-@import "projects";
-
-/* ===========================
-   Global layout & typography
-   =========================== */
+/* =====================================================================
+   00 • Tokens & Color Schemes
+   - Minimal design tokens used by About and Home.
+   - Projects styles live in `_projects.scss` and are imported later.
+   ===================================================================== */
 
 :root {
-  --wrap-max: 1180px;       /* overall site width */
-  --content-max: 1000px;    /* content block width (e.g., project sections) */
-  --text-max: 70ch;         /* comfortable reading line length */
-  --muted: #666;
-  --border: #e7e7e7;
-  --card-bg: #fafafa;
+  --bg: #ffffff;
+  --fg: #0f172a;         /* slate-900-ish */
+  --muted: #6b7280;      /* muted copy */
+  --border: #e5e7eb;     /* subtle borders */
+  --ring: rgba(0,0,0,.05);
+  --brand: #0f172a;      /* conservative default link color */
 }
 
-/* widen the default minima wrapper slightly */
-.wrapper { max-width: var(--wrap-max); }
-
-/* headings spacing */
-.page-content h1,
-.page-content h2 { margin-top: 0.6rem; }
-
-/* images should never overflow */
-img { max-width: 100%; height: auto; }
-
-/* links */
-a { text-underline-offset: 2px; }
-
-/* ===========================
-   Footer (minimal + tidy)
-   =========================== */
-
-.site-footer {
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-/* ===========================
-   Projects page layout
-   =========================== */
-
-/* overall grid: simple two-column with a narrow sidebar */
-.projects-layout {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 24px;
-}
-
-/* make it single-column on small screens */
-@media (max-width: 960px) {
-  .projects-layout {
-    grid-template-columns: 1fr;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0d10;
+    --fg: #e5e7eb;
+    --muted: #a1a1aa;
+    --border: #2f343a;
+    --ring: rgba(255,255,255,.04);
+    --brand: #e5e7eb;
   }
 }
 
-/* ---- ToC sidebar ---- */
-.toc {
-  position: sticky;
-  top: 84px; /* below header */
-  align-self: start;
-}
+/* =====================================================================
+   10 • Base Reset & Typography
+   - Keep this small; About depends on simple, readable defaults.
+   ===================================================================== */
 
-.toc nav ul {
-  list-style: none;
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
   margin: 0;
-  padding: 0;
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.6;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-feature-settings: "liga" 1, "tnum" 1, "cv05" 1;
 }
 
-.toc li + li { margin-top: 8px; }
+img, video { max-width: 100%; height: auto; }
 
-.toc a {
-  display: block;
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #fff;
-  color: inherit;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* Headings rhythm */
+h1, h2, h3, h4 { line-height: 1.25; margin: .2rem 0 .6rem; }
+h1 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+h2 { font-size: clamp(1.2rem, 2.0vw, 1.4rem); }
+h3 { font-size: 1.075rem; }
+
+/* Text blocks */
+p { margin: .4rem 0 .9rem; }
+ul, ol { margin: .4rem 0 .9rem; }
+
+/* Links (kept conservative to match Projects aesthetics) */
+a {
+  color: var(--brand);
+  text-underline-offset: .12em;
+}
+a:hover { text-decoration: underline; }
+
+/* Small utility: sections linked by anchors should not hide beneath header */
+.anchor-target { scroll-margin-top: 72px; }
+
+/* Wrappers (used by the theme/layout); keep modest width by default */
+.wrap, .home-wrap, .projects-page, .page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.toc a.active {
-  background: #f9f9f9;
-  font-weight: 600;
-  border-color: #d8d8d8;
-}
+/* =====================================================================
+   20 • Buttons/Links — shared minimal style
+   - Projects defines its own rich styles in `_projects.scss`. Avoid overrides.
+   - We only define a neutral "btn-link" that Home can also use.
+   ===================================================================== */
 
-/* ---- Main column ---- */
-.projects-main { min-width: 0; } /* prevent overflow from long titles */
-
-/* each project section */
-.project-section {
-  max-width: var(--content-max);
-  margin: 0 auto 48px;
-  scroll-margin-top: 72px; /* anchor offset under sticky header */
-}
-
-/* project header */
-.project-header h2 {
-  margin-bottom: 0.25rem;
-}
-
-.project-meta {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-bottom: 0.75rem;
-}
-
-/* ===========================
-   Media above text (stacked)
-   =========================== */
-
-.project-body { display: block; }
-
-/* media block (image + optional caption) */
-.project-media {
-  display: block;
-  margin: 0 0 1rem 0;
-  text-align: center;
-}
-
-.project-hero {
-  display: block;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
-}
-
-.project-caption {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-top: 6px;
-}
-
-/* text card */
-.project-text {
-  background: var(--card-bg);
-  border: 1px solid #ececec;
-  border-radius: 12px;
-  padding: 16px 18px;
-  max-width: var(--text-max);
-  margin: 0 auto;           /* center the text card */
-}
-
-/* short intro line */
-.project-summary {
-  font-weight: 600;
-  margin: 0 0 8px;
-}
-
-/* long description */
-.project-summary-long {
-  line-height: 1.66;
-  margin: 0;
-  /* If you prefer justified paragraphs, switch to 'justify' */
-  text-align: left;
-}
-
-/* repo link line */
-.project-links { margin-top: 10px; }
-
-/* divider between projects */
-.project-divider {
-  border: 0;
-  border-top: 1px solid #e5e5e5;
-  margin: 40px auto 56px;
-  max-width: var(--content-max);
-}
-
-/* ===========================
-   Index (Featured Projects) – optional light polish
-   =========================== */
-
-.featured-project img {
+.btn-link {
+  display: inline-block;
   border: 1px solid var(--border);
   border-radius: 8px;
-}
-
-/* ===========================
-   Small utilities
-   =========================== */
-
-.muted { color: var(--muted); }
-.nowrap { white-space: nowrap; }
-
-.projects-main .project-section .project-subhead {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: .02em;
-  margin: 0 0 .4rem;
-  color: #444;
-}
-
-.projects-main .project-section .project-subsubhead {
-  font-size: .95rem;
-  font-weight: 700;
-  margin: 1rem 0 .25rem;
-  color: #444;
-}
-
-.project-list { margin: 0 0 .5rem 1rem; }
-
-.project-tags { margin: .25rem 0 .5rem; }
-.tag-chip {
-  display: inline-block;
-  font-size: .8rem;
-  padding: 2px 8px;
-  border: 1px solid #ddd;
-  border-radius: 999px;
-  margin-right: 6px;
-  margin-bottom: 6px;
-  background: #fff;
-}
-
-.project-cta { margin-top: 12px; }
-.btn {
-  display: inline-block;
-  border: 1px solid #ddd;
-  padding: 6px 10px;
-  border-radius: 8px;
+  padding: .5rem .85rem;
   text-decoration: none;
-  margin-right: 8px;
 }
-.btn:hover { background: #f3f3f3; }
 
-.project-notes summary {
-  cursor: pointer;
-  font-weight: 600;
-  margin-top: .75rem;
+/* =====================================================================
+   30 • Page-specific imports
+   - Bring in ALL Projects styling from the dedicated partial.
+   - Do not add project-specific rules here to avoid conflicts.
+   ===================================================================== */
+
+@import "projects";
+
+/* =====================================================================
+   40 • HOME PAGE (scoped)
+   - Only selectors under `.home` are allowed.
+   - Mirrors the card/chip look from Projects without touching it.
+   - Used by: index.md (class: home).  :contentReference[oaicite:4]{index=4}
+   ===================================================================== */
+
+.home {
+  --border: var(--border);
+  --muted:  var(--muted);
+  --card:   #ffffff;
 }
-.project-notes .notes-body { margin-top: .5rem; }
+@media (prefers-color-scheme: dark) {
+  .home { --card: #121417; }
+}
 
-.project-gallery {
+/* Sections */
+.home .home-section { margin-top: 2rem; }
+
+/* Hero layout (two columns collapsing to one) */
+.home .home-hero {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 12px;
-  margin-top: 14px;
+  gap: 1.25rem;
+  grid-template-columns: 1.15fr .85fr;
+  margin-top: 2.1rem;
 }
-.project-gallery img {
-  width: 100%;
-  height: auto;
-  border: 1px solid #e7e7e7;
-  border-radius: 8px;
+@media (max-width: 900px) { .home .home-hero { grid-template-columns: 1fr; } }
+
+.home .home-eyebrow {
+  font-size: .9rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 .25rem;
 }
+.home .home-title { margin: .2rem 0 .5rem; }
+.home .home-lead  { font-size: 1.05rem; max-width: 72ch; margin-bottom: .4rem; }
+.home .home-bullets { margin: .4rem 0 0; padding-left: 1.1rem; }
+
+/* Cards (match Projects’ crisp shells) */
+.home .card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.05rem;
+  box-shadow: 0 1px 0 var(--ring);
+}
+.home .card-title { margin: .1rem 0 .6rem; font-size: 1.02rem; color: var(--muted); }
+
+/* Hero right stat grid */
+.home .home-stat-grid { display: grid; gap: .8rem; grid-template-columns: repeat(2,1fr); margin-bottom: .6rem; }
+@media (max-width: 560px) { .home .home-stat-grid { grid-template-columns: 1fr; } }
+.home .stat .label { font-size: .92rem; color: var(--muted); }
+.home .stat .value { font-size: 1rem; }
+
+/* Shared “chip” look for home (Projects has its own in _projects.scss) */
+.home .pill-list { display: flex; flex-wrap: wrap; gap: .5rem .6rem; list-style: none; padding: 0; margin: .3rem 0 0; }
+.home .pill { border: 1px solid var(--border); border-radius: 999px; padding: .35rem .6rem; font-size: .92rem; }
+
+/* Small cards grid (signals) */
+.home .home-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+
+/* Stack chips reused from Projects’ visual style (scoped to Home) */
+.home .stack-list { display: flex; flex-wrap: wrap; gap: .5rem .6rem; align-items: center; }
+.home .stack-item { border: 1px solid var(--border); padding: .3rem .55rem; border-radius: 999px; font-size: .9rem; }
+.home .stack-more { opacity: .85; }
+
+/* Featured projects on Home (card grid + optional hero) */
+.home .home-feat-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+.home .home-feat-card { display: flex; flex-direction: column; }
+.home .home-feat-hero { margin: 0 0 .6rem; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+.home .home-feat-hero img { display: block; width: 100%; height: auto; }
+.home .home-feat-head { display: flex; justify-content: space-between; gap: .75rem; align-items: baseline; margin-bottom: .25rem; }
+.home .home-feat-title { margin: 0; font-size: 1.02rem; }
+.home .home-feat-title a { text-decoration: none; }
+.home .home-feat-date { font-size: .9rem; color: var(--muted); }
+.home .home-feat-summary { margin: .25rem 0 .6rem; font-size: .95rem; }
+.home .home-cta { margin-top: .9rem; display: flex; gap: .8rem; }
+.home .btn-link { /* reuse neutral button from section 20 */ }
+
+/* =====================================================================
+   50 • ABOUT PAGE
+   - About uses base typography only. No extra rules needed.  :contentReference[oaicite:5]{index=5}
+   ===================================================================== */
+
+/* (intentionally empty) */
+
+/* =====================================================================
+   End of main.scss (cleaned 2025-08-27)
+   - Everything else belonged to legacy styles and was removed.
+   ===================================================================== */
