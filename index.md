@@ -30,7 +30,7 @@ class: is-home
   <section class="value">
     <div class="value-grid">
       <article class="card">
-        <h3>Robotics & Control</h3>
+        <h3>Robotics &amp; Control</h3>
         <p>End-to-end autonomy: sensing, SLAM, path planning, and actuation with clear KPIs.</p>
       </article>
       <article class="card">
@@ -39,27 +39,31 @@ class: is-home
       </article>
       <article class="card">
         <h3>Systems Thinking</h3>
-        <p>Documentation, safety, and testable interfaces that make teams ship with confidence.</p>
+        <p>Documentation, safety, and testable interfaces that help teams ship with confidence.</p>
       </article>
     </div>
   </section>
 
-  <!-- ===== FEATURED PROJECTS (brief cards; fuller detail lives on /projects) ===== -->
+  <!-- ===== FEATURED PROJECTS (brief cards; full detail lives on /projects) ===== -->
   <section class="featured-projects">
     <h2>Featured projects</h2>
 
-    {% assign all = site.data.projects %}
-    {% assign featured = all | where: "featured", true %}
-    {% comment %}
-      Keep this intentionally brief—titles, tiny meta line, short summary if available.
-      Sorting: prefer end_date, fall back to dates.end, else keep input order.
-    {% endcomment %}
+    {% assign featured = site.data.projects | where: "featured", true %}
+    {%- comment -%}
+      Sort by explicit end_date if present; otherwise by title as a stable fallback.
+      (Avoids unsupported where_exp / complex expressions on GitHub Pages.)
+    {%- endcomment -%}
+    {% assign with_end = featured | where: "end_date" %}
+    {% assign without_end = featured | where_exp: "x", "x.end_date == nil" %}{% comment %}Liquid on gh-pages doesn’t support where_exp; replace with manual loop below.{% endcomment %}
 
-    {% assign f_enddate   = featured | where_exp: "p", "p.end_date" | sort: "end_date" | reverse %}
-    {% assign f_dates_end = featured | where_exp: "p", "p.dates and p.dates.end" | sort: "dates.end" | reverse %}
-    {% assign f_other     = featured | where_exp: "p", "not p.end_date and not (p.dates and p.dates.end)" %}
+    {%- assign without_end = "" | split: "" -%}
+    {%- for p in featured -%}
+      {%- unless p.end_date -%}
+        {%- assign without_end = without_end | push: p -%}
+      {%- endunless -%}
+    {%- endfor -%}
 
-    {% assign ordered = f_enddate | concat: f_dates_end | concat: f_other %}
+    {% assign ordered = with_end | sort: "end_date" | reverse | concat: (without_end | sort: "title") %}
 
     <div class="projects-grid">
       {% for p in ordered limit:3 %}
