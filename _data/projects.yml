@@ -322,7 +322,7 @@
       - "Early engagement with navigation and wildlife stakeholders to validate corridors and exclusions"
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero: { src: /assets/projects/img/tidal-array.png, alt: "Google Earth rendering of the optimised tidal array", caption: "Google Earth rendering of the optimised tidal array"
+    hero: { src: /assets/projects/img/tidal-array.png, alt: "Google Earth rendering of the optimised tidal array", caption: "Google Earth rendering of the optimised tidal array"}
     gallery: []
   videos:
     - id: R84wCpUQfaM
