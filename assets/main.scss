@@ -21,6 +21,17 @@
   --card-bg: #fafafa;
 }
 
+/* Restore the classic centered wrapper on ALL pages */
+.site-header .wrapper,
+main.page-content > .wrapper,
+.site-footer .wrapper {
+  max-width: 1180px;           /* <- set the width you liked */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;          /* comfortable gutters */
+  padding-right: 24px;
+}
+
 /* widen the default minima wrapper slightly */
 .wrapper { max-width: var(--wrap-max); }
 

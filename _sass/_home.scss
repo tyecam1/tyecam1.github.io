@@ -225,3 +225,33 @@
     .hf-scroller { scroll-behavior: auto; }
   }
 }
+
+/* --------- final polish: spacing + stacking to avoid overlap --------- */
+.home .hf-grid{
+  gap: clamp(20px, 2.5vw, 28px);    /* a touch more gutter between columns */
+}
+
+.home .hf-card{
+  z-index: 0;                       /* establish a base stacking context */
+  overflow: hidden;                 /* clip internal overlays at the border */
+  background: var(--card-bg, #fff); /* solid bg so gutters look clean */
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 1rem;
+}
+
+.home .hf-controls{ z-index: 2; }   /* keep arrows above images but inside the card */
+
+.home .hf-scroller{
+  grid-auto-columns: 100%;          /* each slide = exact card width */
+  scrollbar-width: none;
+}
+.home .hf-scroller::-webkit-scrollbar{ height: 0; }
+
+.home .hf-item img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;               /* uniform height */
+  object-fit: contain;              /* no cropping */
+  background: rgba(0,0,0,.04);      /* subtle letterbox for odd ratios */
+}
