@@ -6,7 +6,7 @@ title: ""
 <div class="home">
 
 <section class="home-intro">
-  <p class="kicker">Robotics · Control · Applied ML</p>
+  <p class="kicker">Systems Engineering · Reinforcement Learning · Software for Mechatronics</p>
   <h1>I build dependable, human-centred autonomous systems.</h1>
   <p class="lede">
     First-Class MEng (International), Cardiff University · KAIST exchange.

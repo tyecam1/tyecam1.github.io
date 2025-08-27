@@ -41,7 +41,6 @@ class: is-projects
         <div class="title-row">
           <h2 class="project-title">In-Progress</h2>
         </div>
-        <p class="project-oneliner">Active builds and planning that directly support my target roles. Concise snapshots; details inside each card.</p>
       </header>
 
       <div class="ip-columns">

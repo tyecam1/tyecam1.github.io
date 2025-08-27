@@ -255,3 +255,47 @@
   object-fit: contain;              /* no cropping */
   background: rgba(0,0,0,.04);      /* subtle letterbox for odd ratios */
 }
+
+/* extra breathing room between columns */
+.home .hf-grid{
+  gap: clamp(24px, 3vw, 32px);
+}
+
+/* keep each card as its own clipped layer */
+.home .hf-card{
+  isolation: isolate;
+  overflow: hidden;
+  z-index: 0;
+  background: #fff; /* ensures clean gutter */
+}
+
+/* move arrows inward so they never sit in the gutter */
+.home .hf-controls{
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* pad both sides so buttons don’t kiss the edge */
+  padding-left: 12px;
+  padding-right: 12px;
+  pointer-events: none;  /* container doesn’t block scroll */
+}
+
+.home .hf-btn{
+  pointer-events: auto;  /* buttons are clickable */
+  width: 32px; height: 32px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: #fff;      /* reads clearly over images */
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+  opacity: .9;
+}
+.home .hf-btn:hover{ opacity: 1; }
+
+/* each click advances exactly one slide (keep this in index.md) */
+// <button class="hf-btn prev" ... s.scrollBy({left:-s.clientWidth,...})>
+// <button class="hf-btn next" ... s.scrollBy({left:s.clientWidth,...})>
