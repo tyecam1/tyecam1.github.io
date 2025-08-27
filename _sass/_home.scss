@@ -306,3 +306,29 @@
     &.next{ right:1rem; }
   }
 }
+
+.featured-projects{
+  margin-top:2rem;
+  display:grid;
+  gap: clamp(1rem, 2.5vw, 1.5rem);            /* more breathing room */
+  grid-template-columns: 1fr;
+
+  @media (min-width: 920px){
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+  .project-card{
+    position: relative;
+    isolation: isolate;                        /* keep each card’s overlays inside */
+    overflow: hidden;                          /* prevent arrows/shadows spilling */
+    z-index: 0;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,.12);
+    /* optional: if your theme supports dark mode, this remains neutral */
+    background: var(--card-bg, transparent);
+    box-shadow: 0 6px 18px rgba(0,0,0,.06);
+
+    .scroll-controls{ z-index: 2; }            /* ensure arrows sit above images */
+  }
+}

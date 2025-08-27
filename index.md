@@ -36,10 +36,21 @@ title: ""
   <h2 id="featured-title">Featured projects</h2>
 
   {% for p in projects %}
-    {% assign gallery = p.gallery | default: p.images | default: empty %}
-    {% if gallery == empty and p.hero %}
-      {% assign gallery = [p.hero] %}
-    {% endif %}
+    {%- comment -%}
+    Build gallery from any of these keys:
+    - Arrays: gallery, images, media, gallery_images, gallery_urls
+    - Single image fallbacks: hero, hero_image, hero_img, cover, cover_image
+    {%- endcomment -%}
+    {% assign gallery = p.gallery | default: p.images | default: p.media | default: p.gallery_images | default: p.gallery_urls %}
+    {% assign hero    = p.hero | default: p.hero_image | default: p.hero_img | default: p.cover | default: p.cover_image %}
+
+    {%- if gallery == nil or gallery == empty -%}
+      {%- if hero -%}
+        {%- assign gallery = hero | split: ',' -%} {# split guarantees an array; no comma -> single-item array #}
+      {%- else -%}
+        {%- assign gallery = empty -%}
+      {%- endif -%}
+    {%- endif -%}
 
     <article class="project-card" id="{{ p.key }}">
       <header class="project-head">
