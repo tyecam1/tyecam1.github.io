@@ -482,3 +482,34 @@
   .lb-nav{ top:50%; transform:translateY(-50%); width:2.5rem; height:2.5rem; font-size:1.2rem; }
   .lb-nav.prev{ left:1rem; } .lb-nav.next{ right:1rem; }
 }
+
+/* Make the two-column grid use the extra width nicely */
+.home .featured-projects .projects-grid{
+  grid-template-columns: 1fr;
+}
+@media (min-width: 920px){
+  .home .featured-projects .projects-grid{
+    /* each column can grow, but won't shrink below 420px */
+    grid-template-columns: repeat(2, minmax(420px, 1fr));
+  }
+}
+
+/* Consistent card internals */
+.home .project-card{
+  --card-pad: 1rem;
+  padding: var(--card-pad);
+}
+.home .project-card .project-head{ margin-bottom: .5rem; }
+.home .project-card .project-meta{ margin-top: .25rem; }
+
+/* Gallery polish (no extra white band under thumbs) */
+.home .project-card .media-wrap{ margin-top: .25rem; margin-bottom: 0; }
+.home .project-card .media-scroller{
+  /* already set up; just reiterating sizing to avoid oddities */
+  grid-auto-columns: 100%;
+}
+.home .project-card .media-item img{
+  aspect-ratio: 16/9;   /* uniform height */
+  object-fit: contain;  /* show whole image (no middle crop) */
+  background: rgba(0,0,0,.04);
+}

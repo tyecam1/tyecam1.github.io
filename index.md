@@ -126,8 +126,11 @@ title: ""
 
         {% if gcount > 1 %}
         <div class="scroll-controls" aria-hidden="true">
-          <button class="scroll-btn prev" type="button" onclick="this.closest('.project-card').querySelector('.media-scroller').scrollBy({left:-600,behavior:'smooth'})">‹</button>
-          <button class="scroll-btn next" type="button" onclick="this.closest('.project-card').querySelector('.media-scroller').scrollBy({left:600,behavior:'smooth'})">›</button>
+          <button class="scroll-btn prev" type="button"
+            onclick="var s=this.closest('.project-card').querySelector('.media-scroller'); s.scrollBy({left:-s.clientWidth,behavior:'smooth'})">‹</button>
+
+          <button class="scroll-btn next" type="button"
+            onclick="var s=this.closest('.project-card').querySelector('.media-scroller'); s.scrollBy({left:s.clientWidth,behavior:'smooth'})">›</button>
         </div>
         {% endif %}
       </div>
