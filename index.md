@@ -5,9 +5,7 @@ permalink: /
 class: is-home
 ---
 
-# Tye Cameron-Robson
-
-Systems engineer building reliable robotics and reinforcement-learning tooling: control, perception, and experiment infrastructure.
+# Systems engineer building reliable robotics and reinforcement-learning tooling: control, perception, and experiment infrastructure.
 
 ## What I’m focusing on now
 - Integrated RL pipeline with live telemetry and config-first runs.
