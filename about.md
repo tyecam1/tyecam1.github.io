@@ -21,18 +21,14 @@ I’m currently based on the Isle of Wight, reviewing the best opportunities to 
 ---
 
 ## My Timeline
-
-- Extended Project Qualification: *A feasibility study of Tidal Energy on the Isle of Wight*
-  
+- "Extended Project Qualification: *A feasibility study of Tidal Energy on the Isle of Wight*"
 - First Class undergraduate Mechanical Engineering Degree:
 	- Programming focus
 	- Bosch Thermotechnology Ltd: Industrial placement, Quality Dept.
-	- Dissertation: *Control of a Hydraulic Cylinder System under Varying Loads*  
-  
+	- Dissertation: *Control of a Hydraulic Cylinder System under Varying Loads*
 - First Class Master's Mechanical Engineering Degree:
-	- Simulation & Mechatronics focus 
+	- Simulation & Mechatronics focus
 	- KAIST (South Korea): Robotics, Reinforcement Learning, AI
 	- Energy Park Project: *A Feasability-Aware Portfolio for the Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary*
-	- Mechatronics Project: *The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System*  
-  
-- Now: Independent projects in software, RL, and systems engineering for robotics.
+	- Mechatronics Project: *The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System*
+- Now: Independent projects in software, RL, and systems engineering for robotics

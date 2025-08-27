@@ -18,9 +18,9 @@
   tags: [RL platforms, Reproducibility, Telemetry, Robotics]
   stack: [Python, PyTorch, Gymnasium, Unity ML-Agents, PyBullet, Flask/Streamlit, WebSocket, Docker]
   impact_metrics:
-    - { label: "Metric update latency (95th percentile)", value: "NA", note: "Time from the training process emitting a metric to it appearing in the dashboard" }
-    - { label: "Metric delivery success", value: "NA", note: "Percentage of expected metric points that arrive (counts missing updates over the run)" }
-    - { label: "Video frame drop rate", value: "NA", note: "Percentage of frames lost between the environment stream and the dashboard" }
+    - { label: "Metric update latency (95th percentile)", value: "tbd", note: "Time from the training process emitting a metric to it appearing in the dashboard" }
+    - { label: "Metric delivery success", value: "tbd", note: "Percentage of expected metric points that arrive (counts missing updates over the run)" }
+    - { label: "Video frame drop rate", value: "tbd", note: "Percentage of frames lost between the environment stream and the dashboard" }
   highlights:
     - "Same calls to start a task, take an action, and view the screen across every environment"
     - "Stream live training numbers and video frames to the web dashboard"
@@ -31,7 +31,7 @@
       and streamline progress.
     approach: >
       Start deliberately small: build a simple 2-D reinforcement-learning maze solver and use it
-      to stand up the display. Keep everything observable—emit metrics, logs, and video frames;
+      to stand up the display. Keep everything observable: emit metrics, logs, and video frames;
       save the settings, random seed, code version, and checkpoints; and grow the system as I
       learn more about reinforcement learning and web development.
     results: >
@@ -82,12 +82,12 @@
   case_study:
     problem: >
       Windows made GPU training and reproducibility fragile and slow. I want a lean Linux
-      workstation I can rebuild from scratch at any time—same tools, same drivers—so progress
+      workstation I can rebuild from scratch at any time, same tools, same drivers, so progress
       isn’t blocked by the machine. I’ll start on my second-hand 3060 laptop I'd acquired for RL in South Korea, so breakage is safe.
     approach: >
-      Use Arch Linux with everything written and designed as code. Automate the full stack—bootloader,
+      Use Arch Linux with everything written and designed as code. Automate the full stack: bootloader,
       disk layout and filesystem, NVIDIA drivers, packages, dotfiles, containers, and the
-      Python toolchain—and mirror the process in Ansible for unattended reinstalls on new
+      Python toolchain; mirror the process in Ansible for unattended reinstalls on new
       hardware or a clean disk.
     results: >
       One-command setup produces a clean desktop with working NVIDIA CUDA, my editor and shell,
@@ -111,8 +111,8 @@
 - key: phd-planning
   featured: false
   status: current
-  toc_title: PhD Planning — Robot Learning
-  title: PhD Planning — Robot Learning for Human Robot Collaboration
+  toc_title: "PhD Planning: Robot Learning"
+  title: "PhD Planning: Robot Learning for Human Robot Collaboration"
   dates:
     start: 2025-09-01
   role: Candidate (self-directed research planning)
@@ -125,7 +125,7 @@
   stack: [Python, PyTorch, ROS, Unity/Gazebo, Jupyter, Zotero]
   impact_metrics:
     - { label: Proposals, value: "2–3", note: "Framing + methods" }
-    - { label: Prototypes, value: "NA", note: "Navigation + eval demos" }
+    - { label: Prototypes, value: "tbd", note: "Navigation + eval demos" }
     - { label: Reading, value: "50 ATM", note: "With notes" }
   highlights:
     - Problem axes defined (uncertainty, perception ambiguity, human-in-loop)
@@ -250,7 +250,6 @@
       - { src: /assets/img/walkaide2.png, alt: "Electronics & harness layout", caption: "Electronics & harness" }
       - { src: /assets/img/walkaide3.png, alt: "Project poster", caption: "Poster" }
       - { src: /assets/img/walkaide4.png, alt: "Navigation scene with obstacles", caption: "Navigation scene" }
-      - { src: /assets/img/walkaide5.png, alt: "APF obstacle map", caption: "APF map" }
       - { src: /assets/img/walkaide6.png, alt: "Trial still", caption: "Trial still" }
   videos:
     - id: hjoRbiRpzas
@@ -261,7 +260,7 @@
     - Integrated VSLAM perception, mapping, and Arduino feedback
     - Tuned parameters, optimised for system latency and robustness
     - Implemented EEG logging & synchronisation; handed over for analysis
-  team: [Trystan Barnett (Electrical), Tye Cameron (Systems), Oscar Meads (Electrical), Dylan Williams (Mechanical), Shou-Han Zhou (Supervisor)]
+  team: ["Trystan Barnett (Electrical) ", "Tye Cameron (Systems) ", "Oscar Meads (Electrical) ", "Dylan Williams (Mechanical) ", "Shou-Han Zhou (Supervisor)"]
 
 - key: hybrid-tidal-wind
   featured: false
@@ -290,7 +289,7 @@
     - { label: LCOE (baseline), value: "≈ £65/MWh", note: "Modelled; sensitive to discount rate" }
   highlights:
     - Built bathymetry and wind/tidal resource layers and mapped feasible corridors
-    - Wind layout: west-oriented rows, ~7D × 4D spacing; Jensen/Park with Gaussian follow-up checks
+    - "Wind layout: west-oriented rows, ~7D × 4D spacing; Jensen/Park with Gaussian follow-up checks"
     - Cable routing via MST + differential evolution; grid as MVAC with a single onshore substation
     - Condition-monitoring costs and OPEX assumptions included to inform downtime and LCOE
   case_study:
@@ -303,9 +302,9 @@
       size foundations; model wakes and array spacing; optimise inter-array cable routing; and design grid and
       substation options. Assess economics via levelised cost of energy with sensitivity to downtime and intermittency.
     experiments:
-      - "Compare tidal-only, wind-only, and hybrid layouts at candidate sites"
-      - "Sweep spacing/orientation and cable topologies to trade off yield, losses, and maintainability"
-      - "Test sensitivity to device availability, maintenance windows, and grid-connection distance/tariffs"
+      - Compare tidal-only, wind-only, and hybrid layouts at candidate sites
+      - Sweep spacing/orientation and cable topologies to trade off yield, losses, and maintainability
+      - Test sensitivity to device availability, maintenance windows, and grid-connection distance/tariffs
     results: >
       Wind-only layouts achieved the lowest levelised cost of energy under the study assumptions. Economies of
       scale in turbine ratings, installation vessels, O&M logistics, and a mature supply chain dominated. Hybrid
@@ -332,7 +331,7 @@
     - Designed array layouts and optimised capacity factor
     - Led LCOE benchmarking and sustainability analysis
     - Proposed condition-monitoring framework
-  team: [Imogen Anderson (Civil), Victoria Bridges-Galvez (Civil), Tye Cameron (Mechanical), Tom Daniels (Mechanical), Valerija Kolosova (Civil), Jack Tricklebank (Mechanical)]
+  team: ["Imogen Anderson (Civil) ", "Victoria Bridges-Galvez (Civil) ", "Tye Cameron (Mechanical) ", "Tom Daniels (Mechanical) ", "Valerija Kolosova (Civil) ", "Jack Tricklebank (Mechanical) "]
 
 - key: fem-wing
   featured: false
@@ -386,7 +385,7 @@
     hero: { src: /assets/img/fem-wing-hero-MaxVM.png, alt: "Von Mises stress field (max VM)", caption: "Max Von Mises stress in composite wing" }
     gallery:
       - { src: /assets/img/fem-wing-4NodeComparison.png, alt: "4-node quadratic elements", caption: "4-node quadratic elements" }
-      - { src: /assets/img/fem-wing-8NodeComparison.png, alt: "8-node quadratic elements", caption: "8-node quadratic elements" }
+      - { src: /assets/img/fem-wing-8NodedComparison.png, alt: "8-node quadratic elements", caption: "8-node quadratic elements" }
       - { src: /assets/img/fem-wing-EigenVec1.png, alt: "Eigenvector mode 1", caption: "Eigenvector 1" }
       - { src: /assets/img/fem-wing-EigenVec2.png, alt: "Eigenvector mode 2", caption: "Eigenvector 2" }
       - { src: /assets/img/fem-wing-MaxPrincipleShear.png, alt: "Max principal shear", caption: "Max principal shear" }
@@ -398,8 +397,7 @@
     - Designed and implemented FEM solver
     - Ran parametric and optimisation studies
     - Produced visualisations and final report
-  team:
-    - { name: "Individual project", role: "Sole developer", link: "" }
+  team: Individual project
 
 - key: rl-sumo
   featured: true
@@ -437,9 +435,9 @@
       approach/impact and forward velocity; near centre → emphasise stability/centre control. Include
       reward terms for torque cost, centre-of-mass height, and body pitch. Tune PPO with γ=0.998, λ=0.95.
     experiments:
-      - "Baseline PPO vs. curriculum-augmented PPO; measure win rate, reward progression, and stability proxies"
-      - "Ablate reward terms (impact, useful-distance, stabilisers) to expose side-effects"
-      - "Qualitative analysis of emergent tactics (opening leaps, edge pushing) and failure modes"
+      - Baseline PPO vs. curriculum-augmented PPO; measure win rate, reward progression, and stability proxies
+      - Ablate reward terms (impact, useful-distance, stabilisers) to expose side-effects
+      - Qualitative analysis of emergent tactics (opening leaps, edge pushing) and failure modes
     results: |
       The curriculum accelerated early learning and improved robustness relative to the baseline.
       Policies discovered a high-impact “leap” opener and edge-pushing behaviour. In evaluation,
@@ -462,7 +460,7 @@
   media:
     hero: { src: /assets/img/anymal-sumo-hero.png, alt: "ANYmal robots in a simulated sumo arena", caption: "ANYmal trained with PPO in RaisimGym" }
     gallery:
-      - { src: /assets/img/anymal-sumo-2-boxTraining.png, alt: "ANYmal in box training stage", caption: "Curriculum: box training" }
+      - { src: /assets/img/anymal-sumo-2-boxTraining.jpg, alt: "ANYmal in box training stage", caption: "Curriculum: box training" }
       - { src: /assets/img/anymal-sumo-3-ArenaLayout.png, alt: "Top-down of the sumo arena", caption: "Arena layout" }
       - { src: /assets/img/anymal-sumo-4-Demo.png, alt: "Demo match still", caption: "Demo bout" }
   responsibilities:

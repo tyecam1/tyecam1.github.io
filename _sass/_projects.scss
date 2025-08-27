@@ -489,3 +489,51 @@ html, body {
 }
 .is-projects .lightbox-backdrop { position: absolute; inset: 0; display: block; }
 .is-projects .lightbox-close    { position: absolute; top: 10px; right: 14px; color: #fff; font-size: 2rem; text-decoration: none; }
+
+/* ========== Gallery thumbnails: masonry-style (no row gaps) ========== */
+
+/* Default: multi-column masonry (works everywhere) */
+.is-projects .project-gallery .gallery-grid {
+  /* override older grid rules */
+  display: block !important;
+  column-count: 1;
+  column-gap: .8rem;
+  padding: .6rem .6rem .9rem;
+}
+
+@media (min-width: 720px) {
+  .is-projects .project-gallery .gallery-grid { column-count: 2; }
+}
+
+/* Each thumb becomes a column item that won't split */
+.is-projects .project-gallery .gallery-thumb {
+  display: inline-block;   /* critical for columns */
+  width: 100%;
+  margin: 0 0 .8rem;
+  break-inside: avoid;     /* prevent awkward breaks */
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.is-projects .project-gallery .gallery-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;        /* thumbs only; lightbox uses contain */
+}
+
+/* Progressive enhancement: native masonry where supported */
+@supports (grid-template-rows: masonry) {
+  .is-projects .project-gallery .gallery-grid {
+    column-count: initial;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: masonry;   /* masonry rows */
+    gap: .8rem;
+  }
+  .is-projects .project-gallery .gallery-thumb {
+    display: block;
+    margin: 0;                      /* grid handles spacing */
+    break-inside: auto;
+  }
+}

@@ -1,14 +1,30 @@
 ---
 layout: page
-title: Home
+title: ""                # hide the default page title
 permalink: /
 class: is-home
 ---
 
-<div class="hero">
-  <h1>Tye Cameron-Robson</h1>
-  <p class="tagline">Systems engineer building reliable robotics & RL tooling: ROS, control, perception, and experiment infrastructure.</p>
-</div>
+<section class="home-hero">
+  <div class="hh-inner">
+    <h1 class="hh-title">Tye Cameron-Robson</h1>
+    <p class="hh-tag">
+      Systems engineer building reliable robotics and reinforcement-learning tooling:
+      control, perception, and experiment infrastructure.
+    </p>
+
+    <ul class="hh-pills">
+      <li>Robot control & perception</li>
+      <li>Reinforcement learning</li>
+      <li>Reproducible experiments</li>
+    </ul>
+
+    <div class="hh-cta">
+      <a class="btn" href="{{ '/projects/' | relative_url }}">View projects</a>
+      <a class="btn btn-ghost" href="{{ '/about/' | relative_url }}">About me</a>
+    </div>
+  </div>
+</section>
 
 ## What I’m focusing on now
 - Integrated RL pipeline with live telemetry and config-first runs.
