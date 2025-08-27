@@ -4,6 +4,52 @@
 
 /* Use Minima as the base */
 @import "minima";
+
+/* Home hero — compact, blends with Minima */
+.home-hero.compact { padding: clamp(8px, 2.5vw, 16px) 0 0; }
+
+.home-hero .hh-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 2.5vw, 24px);
+}
+
+.home-hero .hh-title {
+  margin: 0 0 .25rem;
+  font-size: clamp(22px, 3.2vw, 28px);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+
+.home-hero .hh-tag {
+  margin: .2rem 0 0;
+  color: #4b5563;
+  max-width: 62ch;
+}
+
+/* Turn the three items into soft “pills” (no bullets) */
+.home-hero .hh-pills {
+  margin: .6rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .5rem;
+}
+.home-hero .hh-pills li {
+  font-size: .9rem;
+  padding: .22rem .56rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #fafafa;
+  color: #111827;
+}
+
+/* Slightly reduce the gap before the next section */
+.home-hero + h2 { margin-top: clamp(12px, 2.2vw, 18px); }
+
+
 @import "projects";
 
 /* ===========================
