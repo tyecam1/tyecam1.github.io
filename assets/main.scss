@@ -1,90 +1,109 @@
 ---
-# Required front matter so Jekyll compiles this file
+# Only the main Sass file needs front matter for Jekyll to compile it
 ---
 
-/* Use Minima as the base */
 @import "minima";
 
-/* Home hero — compact, blends with Minima */
-.home-hero.compact { padding: clamp(8px, 2.5vw, 16px) 0 0; }
+/* ===========================
+   Home (is-home) — site-wide safe
+   =========================== */
 
-.home-hero .hh-inner {
+/* Hide the layout's default page title on the home page */
+.is-home .page-title,
+.is-home h1.page-title { display: none !important; }
+
+/* --- Hero --- */
+.is-home .home-hero.compact {
+  padding: clamp(10px, 2.6vw, 18px) 0 0;
+  border-bottom: 1px solid #efefef;       /* gentle divider */
+  margin-bottom: clamp(10px, 2vw, 18px);
+}
+.is-home .home-hero .hh-inner {
   max-width: 980px;
   margin: 0 auto;
   padding: 0 clamp(16px, 2.5vw, 24px);
+  text-align: center;
 }
-
-.home-hero .hh-title {
+.is-home .home-hero .hh-title {
   margin: 0 0 .25rem;
-  font-size: clamp(22px, 3.2vw, 28px);
-  line-height: 1.25;
+  font-size: clamp(26px, 4.2vw, 36px);
+  line-height: 1.2;
   font-weight: 700;
   letter-spacing: .01em;
 }
-
-.home-hero .hh-tag {
-  margin: .2rem 0 0;
-  color: #4b5563;
-  max-width: 62ch;
+.is-home .home-hero .hh-tag {
+  margin: .3rem auto 0;
+  color: #475569;
+  max-width: 68ch;
 }
-
-/* Turn the three items into soft “pills” (no bullets) */
-.home-hero .hh-pills {
-  margin: .6rem 0 0;
+.is-home .home-hero .hh-pills {
+  margin: .7rem 0 0;
   padding: 0;
   list-style: none;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: .45rem .55rem;
+}
+.is-home .home-hero .hh-pills li {
+  font-size: .9rem;
+  padding: .24rem .62rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #111827;
+  transition: background .15s ease, box-shadow .15s ease, transform .05s ease;
+}
+.is-home .home-hero .hh-pills li:hover {
+  background: #f7f7f7;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  transform: translateY(-1px);
+}
+/* Nudge the first section up a touch so the hero feels connected */
+.is-home .home-hero + h2,
+.is-home .home-hero + h2 + p { margin-top: clamp(14px, 2.2vw, 20px); }
+
+/* --- Skills as tidy chips --- */
+.is-home .skills-list {
+  list-style: none;
+  padding: 0;
+  margin: .4rem 0 0;
   display: flex;
   flex-wrap: wrap;
   gap: .4rem .5rem;
+  max-width: 92ch;
 }
-.home-hero .hh-pills li {
-  font-size: .9rem;
-  padding: .22rem .56rem;
+.is-home .skills-list li {
+  font-size: .85rem;
+  padding: .22rem .5rem;
   border-radius: 999px;
   border: 1px solid #e5e7eb;
   background: #fafafa;
   color: #111827;
 }
 
-/* Slightly reduce the gap before the next section */
-.home-hero + h2 { margin-top: clamp(12px, 2.2vw, 18px); }
-
-/* Hero polish */
-.home-hero.compact {
-  padding: clamp(10px, 2.6vw, 18px) 0 0;
-  border-bottom: 1px solid #efefef;       /* subtle divider */
-  margin-bottom: clamp(10px, 2vw, 18px);  /* tighten into next section */
+/* Optional: soften section headings to match hero scale */
+.is-home h2 {
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.25;
+  margin-top: clamp(18px, 3vw, 28px);
+  margin-bottom: .35rem;
 }
-.home-hero .hh-title {
-  font-weight: 700;
-  letter-spacing: .01em;
-}
-.home-hero .hh-tag { color: #475569; }
 
-/* Pills: lighter by default, gentle hover */
-.home-hero .hh-pills li {
+/* Keep long prose readable width under headings on the home page */
+.is-home h2 + p { max-width: 80ch; }
+
+/* --- Buttons in project cards (existing markup) --- */
+.btn.btn-sm {
+  padding: .35rem .6rem;
+  border-radius: 8px;
+  font-size: .85rem;
+  border: 1px solid #d1d5db;
+  color: #111827;
   background: #fff;
-  border: 1px solid #e5e7eb;
-  transition: background .15s ease, box-shadow .15s ease, transform .05s ease;
 }
-.home-hero .hh-pills li:hover {
-  background: #f7f7f7;
-  box-shadow: 0 1px 4px rgba(0,0,0,.04);
-  transform: translateY(-1px);
-}
+.btn.btn-sm:hover { background: #f9fafb; }
 
-/* ---------- Home hero ---------- */
-.is-home .hero { margin: .2rem 0 1.6rem; }
-.is-home .hero h1 { margin: 0 0 .25rem; font-size: clamp(1.6rem, calc(2.2vw + 1rem), 2.4rem); }
-.is-home .tagline { margin: 0 0 .8rem; opacity: .9; max-width: 48rem; }
-.is-home .hero-ctas { display:flex; gap:.5rem; flex-wrap:wrap; }
-.btn {
-  display:inline-block; padding:.5rem .9rem; border-radius:.6rem; border:1px solid rgba(0,0,0,.12);
-  text-decoration:none; font-weight:600;
-}
-.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
-.btn-primary { background:#111; color:#fff; border-color:#111; }
-.btn-sm { padding:.35rem .6rem; font-size:.88rem; }
+/* (No other pages are affected; all selectors are under .is-home) */
 
 /* ---------- Featured grid ---------- */
 .featured-grid {
@@ -110,130 +129,6 @@
 .fc-tags li { padding:.18rem .45rem; border:1px solid rgba(0,0,0,.08); border-radius:.5rem; font-size:.8rem; }
 .fc-meta { display:flex; justify-content:space-between; align-items:center; font-size:.85rem; opacity:.85; }
 .more-link { margin-top:.6rem; }
-
-/* =========================================================
-   Home hero — compact, humble, blends with Minima defaults
-   ========================================================= */
-.is-home .page-title,
-.is-home h1.page-title { display: none !important; }  /* keep "Home" hidden */
-
-.is-home .home-hero.compact {
-  padding: clamp(8px, 2.5vw, 16px) 0 0;     /* small top breathing room */
-}
-
-.is-home .home-hero .hh-inner {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 clamp(16px, 2.5vw, 24px);
-}
-
-.is-home .home-hero .hh-title {
-  margin: 0 0 .25rem;
-  font-size: clamp(22px, 3.2vw, 28px);      /* closer to section heading size */
-  line-height: 1.25;
-  font-weight: 700;
-  letter-spacing: .01em;
-}
-
-.is-home .home-hero .hh-tag {
-  margin: .2rem 0 0;
-  color: #4b5563;                           /* muted */
-  max-width: 62ch;                          /* keep to readable measure */
-}
-
-.is-home .home-hero .hh-pills {
-  margin: .6rem 0 0;
-  padding: 0;
-  list-style: none;                          /* removes bullets */
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem .5rem;
-}
-
-.is-home .home-hero .hh-pills li {
-  font-size: .9rem;
-  padding: .22rem .56rem;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: #fafafa;
-  color: #111827;
-}
-
-/* Reduce the gap between hero and the next section */
-.is-home .home-hero + h2 {
-  margin-top: clamp(12px, 2.2vw, 18px);
-}
-
-/* Harmonise section headings below the hero (optional but nice) */
-.is-home h2 {
-  font-size: clamp(20px, 2.8vw, 26px);
-  line-height: 1.25;
-  margin-top: clamp(18px, 3vw, 28px);
-  margin-bottom: .35rem;
-}
-
-/* Optional: keep the long skill line readable on very wide screens */
-.is-home h2 + p,
-.is-home h2 + ul {
-  max-width: 80ch;
-}
-
-/* your overrides here */
-.is-home .page-title,
-.is-home h1.page-title { display: none !important; }
-
-.is-home .home-hero.compact { padding: clamp(8px, 2.5vw, 16px) 0 0; }
-.is-home .home-hero .hh-inner { max-width: 980px; margin: 0 auto; padding: 0 clamp(16px, 2.5vw, 24px); }
-.is-home .home-hero .hh-title { margin: 0 0 .25rem; font-size: clamp(22px, 3.2vw, 28px); line-height: 1.25; }
-.is-home .home-hero .hh-tag { margin: .2rem 0 0; color: #4b5563; max-width: 62ch; }
-
-/* The bit that removes bullets and makes chips */
-.is-home .home-hero .hh-pills {
-  margin: .6rem 0 0; padding: 0; list-style: none;
-  display: flex; flex-wrap: wrap; gap: .4rem .5rem;
-}
-.is-home .home-hero .hh-pills li {
-  font-size: .9rem; padding: .22rem .56rem; border-radius: 999px;
-  border: 1px solid #e5e7eb; background: #fafafa; color: #111827;
-}
-
-/* Slightly tighter gap before the next section heading */
-.is-home .home-hero + h2 { margin-top: clamp(12px, 2.2vw, 18px); }
-
-/* Hero polish */
-.home-hero.compact {
-  padding: clamp(10px, 2.6vw, 18px) 0 0;
-  border-bottom: 1px solid #efefef;       /* subtle divider */
-  margin-bottom: clamp(10px, 2vw, 18px);  /* tighten into next section */
-}
-.home-hero .hh-title {
-  font-weight: 700;
-  letter-spacing: .01em;
-}
-.home-hero .hh-tag { color: #475569; }
-
-/* Pills: lighter by default, gentle hover */
-.home-hero .hh-pills li {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  transition: background .15s ease, box-shadow .15s ease, transform .05s ease;
-}
-.home-hero .hh-pills li:hover {
-  background: #f7f7f7;
-  box-shadow: 0 1px 4px rgba(0,0,0,.04);
-  transform: translateY(-1px);
-}
-
-/* First section after hero */
-.home-hero + h2 { margin-top: clamp(14px, 2.2vw, 20px); }
-.home-hero + h2 + ul { margin-top: .6rem; }
-.home-hero + h2 + ul li { margin: .2rem 0; }
-
-.skills-line {
-  max-width: 78ch;       /* readable measure */
-  color: #475569;        /* slightly muted */
-  margin-top: .25rem;
-}
 
 @import "projects";
 

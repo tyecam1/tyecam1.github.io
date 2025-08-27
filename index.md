@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ""                # hide the default page title
+title: ""          # hide the default page title
 permalink: /
 class: is-home
 ---
@@ -9,8 +9,8 @@ class: is-home
   <div class="hh-inner">
     <h1 class="hh-title">Learning to build reliable robotics & RL systems</h1>
     <p class="hh-tag">
-      I’m a recent master’s graduate taking on real projects to improve my judgment—aiming for
-      safe control, clear observability, and work others can reproduce.
+      I’m a recent master’s graduate building small, honest systems to improve my judgment —
+      aiming for safe control, clear observability, and work others can reproduce.
     </p>
     <ul class="hh-pills">
       <li>Control & perception</li>
@@ -20,16 +20,26 @@ class: is-home
   </div>
 </section>
 
-## What I’m focusing on now:
-- Integrated RL pipeline with live telemetry and config-first runs.
-- Arch Linux dev environment automation (CUDA, Docker, Ansible).
-- Human Robot Collaboration (/HRI) research planning (safe RL, intent estimation).
+## What I’m focusing on now
+- Reproducible RL pipeline with a live metrics/video dashboard.
+- A rebuildable CUDA dev box (Ansible + dotfiles) for consistent experiments.
+- Human–robot collaboration planning (safe RL, intent estimation).
 
 <h2>Skills snapshot</h2>
-<p class="skills-line">
-  ROS • Python • C++ • RL (PPO/IL) • Digital Control • SLAM/VSLAM • Perception (RGB-D/LiDAR) •
-  Docker/CUDA • Linux/Ansible • MATLAB/Simulink
-</p>
+<ul class="skills-list">
+  <li>Python</li>
+  <li>C++</li>
+  <li>PyTorch</li>
+  <li>ROS</li>
+  <li>Control</li>
+  <li>Perception (RGB-D/LiDAR)</li>
+  <li>SLAM/VSLAM</li>
+  <li>CUDA/Docker</li>
+  <li>Linux/Ansible</li>
+  <li>MATLAB/Simulink</li>
+  <li>RL (PPO/IL)</li>
+  <li>Reproducibility & CI</li>
+</ul>
 
 ## Featured projects
 {% assign all = site.data.projects %}
