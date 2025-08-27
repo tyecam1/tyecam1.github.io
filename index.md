@@ -5,9 +5,22 @@ permalink: /
 class: is-home
 ---
 
-# Systems engineer building reliable robotics and reinforcement-learning tooling: control, perception, and experiment infrastructure.
+<section class="home-hero">
+  <div class="hh-inner">
+    <h1 class="hh-title">Learning to build reliable robotics & RL systems</h1>
+    <p class="hh-tag">
+      I’m a recent master’s graduate taking on real projects to improve my judgment—aiming for
+      safe control, clear observability, and work others can reproduce.
+    </p>
+    <ul class="hh-pills">
+      <li>Control & perception</li>
+      <li>RL training + evaluation</li>
+      <li>Reproducible experiments</li>
+    </ul>
+  </div>
+</section>
 
-## What I’m focusing on now
+## What I’m focusing on now:
 - Integrated RL pipeline with live telemetry and config-first runs.
 - Arch Linux dev environment automation (CUDA, Docker, Ansible).
 - Human Robot Collaboration (/HRI) research planning (safe RL, intent estimation).
