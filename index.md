@@ -5,7 +5,7 @@ permalink: /
 class: is-home
 ---
 
-<section class="home-hero">
+<section class="home-hero compact">
   <div class="hh-inner">
     <h1 class="hh-title">Learning to build reliable robotics & RL systems</h1>
     <p class="hh-tag">

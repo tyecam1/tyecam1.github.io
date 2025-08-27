@@ -289,3 +289,70 @@ a { text-underline-offset: 2px; }
 .fc-tags li { padding:.18rem .45rem; border:1px solid rgba(0,0,0,.08); border-radius:.5rem; font-size:.8rem; }
 .fc-meta { display:flex; justify-content:space-between; align-items:center; font-size:.85rem; opacity:.85; }
 .more-link { margin-top:.6rem; }
+
+/* =========================================================
+   Home hero — compact, humble, blends with Minima defaults
+   ========================================================= */
+.is-home .page-title,
+.is-home h1.page-title { display: none !important; }  /* keep "Home" hidden */
+
+.is-home .home-hero.compact {
+  padding: clamp(8px, 2.5vw, 16px) 0 0;     /* small top breathing room */
+}
+
+.is-home .home-hero .hh-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 2.5vw, 24px);
+}
+
+.is-home .home-hero .hh-title {
+  margin: 0 0 .25rem;
+  font-size: clamp(22px, 3.2vw, 28px);      /* closer to section heading size */
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+
+.is-home .home-hero .hh-tag {
+  margin: .2rem 0 0;
+  color: #4b5563;                           /* muted */
+  max-width: 62ch;                          /* keep to readable measure */
+}
+
+.is-home .home-hero .hh-pills {
+  margin: .6rem 0 0;
+  padding: 0;
+  list-style: none;                          /* removes bullets */
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .5rem;
+}
+
+.is-home .home-hero .hh-pills li {
+  font-size: .9rem;
+  padding: .22rem .56rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #fafafa;
+  color: #111827;
+}
+
+/* Reduce the gap between hero and the next section */
+.is-home .home-hero + h2 {
+  margin-top: clamp(12px, 2.2vw, 18px);
+}
+
+/* Harmonise section headings below the hero (optional but nice) */
+.is-home h2 {
+  font-size: clamp(20px, 2.8vw, 26px);
+  line-height: 1.25;
+  margin-top: clamp(18px, 3vw, 28px);
+  margin-bottom: .35rem;
+}
+
+/* Optional: keep the long skill line readable on very wide screens */
+.is-home h2 + p,
+.is-home h2 + ul {
+  max-width: 80ch;
+}
