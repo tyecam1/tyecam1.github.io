@@ -5,7 +5,7 @@
 - key: rl-telemetry
   featured: false
   status: current
-  toc_title: Integrated RL Simulation & Telemetry Platform
+  toc_title: Simulation & Telemetry Platform
   title: Integrated RL Simulation & Telemetry Platform
   dates:
     start: 2025-09-01
@@ -14,43 +14,51 @@
   one_liner: >
     Unified RL pipeline for 2D/3D tasks with live telemetry and reproducible runs.
   summary_short: >
-    MVP under development with PPO baselines, config-driven runs, and a live dashboard streaming metrics and frames.
-  tags: [RL platforms, Reproducibility, Telemetry, PPO, Robotics]
+    A telemetry platform that displays live metrics, logs, and video frames for simulated 2-D and 3-D reinforcement-learning agents.
+  tags: [RL platforms, Reproducibility, Telemetry, Robotics]
   stack: [Python, PyTorch, Gymnasium, Unity ML-Agents, PyBullet, Flask/Streamlit, WebSocket, Docker]
   impact_metrics:
-    - { label: Prototype, value: "MVP", note: "PPO + live telemetry (2D)" }
-    - { label: Coverage, value: "2D → 3D", note: "Gridworlds then PyBullet/Unity" }
-    - { label: Runs, value: "Config-first", note: "Seeds, manifests, checkpoints" }
+    - { label: "Metric update latency (95th percentile)", value: "NA", note: "Time from the training process emitting a metric to it appearing in the dashboard" }
+    - { label: "Metric delivery success", value: "NA", note: "Percentage of expected metric points that arrive (counts missing updates over the run)" }
+    - { label: "Video frame drop rate", value: "NA", note: "Percentage of frames lost between the environment stream and the dashboard" }
   highlights:
-    - Unified reset/step/render API across tasks
-    - WebSocket telemetry to dashboard (metrics, plots, frames)
-    - Artefact logging for reproducibility
-    - Extensible interface for new environments
+    - "Same calls to start a task, take an action, and view the screen across every environment"
+    - "Stream live training numbers and video frames to the web dashboard"
+    - "Save everything needed to rerun an experiment (settings, seed, code version, metrics, checkpoints)"
   case_study:
     problem: >
-      Fragmented RL tooling makes runs hard to compare and reproduce.
+      I want something I can carry into future projects, and a centralised telemetry platform will consolidate project logs
+      and streamline progress.
     approach: >
-      Config-first experiments with PPO/tabular; live telemetry to a Streamlit/Flask UI; standardised artefacts.
+      Start deliberately small: build a simple 2-D reinforcement-learning maze solver and use it
+      to stand up the display. Keep everything observable—emit metrics, logs, and video frames;
+      save the settings, random seed, code version, and checkpoints; and grow the system as I
+      learn more about reinforcement learning and web development.
     results: >
-      Baseline PPO + live streaming operational on 2D tasks; 3D envs integrated and tuning in progress.
+      Baseline Proximal Policy Optimisation with live telemetry is operational on 2-D tasks;
+      3-D environments are integrated and tuning is in progress.
     next_steps:
-      - Unity ML-Agents integration and multi-agent experiments
-      - Open-source packaging with examples and docs
-      - Self-play and curriculum support
+      - "Create a clean repository structure and minimal documentation"
+      - "Define a small, stable telemetry format (metrics, logs, video frames)"
+      - "Implement the 2-D maze environment and a simple baseline agent"
+      - "Wire the data path end-to-end (trainer → collector → dashboard)"
+      - "Record run artefacts by default (settings, seed, code version, checkpoints)"
+      - "Add basic tests and set up continuous integration"
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
     hero: { src: /assets/img/rl-telemetry/hero.png, alt: "RL platform system diagram", caption: "Planned architecture and telemetry" }
     gallery: []
   responsibilities:
-    - Designed architecture and PPO baseline
-    - Built logging, checkpointing, and telemetry
-    - Integrated Gymnasium and PyBullet
+    - "Designing the initial architecture and a RL baseline to sanity-check the pipeline"
+    - "Implementing structured logging, checkpoints, and run artefact capture (settings, seed, code version) for reproducibility"
+    - "Building the telemetry path—trainer → collector → web dashboard—streaming metrics and environment video frames"
+    - "Integrating environment backends (Gymnasium for 2-D, PyBullet for 3-D) behind a small, consistent wrapper"
   team: []
 
 - key: archlinux-migration
   featured: false
   status: current
-  toc_title: Arch Linux Migration & Dev Environment Automation
+  toc_title: Arch Linux Migration
   title: Arch Linux Migration & Dev Environment Automation
   dates:
     start: 2025-10-01
@@ -60,12 +68,12 @@
     NVIDIA 3060 laptop on Arch: reproducible, CUDA-ready, one-command bootstrap.
   summary_short: >
     Scripted install (bootloader→CUDA→Docker→dotfiles) plus an optional Ansible playbook for idempotent rebuilds.
-  tags: [Arch Linux, CUDA, Docker, Dotfiles, Automation, Ansible]
-  stack: [Arch Linux, systemd-boot, btrfs, pacman/paru, NVIDIA + CUDA, Docker, Python, Make, Ansible]
+  tags: [Linux, CUDA, Docker, Dotfiles, Automation, Ansible]
+  stack: [Arch Linux, systemd-boot, btrfs, pacman/paru, NVIDIA, Docker, Python, Make, Ansible]
   impact_metrics:
     - { label: Bootstrap, value: "≤15 min", note: "Bare OS → dev ready" }
     - { label: Repro, value: "1 command", note: "make bootstrap" }
-    - { label: GPU, value: "CUDA OK", note: "Validated on host + Docker" }
+    - { label: GPU, value: "CUDA OK", note: "Validate on host + Docker" }
   highlights:
     - Idempotent shell bootstrap for packages, drivers, and tools
     - Versioned dotfiles (shell/editor/terminal/WM)
@@ -73,69 +81,85 @@
     - Ansible playbook with roles, handlers, and tags against a local or remote inventory
   case_study:
     problem: >
-      Windows slowed GPU workflows and reproducibility; I wanted a lean, rebuildable dev box.
+      Windows made GPU training and reproducibility fragile and slow. I want a lean Linux
+      workstation I can rebuild from scratch at any time—same tools, same drivers—so progress
+      isn’t blocked by the machine. I’ll start on my second-hand 3060 laptop I'd acquired for RL in South Korea, so breakage is safe.
     approach: >
-      Automate the full stack (bootloader, FS, drivers, packages, dotfiles, containers, Python). Mirror steps in Ansible for unattended rebuilds.
+      Use Arch Linux with everything written and designed as code. Automate the full stack—bootloader,
+      disk layout and filesystem, NVIDIA drivers, packages, dotfiles, containers, and the
+      Python toolchain—and mirror the process in Ansible for unattended reinstalls on new
+      hardware or a clean disk.
     results: >
-      One-command setup with working CUDA; faster context switching; playbook enables headless or multi-host rebuilds.
+      One-command setup produces a clean desktop with working NVIDIA CUDA, my editor and shell,
+      and a predictable Python environment. Context switching is faster, and the same playbook
+      can bring up a headless node or a second machine.
     next_steps:
-      - Publish dotfiles/bootstrap with CI checks
-      - Optional Nix packaging for brittle toolchains
-      - Scripted backup/sync across machines
+      - "Publish the bootstrap and dotfiles with basic checks in continuous integration"
+      - "Add smoke tests: driver loads, nvidia-smi works, CUDA sample compiles"
+      - "Script simple backup and sync across machines (home and project folders)"
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
     hero: { src: /assets/projects/archlinux/hero.png, alt: "Arch desktop with terminal and telemetry", caption: "Reproducible CUDA dev environment" }
     gallery: []
   responsibilities:
-    - Authored bootstrap and dotfiles
-    - Validated CUDA on host and Docker
-    - Wrote Ansible roles and inventory
+    - Code custom desktop environment
+    - Author bootstrap and dotfiles
+    - Validate CUDA on host and Docker
+    - Write Ansible roles and inventory
   team: []
 
 - key: phd-planning
   featured: false
   status: current
-  toc_title: PhD Planning — Robot Learning for Assistive Navigation
-  title: PhD Planning — Robot Learning for Assistive Navigation
+  toc_title: PhD Planning — Robot Learning
+  title: PhD Planning — Robot Learning for Human Robot Collaboration
   dates:
     start: 2025-09-01
   role: Candidate (self-directed research planning)
   domain: Robot Learning | HRI
   one_liner: >
-    Long-term interest: safe, co-adaptive RL for assistive navigation—pursued alongside a full-time role.
+    Long-term interest: safe, co-adaptive RL for human-in-the-loop technology—pursued alongside a full-time role.
   summary_short: >
-    Proposals, reading plan, small prototypes; outreach to Brighton, Nottingham, and European HRI labs.
-  tags: [Safe RL, Co-adaptive control, Intent estimation, Haptic guidance, Reproducibility]
-  stack: [Python, PyTorch, ROS, RTAB-Map, Unity/Gazebo, Jupyter, Zotero/Obsidian]
+    Proposals, reading plan, small prototypes; outreach to European HRI labs.
+  tags: [Safe RL, Co-adaptive control, Intent estimation, Datasets for RL, Reproducibility]
+  stack: [Python, PyTorch, ROS, Unity/Gazebo, Jupyter, Zotero]
   impact_metrics:
     - { label: Proposals, value: "2–3", note: "Framing + methods" }
-    - { label: Prototypes, value: "2", note: "Navigation + eval demos" }
-    - { label: Reading, value: "80–120", note: "With notes" }
+    - { label: Prototypes, value: "NA", note: "Navigation + eval demos" }
+    - { label: Reading, value: "50 ATM", note: "With notes" }
   highlights:
     - Problem axes defined (uncertainty, perception ambiguity, human-in-loop)
     - Reproducible experiment & evaluation plan
     - Prototypes to de-risk perception and reward design
   case_study:
     problem: >
-      Assistive navigation needs policies that adapt safely to people and uncertainty.
+      Robots can execute narrow tasks quickly, but they lack the directive a human provides.
+      For robots and people to work together in the physical world, we need practical, two-way
+      communication and safe co-adaptation. Reinforcement-learning for human–robot interaction
+      (HRI) is promising, but the required data are costly to collect and often bespoke, which
+      makes results hard to compare and reuse.
     approach: >
-      Explore co-adaptive safe RL and preference-informed guidance; evaluate with simulation metrics and human-centred measures.
+      Map what works today and build on it. Start with small, reproducible studies that combine:
+      (1) uncertainty-aware perception and intent inference, (2) co-adaptive control with
+      safety constraints, and (3) preference-informed learning to keep humans in the loop.
+      Control data costs by prototyping in simulation first (Unity/Gazebo), using scripted user
+      models and teleoperation for early signals, then moving to focused human studies.
     results: >
-      Two proposal drafts refined; reproducibility harness in place; supervisor shortlist identified.
+      Long term planning outcomes to aim for: a coherent, defensible PhD plan (research questions, methods,
+      and evaluation) and a successful studentship application with a respected robotics/HRI group.
+      Current status: Limited to research only while I persue a career in my field.
     next_steps:
-      - Supervisor alignment and pilot planning
-      - Richer perception; preference learning studies
+      - "Sharpen the primary research question and success criteria"
+      - "Build a small simulation task to test co-adaptation and intent cues"
+      - "Set up a reproducible template repo (tasks, logging, seeds, metrics, notebooks)"
+
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
     hero: { src: /assets/projects/phd/hero.png, alt: "Planning board and prototype screenshots", caption: "Themes, prototypes, and evaluation plan" }
     gallery: []
   responsibilities:
-    - Drafted proposals and reading plan
-    - Built small prototypes and harness
-    - Contacted prospective labs
-  team:
-    - { name: "Dr. Yanan Li", role: "Prospective supervisor (interest)", link: "" }
-    - { name: "Dr. Shou-Han Zhou", role: "Academic mentor (Cardiff)", link: "" }
+    - Draft proposals and reading plan
+  team: []
 
 # ==========================
 # PAST / COMPLETED (expanded)
@@ -144,18 +168,18 @@
 - key: walkaide
   featured: true
   status: past
-  toc_title: Wearable Haptic Navigation System (RGB-D VSLAM)
+  toc_title: Wearable Navigation System
   title: The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System
   dates:
     start: 2024-09-01
     end: 2025-05-01
-  role: Lead Developer (solo project)
+  role: Systems Engineer
   domain: Robotics | Assistive Robotics | Haptics | VSLAM | Human Factors
   one_liner: >
-    Directional haptic cues with RGB-D VSLAM reduced collisions and improved success in blindfolded navigation trials.
+    A comparitive study on two haptic feedback methods for a wearable navigation aid used by the visually impaired.
   summary_short: >
     Built a wearable navigation system (RGB-D VSLAM, APF navigation, haptic actuation) with EEG event logging. Trials showed
-    compass-style cues outperformed pull-based straps on success, safety, and reaction time.
+    fixed reference haptic cues outperformed rotational haptic ques on success, safety, and reaction time.
   tags:
     - SLAM
     - ROS Noetic
@@ -180,26 +204,27 @@
     - { label: Reaction time, value: "3.43–3.67 s vs ~4.5–4.9 s", note: "Compass vs pulling feedback" }
     - { label: Participants, value: "4", note: "Blindfolded indoor trials (textured vs plain)" }
   highlights:
-    - End-to-end wearable system with RGB-D perception, VSLAM, haptic actuation, and APF
-    - Controlled comparison of compass vs pull-based feedback
-    - EEG event logging aligned to haptic/motor cues for later analysis
+    - End-to-end lightweight wearable system with RGB-D perception, VSLAM, haptic navigation
+    - Controlled comparison of compass vs rotational-based feedback
+    - EEG event logging aligned to haptic navigation cues for later analysis
     - Reproducible ROS/Arduino testbed for assistive robotics
   case_study:
     problem: |
-      Indoors, GPS is unreliable. Can haptic compass cues paired with RGB-D SLAM guide users more clearly
-      than pull-based straps, and what environmental factors matter?
+      Indoors, GPS is unreliable. According to cognitive science, we understand haptic feedback best when a fixed reference point is utilised.
+      However, our mobbility is naturally coordinated through left and right channels. Will fixed reference point haptic cues, paired with RGB-D SLAM, 
+      guide users more clearly than pull-based rotational ques? What are the other critical factors in wearable navigation systems?
     approach: |
       ROS pipeline with RealSense RGB-D perception, RTAB-Map localisation, APF navigation, and Arduino-driven actuators.
-      Two feedback modalities were implemented: (i) compass pressure with a back reference, and (ii) tightening pull straps.
-      All cues and motor commands were timestamped and logged, together with EEG event markers, for later workload analysis.
+      Two feedback modalities were implemented: (i) compass pressure with a back reference, and (ii) tightening straps around either shoulder.
+      All cues and motor commands were timestamped and logged, together with EEG event markers, for later cognitive workload analysis.
     experiments: |
-      Four blindfolded participants navigated fixed routes in textured and plain rooms with both systems.
+      Four blindfolded participants navigated fixed routes in textured and plain rooms with both systems and 3 distinct obstacles.
       Metrics included success, collisions, odometry loss, reaction time, and qualitative feedback. SLAM stability was
       analysed under texture and turning-rate changes.
     results: |
       Compass cues achieved higher success (83–77% vs 50–66%), fewer collisions (0–0.42 vs ≤1.17), and faster reactions
       (3.4–3.7 s vs ~4.5–4.9 s). Textured environments stabilised VSLAM, while rapid turns remained a failure mode.
-      Participants reported compass cues clearer and more intuitive; pulling was rated more comfortable.
+      Participants reported compass cues clearer and more distinguishable; pulling was rated more natural and comfortable.
     challenges:
       - Limited servo torque constrained haptic salience
       - VSLAM degraded during rapid turns and in plain environments
@@ -207,7 +232,7 @@
       - Multi-device ROS over Wi-Fi/TF frames introduced timing complexity
     learnings:
       - Body-referenced compass cues are clearer than pull-based cues indoors
-      - Visual texture drives VSLAM robustness more than lighting
+      - Visual texture drives VSLAM latency more than move speed
       - Event-synchronised EEG logging is practical and informative for later analysis
     next_steps:
       - Lighter, higher-torque actuators with adaptive feedback
@@ -233,57 +258,71 @@
   responsibilities:
     - Designed system architecture and custom ROS nodes
     - Implemented APF navigation and haptic control
-    - Integrated perception, mapping, and Arduino feedback
+    - Integrated VSLAM perception, mapping, and Arduino feedback
+    - Tuned parameters, optimised for system latency and robustness
     - Implemented EEG logging & synchronisation; handed over for analysis
-  team: []
+  team: [Trystan Barnett (Electrical), Tye Cameron (Systems), Oscar Meads (Electrical), Dylan Williams (Mechanical), Shou-Han Zhou (Supervisor)]
 
 - key: hybrid-tidal-wind
   featured: false
   status: past
-  toc_title: Hybrid Tidal–Wind Feasibility (Severn Estuary)
+  toc_title: Severn Estuary Wind & Tidal Feasibility
   title: A Feasibility-Aware Portfolio for the Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary
   dates:
     start: 2024-09-01
     end: 2025-05-01
-  role: Systems Analyst & Modeller
+  role: Resource & Array Modelling · Condition Monitoring · Financial Analysis
   domain: Renewable Energy | Offshore Engineering | Sustainability
   one_liner: >
-    Bathymetry-driven siting and array modelling for a hybrid tidal–wind project in the Severn Estuary.
+    Feasibility study comparing tidal, wind, and hybrid options in the Severn Estuary; hybrid was
+    assessed but wind-only was recommended as most feasible and lowest cost.
   summary_short: >
-    Developed resource models and layouts, benchmarked LCOE, and proposed condition monitoring to reduce O&M downtime;
-    results indicate competitive LCOE and improved resilience via hybridisation.
-  tags: [Resource assessment, Bathymetry & GIS, Condition monitoring, Hybrid arrays, LCOE analysis, Resilience]
-  stack: [Python (resource modelling, LCOE), MATLAB (turbine performance), GIS & bathymetry]
+    Mapped bathymetry and resources, designed wind layouts (21 × 15 MW) with wake-aware spacing,
+    routed inter-array cabling, and scoped grid/substation options. Tidal potential was analysed
+    but co-location proved impractical; the wind-only design achieved the lowest LCOE under the
+    stated assumptions.
+  tags: [Resource assessment, Bathymetry & GIS, Condition monitoring, Hybrid assessment, LCOE analysis, Resilience]
+  stack: [Python (PyWake, LCOE), SciPy (optimisation), MATLAB (turbine performance), GIS & bathymetry]
   impact_metrics:
-    - { label: Capacity factor, value: "35–45%", note: "Hybrid array scenarios" }
-    - { label: Site extent, value: "Barry–Minehead", note: "Bathymetry constraints" }
-    - { label: LCOE, value: "£60–80/MWh", note: "Comparable to offshore wind" }
-    - { label: Contribution, value: "Industrial supply", note: "Potential repowering" }
+    - { label: Installed capacity, value: "315 MW", note: "21 × Vestas V236-15 MW" }
+    - { label: Annual energy, value: "≈ 1,344 GWh/yr", note: "Study AEP estimate" }
+    - { label: Capacity factor, value: "≈ 48.8%", note: "Assumed for site" }
+    - { label: LCOE (baseline), value: "≈ £65/MWh", note: "Modelled; sensitive to discount rate" }
   highlights:
-    - Built bathymetry and wind/tidal resource models
-    - Designed arrays for capture and reliability; wake-aware spacing
-    - Benchmarked LCOE under grid and O&M scenarios
-    - Condition monitoring strategy to reduce downtime
+    - Built bathymetry and wind/tidal resource layers and mapped feasible corridors
+    - Wind layout: west-oriented rows, ~7D × 4D spacing; Jensen/Park with Gaussian follow-up checks
+    - Cable routing via MST + differential evolution; grid as MVAC with a single onshore substation
+    - Condition-monitoring costs and OPEX assumptions included to inform downtime and LCOE
   case_study:
-    problem: |
-      The Severn Estuary offers strong tides but complex bathymetry. Can a hybrid tidal–wind portfolio
-      deliver reliable power at competitive cost for local industry?
-    approach: |
-      Combined bathymetry mapping with wind/tidal resource assessment to identify feasible corridors.
-      Array designs balanced capture, reliability, and maintainability. Economics assessed via LCOE under multiple scenarios.
-    experiments: |
-      Compared tidal-only, wind-only, and hybrid layouts. Sensitivity to downtime, resource intermittency, and grid connection options.
-    results: |
-      Hybrid layouts smoothed supply variability, improved downtime resilience, and achieved competitive LCOE.
-      The approach highlighted siting constraints around channels and shipping lanes.
+    problem: >
+      The Severn Estuary has strong tidal flows but complex bathymetry and strict siting constraints.
+      The question: can a hybrid tidal–wind portfolio deliver reliable power for local industry at a
+      competitive cost once channels, shipping lanes, wildlife zones, and seabed conditions are respected?
+    approach: >
+      Integrate bathymetry and resource data to map feasible corridors; design wind layouts and preliminarily
+      size foundations; model wakes and array spacing; optimise inter-array cable routing; and design grid and
+      substation options. Assess economics via levelised cost of energy with sensitivity to downtime and intermittency.
+    experiments:
+      - "Compare tidal-only, wind-only, and hybrid layouts at candidate sites"
+      - "Sweep spacing/orientation and cable topologies to trade off yield, losses, and maintainability"
+      - "Test sensitivity to device availability, maintenance windows, and grid-connection distance/tariffs"
+    results: >
+      Wind-only layouts achieved the lowest levelised cost of energy under the study assumptions. Economies of
+      scale in turbine ratings, installation vessels, O&M logistics, and a mature supply chain dominated. Hybrid
+      layouts offered smoother supply but were impractical here due to depth, seabed, and electrical-integration
+      mismatches, and came with higher LCOE. Siting constraints around channels and shipping lanes remained key drivers.
     learnings:
-      - Hybridisation improves reliability over single-technology fields
-      - Early condition-monitoring integration reduces projected O&M costs
+      - "Wind-only is most cost-effective at this site; hybridisation improves reliability but adds cost/complexity"
+      - "Early condition-monitoring integration reduces projected O&M costs"
+      - "Cable routing and substation siting materially affect both losses and installation costs"
     next_steps:
-      - High-resolution CFD; longer environmental series; extended policy-aware economics
+      - "Higher-resolution CFD for wakes and local bathymetry effects"
+      - "Longer multi-year environmental series to stress-test variability and downtime"
+      - "Policy-aware economics (e.g., Contracts for Difference scenarios) and refined CAPEX/OPEX ranges"
+      - "Early engagement with navigation and wildlife stakeholders to validate corridors and exclusions"
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero: { src: /assets/projects/img/tidal-array.png, alt: "Map of hybrid tidal and wind array design", caption: "Hybrid tidal–wind feasibility design" }
+    hero: { src: /assets/projects/img/tidal-array.png, alt: "Google Earth rendering of the optimised tidal array", caption: "Google Earth rendering of the optimised tidal array"
     gallery: []
   videos:
     - id: R84wCpUQfaM
@@ -293,8 +332,7 @@
     - Designed array layouts and optimised capacity factor
     - Led LCOE benchmarking and sustainability analysis
     - Proposed condition-monitoring framework
-  team:
-    - { name: "Group of 4 MEng students", role: "Co-designers", link: "" }
+  team: [Imogen Anderson (Civil), Victoria Bridges-Galvez (Civil), Tye Cameron (Mechanical), Tom Daniels (Mechanical), Valerija Kolosova (Civil), Jack Tricklebank (Mechanical)]
 
 - key: fem-wing
   featured: false
@@ -311,8 +349,8 @@
   summary_short: >
     Implemented 8-node quadratic elements with Gauss quadrature; θ–ϕ parametric sweeps and optimisation
     identified a robust sweet spot while enforcing area and orthotropic behaviour.
-  tags: [Custom FEM, Quadratic elements, Gauss quadrature, Constraint handling, Differential evolution, Visualisation]
-  stack: [Python, NumPy, SciPy (differential evolution, fsolve), Matplotlib]
+  tags: [Custom FEM, Quadratic elements, Gauss quadrature, Constraint handling, Differential evolution, ParaView Visualisation]
+  stack: [Python, NumPy, SciPy (differential evolution, fsolve), Matplotlib, ParaView, Gmsh]
   impact_metrics:
     - { label: Von Mises reduction, value: "≈25%", note: "Parametric + optimisation" }
     - { label: Area accuracy, value: "<1% error", note: "240 m² target" }
@@ -320,7 +358,7 @@
     - { label: Scale, value: "500+ runs", note: "Multiple materials" }
   highlights:
     - Implemented solver with 8-node quadratic elements
-    - Enforced constraints via trigonometric formulation
+    - Efficient sparse stiffness matrix handling
     - Automated θ–ϕ sweeps and convergence checks
   case_study:
     problem: |
@@ -366,7 +404,7 @@
 - key: rl-sumo
   featured: true
   status: past
-  toc_title: RL Quadruped Sumo (ANYmal, PPO)
+  toc_title: RL Quadruped Sumo
   title: Reinforcement Learning-Based Control of a Quadruped Agent in a Simulated Sumo Arena
   dates:
     start: 2023-08-01
@@ -374,33 +412,46 @@
   role: Reinforcement Learning Engineer (course project)
   domain: Reinforcement Learning | Robotics | Simulation
   one_liner: >
-    PPO + curriculum in RaisimGym; emergent leap-attack; 24th in a class tournament.
+    Proximal Policy Optimisation (PPO) with a simple, reward-embedded curriculum in RaisimGym; an emergent
+    “leap” opening appeared.
   summary_short: >
-    Trained full ANYmal with torque control and curriculum scheduling; analysed learning curves and strategies.
+    Trained full ANYmal with joint-torque control and a two-stage curriculum; analysed learning curves,
+    hyperparameters, and emergent tactics under adversarial contact.
   tags: [PPO, Curriculum learning, Vectorised envs, Reward shaping, Emergent behaviour, Analysis]
   stack: [PyTorch, RaiSim/RaisimGym, CUDA, NumPy, TensorBoard]
   impact_metrics:
-    - { label: Placement, value: "24th", note: "MSc/PhD cohort tournament" }
-    - { label: Scale, value: "1M+ iters", note: "Vectorised environments" }
-    - { label: Behaviours, value: "Leap-attack, edge pushing", note: "Emergent, not scripted" }
+    - { label: Placement,  value: "24/32",      note: "Tournament placing (25% win rate)" }
+    - { label: Scale,      value: "100 envs",   note: "Vectorised training; 30 threads" }
+    - { label: Behaviour,  value: "Leap-attack", note: "Discovered early; often decisive but risky" }
   highlights:
-    - Implemented PPO baseline and curriculum scheduler
-    - Reward shaping for stance stability and opponent displacement
-    - Full-model ANYmal training with joint torque actuation
+    - Implemented PPO baseline in PyTorch with vectorised simulation and a two-stage curriculum
+    - Shaped rewards for stability, useful approach, impact, and centre control; tuned γ=0.998 and λ=0.95
+    - Observed emergent “leap” opener plus edge-pushing; diagnosed failure cases and reward side-effects
   case_study:
     problem: |
-      Quadruped control in adversarial contact settings is high-variance and sparse-reward.
+      Quadruped control under adversarial contact is high-variance and sparse-reward. The agent must
+      balance stability and aggression in continuous action space while avoiding brittle policy updates.
     approach: |
-      PPO in PyTorch with vectorised environments and curriculum difficulty; observations include joint states and opponent proximity.
-    experiments: |
-      Baseline PPO vs curriculum; measured win rate and reward progression; qualitative behaviour analysis.
+      Train with Proximal Policy Optimisation in PyTorch on a vectorised RaiSim/RaisimGym environment
+      (100 parallel arenas). Use a simple curriculum embedded in the reward: far from centre → emphasise
+      approach/impact and forward velocity; near centre → emphasise stability/centre control. Include
+      reward terms for torque cost, centre-of-mass height, and body pitch. Tune PPO with γ=0.998, λ=0.95.
+    experiments:
+      - "Baseline PPO vs. curriculum-augmented PPO; measure win rate, reward progression, and stability proxies"
+      - "Ablate reward terms (impact, useful-distance, stabilisers) to expose side-effects"
+      - "Qualitative analysis of emergent tactics (opening leaps, edge pushing) and failure modes"
     results: |
-      Curriculum accelerated convergence and improved robustness; policies discovered leap-attack and edge-pushing tactics.
+      The curriculum accelerated early learning and improved robustness relative to the baseline.
+      Policies discovered a high-impact “leap” opener and edge-pushing behaviour. In evaluation,
+      placement was 24/32 with ~25% win rate; failures were often self-destabilisations after the leap.
     learnings:
-      - Curriculum design materially affects sample efficiency
-      - Visualisation and component rewards are critical for debugging
+      - “Contact = good” accidentally encourages sticking to the opponent; reward should favour destabilisation, not mere impact
+      - Curriculum design matters; centre-aware staging improved sample efficiency and stability
+      - Limited opponent diversity in training capped generalisation; richer opponents are needed
     next_steps:
-      - Multi-agent self-play and domain randomisation for robustness
+      - "Introduce self-play and opponent ensembles; apply domain randomisation for contact, friction, and mass"
+      - "Rework reward to penalise sustained contact and explicitly reward opponent destabilisation/outs"
+      - "Add safety terms (anti-flip) and richer observations; explore longer horizons and early-stopping criteria"
   links:
     repo: https://github.com/tyecam1/KAIST-Anymal-Sumo
     docs: ""
@@ -415,12 +466,16 @@
       - { src: /assets/img/anymal-sumo-3-ArenaLayout.png, alt: "Top-down of the sumo arena", caption: "Arena layout" }
       - { src: /assets/img/anymal-sumo-4-Demo.png, alt: "Demo match still", caption: "Demo bout" }
   responsibilities:
-    - Implemented PPO loop and curriculum
-    - Tuned reward shaping and environment configuration
-    - Ran GPU training and analysed behaviours
+    - Implemented PPO loop and two-stage curriculum; tuned γ, λ, action std, and reward coefficients
+    - Shaped rewards for stability vs aggression; instrumented training and analysed behaviours
+    - Ran GPU training, evaluated policies, and documented tournament results
   team: []
   references:
     - https://github.com/jhwangbo/raisimLib
     - https://github.com/jhwangbo/ME491_Policy_Iteration
     - https://github.com/jhwangbo/ME491_Value_Iteration_Template
     - https://github.com/jhwangbo/raisimGymTutorial
+  videos:
+    - id: x24TwcXVaeE
+      title: Initial ANYmal Agent training video
+

@@ -214,6 +214,17 @@ class: is-projects
     <!-- ======= Past projects (featured first) ======= -->
     {% for p in list_past %}
     <section class="project-section anchor-target" id="{{ p.key }}">
+    <header class="project-header">
+      <div class="title-row">
+        <h2 class="project-title">{{ p.title }}</h2>
+        <div class="project-dates">
+          {%- if p.status == "current" and p.dates and p.dates.start -%}
+            In progress — since {{ p.dates.start | date: "%b %Y" }}
+          {%- elsif p.dates and p.dates.start and p.dates.end -%}
+            {{ p.dates.start | date: "%b %Y" }} – {{ p.dates.end | date: "%b %Y" }}
+          {%- endif -%}
+        </div>
+      </div>
 
       {%- assign has_hero_src = p.media and p.media.hero and p.media.hero.src | default: '' | strip -%}
       {%- if has_hero_src != '' -%}
@@ -224,18 +235,6 @@ class: is-projects
           {%- endif -%}
         </figure>
       {%- endif -%}
-
-      <header class="project-header">
-        <div class="title-row">
-          <h2 class="project-title">{{ p.title }}</h2>
-          <div class="project-dates">
-            {%- if p.status == "current" and p.dates and p.dates.start -%}
-              In progress — since {{ p.dates.start | date: "%b %Y" }}
-            {%- elsif p.dates and p.dates.start and p.dates.end -%}
-              {{ p.dates.start | date: "%b %Y" }} – {{ p.dates.end | date: "%b %Y" }}
-            {%- endif -%}
-          </div>
-        </div>
 
         {% if p.role or p.domain %}
           <div class="project-roleline">
