@@ -4,128 +4,89 @@ title: Home
 class: home
 ---
 
-<div class="home-wrap">
+<style>
+/* Home-only gallery styling (safe: scoped to .home) */
+.home .feat-gallery{
+  display:flex; gap:.5rem; overflow-x:auto; padding-bottom:.25rem;
+  scroll-snap-type:x mandatory;
+}
+.home .feat-gallery img{
+  height:140px; width:auto; border-radius:8px;
+  border:1px solid rgba(0,0,0,.12);
+  display:block; scroll-snap-align:center;
+}
+@media (prefers-color-scheme: dark){
+  .home .feat-gallery img{ border-color: rgba(255,255,255,.18); }
+}
+</style>
+
+<div class="wrap">
 
   <!-- HERO -->
-  <section class="home-hero">
-    <div class="home-hero-left">
-      <p class="home-eyebrow">Reliable robotics & RL — small builds, honest measures</p>
-      <h1 class="home-title">I’m Tye, a recent MEng graduate focused on control, perception and reinforcement learning.</h1>
-      <p class="home-lead">
-        I build tidy, reproducible systems aimed at safe control, clear observability, and results others can reproduce.
-        I like humble builds that work in the real world and improve with data.
-      </p>
-
-      <ul class="home-bullets">
-        <li>Control & perception with ROS, VSLAM/RTAB-Map, IMU fusion</li>
-        <li>RL training & evaluation (PPO/IL, curriculum, metrics & dashboards)</li>
-        <li>Reproducibility (Ansible, dotfiles, CI; clean reports & notebooks)</li>
-      </ul>
-    </div>
-
-    <aside class="home-hero-card card">
-      <h2 class="card-title">At a glance</h2>
-      <div class="home-stat-grid">
-        <div class="stat">
-          <div class="label">Capstone systems</div>
-          <div class="value">Wearable Navigation · RL Quadruped</div>
-        </div>
-        <div class="stat">
-          <div class="label">Perception stack</div>
-          <div class="value">RGB-D (RTAB-Map) + LiDAR (Hector-SLAM)</div>
-        </div>
-        <div class="stat">
-          <div class="label">Evaluation mindset</div>
-          <div class="value">Success, collisions, reaction time, odom loss</div>
-        </div>
-        <div class="stat">
-          <div class="label">Background</div>
-          <div class="value">MEng (International), First Class</div>
-        </div>
-      </div>
-
-      <div class="stack-list" role="list" aria-label="Core tools">
-        <span class="stack-item">Python</span>
-        <span class="stack-item">C++</span>
-        <span class="stack-item">PyTorch</span>
-        <span class="stack-item">ROS Noetic</span>
-        <span class="stack-item">CUDA/Docker</span>
-        <span class="stack-item">Linux/Ansible</span>
-      </div>
-    </aside>
+  <section>
+    <p class="eyebrow">Reliable robotics & RL — small builds, honest measures</p>
+    <h1>I’m Tye, a recent MEng graduate focused on control, perception and reinforcement learning.</h1>
+    <p>
+      I build tidy, reproducible systems aimed at safe control, clear observability, and results others can reproduce.
+      I like humble builds that work in the real world and improve with data.
+    </p>
+    <ul>
+      <li>Control & perception with ROS, VSLAM/RTAB-Map, IMU fusion</li>
+      <li>RL training & evaluation (PPO/IL, curriculum, metrics & dashboards)</li>
+      <li>Reproducibility (Ansible, dotfiles, CI; clean reports & notebooks)</li>
+    </ul>
   </section>
 
   <!-- CURRENT FOCUS -->
-  <section class="home-section">
+  <section>
     <h2>What I’m focusing on now</h2>
-    <div class="card">
-      <ul class="home-bullets">
-        <li>Reproducible RL pipeline with a lightweight live metrics/video dashboard.</li>
-        <li>Rebuildable CUDA dev box (Ansible + dotfiles) for consistent experiments.</li>
-        <li>Human–robot collaboration planning (safe RL, intent estimation).</li>
-      </ul>
-    </div>
+    <ul>
+      <li>Reproducible RL pipeline with a lightweight live metrics/video dashboard.</li>
+      <li>Rebuildable CUDA dev box (Ansible + dotfiles) for consistent experiments.</li>
+      <li>Human–robot collaboration planning (safe RL, intent estimation).</li>
+    </ul>
   </section>
 
   <!-- SKILLS -->
-  <section class="home-section">
+  <section>
     <h2>Skills snapshot</h2>
-    <div class="card">
-      <div class="stack-list" role="list" aria-label="Tech stack">
-        <span class="stack-item">Python</span>
-        <span class="stack-item">C++</span>
-        <span class="stack-item">PyTorch</span>
-        <span class="stack-item">ROS (Noetic)</span>
-        <span class="stack-item">Control (state-space, digital)</span>
-        <span class="stack-item">Perception (RGB-D/LiDAR)</span>
-        <span class="stack-item">SLAM / VSLAM</span>
-        <span class="stack-item">CUDA / Docker</span>
-        <span class="stack-item">Linux / Ansible</span>
-        <span class="stack-item">MATLAB / Simulink</span>
-        <span class="stack-item">RL (PPO / IL)</span>
-        <span class="stack-item">Reproducibility & CI</span>
-      </div>
-    </div>
+    <p>
+      Python · C++ · PyTorch · ROS (Noetic) · Control (state-space, digital) ·
+      Perception (RGB-D/LiDAR) · SLAM/VSLAM · CUDA/Docker · Linux/Ansible ·
+      MATLAB/Simulink · RL (PPO/IL) · Reproducibility & CI
+    </p>
   </section>
 
   <!-- HIRING SIGNALS -->
-  <section class="home-section">
+  <section>
     <h2>Signals for hiring managers</h2>
-    <div class="home-grid">
-      <article class="card">
-        <h3>Hands-on proof</h3>
-        <p>Wearable navigation system with RGB-D perception, haptic actuation, and user trials; plus a full RL quadruped project.</p>
-      </article>
-      <article class="card">
-        <h3>Measurement mindset</h3>
-        <p>Defined KPIs and analysed results (success rate, collisions, reaction time, odometry loss) to guide iteration.</p>
-      </article>
-      <article class="card">
-        <h3>Production habits</h3>
-        <p>ROS packages, clean nodes, reproducible setups (Ansible/dotfiles), and reports/videos suitable for stakeholders.</p>
-      </article>
-      <article class="card">
-        <h3>Team & humility</h3>
-        <p>Happy to start small, learn fast, and help wherever useful—from perception plumbing to experiment cleanup.</p>
-      </article>
-    </div>
+    <h3>Hands-on proof</h3>
+    <p>Wearable navigation system with RGB-D perception, haptic actuation, and user trials; plus a full RL quadruped project.</p>
+
+    <h3>Measurement mindset</h3>
+    <p>Defined KPIs and analysed results (success rate, collisions, reaction time, odometry loss) to guide iteration.</p>
+
+    <h3>Production habits</h3>
+    <p>ROS packages, clean nodes, reproducible setups (Ansible/dotfiles), and reports/videos suitable for stakeholders.</p>
+
+    <h3>Team & humility</h3>
+    <p>Happy to start small, learn fast, and help wherever useful—from perception plumbing to experiment cleanup.</p>
   </section>
 
-  <!-- FEATURED PROJECTS -->
-  <section class="home-section">
+  <!-- FEATURED PROJECTS (cards preserved; add small gallery) -->
+  <section>
     <h2>Featured projects</h2>
 
-    <div class="home-feat-grid">
+    <div class="cards">
       {% assign featured = site.data.projects | where: "featured", true | sort: "dates.end" | reverse %}
       {% for p in featured %}
-      <article class="home-feat-card card">
-
-        {% if p.media and p.media.hero and p.media.hero.src or p.media.gallery %}
-        <div class="home-feat-gallery" aria-label="Project images">
-          {% if p.media and p.media.hero and p.media.hero.src %}
+      <article class="project-card">
+        {% if p.media and (p.media.hero or p.media.gallery) %}
+        <div class="feat-gallery" aria-label="Project images">
+          {% if p.media.hero and p.media.hero.src %}
             <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}" loading="lazy">
           {% endif %}
-          {% if p.media and p.media.gallery %}
+          {% if p.media.gallery %}
             {% for g in p.media.gallery %}
               {% if g.src %}
                 <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}" loading="lazy">
@@ -135,40 +96,28 @@ class: home
         </div>
         {% endif %}
 
-        <header class="home-feat-head">
-          <h3 class="home-feat-title">
-            <a href="/projects/#{{ p.key }}">{{ p.toc_title | default: p.title }}</a>
-          </h3>
-          {% if p.dates and p.dates.end %}
-            <div class="home-feat-date">{{ p.dates.end | date: "%b %Y" }}</div>
-          {% endif %}
-        </header>
-
+        <h3><a href="/projects/#{{ p.key }}">{{ p.toc_title | default: p.title }}</a></h3>
         {% if p.summary_short %}
-          <p class="home-feat-summary">{{ p.summary_short }}</p>
+          <p>{{ p.summary_short }}</p>
         {% endif %}
 
         {% if p.stack %}
-          {% assign max_stack = 6 %}
-          <div class="stack-list" aria-label="Tech stack">
-            {% for s in p.stack %}
-              {% if s and s != '' and forloop.index <= max_stack %}
-                <span class="stack-item">{{ s }}</span>
-              {% endif %}
-            {% endfor %}
-            {% if p.stack.size > max_stack %}
-              <span class="stack-item stack-more">+{{ p.stack.size | minus: max_stack }}</span>
-            {% endif %}
-          </div>
+        <ul class="tags">
+          {% for s in p.stack limit:6 %}
+            <li class="tag">{{ s }}</li>
+          {% endfor %}
+          {% if p.stack.size > 6 %}
+            <li class="tag">+{{ p.stack.size | minus: 6 }}</li>
+          {% endif %}
+        </ul>
         {% endif %}
       </article>
       {% endfor %}
     </div>
 
-    <div class="home-cta">
-      <a class="btn-link" href="/projects/">See all projects →</a>
-      <a class="btn-link" href="/about/">About me →</a>
-    </div>
+    <p style="margin-top:.75rem;">
+      <a href="/projects/">See all projects →</a> &nbsp;·&nbsp; <a href="/about/">About me →</a>
+    </p>
   </section>
 
 </div>
