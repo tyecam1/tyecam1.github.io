@@ -36,20 +36,46 @@ title: ""
   <h2 id="featured-title">Featured projects</h2>
 
   {% for p in projects %}
-    {%- comment -%}
-    Build gallery from any of these keys:
-    - Arrays: gallery, images, media, gallery_images, gallery_urls
-    - Single image fallbacks: hero, hero_image, hero_img, cover, cover_image
-    {%- endcomment -%}
-    {% assign gallery = p.gallery | default: p.images | default: p.media | default: p.gallery_images | default: p.gallery_urls %}
-    {% assign hero    = p.hero | default: p.hero_image | default: p.hero_img | default: p.cover | default: p.cover_image %}
 
-    {%- if gallery == nil or gallery == empty -%}
-      {%- if hero -%}
-        {%- assign gallery = hero | split: ',' -%} {# split guarantees an array; no comma -> single-item array #}
-      {%- else -%}
-        {%- assign gallery = empty -%}
-      {%- endif -%}
+    {%- comment -%}
+    Build a STRING array "gallery" from multiple schemas:
+    - p.media.hero.src (object) and p.media.gallery[].src (objects)
+    - p.gallery / p.images (array of strings)
+    - p.hero / p.cover (single string)
+    Put hero first if both exist and de-duplicate.
+    {%- endcomment -%}
+
+    {%- assign gallery = "" | split: "" -%}           {# start as empty array #}
+    {%- assign hero_src = nil -%}
+
+    {%- if p.media and p.media.hero and p.media.hero.src -%}
+      {%- assign hero_src = p.media.hero.src -%}
+    {%- elsif p.hero or p.hero_image or p.cover or p.cover_image -%}
+      {%- assign hero_src = p.hero | default: p.hero_image | default: p.cover | default: p.cover_image -%}
+    {%- endif -%}
+
+    {%- if p.media and p.media.gallery -%}
+      {%- for g in p.media.gallery -%}
+        {%- if g.src -%}
+          {%- assign gallery = gallery | push: g.src -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if p.gallery or p.images or p.media_urls or p.gallery_urls -%}
+      {%- assign raw = p.gallery | default: p.images | default: p.media_urls | default: p.gallery_urls -%}
+      {%- for g in raw -%}
+        {%- assign gallery = gallery | push: g -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if hero_src -%}
+      {%- capture joined %}{{ gallery | join:'|' }}{% endcapture -%}
+      {%- assign gallery = hero_src | append:'|' | append: joined | split:'|' | uniq -%}
+    {%- endif -%}
+
+    {%- if gallery == empty and hero_src -%}
+      {%- assign gallery = hero_src | split: ',' -%}
     {%- endif -%}
 
     <article class="project-card" id="{{ p.key }}">
@@ -75,7 +101,9 @@ title: ""
           {% for img in gallery %}
             <figure class="media-item">
               <a class="zoom" href="#{{ p.key }}-img-{{ forloop.index }}" title="Enlarge image {{ forloop.index }}">
-                <img loading="lazy" src="{{ img | relative_url }}" alt="{{ p.title }} – image {{ forloop.index }}">
+                <img {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+                     src="{{ img | relative_url }}"
+                     alt="{{ p.title | escape }} — image {{ forloop.index }}">
               </a>
             </figure>
           {% endfor %}
@@ -89,14 +117,12 @@ title: ""
       <!-- CSS-only lightbox set -->
       <div class="lightbox-set">
         {% for img in gallery %}
-          {% assign i = forloop.index %}
-          {% assign l = forloop.length %}
+          {% assign i = forloop.index %}{% assign l = forloop.length %}
           {% if i > 1 %}{% assign prev = i | minus: 1 %}{% else %}{% assign prev = l %}{% endif %}
           {% if i < l %}{% assign nxt = i | plus: 1 %}{% else %}{% assign nxt = 1 %}{% endif %}
-
           <div class="lightbox" id="{{ p.key }}-img-{{ i }}">
             <a class="lb-nav prev" href="#{{ p.key }}-img-{{ prev }}" aria-label="Previous">‹</a>
-            <img src="{{ img | relative_url }}" alt="{{ p.title }} – enlarged image {{ i }}">
+            <img src="{{ img | relative_url }}" alt="{{ p.title | escape }} — enlarged image {{ i }}">
             <a class="lb-nav next" href="#{{ p.key }}-img-{{ nxt }}" aria-label="Next">›</a>
             <a class="lb-close" href="#close" aria-label="Close">×</a>
           </div>
@@ -108,6 +134,7 @@ title: ""
         <p class="project-blurb">{{ p.summary_short }}</p>
       {% endif %}
     </article>
+
   {% endfor %}
 </section>
 

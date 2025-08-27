@@ -332,3 +332,58 @@
     .scroll-controls{ z-index: 2; }            /* ensure arrows sit above images */
   }
 }
+
+/* grid spacing a touch larger to avoid visual “seam” */
+.home .featured-projects .projects-grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.25rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 920px){
+  .home .featured-projects .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* isolate each card and clip overlays/shadows inside */
+.home .project-card{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;        /* clip arrows & shadows to the card */
+  z-index: 0;
+  border-radius: 1rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.12);
+  background: var(--card-bg, transparent);
+}
+
+/* gallery polish */
+.home .media-scroller{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: .5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  border-radius: .75rem;
+  padding-bottom: .25rem;          /* space for hidden scrollbar */
+  scrollbar-width: none;           /* Firefox: hide */
+}
+.home .media-scroller::-webkit-scrollbar{ height: 0; }  /* WebKit: hide */
+
+.home .media-item{
+  scroll-snap-align: start;
+  overflow: hidden;
+  border-radius: .75rem;
+}
+.home .media-item img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;              /* consistent height without layout shift */
+  object-fit: cover;
+}
+
+/* keep the arrows above images but inside the card */
+.home .scroll-controls{ z-index: 2; }
