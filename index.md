@@ -35,70 +35,58 @@ title: ""
 <section class="featured-projects" aria-labelledby="featured-title">
   <h2 id="featured-title">Featured projects</h2>
 
-  <!-- NEW: grid wrapper so CSS can place two columns consistently -->
+  <!-- Grid wrapper for two columns -->
   <div class="projects-grid">
+
   {% for p in projects %}
 
     {%- comment -%}
-    Build gallery_items as an array of maps: [{src, alt, caption}]
+    Build a pipe-delimited string of image srcs (GitHub Pages–safe).
     Supports:
-    - p.media.hero.src (+ optional .alt/.caption)
-    - p.media.gallery[].src (+ optional .alt/.caption)
-    - p.gallery / p.images (array of strings)
-    - p.hero / p.cover (single string)
-    Hero is prepended; duplicates removed.
+      - p.media.hero.src and p.media.gallery[].src
+      - p.hero / p.cover (single string)
+      - p.gallery / p.images (array of strings)
+    Puts hero first and de-dupes using a sentinel: |src|
     {%- endcomment -%}
 
-    {%- assign gallery_items = "" | split: "" -%}
-    {%- assign hero_src = nil -%}
-    {%- assign hero_alt = nil -%}
-    {%- assign hero_caption = nil -%}
+    {%- assign gallery_pipe = '|' -%}
 
+    {%- assign hero_src = nil -%}
     {%- if p.media and p.media.hero and p.media.hero.src -%}
       {%- assign hero_src = p.media.hero.src -%}
-      {%- assign hero_alt = p.media.hero.alt | default: p.title -%}
-      {%- assign hero_caption = p.media.hero.caption -%}
     {%- elsif p.hero or p.hero_image or p.cover or p.cover_image -%}
       {%- assign hero_src = p.hero | default: p.hero_image | default: p.cover | default: p.cover_image -%}
-      {%- assign hero_alt = p.title -%}
+    {%- endif -%}
+
+    {%- if hero_src -%}
+      {%- capture probe %}|{{ hero_src }}|{% endcapture -%}
+      {%- unless gallery_pipe contains probe -%}
+        {%- assign gallery_pipe = gallery_pipe | append: hero_src | append: '|' -%}
+      {%- endunless -%}
     {%- endif -%}
 
     {%- if p.media and p.media.gallery -%}
       {%- for g in p.media.gallery -%}
         {%- if g.src -%}
-          {%- assign item = ("" | split:"") | push:"" | last -%}
-          {%- assign item = item | merge: {"src": g.src, "alt": g.alt | default: p.title, "caption": g.caption} -%}
-          {%- assign gallery_items = gallery_items | push: item -%}
+          {%- capture s %}|{{ g.src }}|{% endcapture -%}
+          {%- unless gallery_pipe contains s -%}
+            {%- assign gallery_pipe = gallery_pipe | append: g.src | append: '|' -%}
+          {%- endunless -%}
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
 
-    {%- if p.gallery or p.images or p.media_urls or p.gallery_urls -%}
-      {%- assign raw = p.gallery | default: p.images | default: p.media_urls | default: p.gallery_urls -%}
+    {%- if p.gallery or p.images -%}
+      {%- assign raw = p.gallery | default: p.images -%}
       {%- for g in raw -%}
-        {%- assign item = ("" | split:"") | push:"" | last -%}
-        {%- assign item = item | merge: {"src": g, "alt": p.title} -%}
-        {%- assign gallery_items = gallery_items | push: item -%}
+        {%- capture s %}|{{ g }}|{% endcapture -%}
+        {%- unless gallery_pipe contains s -%}
+          {%- assign gallery_pipe = gallery_pipe | append: g | append: '|' -%}
+        {%- endunless -%}
       {%- endfor -%}
     {%- endif -%}
 
-    {%- if hero_src -%}
-      {%- assign already = false -%}
-      {%- for it in gallery_items -%}
-        {%- if it.src == hero_src -%}{%- assign already = true -%}{%- endif -%}
-      {%- endfor -%}
-      {%- unless already -%}
-        {%- assign hero_item = ("" | split:"") | push:"" | last -%}
-        {%- assign hero_item = hero_item | merge: {"src": hero_src, "alt": hero_alt, "caption": hero_caption} -%}
-        {%- assign gallery_items = gallery_items | unshift: hero_item -%}
-      {%- endunless -%}
-    {%- endif -%}
-
-    {%- if gallery_items == empty and hero_src -%}
-      {%- assign hero_item = ("" | split:"") | push:"" | last -%}
-      {%- assign hero_item = hero_item | merge: {"src": hero_src, "alt": hero_alt} -%}
-      {%- assign gallery_items = gallery_items | push: hero_item -%}
-    {%- endif -%}
+    {%- assign gallery = gallery_pipe | split: '|' -%}
 
     <article class="project-card" id="{{ p.key }}">
       <header class="project-head">
@@ -115,21 +103,28 @@ title: ""
         </div>
       </header>
 
-      {% if gallery_items and gallery_items.size > 0 %}
+      {% assign gcount = 0 %}
+      {% for img in gallery %}{% if img != '' %}{% assign gcount = gcount | plus: 1 %}{% endif %}{% endfor %}
+
+      {% if gcount > 0 %}
       <div class="media-wrap">
         <div class="media-scroller snaps-inline" role="group" aria-label="{{ p.toc_title | default: p.title }} image gallery">
-          {% for img in gallery_items %}
-            <figure class="media-item">
-              <a class="zoom" href="#{{ p.key }}-img-{{ forloop.index }}" title="Enlarge image {{ forloop.index }}">
-                <img {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
-                     src="{{ img.src | relative_url }}"
-                     alt="{{ img.alt | default: p.title | escape }}">
-              </a>
-            </figure>
+          {% assign idx = 0 %}
+          {% for img in gallery %}
+            {% unless img == '' %}
+              {% assign idx = idx | plus: 1 %}
+              <figure class="media-item">
+                <a class="zoom" href="#{{ p.key }}-img-{{ idx }}" title="Enlarge image {{ idx }}">
+                  <img {% if idx == 1 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+                       src="{{ img | relative_url }}"
+                       alt="{{ p.title | escape }} — image {{ idx }}">
+                </a>
+              </figure>
+            {% endunless %}
           {% endfor %}
         </div>
 
-        {% if gallery_items.size > 1 %}
+        {% if gcount > 1 %}
         <div class="scroll-controls" aria-hidden="true">
           <button class="scroll-btn prev" type="button" onclick="this.closest('.project-card').querySelector('.media-scroller').scrollBy({left:-600,behavior:'smooth'})">‹</button>
           <button class="scroll-btn next" type="button" onclick="this.closest('.project-card').querySelector('.media-scroller').scrollBy({left:600,behavior:'smooth'})">›</button>
@@ -137,22 +132,25 @@ title: ""
         {% endif %}
       </div>
 
-      <!-- Lightbox with click-anywhere-to-close backdrop + captions -->
+      <!-- Lightbox (click outside to close) -->
       <div class="lightbox-set">
-        {% for img in gallery_items %}
-          {% assign i = forloop.index %}{% assign l = forloop.length %}
-          {% if i > 1 %}{% assign prev = i | minus: 1 %}{% else %}{% assign prev = l %}{% endif %}
-          {% if i < l %}{% assign nxt = i | plus: 1 %}{% else %}{% assign nxt = 1 %}{% endif %}
-          <div class="lightbox" id="{{ p.key }}-img-{{ i }}">
-            <a class="lb-backdrop" href="#close" aria-label="Close"></a>
-            <a class="lb-nav prev" href="#{{ p.key }}-img-{{ prev }}" aria-label="Previous">‹</a>
-            <figure class="lb-media">
-              <img src="{{ img.src | relative_url }}" alt="{{ img.alt | default: p.title | escape }}">
-              {% if img.caption %}<figcaption class="lb-caption">{{ img.caption }}</figcaption>{% endif %}
-            </figure>
-            <a class="lb-nav next" href="#{{ p.key }}-img-{{ nxt }}" aria-label="Next">›</a>
-            <a class="lb-close" href="#close" aria-label="Close">×</a>
-          </div>
+        {% assign idx = 0 %}
+        {% for img in gallery %}
+          {% unless img == '' %}
+            {% assign idx = idx | plus: 1 %}
+            {% assign l = gcount %}
+            {% if idx > 1 %}{% assign prev = idx | minus: 1 %}{% else %}{% assign prev = l %}{% endif %}
+            {% if idx < l %}{% assign nxt = idx | plus: 1 %}{% else %}{% assign nxt = 1 %}{% endif %}
+            <div class="lightbox" id="{{ p.key }}-img-{{ idx }}">
+              <a class="lb-backdrop" href="#close" aria-label="Close"></a>
+              <a class="lb-nav prev" href="#{{ p.key }}-img-{{ prev }}" aria-label="Previous">‹</a>
+              <figure class="lb-media">
+                <img src="{{ img | relative_url }}" alt="{{ p.title | escape }} — enlarged image {{ idx }}">
+              </figure>
+              <a class="lb-nav next" href="#{{ p.key }}-img-{{ nxt }}" aria-label="Next">›</a>
+              <a class="lb-close" href="#close" aria-label="Close">×</a>
+            </div>
+          {% endunless %}
         {% endfor %}
       </div>
       {% endif %}
