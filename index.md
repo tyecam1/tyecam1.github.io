@@ -49,21 +49,7 @@ class: is-home
     <h2>Featured projects</h2>
 
     {% assign featured = site.data.projects | where: "featured", true %}
-    {%- comment -%}
-      Sort by explicit end_date if present; otherwise by title as a stable fallback.
-      (Avoids unsupported where_exp / complex expressions on GitHub Pages.)
-    {%- endcomment -%}
-    {% assign with_end = featured | where: "end_date" %}
-    {% assign without_end = featured | where_exp: "x", "x.end_date == nil" %}{% comment %}Liquid on gh-pages doesn’t support where_exp; replace with manual loop below.{% endcomment %}
-
-    {%- assign without_end = "" | split: "" -%}
-    {%- for p in featured -%}
-      {%- unless p.end_date -%}
-        {%- assign without_end = without_end | push: p -%}
-      {%- endunless -%}
-    {%- endfor -%}
-
-    {% assign ordered = with_end | sort: "end_date" | reverse | concat: (without_end | sort: "title") %}
+    {% assign ordered = featured | sort: "end_date" | reverse %}
 
     <div class="projects-grid">
       {% for p in ordered limit:3 %}
