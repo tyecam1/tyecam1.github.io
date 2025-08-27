@@ -25,8 +25,11 @@ class: is-home
 - Arch Linux dev environment automation (CUDA, Docker, Ansible).
 - Human Robot Collaboration (/HRI) research planning (safe RL, intent estimation).
 
-## Skills snapshot
-ROS • Python • C++ • RL (PPO/IL) • Digital Control • SLAM/VSLAM • Perception (RGB-D/LiDAR) • Docker/CUDA • Linux/Ansible • MATLAB/ Simulink
+<h2>Skills snapshot</h2>
+<p class="skills-line">
+  ROS • Python • C++ • RL (PPO/IL) • Digital Control • SLAM/VSLAM • Perception (RGB-D/LiDAR) •
+  Docker/CUDA • Linux/Ansible • MATLAB/Simulink
+</p>
 
 ## Featured projects
 {% assign all = site.data.projects %}
