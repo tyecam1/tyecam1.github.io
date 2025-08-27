@@ -5,26 +5,9 @@ permalink: /
 class: is-home
 ---
 
-<section class="home-hero">
-  <div class="hh-inner">
-    <h1 class="hh-title">Tye Cameron-Robson</h1>
-    <p class="hh-tag">
-      Systems engineer building reliable robotics and reinforcement-learning tooling:
-      control, perception, and experiment infrastructure.
-    </p>
+# Tye Cameron-Robson
 
-    <ul class="hh-pills">
-      <li>Robot control & perception</li>
-      <li>Reinforcement learning</li>
-      <li>Reproducible experiments</li>
-    </ul>
-
-    <div class="hh-cta">
-      <a class="btn" href="{{ '/projects/' | relative_url }}">View projects</a>
-      <a class="btn btn-ghost" href="{{ '/about/' | relative_url }}">About me</a>
-    </div>
-  </div>
-</section>
+Systems engineer building reliable robotics and reinforcement-learning tooling: control, perception, and experiment infrastructure.
 
 ## What I’m focusing on now
 - Integrated RL pipeline with live telemetry and config-first runs.
