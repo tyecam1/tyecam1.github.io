@@ -30,6 +30,7 @@ title: ""
 </section>
 
 {% assign projects = site.data.projects | where: "featured", true %}
+{% assign lightboxes = "" %}
 
 <section class="featured-projects hf" aria-labelledby="featured-title">
   <h2 id="featured-title">Featured projects</h2>
@@ -131,12 +132,14 @@ title: ""
         {% endif %}
       </div>
 
-      <div class="hf-lightbox-set">
-        {% assign idx = 0 %}
+      {% comment %} Build lightboxes outside the card to avoid stacking overlap {% endcomment %}
+      {% assign idx = 0 %}
+      {% capture lightboxes %}
+        {{ lightboxes }}
+        {% assign l = gcount %}
         {% for img in gallery %}
           {% unless img == '' %}
             {% assign idx = idx | plus: 1 %}
-            {% assign l = gcount %}
             {% if idx > 1 %}{% assign prev = idx | minus: 1 %}{% else %}{% assign prev = l %}{% endif %}
             {% if idx < l %}{% assign nxt = idx | plus: 1 %}{% else %}{% assign nxt = 1 %}{% endif %}
             <div class="hf-lightbox" id="{{ p.key }}-img-{{ idx }}">
@@ -150,7 +153,7 @@ title: ""
             </div>
           {% endunless %}
         {% endfor %}
-      </div>
+      {% endcapture %}
       {% endif %}
 
       {% if p.summary_short %}
@@ -160,7 +163,11 @@ title: ""
 
   {% endfor %}
   </div><!-- /.hf-grid -->
+
+  {{ lightboxes }}
+  <div id="close" hidden></div>
 </section>
+
 
 <div id="close" hidden></div>
 </div>
