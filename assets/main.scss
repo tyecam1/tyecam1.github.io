@@ -4,16 +4,6 @@
 
 @import "minima";
 
-
-/* Wider content wrapper site-wide (helps both Home + Projects) */
-main.page-content > .wrapper {
-  max-width: 1200px;           /* was ~800px in Minima */
-}
-
-@media (min-width: 1400px){
-  main.page-content > .wrapper { max-width: 1280px; }
-}
-
 @import "home";
 
 @import "projects";

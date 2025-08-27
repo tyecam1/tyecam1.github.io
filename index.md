@@ -14,7 +14,6 @@ title: ""
     prototyping from simulation to hardware.
   </p>
 
-  <!-- Skill chips -->
   <ul class="skill-chips" aria-label="Core tools and methods">
     <li class="chip">ROS (Noetic/2)</li>
     <li class="chip">Python</li>
@@ -32,21 +31,19 @@ title: ""
 
 {% assign projects = site.data.projects | where: "featured", true %}
 
-<section class="featured-projects" aria-labelledby="featured-title">
+<section class="featured-projects hf" aria-labelledby="featured-title">
   <h2 id="featured-title">Featured projects</h2>
 
-  <!-- Grid wrapper for two columns -->
-  <div class="projects-grid">
-
+  <div class="hf-grid">
   {% for p in projects %}
 
     {%- comment -%}
-    Build a pipe-delimited string of image srcs (GitHub Pages–safe).
+    Build a pipe-delimited list of image srcs (GitHub Pages–safe).
     Supports:
       - p.media.hero.src and p.media.gallery[].src
-      - p.hero / p.cover (single string)
+      - p.hero / p.cover (string)
       - p.gallery / p.images (array of strings)
-    Puts hero first and de-dupes using a sentinel: |src|
+    Puts hero first and de-dupes.
     {%- endcomment -%}
 
     {%- assign gallery_pipe = '|' -%}
@@ -88,12 +85,12 @@ title: ""
 
     {%- assign gallery = gallery_pipe | split: '|' -%}
 
-    <article class="project-card" id="{{ p.key }}">
-      <header class="project-head">
-        <h3 class="project-title">
+    <article class="hf-card" id="{{ p.key }}">
+      <header class="hf-head">
+        <h3 class="hf-title">
           {% if p.url %}<a href="{{ p.url | relative_url }}">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}
         </h3>
-        <div class="project-meta">
+        <div class="hf-meta">
           {% if p.dates and (p.dates.start or p.dates.end) %}
             <span class="date">
               {{ p.dates.start | default: p.start_date }}{% if p.dates.end or p.end_date %}—{{ p.dates.end | default: p.end_date }}{% endif %}
@@ -107,14 +104,14 @@ title: ""
       {% for img in gallery %}{% if img != '' %}{% assign gcount = gcount | plus: 1 %}{% endif %}{% endfor %}
 
       {% if gcount > 0 %}
-      <div class="media-wrap">
-        <div class="media-scroller snaps-inline" role="group" aria-label="{{ p.toc_title | default: p.title }} image gallery">
+      <div class="hf-media-wrap">
+        <div class="hf-scroller snaps-inline" role="group" aria-label="{{ p.toc_title | default: p.title }} image gallery">
           {% assign idx = 0 %}
           {% for img in gallery %}
             {% unless img == '' %}
               {% assign idx = idx | plus: 1 %}
-              <figure class="media-item">
-                <a class="zoom" href="#{{ p.key }}-img-{{ idx }}" title="Enlarge image {{ idx }}">
+              <figure class="hf-item">
+                <a class="hf-zoom" href="#{{ p.key }}-img-{{ idx }}" title="Enlarge image {{ idx }}">
                   <img {% if idx == 1 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
                        src="{{ img | relative_url }}"
                        alt="{{ p.title | escape }} — image {{ idx }}">
@@ -125,18 +122,16 @@ title: ""
         </div>
 
         {% if gcount > 1 %}
-        <div class="scroll-controls" aria-hidden="true">
-          <button class="scroll-btn prev" type="button"
-            onclick="var s=this.closest('.project-card').querySelector('.media-scroller'); s.scrollBy({left:-s.clientWidth,behavior:'smooth'})">‹</button>
-
-          <button class="scroll-btn next" type="button"
-            onclick="var s=this.closest('.project-card').querySelector('.media-scroller'); s.scrollBy({left:s.clientWidth,behavior:'smooth'})">›</button>
+        <div class="hf-controls" aria-hidden="true">
+          <button class="hf-btn prev" type="button"
+            onclick="var s=this.closest('.hf-card').querySelector('.hf-scroller'); s.scrollBy({left:-s.clientWidth,behavior:'smooth'})">‹</button>
+          <button class="hf-btn next" type="button"
+            onclick="var s=this.closest('.hf-card').querySelector('.hf-scroller'); s.scrollBy({left:s.clientWidth,behavior:'smooth'})">›</button>
         </div>
         {% endif %}
       </div>
 
-      <!-- Lightbox (click outside to close) -->
-      <div class="lightbox-set">
+      <div class="hf-lightbox-set">
         {% assign idx = 0 %}
         {% for img in gallery %}
           {% unless img == '' %}
@@ -144,14 +139,14 @@ title: ""
             {% assign l = gcount %}
             {% if idx > 1 %}{% assign prev = idx | minus: 1 %}{% else %}{% assign prev = l %}{% endif %}
             {% if idx < l %}{% assign nxt = idx | plus: 1 %}{% else %}{% assign nxt = 1 %}{% endif %}
-            <div class="lightbox" id="{{ p.key }}-img-{{ idx }}">
-              <a class="lb-backdrop" href="#close" aria-label="Close"></a>
-              <a class="lb-nav prev" href="#{{ p.key }}-img-{{ prev }}" aria-label="Previous">‹</a>
-              <figure class="lb-media">
+            <div class="hf-lightbox" id="{{ p.key }}-img-{{ idx }}">
+              <a class="hf-backdrop" href="#close" aria-label="Close"></a>
+              <a class="hf-nav prev" href="#{{ p.key }}-img-{{ prev }}" aria-label="Previous">‹</a>
+              <figure class="hf-fig">
                 <img src="{{ img | relative_url }}" alt="{{ p.title | escape }} — enlarged image {{ idx }}">
               </figure>
-              <a class="lb-nav next" href="#{{ p.key }}-img-{{ nxt }}" aria-label="Next">›</a>
-              <a class="lb-close" href="#close" aria-label="Close">×</a>
+              <a class="hf-nav next" href="#{{ p.key }}-img-{{ nxt }}" aria-label="Next">›</a>
+              <a class="hf-close" href="#close" aria-label="Close">×</a>
             </div>
           {% endunless %}
         {% endfor %}
@@ -159,12 +154,12 @@ title: ""
       {% endif %}
 
       {% if p.summary_short %}
-        <p class="project-blurb">{{ p.summary_short }}</p>
+        <p class="hf-blurb">{{ p.summary_short }}</p>
       {% endif %}
     </article>
 
   {% endfor %}
-  </div><!-- /.projects-grid -->
+  </div><!-- /.hf-grid -->
 </section>
 
 <div id="close" hidden></div>

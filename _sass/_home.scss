@@ -513,3 +513,133 @@
   object-fit: contain;  /* show whole image (no middle crop) */
   background: rgba(0,0,0,.04);
 }
+
+/* --- Force Featured grid to fill the wrapper --- */
+.home .featured-projects { padding-left: 0; padding-right: 0; }  /* no inner padding */
+.home .featured-projects .projects-grid{
+  width: 100%;
+  max-width: none;                                /* override any earlier cap */
+  margin: 0;                                      /* no unintended centering */
+  display: grid;
+  gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: 1fr;                     /* mobile */
+}
+@media (min-width: 920px){
+  .home .featured-projects .projects-grid{
+    /* Two columns that truly stretch across the wrapper */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Ensure each card expands to its grid area */
+.home .project-card{
+  max-width: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make each slide exactly the card width (so arrows advance one slide cleanly) */
+.home .media-scroller{
+  grid-auto-columns: 100%;
+}
+
+/* (If you previously added a max-width somewhere, this neutralises it) */
+.home .projects-grid,
+.home .featured-projects,
+.home .project-card { box-sizing: border-box; }
+
+/* ====== Home Featured (namespaced to avoid collisions with _projects.scss) ====== */
+.hf { /* section.featured-projects.hf */
+  /* no extra padding inside the wrapper */
+  padding-left: 0; padding-right: 0;
+}
+
+.hf-grid{
+  width: 100%;
+  margin: 0;
+  display: grid;
+  gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: 1fr; /* mobile */
+}
+@media (min-width: 920px){
+  .hf-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* fill the wrapper fully */
+  }
+}
+
+.hf-card{
+  width: 100%;
+  max-width: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  background: var(--card-bg, transparent);
+}
+
+.hf-head{ margin: 0 0 .5rem; }
+.hf-title{ margin: 0; line-height: 1.25; }
+.hf-meta{ margin-top: .25rem; font-size: .9rem; opacity: .8; display:flex; flex-wrap:wrap; gap:.5rem; }
+.hf-meta .date{ white-space: nowrap; }
+
+/* Gallery */
+.hf-media-wrap{ margin-top: .25rem; }
+.hf-scroller{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: .5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  border-radius: .75rem;
+  padding-bottom: .25rem;
+  scrollbar-width: none;
+}
+.hf-scroller::-webkit-scrollbar{ height: 0; }
+
+.hf-item{ scroll-snap-align: start; overflow: hidden; border-radius: .75rem; }
+.hf-item img{
+  display: block; width: 100%;
+  aspect-ratio: 16/9;      /* uniform height */
+  object-fit: contain;     /* no mid-crop */
+  background: rgba(0,0,0,.04);
+}
+
+/* arrows */
+.hf-controls{
+  pointer-events: none; position: absolute; inset: 0;
+  display: flex; justify-content: space-between; align-items: center; padding: 0 .25rem;
+}
+.hf-btn{
+  pointer-events: auto; width: 2rem; height: 2rem; border-radius: 999px;
+  border: 1px solid currentColor; background: transparent; opacity: .85;
+}
+.hf-btn:hover{ opacity: 1; }
+
+/* blurb */
+.hf-blurb{ margin: .75rem 0 0; max-width: 80ch; }
+
+/* Lightbox (click anywhere outside image to close) */
+.hf-lightbox{
+  position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+  padding: 2rem; background: rgba(0,0,0,.85); z-index: 1000;
+}
+.hf-lightbox:target{ display: flex; }
+
+.hf-backdrop{ position: absolute; inset: 0; }
+.hf-fig{ max-width: min(1200px, 92vw); max-height: 86vh; display: flex; align-items: center; justify-content: center; }
+.hf-fig img{ max-width: 100%; max-height: 78vh; border-radius: .5rem; }
+
+.hf-close, .hf-nav{
+  position: fixed; display: grid; place-items: center; text-decoration: none;
+  color: #fff; border: 1px solid #fff; border-radius: 999px; opacity: .9; background: transparent;
+}
+.hf-close{ top: 1rem; right: 1rem; width: 2.25rem; height: 2.25rem; font-size: 1.25rem; line-height: 1; }
+.hf-nav{ top: 50%; transform: translateY(-50%); width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
+.hf-nav.prev{ left: 1rem; } .hf-nav.next{ right: 1rem; }
