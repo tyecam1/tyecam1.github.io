@@ -102,25 +102,21 @@ a:hover { text-decoration: underline; }
 @import "projects";
 
 /* =====================================================================
-   40 • HOME PAGE (scoped)
-   - Only selectors under `.home` are allowed.
-   - Mirrors the card/chip look from Projects without touching it.
-   - Used by: index.md (class: home).  :contentReference[oaicite:4]{index=4}
+   HOME PAGE (SCOPED) — safe: affects only index.md (class="home")
    ===================================================================== */
 
-.home {
-  --border: var(--border);
-  --muted:  var(--muted);
-  --card:   #ffffff;
+.home { /* local tokens (do not touch site colours) */
+  --border: #e5e7eb;
 }
 @media (prefers-color-scheme: dark) {
-  .home { --card: #121417; }
+  .home { --border: #2f343a; }
 }
 
-/* Sections */
+/* Layout */
+.home .home-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
 .home .home-section { margin-top: 2rem; }
 
-/* Hero layout (two columns collapsing to one) */
+/* Hero (two columns, collapses to one) */
 .home .home-hero {
   display: grid;
   gap: 1.25rem;
@@ -133,62 +129,62 @@ a:hover { text-decoration: underline; }
   font-size: .9rem;
   letter-spacing: .06em;
   text-transform: uppercase;
-  color: var(--muted);
+  opacity: .8;
   margin: 0 0 .25rem;
 }
 .home .home-title { margin: .2rem 0 .5rem; }
-.home .home-lead  { font-size: 1.05rem; max-width: 72ch; margin-bottom: .4rem; }
+.home .home-lead  { max-width: 72ch; margin-bottom: .4rem; }
 .home .home-bullets { margin: .4rem 0 0; padding-left: 1.1rem; }
 
-/* Cards (match Projects’ crisp shells) */
+/* Cards (neutral shell; matches Projects vibe without overriding it) */
 .home .card {
-  background: var(--card);
+  background: inherit; /* use theme background */
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1rem 1.05rem;
-  box-shadow: 0 1px 0 var(--ring);
+  box-shadow: 0 1px 0 rgba(0,0,0,.03);
 }
-.home .card-title { margin: .1rem 0 .6rem; font-size: 1.02rem; color: var(--muted); }
+.home .card-title { margin: .1rem 0 .6rem; opacity: .9; font-size: 1.02rem; }
 
-/* Hero right stat grid */
+/* Hero right: small stat grid */
 .home .home-stat-grid { display: grid; gap: .8rem; grid-template-columns: repeat(2,1fr); margin-bottom: .6rem; }
 @media (max-width: 560px) { .home .home-stat-grid { grid-template-columns: 1fr; } }
-.home .stat .label { font-size: .92rem; color: var(--muted); }
+.home .stat .label { font-size: .92rem; opacity: .85; }
 .home .stat .value { font-size: 1rem; }
 
-/* Shared “chip” look for home (Projects has its own in _projects.scss) */
-.home .pill-list { display: flex; flex-wrap: wrap; gap: .5rem .6rem; list-style: none; padding: 0; margin: .3rem 0 0; }
-.home .pill { border: 1px solid var(--border); border-radius: 999px; padding: .35rem .6rem; font-size: .92rem; }
-
-/* Small cards grid (signals) */
-.home .home-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-
-/* Stack chips reused from Projects’ visual style (scoped to Home) */
+/* Pill/Chip list for skills */
 .home .stack-list { display: flex; flex-wrap: wrap; gap: .5rem .6rem; align-items: center; }
 .home .stack-item { border: 1px solid var(--border); padding: .3rem .55rem; border-radius: 999px; font-size: .9rem; }
 .home .stack-more { opacity: .85; }
 
-/* Featured projects on Home (card grid + optional hero) */
+/* Hiring signals grid */
+.home .home-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+
+/* Featured projects grid + gallery */
 .home .home-feat-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+
 .home .home-feat-card { display: flex; flex-direction: column; }
-.home .home-feat-hero { margin: 0 0 .6rem; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
-.home .home-feat-hero img { display: block; width: 100%; height: auto; }
-.home .home-feat-head { display: flex; justify-content: space-between; gap: .75rem; align-items: baseline; margin-bottom: .25rem; }
+
+.home .home-feat-gallery {
+  display: flex;
+  gap: .5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: .25rem;
+}
+.home .home-feat-gallery img {
+  height: 140px;          /* smaller images as requested */
+  width: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  scroll-snap-align: center;
+  display: block;
+}
+
+.home .home-feat-head { display: flex; justify-content: space-between; gap: .75rem; align-items: baseline; margin: .5rem 0 .25rem; }
 .home .home-feat-title { margin: 0; font-size: 1.02rem; }
 .home .home-feat-title a { text-decoration: none; }
-.home .home-feat-date { font-size: .9rem; color: var(--muted); }
-.home .home-feat-summary { margin: .25rem 0 .6rem; font-size: .95rem; }
+.home .home-feat-date { font-size: .9rem; opacity: .75; }
+.home .home-feat-summary { margin: .25rem 0 .6rem; }
 .home .home-cta { margin-top: .9rem; display: flex; gap: .8rem; }
-.home .btn-link { /* reuse neutral button from section 20 */ }
-
-/* =====================================================================
-   50 • ABOUT PAGE
-   - About uses base typography only. No extra rules needed.  :contentReference[oaicite:5]{index=5}
-   ===================================================================== */
-
-/* (intentionally empty) */
-
-/* =====================================================================
-   End of main.scss (cleaned 2025-08-27)
-   - Everything else belonged to legacy styles and was removed.
-   ===================================================================== */
+.home .btn-link { display: inline-block; padding: .5rem .85rem; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; }

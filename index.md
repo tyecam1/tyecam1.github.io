@@ -44,14 +44,14 @@ class: home
         </div>
       </div>
 
-      <ul class="pill-list" aria-label="Core tools">
-        <li class="pill">Python</li>
-        <li class="pill">C++</li>
-        <li class="pill">PyTorch</li>
-        <li class="pill">ROS Noetic</li>
-        <li class="pill">CUDA/Docker</li>
-        <li class="pill">Linux/Ansible</li>
-      </ul>
+      <div class="stack-list" role="list" aria-label="Core tools">
+        <span class="stack-item">Python</span>
+        <span class="stack-item">C++</span>
+        <span class="stack-item">PyTorch</span>
+        <span class="stack-item">ROS Noetic</span>
+        <span class="stack-item">CUDA/Docker</span>
+        <span class="stack-item">Linux/Ansible</span>
+      </div>
     </aside>
   </section>
 
@@ -71,7 +71,6 @@ class: home
   <section class="home-section">
     <h2>Skills snapshot</h2>
     <div class="card">
-      <!-- Reuse Projects page “chips” vibe -->
       <div class="stack-list" role="list" aria-label="Tech stack">
         <span class="stack-item">Python</span>
         <span class="stack-item">C++</span>
@@ -112,7 +111,7 @@ class: home
     </div>
   </section>
 
-  <!-- FEATURED PROJECTS (kept as real cards) -->
+  <!-- FEATURED PROJECTS -->
   <section class="home-section">
     <h2>Featured projects</h2>
 
@@ -120,10 +119,20 @@ class: home
       {% assign featured = site.data.projects | where: "featured", true | sort: "dates.end" | reverse %}
       {% for p in featured %}
       <article class="home-feat-card card">
-        {% if p.media and p.media.hero and p.media.hero.src %}
-          <figure class="home-feat-hero">
-            <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}" loading="lazy" />
-          </figure>
+
+        {% if p.media and p.media.hero and p.media.hero.src or p.media.gallery %}
+        <div class="home-feat-gallery" aria-label="Project images">
+          {% if p.media and p.media.hero and p.media.hero.src %}
+            <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}" loading="lazy">
+          {% endif %}
+          {% if p.media and p.media.gallery %}
+            {% for g in p.media.gallery %}
+              {% if g.src %}
+                <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}" loading="lazy">
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
         {% endif %}
 
         <header class="home-feat-head">
