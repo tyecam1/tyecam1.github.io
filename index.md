@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Home
-class: home
+title: ""
 ---
+
+<div class="home">
 
 <section class="home-intro">
   <p class="kicker">Robotics · Control · Applied ML</p>
@@ -95,12 +96,9 @@ class: home
       {% if p.summary_short %}
         <p class="project-blurb">{{ p.summary_short }}</p>
       {% endif %}
-      {% if p.cta %}
-        <p class="project-cta"><a class="btn" href="{{ p.cta.href | relative_url }}">{{ p.cta.label }}</a></p>
-      {% endif %}
     </article>
   {% endfor %}
 </section>
 
-<!-- target used by lightbox close links -->
 <div id="close" hidden></div>
+</div>
