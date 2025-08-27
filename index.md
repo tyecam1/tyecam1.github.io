@@ -1,123 +1,91 @@
 ---
-layout: default
+layout: page
 title: Home
-class: home
+permalink: /
+class: is-home
 ---
 
-<style>
-/* Home-only gallery styling (safe: scoped to .home) */
-.home .feat-gallery{
-  display:flex; gap:.5rem; overflow-x:auto; padding-bottom:.25rem;
-  scroll-snap-type:x mandatory;
-}
-.home .feat-gallery img{
-  height:140px; width:auto; border-radius:8px;
-  border:1px solid rgba(0,0,0,.12);
-  display:block; scroll-snap-align:center;
-}
-@media (prefers-color-scheme: dark){
-  .home .feat-gallery img{ border-color: rgba(255,255,255,.18); }
-}
-</style>
+<div class="home">
 
-<div class="wrap">
-
-  <!-- HERO -->
-  <section>
-    <p class="eyebrow">Reliable robotics & RL — small builds, honest measures</p>
-    <h1>I’m Tye, a recent MEng graduate focused on control, perception and reinforcement learning.</h1>
-    <p>
-      I build tidy, reproducible systems aimed at safe control, clear observability, and results others can reproduce.
-      I like humble builds that work in the real world and improve with data.
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <p class="kicker">Robotics · Control · Applied ML</p>
+    <h1 class="headline">
+      I build dependable, human-centred autonomous systems.
+    </h1>
+    <p class="subhead">
+      First-Class MEng (International), Cardiff University · KAIST exchange.
+      I specialise in ROS-based perception & navigation, control design, and
+      rapid prototyping from simulation to hardware.
     </p>
-    <ul>
-      <li>Control & perception with ROS, VSLAM/RTAB-Map, IMU fusion</li>
-      <li>RL training & evaluation (PPO/IL, curriculum, metrics & dashboards)</li>
-      <li>Reproducibility (Ansible, dotfiles, CI; clean reports & notebooks)</li>
+
+    <ul class="hero-highlights">
+      <li>ROS (Noetic/2), Python &amp; C++ · RTAB-Map · RealSense</li>
+      <li>Control: state-space, digital control, MPC</li>
+      <li>RL &amp; simulation: PPO, evaluation, reproducible pipelines</li>
     </ul>
   </section>
 
-  <!-- CURRENT FOCUS -->
-  <section>
-    <h2>What I’m focusing on now</h2>
-    <ul>
-      <li>Reproducible RL pipeline with a lightweight live metrics/video dashboard.</li>
-      <li>Rebuildable CUDA dev box (Ansible + dotfiles) for consistent experiments.</li>
-      <li>Human–robot collaboration planning (safe RL, intent estimation).</li>
-    </ul>
+  <!-- ===== VALUE CARDS ===== -->
+  <section class="value">
+    <div class="value-grid">
+      <article class="card">
+        <h3>Robotics & Control</h3>
+        <p>End-to-end autonomy: sensing, SLAM, path planning, and actuation with clear KPIs.</p>
+      </article>
+      <article class="card">
+        <h3>Applied ML</h3>
+        <p>RL for behaviour, practical MLOps, fast iteration from baseline to validated results.</p>
+      </article>
+      <article class="card">
+        <h3>Systems Thinking</h3>
+        <p>Documentation, safety, and testable interfaces that make teams ship with confidence.</p>
+      </article>
+    </div>
   </section>
 
-  <!-- SKILLS -->
-  <section>
-    <h2>Skills snapshot</h2>
-    <p>
-      Python · C++ · PyTorch · ROS (Noetic) · Control (state-space, digital) ·
-      Perception (RGB-D/LiDAR) · SLAM/VSLAM · CUDA/Docker · Linux/Ansible ·
-      MATLAB/Simulink · RL (PPO/IL) · Reproducibility & CI
-    </p>
-  </section>
-
-  <!-- HIRING SIGNALS -->
-  <section>
-    <h2>Signals for hiring managers</h2>
-    <h3>Hands-on proof</h3>
-    <p>Wearable navigation system with RGB-D perception, haptic actuation, and user trials; plus a full RL quadruped project.</p>
-
-    <h3>Measurement mindset</h3>
-    <p>Defined KPIs and analysed results (success rate, collisions, reaction time, odometry loss) to guide iteration.</p>
-
-    <h3>Production habits</h3>
-    <p>ROS packages, clean nodes, reproducible setups (Ansible/dotfiles), and reports/videos suitable for stakeholders.</p>
-
-    <h3>Team & humility</h3>
-    <p>Happy to start small, learn fast, and help wherever useful—from perception plumbing to experiment cleanup.</p>
-  </section>
-
-  <!-- FEATURED PROJECTS (cards preserved; add small gallery) -->
-  <section>
+  <!-- ===== FEATURED PROJECTS (brief cards; fuller detail lives on /projects) ===== -->
+  <section class="featured-projects">
     <h2>Featured projects</h2>
 
-    <div class="cards">
-      {% assign featured = site.data.projects | where: "featured", true | sort: "dates.end" | reverse %}
-      {% for p in featured %}
-      <article class="project-card">
-        {% if p.media and (p.media.hero or p.media.gallery) %}
-        <div class="feat-gallery" aria-label="Project images">
-          {% if p.media.hero and p.media.hero.src %}
-            <img src="{{ p.media.hero.src }}" alt="{{ p.media.hero.alt | default: p.title }}" loading="lazy">
-          {% endif %}
-          {% if p.media.gallery %}
-            {% for g in p.media.gallery %}
-              {% if g.src %}
-                <img src="{{ g.src }}" alt="{{ g.alt | default: p.title }}" loading="lazy">
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        </div>
-        {% endif %}
+    {% assign all = site.data.projects %}
+    {% assign featured = all | where: "featured", true %}
+    {% comment %}
+      Keep this intentionally brief—titles, tiny meta line, short summary if available.
+      Sorting: prefer end_date, fall back to dates.end, else keep input order.
+    {% endcomment %}
 
-        <h3><a href="/projects/#{{ p.key }}">{{ p.toc_title | default: p.title }}</a></h3>
-        {% if p.summary_short %}
-          <p>{{ p.summary_short }}</p>
-        {% endif %}
+    {% assign f_enddate   = featured | where_exp: "p", "p.end_date" | sort: "end_date" | reverse %}
+    {% assign f_dates_end = featured | where_exp: "p", "p.dates and p.dates.end" | sort: "dates.end" | reverse %}
+    {% assign f_other     = featured | where_exp: "p", "not p.end_date and not (p.dates and p.dates.end)" %}
 
-        {% if p.stack %}
-        <ul class="tags">
-          {% for s in p.stack limit:6 %}
-            <li class="tag">{{ s }}</li>
-          {% endfor %}
-          {% if p.stack.size > 6 %}
-            <li class="tag">+{{ p.stack.size | minus: 6 }}</li>
+    {% assign ordered = f_enddate | concat: f_dates_end | concat: f_other %}
+
+    <div class="projects-grid">
+      {% for p in ordered limit:3 %}
+        {% assign start = p.start_date | default: p.dates.start %}
+        {% assign end   = p.end_date   | default: p.dates.end   %}
+        <article class="project-card" id="proj-{{ p.key }}">
+          <h3 class="project-title">{{ p.toc_title | default: p.title }}</h3>
+          <p class="project-meta">
+            {% if p.status == "current" %}<span class="badge">Current</span>{% endif %}
+            {% if start or end %}
+              <span class="dates">
+                {% if start %}{{ start }}{% endif %}{% if end %}–{{ end }}{% endif %}
+              </span>
+            {% endif %}
+            {% if p.stack %}<span class="stack">{{ p.stack | join: " · " | truncate: 90 }}</span>{% endif %}
+          </p>
+          {% if p.summary_short %}
+            <p class="project-summary">{{ p.summary_short | strip }}</p>
           {% endif %}
-        </ul>
-        {% endif %}
-      </article>
+        </article>
       {% endfor %}
     </div>
 
-    <p style="margin-top:.75rem;">
-      <a href="/projects/">See all projects →</a> &nbsp;·&nbsp; <a href="/about/">About me →</a>
-    </p>
+    <div class="projects-cta">
+      <a class="button" href="/projects/">See all projects →</a>
+    </div>
   </section>
 
 </div>

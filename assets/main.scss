@@ -133,73 +133,7 @@
 /* =====================================================================
    HOME PAGE (scoped) — visually aligned with Projects page
    ===================================================================== */
-.home {
-  --border: #e5e7eb;
-  --muted:  #71717a;
-  --card:   #ffffff;
-  --ring:   rgba(0,0,0,.05);
-}
-@media (prefers-color-scheme: dark) {
-  .home { --border:#2f343a; --muted:#a1a1aa; --card:#121417; --ring: rgba(255,255,255,.04); }
-}
-
-/* container */
-.home .home-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
-.home .home-section { margin-top: 2rem; }
-
-/* text rhythms aligned with projects */
-.home .home-eyebrow { font-size:.9rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
-.home .home-title   { font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.2; margin: .2rem 0 .4rem; }
-.home .home-lead    { font-size: 1.05rem; max-width: 72ch; margin-bottom: .5rem; }
-.home .home-bullets { margin:.5rem 0 0; padding-left: 1.1rem; }
-
-/* cards (match projects’ crisp cards) */
-.home .card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem 1.05rem;
-  box-shadow: 0 1px 0 var(--ring);
-}
-
-/* hero two-column */
-.home .home-hero { display:grid; gap:1.25rem; grid-template-columns: 1.15fr .85fr; margin-top: 2.1rem; }
-.home .home-hero-left { min-width: 0; }
-@media (max-width: 900px) { .home .home-hero { grid-template-columns: 1fr; } }
-
-/* hero right card */
-.home .card-title { margin:.1rem 0 .6rem; font-size: 1.02rem; color: var(--muted); }
-.home .home-stat-grid { display:grid; gap:.8rem; grid-template-columns: repeat(2,1fr); margin-bottom:.6rem; }
-@media (max-width: 560px) { .home .home-stat-grid { grid-template-columns: 1fr; } }
-.home .stat .label { font-size:.92rem; color: var(--muted); }
-.home .stat .value { font-size:1.0rem; }
-
-/* chips / pills — reuse vibe from projects */
-.home .pill-list { display:flex; flex-wrap:wrap; gap:.5rem .6rem; list-style:none; padding:0; margin:.3rem 0 0; }
-.home .pill { border:1px solid var(--border); border-radius:999px; padding:.35rem .6rem; font-size:.92rem; }
-
-/* grid of small cards */
-.home .home-grid { display:grid; gap:1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-
-/* stack chips (class names reused from projects.scss for visual parity) */
-.home .stack-list { display:flex; flex-wrap:wrap; gap:.5rem .6rem; align-items:center; }
-.home .stack-item { border:1px solid var(--border); padding:.3rem .55rem; border-radius:999px; font-size:.9rem; }
-.home .stack-more { opacity:.85; }
-
-/* Featured projects — card grid with optional hero image */
-.home .home-feat-grid { display:grid; gap:1rem; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
-.home .home-feat-card { display:flex; flex-direction:column; }
-.home .home-feat-hero { margin:0 0 .6rem; border-radius:10px; overflow:hidden; border:1px solid var(--border); }
-.home .home-feat-hero img { display:block; width:100%; height:auto; }
-
-.home .home-feat-head { display:flex; justify-content:space-between; gap:.75rem; align-items:baseline; margin-bottom:.25rem; }
-.home .home-feat-title { margin:0; font-size:1.02rem; }
-.home .home-feat-title a { text-decoration:none; }
-.home .home-feat-date { font-size:.9rem; color:var(--muted); }
-.home .home-feat-summary { margin:.25rem 0 .6rem; font-size:.95rem; }
-
-.home .home-cta { margin-top: .9rem; display:flex; gap:.8rem; }
-.home .btn-link { display:inline-block; padding:.5rem .85rem; border:1px solid var(--border); border-radius:8px; text-decoration:none; }
+@import "home";
 
 @import "projects";
 
