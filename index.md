@@ -160,6 +160,10 @@ title: ""
   {% endfor %}
   </div><!-- /.hf-grid -->
 
+<div class="hf-cta">
+  <a class="hf-button" href="{{ '/projects/' | relative_url }}">View all projects</a>
+</div>
+
   {{ lightboxes }}
   <div id="close" hidden></div>
 </section>

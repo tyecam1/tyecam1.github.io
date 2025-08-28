@@ -303,3 +303,46 @@
 // <button class="hf-btn next" ... s.scrollBy({left:s.clientWidth,...})>
 
 .home .hf-lightbox { z-index: 2000; }
+
+/* View all projects CTA */
+.home .hf-cta{
+  margin-top: clamp(16px, 2.5vw, 24px);
+  display: flex;
+  justify-content: center;
+}
+.home .hf-button{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: .9;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.home .hf-button:hover{
+  opacity: 1;
+  transform: translateY(-1px);
+}
+.home .hf-button::after{
+  content: "→";
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* Force date and stack onto separate lines on Featured cards */
+.home .hf-card .hf-meta{
+  display: block;              /* override previous flex/grid */
+  font-size: .9rem;
+  opacity: .8;
+}
+.home .hf-card .hf-meta .date,
+.home .hf-card .hf-meta .stack{
+  display: block;              /* each gets its own line */
+  white-space: normal;         /* allow wrapping as needed */
+  margin: 0;
+}
+.home .hf-card .hf-meta .date{ margin-bottom: .15rem; }
+.home .hf-card .hf-meta .date::after{ content: none; } /* in case a dot separator was added elsewhere */
