@@ -6,26 +6,22 @@ title: ""
 <div class="home">
 
 <section class="home-intro">
-  <p class="kicker">Systems Engineering · Reinforcement Learning · Software for Mechatronics</p>
-  <h1>I build dependable, human-centred autonomous systems.</h1>
+  <p class="kicker">Systems Engineering · Software for Mechatronics · Reinforcement Learning</p>
+  <h1>Moving towards dependable, human-centred autonomous systems.</h1>
   <p class="lede">
-    First-Class MEng (International), Cardiff University · KAIST exchange.
-    I specialise in ROS-based perception & navigation, control design, and rapid
-    prototyping from simulation to hardware.
+    First-Class Master of Engineering (International): Cardiff University with a KAIST exchange. I’m an aspiring mechatronics engineer focused on physics-based modelling & simulation with hardware-integrated ROS deployments.
   </p>
 
   <ul class="skill-chips" aria-label="Core tools and methods">
-    <li class="chip">ROS (Noetic/2)</li>
+    <li class="chip">ROS (Noetic)</li>
     <li class="chip">Python</li>
     <li class="chip">C++</li>
     <li class="chip">RTAB-Map</li>
-    <li class="chip">RealSense</li>
-    <li class="chip">State-space control</li>
-    <li class="chip">Digital control</li>
-    <li class="chip">MPC</li>
     <li class="chip">PPO</li>
-    <li class="chip">Evaluation</li>
-    <li class="chip">Reproducible pipelines</li>
+    <li class="chip">State-space & digital control</li>
+    <li class="chip">Sustainability</li>
+    <li class="chip">Continuous Improvement</li>
+    <li class="chip">Teamwork & Communication</li>
   </ul>
 </section>
 

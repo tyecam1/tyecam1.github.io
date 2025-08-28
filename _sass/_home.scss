@@ -84,14 +84,16 @@
   .hf-head { margin: 0 0 .5rem; }
   .hf-title { margin: 0; line-height: 1.25; }
 
-  .hf-meta {
-    margin-top: .25rem;
-    font-size: .9rem;
-    opacity: .8;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-  }
+.home .hf-meta{
+  margin-top: .25rem;
+  display: flex;
+  flex-direction: column;           /* force two lines */
+  gap: .5rem;
+  font-size: .9rem;
+  opacity: .8;
+}
+.home .hf-meta .date{ white-space: nowrap; }
+
 
   .hf-meta .date { white-space: nowrap; }
 
