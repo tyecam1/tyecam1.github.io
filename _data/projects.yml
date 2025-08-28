@@ -336,7 +336,7 @@
 - key: fem-wing
   featured: false
   status: past
-  toc_title: FEM Wing Optimisation (Composite, 2D)
+  toc_title: FEM Wing Optimisation
   title: Finite Element Modelling and Optimisation of a 2D Composite Wing Section
   dates:
     start: 2024-02-01
