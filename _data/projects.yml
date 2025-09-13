@@ -37,13 +37,6 @@
     results: >
       Baseline Proximal Policy Optimisation with live telemetry is operational on 2-D tasks;
       3-D environments are integrated and tuning is in progress.
-    next_steps:
-      - "Create a clean repository structure and minimal documentation"
-      - "Define a small, stable telemetry format (metrics, logs, video frames)"
-      - "Implement the 2-D maze environment and a simple baseline agent"
-      - "Wire the data path end-to-end (trainer → collector → dashboard)"
-      - "Record run artefacts by default (settings, seed, code version, checkpoints)"
-      - "Add basic tests and set up continuous integration"
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
     hero: { src: /assets/img/rl-telemetry/hero.png, alt: "RL platform system diagram", caption: "Planned architecture and telemetry" }
@@ -51,7 +44,7 @@
   responsibilities:
     - "Designing the initial architecture and a RL baseline to sanity-check the pipeline"
     - "Implementing structured logging, checkpoints, and run artefact capture (settings, seed, code version) for reproducibility"
-    - "Building the telemetry path—trainer → collector → web dashboard—streaming metrics and environment video frames"
+    - "Building the telemetry path—trainer - collector - web dashboard—streaming metrics and environment video frames"
     - "Integrating environment backends (Gymnasium for 2-D, PyBullet for 3-D) behind a small, consistent wrapper"
   team: []
 
@@ -72,7 +65,6 @@
   stack: [Arch Linux, systemd-boot, btrfs, pacman/paru, NVIDIA, Docker, Python, Make, Ansible]
   impact_metrics:
     - { label: Bootstrap, value: "≤15 min", note: "Bare OS → dev ready" }
-    - { label: Repro, value: "1 command", note: "make bootstrap" }
     - { label: GPU, value: "CUDA OK", note: "Validate on host + Docker" }
   highlights:
     - Idempotent shell bootstrap for packages, drivers, and tools
@@ -93,10 +85,6 @@
       One-command setup produces a clean desktop with working NVIDIA CUDA, my editor and shell,
       and a predictable Python environment. Context switching is faster, and the same playbook
       can bring up a headless node or a second machine.
-    next_steps:
-      - "Publish the bootstrap and dotfiles with basic checks in continuous integration"
-      - "Add smoke tests: driver loads, nvidia-smi works, CUDA sample compiles"
-      - "Script simple backup and sync across machines (home and project folders)"
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
     hero: { src: /assets/projects/archlinux/hero.png, alt: "Arch desktop with terminal and telemetry", caption: "Reproducible CUDA dev environment" }
@@ -124,9 +112,9 @@
   tags: [Safe RL, Co-adaptive control, Intent estimation, Datasets for RL, Reproducibility]
   stack: [Python, PyTorch, ROS, Unity/Gazebo, Jupyter, Zotero]
   impact_metrics:
-    - { label: Proposals, value: "2–3", note: "Framing + methods" }
+    - { label: Proposals, value: "2", note: "Framing + methods" }
     - { label: Prototypes, value: "tbd", note: "Navigation + eval demos" }
-    - { label: Reading, value: "50 ATM", note: "With notes" }
+    - { label: Currently Read, value: "50", note: "With notes" }
   highlights:
     - Problem axes defined (uncertainty, perception ambiguity, human-in-loop)
     - Reproducible experiment & evaluation plan
@@ -135,7 +123,7 @@
     problem: >
       Robots can execute narrow tasks quickly, but they lack the directive a human provides.
       For robots and people to work together in the physical world, we need practical, two-way
-      communication and safe co-adaptation. Reinforcement-learning for human–robot interaction
+      communication and safe co-adaptation. Reinforcement-learning for human-robot interaction
       (HRI) is promising, but the required data are costly to collect and often bespoke, which
       makes results hard to compare and reuse.
     approach: >
@@ -148,10 +136,6 @@
       Long term planning outcomes to aim for: a coherent, defensible PhD plan (research questions, methods,
       and evaluation) and a successful studentship application with a respected robotics/HRI group.
       Current status: Limited to research only while I persue a career in my field.
-    next_steps:
-      - "Sharpen the primary research question and success criteria"
-      - "Build a small simulation task to test co-adaptation and intent cues"
-      - "Set up a reproducible template repo (tasks, logging, seeds, metrics, notebooks)"
 
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
@@ -193,10 +177,8 @@
     - Artificial Potential Fields (navigation)
   stack:
     - ROS Noetic
-    - Python (custom ROS nodes, PCL)
-    - RTAB-Map (RGB-D VSLAM)
-    - Intel RealSense D435i
-    - Arduino Nano 33 BLE
+    - Python
+    - RTAB-Map
     - EEG logging (Emotiv, CYKIT)
   impact_metrics:
     - { label: Success rate, value: "83–77% vs 50–66%", note: "Compass vs pulling" }
