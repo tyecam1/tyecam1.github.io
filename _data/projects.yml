@@ -34,9 +34,9 @@
       to stand up the display. Keep everything observable: emit metrics, logs, and video frames;
       save the settings, random seed, code version, and checkpoints; and grow the system as I
       learn more about reinforcement learning and web development.
-    results: >
-      Baseline Proximal Policy Optimisation with live telemetry is operational on 2-D tasks;
-      3-D environments are integrated and tuning is in progress.
+    #results: >
+     # Baseline Proximal Policy Optimisation with live telemetry is operational on 2-D tasks;
+      #3-D environments are integrated and tuning is in progress.
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
     hero: { src: /assets/img/rl-telemetry/hero.png, alt: "RL platform system diagram", caption: "Planned architecture and telemetry" }
@@ -81,10 +81,10 @@
       disk layout and filesystem, NVIDIA drivers, packages, dotfiles, containers, and the
       Python toolchain; mirror the process in Ansible for unattended reinstalls on new
       hardware or a clean disk.
-    results: >
-      One-command setup produces a clean desktop with working NVIDIA CUDA, my editor and shell,
-      and a predictable Python environment. Context switching is faster, and the same playbook
-      can bring up a headless node or a second machine.
+    #results: >
+      #One-command setup produces a clean desktop with working NVIDIA CUDA, my editor and shell,
+      #and a predictable Python environment. Context switching is faster, and the same playbook
+      #can bring up a headless node or a second machine.
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
     hero: { src: /assets/projects/archlinux/hero.png, alt: "Arch desktop with terminal and telemetry", caption: "Reproducible CUDA dev environment" }
@@ -132,10 +132,10 @@
       safety constraints, and (3) preference-informed learning to keep humans in the loop.
       Control data costs by prototyping in simulation first (Unity/Gazebo), using scripted user
       models and teleoperation for early signals, then moving to focused human studies.
-    results: >
-      Long term planning outcomes to aim for: a coherent, defensible PhD plan (research questions, methods,
-      and evaluation) and a successful studentship application with a respected robotics/HRI group.
-      Current status: Limited to research only while I persue a career in my field.
+    #results: >
+      #Long term planning outcomes to aim for: a coherent, defensible PhD plan (research questions, methods,
+      #and evaluation) and a successful studentship application with a respected robotics/HRI group.
+      #Current status: Limited to research only while I persue a career in my field.
 
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
