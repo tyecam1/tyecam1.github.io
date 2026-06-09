@@ -6,22 +6,23 @@ title: ""
 <div class="home">
 
 <section class="home-intro">
-  <p class="kicker">Systems Engineering · Software for Mechatronics · Reinforcement Learning</p>
-  <h1>Moving towards dependable, human-centred autonomous systems.</h1>
+  <p class="kicker">PhD Research · Human-Robot Collaboration · Robotics Systems</p>
+  <h1>Investigating when collaborative robots become worth adopting in real process-engineering work.</h1>
   <p class="lede">
-    First-Class Master of Engineering (International): Cardiff University with a KAIST exchange. I’m an aspiring mechatronics engineer focused on physics-based modelling & simulation with hardware-integrated ROS deployments.
+    I’m a PhD researcher at the University of Strathclyde working on human-centred collaborative robotics for process-engineering and laboratory environments. My work connects adoption evidence, industrial task analysis, human factors, safety-aware benchmarking, and practical ROS-based system integration.
   </p>
 
   <ul class="skill-chips" aria-label="Core tools and methods">
-    <li class="chip">ROS (Noetic)</li>
+    <li class="chip">Collaborative robotics</li>
+    <li class="chip">Process engineering</li>
+    <li class="chip">Human factors</li>
+    <li class="chip">Benchmark design</li>
+    <li class="chip">ROS Noetic</li>
     <li class="chip">Python</li>
-    <li class="chip">C++</li>
     <li class="chip">RTAB-Map</li>
-    <li class="chip">PPO</li>
-    <li class="chip">State-space & digital control</li>
-    <li class="chip">Sustainability</li>
-    <li class="chip">Continuous Improvement</li>
-    <li class="chip">Teamwork & Communication</li>
+    <li class="chip">RGB-D perception</li>
+    <li class="chip">Haptic feedback</li>
+    <li class="chip">Control & RL</li>
   </ul>
 </section>
 
@@ -67,7 +68,7 @@ title: ""
             {%- assign gallery_pipe = gallery_pipe | append: g.src | append: '|' -%}
           {%- endunless -%}
         {%- endif -%}
-      {%- endfor -%}
+      {%- endfor %}
     {%- endif -%}
 
     {%- if p.gallery or p.images -%}
@@ -77,7 +78,7 @@ title: ""
         {%- unless gallery_pipe contains s -%}
           {%- assign gallery_pipe = gallery_pipe | append: g | append: '|' -%}
         {%- endunless -%}
-      {%- endfor -%}
+      {%- endfor %}
     {%- endif -%}
 
     {%- assign gallery = gallery_pipe | split: '|' -%}
