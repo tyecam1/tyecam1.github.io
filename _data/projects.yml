@@ -1,224 +1,311 @@
 # ==========================
-# CURRENT / IN-PROGRESS (concise)
+# CURRENT / IN-PROGRESS
 # ==========================
+
+- key: phd-hrc-adoption
+  featured: true
+  status: current
+  toc_title: PhD Research
+  title: Adoption-Aware Collaborative Robotics for Process Engineering
+  dates:
+    start: 2025-10-01
+  role: PhD Researcher
+  domain: Human-Robot Collaboration | Process Engineering | Design Research
+  one_liner: >
+    Investigating when collaborative robots become worth adopting in laboratory and process-engineering workflows.
+  summary_short: >
+    My PhD at the University of Strathclyde examines the conditions under which collaborative robotics is genuinely
+    worth adopting, not just technically possible. The work combines design research methodology, industrial task
+    analysis, human factors, safety-aware benchmark design, and practical robotics integration with CPI as industrial
+    partner.
+  tags:
+    - Human-robot collaboration
+    - Process engineering
+    - Adoption evidence
+    - Benchmark design
+    - Human factors
+    - Safety-aware autonomy
+    - Design Research Methodology
+  stack:
+    - Python
+    - ROS
+    - Obsidian/Zotero research pipeline
+    - Literature review
+    - Experimental design
+    - Benchmarking
+  impact_metrics:
+    - { label: Research frame, value: "DRM Type-3", note: "Reference model, descriptive study, prescriptive study, evaluation" }
+    - { label: Industrial context, value: "CPI", note: "Process-engineering and laboratory automation workflows" }
+    - { label: Current focus, value: "Benchmark design", note: "Preparative handling and constrained manipulation tasks" }
+  highlights:
+    - "Frames collaborative robotics around adoption value, not isolated task success"
+    - "Develops benchmark requirements for laboratory and process-engineering work"
+    - "Connects workflow, safety, human judgement, traceability, and uncertainty recovery"
+    - "Uses evidence synthesis to derive measurable claims and evaluation criteria"
+  case_study:
+    problem: >
+      Collaborative robots are often evaluated as if technical task execution were enough. In process-engineering
+      and laboratory contexts, that misses the harder question: whether the robot improves a real workflow once
+      safety, traceability, material state, human judgement, and recovery from uncertainty are included.
+    approach: >
+      I am using a design-research structure to move from problem clarification to benchmark design and evaluation.
+      The work currently focuses on two industrially meaningful task families: preparative handling, where material
+      state and handover quality matter, and constrained manipulation, where access, visibility, force control, and
+      safe recovery are degraded.
+    experiments: >
+      Current experimental planning defines task benchmarks, adoption criteria, human-role boundaries, and measurement
+      recipes for efficiency, safety, workload, trust calibration, intervention quality, and failure recovery.
+    results: >
+      Year-one outputs have reframed the PhD around adoption-worthiness, produced a structured research map, and
+      narrowed the benchmark direction toward preparative handling and constrained manipulation rather than generic
+      collaborative assembly.
+    learnings:
+      - "A technically capable robot is not automatically adoptable"
+      - "Benchmarks must expose task context, human role, and failure-recovery behaviour"
+      - "Human factors need event-timed measures, not only post-task questionnaires"
+    next_steps:
+      - "Complete the first literature review and evidence model"
+      - "Develop the benchmark protocol with CPI"
+      - "Build the first demonstrator experiment and measurement pipeline"
+  links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
+  media:
+    hero: { src: /assets/projects/phd/hero.png, alt: "PhD research map for adoption-aware collaborative robotics", caption: "Adoption-aware HRC research frame" }
+    gallery: []
+  responsibilities:
+    - "Define research questions, evidence criteria, and benchmark requirements"
+    - "Map industrial workflows into measurable robotics task families"
+    - "Design experimental protocols that combine engineering performance and human factors"
+    - "Build and maintain the evidence pipeline that supports the literature review"
+  team: ["University of Strathclyde DMEM", "CPI industrial partner"]
+
+- key: research-engine
+  featured: false
+  status: current
+  toc_title: Research Engine
+  title: Research Engine for Robotics Evidence Synthesis
+  dates:
+    start: 2025-10-01
+  role: Research Systems Engineer
+  domain: Research Infrastructure | Evidence Synthesis | Robotics
+  one_liner: >
+    A structured Obsidian and Zotero-based system for turning robotics literature into traceable research claims.
+  summary_short: >
+    Built a research-engine workflow around a version-controlled Obsidian vault, Zotero annotations, evidence cards,
+    decision logs, and DRM-aligned research artefacts. The goal is to make the PhD literature review auditable:
+    papers become evidence, evidence supports claims, and claims feed benchmark requirements.
+  tags: [Research tooling, Obsidian, Zotero, Evidence synthesis, Git, DRM, Robotics literature]
+  stack: [Obsidian, Zotero, Git, Markdown, YAML, BibTeX, Python]
+  impact_metrics:
+    - { label: Core purpose, value: "Traceability", note: "Paper → evidence → claim → benchmark requirement" }
+    - { label: Method frame, value: "DRM-aligned", note: "Research questions, factors, impact links, KPIs, and evidence cards" }
+    - { label: Review use, value: "S1 literature review", note: "Supports adoption-aware HRC evidence synthesis" }
+  highlights:
+    - "Separates source notes, evidence cards, claims, KPIs, and decision records"
+    - "Keeps literature-review decisions auditable through Git history"
+    - "Supports research planning without burying the argument in a folder of PDFs"
+  case_study:
+    problem: >
+      A PhD literature review can easily become a pile of annotated papers with no defensible link between reading,
+      claims, and later experiments. That is not good enough for adoption-aware robotics research, where weak evidence
+      mapping leads directly to weak benchmark design.
+    approach: >
+      I built a structured research pipeline around Obsidian, Zotero, Markdown, and Git. The system separates papers,
+      annotations, evidence cards, factors, impact links, KPIs, standards references, and decision logs so that each
+      claim in the review can be traced back to a source and forward to an experimental requirement.
+    results: >
+      The current workflow is being used to manage the PhD review, decision ledger, CPI meeting outcomes, benchmark
+      requirements, and work packages for future automation.
+    learnings:
+      - "Research infrastructure is only useful when it reduces ambiguity in the argument"
+      - "The vault should expose decisions and evidence, not just store notes"
+      - "Automation should preserve traceability rather than generate more unreviewed text"
+    next_steps:
+      - "Tighten Zotero-to-vault extraction"
+      - "Backfill evidence cards for the first HRC review paper"
+      - "Use the evidence model to drive benchmark and measurement decisions"
+  links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
+  media:
+    hero: { src: /assets/projects/phd/hero.png, alt: "Evidence pipeline for robotics literature review", caption: "Research-engine evidence pipeline" }
+    gallery: []
+  responsibilities:
+    - "Designed the vault ontology and evidence flow"
+    - "Maintained decision logs and research work packages"
+    - "Connected literature review outputs to benchmark requirements"
+  team: []
+
+- key: vis-simulation
+  featured: false
+  status: current
+  toc_title: VIS Simulation
+  title: VIS Prototyping for Human-Robot Collaboration Scenarios
+  dates:
+    start: 2026-01-01
+  role: Simulation & Visualisation Developer
+  domain: Robotics Visualisation | HRC Scenario Design | Training Technology
+  one_liner: >
+    Unity and Unreal prototypes for communicating and testing human-robot collaboration scenarios before hardware trials.
+  summary_short: >
+    Developed visual and interactive simulation assets to explore how collaborative robotics scenarios can be explained,
+    rehearsed, and critiqued before physical deployment. In the PhD context, this supports early-stage communication
+    of workflow assumptions, operator roles, spatial constraints, and safety logic.
+  tags: [Unity, Unreal Engine, Simulation, HRC, Visualisation, Human factors, Training]
+  stack: [Unity, Unreal Engine, C#, Blueprints, 3D workflows]
+  impact_metrics:
+    - { label: Use case, value: "Scenario prototyping", note: "Communicate workflow and safety assumptions before hardware trials" }
+    - { label: PhD relevance, value: "Human-role clarity", note: "Supports discussion of operator actions, robot actions, and shared space" }
+  highlights:
+    - "Uses simulation as a communication tool, not a substitute for evidence"
+    - "Supports early critique of spatial layout, role allocation, and safety assumptions"
+    - "Separates visual scenario design from the research evidence engine"
+  case_study:
+    problem: >
+      Human-robot collaboration is hard to discuss from text alone. Stakeholders need to see who does what, where
+      the robot moves, what the operator is expected to notice, and what happens when the task deviates from the
+      nominal path.
+    approach: >
+      Use Unity and Unreal prototypes to create interactive or visual HRC scenarios that can support discussion,
+      teaching, and early design critique before committing to physical hardware.
+    results: >
+      The work provides a reusable route for turning task-analysis assumptions into visual scenarios that can be
+      reviewed by supervisors, collaborators, and non-specialist stakeholders.
+    learnings:
+      - "Visualisation helps expose hidden assumptions about role allocation and safety boundaries"
+      - "The simulation must be clearly labelled as exploratory unless validated against real data"
+  links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
+  media:
+    hero: { src: /assets/projects/phd/hero.png, alt: "Virtual HRC scenario prototype", caption: "Virtual HRC scenario prototyping" }
+    gallery: []
+  responsibilities:
+    - "Built exploratory Unity and Unreal prototypes"
+    - "Mapped robotics scenarios into visual interaction sequences"
+    - "Separated simulation communication value from empirical evidence claims"
+  team: []
 
 - key: rl-telemetry
   featured: false
   status: current
   toc_title: Simulation & Telemetry Platform
-  title: Integrated RL Simulation & Telemetry Platform
+  title: Robot-Learning Simulation & Telemetry Platform
   dates:
     start: 2025-09-01
   role: Developer & Research Engineer
-  domain: Reinforcement Learning
+  domain: Robot Learning | Reproducibility | Experiment Monitoring
   one_liner: >
-    Unified RL pipeline for 2D/3D tasks with live telemetry and reproducible runs.
+    A prototype telemetry layer for monitoring reinforcement-learning runs with metrics, logs, frames, and reproducible settings.
   summary_short: >
-    A telemetry platform that displays live metrics, logs, and video frames for simulated 2-D and 3-D reinforcement-learning agents.
-  tags: [RL platforms, Reproducibility, Telemetry, Robotics]
-  stack: [Python, PyTorch, Gymnasium, Unity ML-Agents, PyBullet, Flask/Streamlit, WebSocket, Docker]
+    Prototype platform for simulated robot-learning experiments. The aim is to make training behaviour visible while
+    preserving the information needed to rerun an experiment: settings, seed, code version, logs, metrics, checkpoints,
+    and environment frames.
+  tags: [Robot learning, Reproducibility, Telemetry, Experiment monitoring]
+  stack: [Python, PyTorch, Gymnasium, PyBullet, Flask/Streamlit, WebSocket, Docker]
   impact_metrics:
-    - { label: "Metric update latency (95th percentile)", value: "tbd", note: "Time from the training process emitting a metric to it appearing in the dashboard" }
-    - { label: "Metric delivery success", value: "tbd", note: "Percentage of expected metric points that arrive (counts missing updates over the run)" }
-    - { label: "Video frame drop rate", value: "tbd", note: "Percentage of frames lost between the environment stream and the dashboard" }
+    - { label: Current status, value: "Prototype", note: "Designed as a reusable experiment-monitoring layer" }
+    - { label: Core output, value: "Run artefacts", note: "Settings, seed, code version, metrics, checkpoints, and logs" }
   highlights:
-    - "Same calls to start a task, take an action, and view the screen across every environment"
-    - "Stream live training numbers and video frames to the web dashboard"
-    - "Save everything needed to rerun an experiment (settings, seed, code version, metrics, checkpoints)"
+    - "Streams training metrics and environment frames to a dashboard"
+    - "Captures run artefacts for later comparison and debugging"
+    - "Designed to support future robot-learning experiments rather than stand alone as a finished product"
   case_study:
     problem: >
-      I want something I can carry into future projects, and a centralised telemetry platform will consolidate project logs
-      and streamline progress.
+      Reinforcement-learning experiments fail silently when metrics, settings, seeds, and environment behaviour are
+      scattered across ad hoc scripts. Without a clean run record, it is hard to know whether a policy improved or
+      simply changed.
     approach: >
-      Start deliberately small: build a simple 2-D reinforcement-learning maze solver and use it
-      to stand up the display. Keep everything observable: emit metrics, logs, and video frames;
-      save the settings, random seed, code version, and checkpoints; and grow the system as I
-      learn more about reinforcement learning and web development.
-    #results: >
-     # Baseline Proximal Policy Optimisation with live telemetry is operational on 2-D tasks;
-      #3-D environments are integrated and tuning is in progress.
+      Build a small telemetry layer around simulated tasks. Keep the first environments simple, make the run record
+      explicit, and treat monitoring as part of the experiment rather than an afterthought.
+    results: >
+      The platform is an in-progress support tool for future robot-learning work, not a polished research result.
+    learnings:
+      - "Experiment observability matters as much as algorithm choice"
+      - "Run artefacts need to be captured before training becomes complex"
   links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
   media:
-    hero: { src: /assets/img/rl-telemetry/hero.png, alt: "RL platform system diagram", caption: "Planned architecture and telemetry" }
+    hero: { src: /assets/img/rl-telemetry/hero.png, alt: "Robot-learning telemetry platform diagram", caption: "Simulation and telemetry pipeline" }
     gallery: []
   responsibilities:
-    - "Designing the initial architecture and a RL baseline to sanity-check the pipeline"
-    - "Implementing structured logging, checkpoints, and run artefact capture (settings, seed, code version) for reproducibility"
-    - "Building the telemetry path—trainer - collector - web dashboard—streaming metrics and environment video frames"
-    - "Integrating environment backends (Gymnasium for 2-D, PyBullet for 3-D) behind a small, consistent wrapper"
-  team: []
-
-- key: archlinux-migration
-  featured: false
-  status: current
-  toc_title: Arch Linux Migration
-  title: Arch Linux Migration & Dev Environment Automation
-  dates:
-    start: 2025-10-01
-  role: Systems Engineer (personal infrastructure)
-  domain: Developer Experience | Linux
-  one_liner: >
-    NVIDIA 3060 laptop on Arch: reproducible, CUDA-ready, one-command bootstrap.
-  summary_short: >
-    Scripted install (bootloader→CUDA→Docker→dotfiles) plus an optional Ansible playbook for idempotent rebuilds.
-  tags: [Linux, CUDA, Docker, Dotfiles, Automation, Ansible]
-  stack: [Arch Linux, systemd-boot, btrfs, pacman/paru, NVIDIA, Docker, Python, Make, Ansible]
-  impact_metrics:
-    - { label: Bootstrap, value: "≤15 min", note: "Bare OS → dev ready" }
-    - { label: GPU, value: "CUDA OK", note: "Validate on host + Docker" }
-  highlights:
-    - Idempotent shell bootstrap for packages, drivers, and tools
-    - Versioned dotfiles (shell/editor/terminal/WM)
-    - Docker workflow for RL/robotics stacks
-    - Ansible playbook with roles, handlers, and tags against a local or remote inventory
-  case_study:
-    problem: >
-      Windows made GPU training and reproducibility fragile and slow. I want a lean Linux
-      workstation I can rebuild from scratch at any time, same tools, same drivers, so progress
-      isn’t blocked by the machine. I’ll start on my second-hand 3060 laptop I'd acquired for RL in South Korea, so breakage is safe.
-    approach: >
-      Use Arch Linux with everything written and designed as code. Automate the full stack: bootloader,
-      disk layout and filesystem, NVIDIA drivers, packages, dotfiles, containers, and the
-      Python toolchain; mirror the process in Ansible for unattended reinstalls on new
-      hardware or a clean disk.
-    #results: >
-      #One-command setup produces a clean desktop with working NVIDIA CUDA, my editor and shell,
-      #and a predictable Python environment. Context switching is faster, and the same playbook
-      #can bring up a headless node or a second machine.
-  links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
-  media:
-    hero: { src: /assets/projects/archlinux/hero.png, alt: "Arch desktop with terminal and telemetry", caption: "Reproducible CUDA dev environment" }
-    gallery: []
-  responsibilities:
-    - Code custom desktop environment
-    - Author bootstrap and dotfiles
-    - Validate CUDA on host and Docker
-    - Write Ansible roles and inventory
-  team: []
-
-- key: phd-planning
-  featured: false
-  status: current
-  toc_title: "PhD Planning: Robot Learning"
-  title: "PhD Planning: Robot Learning for Human Robot Collaboration"
-  dates:
-    start: 2025-09-01
-  role: Candidate (self-directed research planning)
-  domain: Robot Learning | HRI
-  one_liner: >
-    Long-term interest: safe, co-adaptive RL for human-in-the-loop technology.
-  summary_short: >
-    Proposals, reading plan, small prototypes; outreach to European HRI labs.
-  tags: [Safe RL, Co-adaptive control, Intent estimation, Datasets for RL, Reproducibility]
-  stack: [Python, PyTorch, ROS, Unity/Gazebo, Jupyter, Zotero]
-  impact_metrics:
-    - { label: Proposals, value: "2", note: "Framing + methods" }
-    - { label: Prototypes, value: "tbd", note: "Navigation + eval demos" }
-    - { label: Currently Read, value: "50", note: "With notes" }
-  highlights:
-    - Problem axes defined (uncertainty, perception ambiguity, human-in-loop)
-    - Reproducible experiment & evaluation plan
-    - Prototypes to de-risk perception and reward design
-  case_study:
-    problem: >
-      Robots can execute narrow tasks quickly, but they lack the directive a human provides.
-      For robots and people to work together in the physical world, we need practical, two-way
-      communication and safe co-adaptation. Reinforcement-learning for human-robot interaction
-      (HRI) is promising, but the required data are costly to collect and often bespoke, which
-      makes results hard to compare and reuse.
-    approach: >
-      Map what works today and build on it. Start with small, reproducible studies that combine:
-      (1) uncertainty-aware perception and intent inference, (2) co-adaptive control with
-      safety constraints, and (3) preference-informed learning to keep humans in the loop.
-      Control data costs by prototyping in simulation first (Unity/Gazebo), using scripted user
-      models and teleoperation for early signals, then moving to focused human studies.
-    #results: >
-      #Long term planning outcomes to aim for: a coherent, defensible PhD plan (research questions, methods,
-      #and evaluation) and a successful studentship application with a respected robotics/HRI group.
-      #Current status: Limited to research only while I persue a career in my field.
-
-  links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
-  media:
-    hero: { src: /assets/projects/phd/hero.png, alt: "Planning board and prototype screenshots", caption: "Themes, prototypes, and evaluation plan" }
-    gallery: []
-  responsibilities:
-    - Draft proposals and reading plan
+    - "Designed the initial experiment-monitoring architecture"
+    - "Implemented structured logging and run artefact capture"
+    - "Built telemetry path from trainer to dashboard"
   team: []
 
 # ==========================
-# PAST / COMPLETED (expanded)
+# PAST / COMPLETED
 # ==========================
 
 - key: walkaide
   featured: true
   status: past
   toc_title: Wearable Navigation System
-  title: The Design and Evaluation of Haptic Feedback Methods and Environmental Impacts on a Wearable Navigation System
+  title: Wearable Indoor Navigation Aid with Haptic Feedback
   dates:
     start: 2024-09-01
     end: 2025-05-01
   role: Systems Engineer
-  domain: Robotics | Assistive Robotics | Haptics | VSLAM | Human Factors
+  domain: Robotics | Assistive Robotics | Haptics | Visual SLAM | Human Factors
   one_liner: >
-    A comparitive study on two haptic feedback methods for a wearable navigation aid used by the visually impaired.
+    Wearable indoor navigation aid combining RGB-D perception, visual SLAM, artificial potential field planning, and haptic feedback.
   summary_short: >
-    Built a wearable navigation system (RGB-D VSLAM, APF navigation, haptic actuation) with EEG event logging. Trials showed
-    fixed reference haptic cues outperformed rotational haptic ques on success, safety, and reaction time.
+    Built and evaluated a ROS-based wearable navigation prototype for indoor mobility support. The system combined
+    Intel RealSense RGB-D perception, RTAB-Map visual SLAM, artificial potential field planning, Arduino-controlled
+    haptic actuation, and timestamped event logging. Blindfolded trials compared compass-style pressure cues against
+    shoulder-pull cues across two indoor environments.
   tags:
-    - SLAM
     - ROS Noetic
-    - Python (custom ROS nodes, PCL)
-    - RTAB-Map (RGB-D VSLAM)
+    - Python
+    - RTAB-Map
+    - RGB-D perception
     - Intel RealSense D435i
     - Arduino Nano 33 BLE
-    - LattePanda Delta 3
-    - Raspberry Pi 4
-    - EEG logging (Emotiv, CYKIT)
-    - Artificial Potential Fields (navigation)
+    - Artificial Potential Fields
+    - Haptic feedback
+    - EEG event logging
+    - Human-subject testing
   stack:
     - ROS Noetic
     - Python
     - RTAB-Map
-    - EEG logging (Emotiv, CYKIT)
+    - Intel RealSense
+    - Arduino
+    - CYKIT/Emotiv event logging
   impact_metrics:
-    - { label: Success rate, value: "83–77% vs 50–66%", note: "Compass vs pulling" }
-    - { label: Collisions per trial, value: "0–0.42 vs up to 1.17", note: "Compass vs pulling" }
-    - { label: Reaction time, value: "3.43–3.67 s vs ~4.5–4.9 s", note: "Compass vs pulling feedback" }
-    - { label: Participants, value: "4", note: "Blindfolded indoor trials (textured vs plain)" }
+    - { label: Success rate, value: "83–77% vs 50–66%", note: "Compass-style pressure cues vs shoulder-pull cues" }
+    - { label: Collisions per trial, value: "0–0.42 vs up to 1.17", note: "Compass-style pressure cues vs shoulder-pull cues" }
+    - { label: Reaction time, value: "3.43–3.67 s vs ~4.5–4.9 s", note: "Compass-style pressure cues vs shoulder-pull cues" }
+    - { label: Participants, value: "4", note: "Blindfolded indoor trials across two rooms" }
   highlights:
-    - End-to-end lightweight wearable system with RGB-D perception, VSLAM, haptic navigation
-    - Controlled comparison of compass vs rotational-based feedback
-    - EEG event logging aligned to haptic navigation cues for later analysis
-    - Reproducible ROS/Arduino testbed for assistive robotics
+    - "End-to-end wearable robotics prototype with RGB-D perception, localisation, planning, and haptic actuation"
+    - "Controlled comparison of two body-based haptic feedback methods"
+    - "Timestamped haptic command logging for later EEG and workload analysis"
+    - "Identified environment texture, rapid turns, and actuator salience as key failure modes"
   case_study:
     problem: |
-      Indoors, GPS is unreliable. According to cognitive science, we understand haptic feedback best when a fixed reference point is utilised.
-      However, our mobbility is naturally coordinated through left and right channels. Will fixed reference point haptic cues, paired with RGB-D SLAM, 
-      guide users more clearly than pull-based rotational ques? What are the other critical factors in wearable navigation systems?
+      Indoor navigation remains difficult for visually impaired people because GPS is unreliable indoors and many aids
+      are handheld, conspicuous, or dependent on audio. The engineering question was whether a hands-free wearable
+      system could convert live spatial perception into haptic guidance that users could interpret quickly and safely.
     approach: |
-      ROS pipeline with RealSense RGB-D perception, RTAB-Map localisation, APF navigation, and Arduino-driven actuators.
-      Two feedback modalities were implemented: (i) compass pressure with a back reference, and (ii) tightening straps around either shoulder.
-      All cues and motor commands were timestamped and logged, together with EEG event markers, for later cognitive workload analysis.
+      I helped integrate a ROS pipeline using RealSense RGB-D sensing, RTAB-Map localisation, artificial potential field
+      planning, and Arduino-driven haptic actuation. Two feedback modes were implemented: a fixed-reference compass-style
+      pressure cue on the back, and a shoulder-pull mechanism that indicated direction through left/right strap tension.
     experiments: |
-      Four blindfolded participants navigated fixed routes in textured and plain rooms with both systems and 3 distinct obstacles.
-      Metrics included success, collisions, odometry loss, reaction time, and qualitative feedback. SLAM stability was
-      analysed under texture and turning-rate changes.
+      Four blindfolded sighted participants navigated fixed indoor routes in two rooms with different visual texture.
+      Metrics included route success, collisions, lost odometry, reaction time, computational load, and qualitative feedback.
     results: |
-      Compass cues achieved higher success (83–77% vs 50–66%), fewer collisions (0–0.42 vs ≤1.17), and faster reactions
-      (3.4–3.7 s vs ~4.5–4.9 s). Textured environments stabilised VSLAM, while rapid turns remained a failure mode.
-      Participants reported compass cues clearer and more distinguishable; pulling was rated more natural and comfortable.
+      Compass-style pressure cues achieved higher success, fewer collisions, and faster responses than shoulder-pull cues.
+      The pulling mechanism felt more natural to some users, but it was less distinguishable during navigation. Visual
+      texture improved localisation, while rapid turns and plain environments remained failure modes.
     challenges:
-      - Limited servo torque constrained haptic salience
-      - VSLAM degraded during rapid turns and in plain environments
-      - Small sample size limited statistical power
-      - Multi-device ROS over Wi-Fi/TF frames introduced timing complexity
+      - "Servo torque and mechanical comfort constrained haptic salience"
+      - "Visual SLAM degraded during rapid rotations and low-texture scenes"
+      - "Small participant count limited statistical power"
+      - "Multi-device ROS networking introduced timing and transform-management complexity"
     learnings:
-      - Body-referenced compass cues are clearer than pull-based cues indoors
-      - Visual texture drives VSLAM latency more than move speed
-      - Event-synchronised EEG logging is practical and informative for later analysis
+      - "Body-referenced haptic cues need a stable reference point to be interpreted quickly"
+      - "Assistive robotics performance depends on the environment, not just the algorithm"
+      - "Event-synchronised logging is feasible and valuable for later workload analysis"
     next_steps:
-      - Lighter, higher-torque actuators with adaptive feedback
-      - Multi-camera or fusion for robust SLAM; larger participant study
+      - "Use lighter and higher-torque actuators"
+      - "Improve localisation through multi-camera sensing or sensor fusion"
+      - "Run a larger study with visually impaired participants and adaptive feedback"
   links:
     repo: https://github.com/tyecam1/Mechatronic-Walkaide
     docs: ""
@@ -229,7 +316,7 @@
   media:
     hero: { src: /assets/img/walkaide.png, alt: "Participant wearing haptic harness with RGB-D camera", caption: "Prototype wearable navigation system" }
     gallery:
-      - { src: /assets/img/walkaide2.png, alt: "Electronics & harness layout", caption: "Electronics & harness" }
+      - { src: /assets/img/walkaide2.png, alt: "Electronics and harness layout", caption: "Electronics and harness" }
       - { src: /assets/img/walkaide3.png, alt: "Project poster", caption: "Poster" }
       - { src: /assets/img/walkaide4.png, alt: "Navigation scene with obstacles", caption: "Navigation scene" }
       - { src: /assets/img/walkaide6.png, alt: "Trial still", caption: "Trial still" }
@@ -237,152 +324,15 @@
     - id: hjoRbiRpzas
       title: Haptic Feedback Methods and Environmental Impacts — Testing
   responsibilities:
-    - Designed system architecture and custom ROS nodes
-    - Implemented APF navigation and haptic control
-    - Integrated VSLAM perception, mapping, and Arduino feedback
-    - Tuned parameters, optimised for system latency and robustness
-    - Implemented EEG logging & synchronisation; handed over for analysis
-  team: ["Trystan Barnett (Electrical) ", "Tye Cameron (Systems) ", "Oscar Meads (Electrical) ", "Dylan Williams (Mechanical) ", "Shou-Han Zhou (Supervisor)"]
-
-- key: hybrid-tidal-wind
-  featured: false
-  status: past
-  toc_title: Severn Estuary Wind & Tidal Feasibility
-  title: A Feasibility-Aware Portfolio for the Design & Installation of a Hybrid Tidal & Wind Farm in the Severn Estuary
-  dates:
-    start: 2024-09-01
-    end: 2025-05-01
-  role: Resource & Array Modelling · Condition Monitoring · Financial Analysis
-  domain: Renewable Energy | Offshore Engineering | Sustainability
-  one_liner: >
-    Feasibility study comparing tidal, wind, and hybrid options in the Severn Estuary; hybrid was
-    assessed but wind-only was recommended as most feasible and lowest cost.
-  summary_short: >
-    Mapped bathymetry and resources, designed wind layouts (21 × 15 MW) with wake-aware spacing,
-    routed inter-array cabling, and scoped grid/substation options. Tidal potential was analysed
-    but co-location proved impractical; the wind-only design achieved the lowest LCOE under the
-    stated assumptions.
-  tags: [Resource assessment, Bathymetry & GIS, Condition monitoring, Hybrid assessment, LCOE analysis, Resilience]
-  stack: [Python (PyWake, LCOE), SciPy (optimisation), MATLAB (turbine performance), GIS & bathymetry]
-  impact_metrics:
-    - { label: Installed capacity, value: "315 MW", note: "21 × Vestas V236-15 MW" }
-    - { label: Annual energy, value: "≈ 1,344 GWh/yr", note: "Study AEP estimate" }
-    - { label: Capacity factor, value: "≈ 48.8%", note: "Assumed for site" }
-    - { label: LCOE (baseline), value: "≈ £65/MWh", note: "Modelled; sensitive to discount rate" }
-  highlights:
-    - Built bathymetry and wind/tidal resource layers and mapped feasible corridors
-    - "Wind layout: west-oriented rows, ~7D × 4D spacing; Jensen/Park with Gaussian follow-up checks"
-    - Cable routing via MST + differential evolution; grid as MVAC with a single onshore substation
-    - Condition-monitoring costs and OPEX assumptions included to inform downtime and LCOE
-  case_study:
-    problem: >
-      The Severn Estuary has strong tidal flows but complex bathymetry and strict siting constraints.
-      The question: can a hybrid tidal–wind portfolio deliver reliable power for local industry at a
-      competitive cost once channels, shipping lanes, wildlife zones, and seabed conditions are respected?
-    approach: >
-      Integrate bathymetry and resource data to map feasible corridors; design wind layouts and preliminarily
-      size foundations; model wakes and array spacing; optimise inter-array cable routing; and design grid and
-      substation options. Assess economics via levelised cost of energy with sensitivity to downtime and intermittency.
-    experiments:
-      - Compare tidal-only, wind-only, and hybrid layouts at candidate sites
-      - Sweep spacing/orientation and cable topologies to trade off yield, losses, and maintainability
-      - Test sensitivity to device availability, maintenance windows, and grid-connection distance/tariffs
-    results: >
-      Wind-only layouts achieved the lowest levelised cost of energy under the study assumptions. Economies of
-      scale in turbine ratings, installation vessels, O&M logistics, and a mature supply chain dominated. Hybrid
-      layouts offered smoother supply but were impractical here due to depth, seabed, and electrical-integration
-      mismatches, and came with higher LCOE. Siting constraints around channels and shipping lanes remained key drivers.
-    learnings:
-      - "Wind-only is most cost-effective at this site; hybridisation improves reliability but adds cost/complexity"
-      - "Early condition-monitoring integration reduces projected O&M costs"
-      - "Cable routing and substation siting materially affect both losses and installation costs"
-    next_steps:
-      - "Higher-resolution CFD for wakes and local bathymetry effects"
-      - "Longer multi-year environmental series to stress-test variability and downtime"
-      - "Policy-aware economics (e.g., Contracts for Difference scenarios) and refined CAPEX/OPEX ranges"
-      - "Early engagement with navigation and wildlife stakeholders to validate corridors and exclusions"
-  links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
-  media:
-    hero: { src: /assets/projects/img/tidal-array.png, alt: "Google Earth rendering of the optimised tidal array", caption: "Google Earth rendering of the optimised tidal array"}
-    gallery: []
-  videos:
-    - id: R84wCpUQfaM
-      title: Renewable Energy Park Design Documentary
-  responsibilities:
-    - Built resource and bathymetric models
-    - Designed array layouts and optimised capacity factor
-    - Led LCOE benchmarking and sustainability analysis
-    - Proposed condition-monitoring framework
-  team: ["Imogen Anderson (Civil) ", "Victoria Bridges-Galvez (Civil) ", "Tye Cameron (Mechanical) ", "Tom Daniels (Mechanical) ", "Valerija Kolosova (Civil) ", "Jack Tricklebank (Mechanical) "]
-
-- key: fem-wing
-  featured: false
-  status: past
-  toc_title: FEM Wing Optimisation
-  title: Finite Element Modelling and Optimisation of a 2D Composite Wing Section
-  dates:
-    start: 2024-02-01
-    end: 2024-05-01
-  role: Lead Developer & Researcher
-  domain: Computational Mechanics | Optimisation | Aerospace Structures
-  one_liner: >
-    Custom Python FEM with differential evolution cut Von Mises stress by ~25% at <1% area error.
-  summary_short: >
-    Implemented 8-node quadratic elements with Gauss quadrature; θ–ϕ parametric sweeps and optimisation
-    identified a robust sweet spot while enforcing area and orthotropic behaviour.
-  tags: [Custom FEM, Quadratic elements, Gauss quadrature, Constraint handling, Differential evolution, ParaView Visualisation]
-  stack: [Python, NumPy, SciPy (differential evolution, fsolve), Matplotlib, ParaView, Gmsh]
-  impact_metrics:
-    - { label: Von Mises reduction, value: "≈25%", note: "Parametric + optimisation" }
-    - { label: Area accuracy, value: "<1% error", note: "240 m² target" }
-    - { label: Sweet spot, value: "θ 60–64°, ϕ 83–87°", note: "Best trade-off region" }
-    - { label: Scale, value: "500+ runs", note: "Multiple materials" }
-  highlights:
-    - Implemented solver with 8-node quadratic elements
-    - Efficient sparse stiffness matrix handling
-    - Automated θ–ϕ sweeps and convergence checks
-  case_study:
-    problem: |
-      Reduce peak stress in a composite wing section while strictly maintaining area and orthotropic response.
-    approach: |
-      Python FEM with Gauss quadrature; constraint enforcement via trigonometric forms and iterative solvers;
-      differential evolution across θ–ϕ parameters.
-    experiments: |
-      Sweeps over θ, ϕ (60–90°) across material sets (E₁, E₂, G₁₂). Visualised stress fields and convergence.
-    results: |
-      ~25% reduction vs baselines; best region θ=60–64°, ϕ=83–87°; <1% area deviation; stress redistribution confirmed across the section.
-    learnings:
-      - Stability hinges on constraint enforcement and eliminating non-finite solutions
-      - Small angular changes in θ have outsized effects on stress concentrations
-    next_steps:
-      - Extend to 3D with dynamic loads and multi-objective optimisation (stress, weight, stiffness)
-  links:
-    repo: https://github.com/tyecam1/AircraftWing-FEM-Solver
-    docs: ""
-    demo: ""
-    video: ""
-    paper: https://github.com/tyecam1/AircraftWing-FEM-Solver/blob/main/docs/FinalReport.pdf
-    dataset: ""
-  media:
-    hero: { src: /assets/img/fem-wing-hero-MaxVM.png, alt: "Von Mises stress field (max VM)", caption: "Max Von Mises stress in composite wing" }
-    gallery:
-      - { src: /assets/img/fem-wing-4NodeComparison.png, alt: "4-node quadratic elements", caption: "4-node quadratic elements" }
-      - { src: /assets/img/fem-wing-8NodedComparison.png, alt: "8-node quadratic elements", caption: "8-node quadratic elements" }
-      - { src: /assets/img/fem-wing-EigenVec1.png, alt: "Eigenvector mode 1", caption: "Eigenvector 1" }
-      - { src: /assets/img/fem-wing-EigenVec2.png, alt: "Eigenvector mode 2", caption: "Eigenvector 2" }
-      - { src: /assets/img/fem-wing-MaxPrincipleShear.png, alt: "Max principal shear", caption: "Max principal shear" }
-      - { src: /assets/img/fem-wing-PrincipleSurface.png, alt: "Principal stress surface", caption: "Principal stress surface" }
-      - { src: /assets/img/fem-wing-stressXX.png, alt: "σxx stress field", caption: "Stress XX" }
-      - { src: /assets/img/fem-wing-stressYY.png, alt: "σyy stress field", caption: "Stress YY" }
-      - { src: /assets/img/fem-wing-VMsurface.png, alt: "Von Mises surface", caption: "Von Mises surface" }
-  responsibilities:
-    - Designed and implemented FEM solver
-    - Ran parametric and optimisation studies
-    - Produced visualisations and final report
-  team: Individual project
+    - "Designed system architecture and custom ROS nodes"
+    - "Implemented APF navigation and haptic control"
+    - "Integrated visual SLAM perception, mapping, and Arduino feedback"
+    - "Tuned parameters for latency and robustness"
+    - "Implemented timestamped event logging for later EEG synchronisation"
+  team: ["Trystan Barnett (Electrical)", "Tye Cameron-Robson (Systems)", "Samuel Griffin", "Oscar Meads (Electrical)", "Dylan Williams (Mechanical)", "Dr Shou-Han Zhou (Supervisor)"]
 
 - key: rl-sumo
-  featured: true
+  featured: false
   status: past
   toc_title: RL Quadruped Sumo
   title: Reinforcement Learning-Based Control of a Quadruped Agent in a Simulated Sumo Arena
@@ -392,46 +342,43 @@
   role: Reinforcement Learning Engineer (course project)
   domain: Reinforcement Learning | Robotics | Simulation
   one_liner: >
-    Proximal Policy Optimisation (PPO) with a simple, reward-embedded curriculum in RaisimGym; an emergent
-    “leap” opening appeared.
+    PPO control for simulated ANYmal sumo, useful mainly as a lesson in reward design, opponent diversity, and brittle contact policies.
   summary_short: >
-    Trained full ANYmal with joint-torque control and a two-stage curriculum; analysed learning curves,
-    hyperparameters, and emergent tactics under adversarial contact.
-  tags: [PPO, Curriculum learning, Vectorised envs, Reward shaping, Emergent behaviour, Analysis]
+    Trained a simulated ANYmal agent in RaiSim using Proximal Policy Optimisation and a simple reward-embedded curriculum.
+    The policy discovered aggressive contact behaviours, including a risky leap opener, but generalisation was limited by
+    simplified opponent modelling and reward side effects.
+  tags: [PPO, Curriculum learning, RaiSim, Reward shaping, Contact-rich control]
   stack: [PyTorch, RaiSim/RaisimGym, CUDA, NumPy, TensorBoard]
   impact_metrics:
-    - { label: Placement,  value: "24/32",      note: "Tournament placing (25% win rate)" }
-    - { label: Scale,      value: "100 envs",   note: "Vectorised training; 30 threads" }
-    - { label: Behaviour,  value: "Leap-attack", note: "Discovered early; often decisive but risky" }
+    - { label: Training scale, value: "100 envs", note: "Vectorised training with 30 CPU threads" }
+    - { label: Control rate, value: "100 Hz", note: "0.01 s control timestep" }
+    - { label: Key lesson, value: "Reward brittleness", note: "Impact rewards encouraged contact rather than reliable destabilisation" }
   highlights:
-    - Implemented PPO baseline in PyTorch with vectorised simulation and a two-stage curriculum
-    - Shaped rewards for stability, useful approach, impact, and centre control; tuned γ=0.998 and λ=0.95
-    - Observed emergent “leap” opener plus edge-pushing; diagnosed failure cases and reward side-effects
+    - "Implemented PPO with vectorised RaiSim environments"
+    - "Designed a two-stage reward curriculum around distance-to-centre"
+    - "Diagnosed failure modes caused by opponent simplification and over-aggressive contact rewards"
   case_study:
     problem: |
-      Quadruped control under adversarial contact is high-variance and sparse-reward. The agent must
-      balance stability and aggression in continuous action space while avoiding brittle policy updates.
+      Contact-rich quadruped competition is hard to model with classical control because the agent must balance
+      locomotion, stability, aggression, and recovery in a sparse-reward environment.
     approach: |
-      Train with Proximal Policy Optimisation in PyTorch on a vectorised RaiSim/RaisimGym environment
-      (100 parallel arenas). Use a simple curriculum embedded in the reward: far from centre → emphasise
-      approach/impact and forward velocity; near centre → emphasise stability/centre control. Include
-      reward terms for torque cost, centre-of-mass height, and body pitch. Tune PPO with γ=0.998, λ=0.95.
-    experiments:
-      - Baseline PPO vs. curriculum-augmented PPO; measure win rate, reward progression, and stability proxies
-      - Ablate reward terms (impact, useful-distance, stabilisers) to expose side-effects
-      - Qualitative analysis of emergent tactics (opening leaps, edge pushing) and failure modes
+      I trained an ANYmal agent with Proximal Policy Optimisation in RaiSim. The reward curriculum encouraged approach
+      and impact when far from centre, then stability and centre control during close engagement.
+    experiments: |
+      Training varied reward coefficients, PPO parameters, and simplified opponent behaviours. Evaluation focused on
+      win behaviour, stability, and qualitative policy failure modes.
     results: |
-      The curriculum accelerated early learning and improved robustness relative to the baseline.
-      Policies discovered a high-impact “leap” opener and edge-pushing behaviour. In evaluation,
-      placement was 24/32 with ~25% win rate; failures were often self-destabilisations after the leap.
+      The agent learned forceful engagement and a high-impact leap opener. That behaviour sometimes destabilised the
+      opponent but often caused self-destabilisation. The project therefore became a useful negative case study: without
+      opponent diversity and careful reward design, reinforcement-learning policies can look impressive while remaining brittle.
     learnings:
-      - “Contact = good” accidentally encourages sticking to the opponent; reward should favour destabilisation, not mere impact
-      - Curriculum design matters; centre-aware staging improved sample efficiency and stability
-      - Limited opponent diversity in training capped generalisation; richer opponents are needed
+      - "Rewarding contact is not the same as rewarding useful destabilisation"
+      - "Simplified opponents improve training speed but cap generalisation"
+      - "Aggressive policies need explicit risk and recovery terms"
     next_steps:
-      - "Introduce self-play and opponent ensembles; apply domain randomisation for contact, friction, and mass"
-      - "Rework reward to penalise sustained contact and explicitly reward opponent destabilisation/outs"
-      - "Add safety terms (anti-flip) and richer observations; explore longer horizons and early-stopping criteria"
+      - "Train against opponent ensembles or self-play"
+      - "Use domain randomisation for friction, mass, and contact parameters"
+      - "Reward opponent destabilisation and ring-out events rather than sustained contact"
   links:
     repo: https://github.com/tyecam1/KAIST-Anymal-Sumo
     docs: ""
@@ -440,15 +387,15 @@
     paper: https://github.com/tyecam1/KAIST-Anymal-Sumo/blob/master/ME491_project/report/TyeCameronFinalReport.pdf
     dataset: ""
   media:
-    hero: { src: /assets/img/anymal-sumo-hero.png, alt: "ANYmal robots in a simulated sumo arena", caption: "ANYmal trained with PPO in RaisimGym" }
+    hero: { src: /assets/img/anymal-sumo-hero.png, alt: "ANYmal robots in a simulated sumo arena", caption: "ANYmal trained with PPO in RaiSim" }
     gallery:
       - { src: /assets/img/anymal-sumo-2-boxTraining.jpg, alt: "ANYmal in box training stage", caption: "Curriculum: box training" }
       - { src: /assets/img/anymal-sumo-3-ArenaLayout.png, alt: "Top-down of the sumo arena", caption: "Arena layout" }
       - { src: /assets/img/anymal-sumo-4-Demo.png, alt: "Demo match still", caption: "Demo bout" }
   responsibilities:
-    - Implemented PPO loop and two-stage curriculum; tuned γ, λ, action std, and reward coefficients
-    - Shaped rewards for stability vs aggression; instrumented training and analysed behaviours
-    - Ran GPU training, evaluated policies, and documented tournament results
+    - "Implemented PPO loop and reward curriculum"
+    - "Tuned stability, approach, impact, and centre-control rewards"
+    - "Analysed emergent behaviours and failure modes"
   team: []
   references:
     - https://github.com/jhwangbo/raisimLib
@@ -459,3 +406,133 @@
     - id: x24TwcXVaeE
       title: Initial ANYmal Agent training video
 
+- key: fem-wing
+  featured: false
+  status: past
+  toc_title: FEM Wing Optimisation
+  title: Custom Finite Element Solver for Wing Stress Optimisation
+  dates:
+    start: 2024-02-01
+    end: 2024-05-01
+  role: Lead Developer & Researcher
+  domain: Computational Mechanics | Optimisation | Aerospace Structures
+  one_liner: >
+    Python FEM solver for a simplified orthotropic wing section, linking numerical methods to design optimisation.
+  summary_short: >
+    Implemented a finite element solver for 4-node and 8-node quadrilateral meshes, then used differential evolution
+    to study how backward sweep and dihedral affected stress concentration under drag loading.
+  tags: [Custom FEM, Quadrilateral elements, Gauss quadrature, Differential evolution, ParaView]
+  stack: [Python, NumPy, SciPy, Matplotlib, ParaView, Gmsh]
+  impact_metrics:
+    - { label: Element types, value: "4- and 8-node", note: "Quadrilateral meshes" }
+    - { label: Optimisation variables, value: "θ and ϕ", note: "Backward sweep and dihedral angles" }
+    - { label: Best reported case, value: "0.91 MPa VM", note: "For the reported optimum material/geometry combination" }
+  highlights:
+    - "Built the solver rather than only using commercial FEA software"
+    - "Compared accuracy and computational cost between element orders"
+    - "Connected geometry, material assumptions, and stress redistribution"
+  case_study:
+    problem: |
+      The project asked how wing geometry affects stress concentration under drag loading while maintaining a fixed
+      simplified wing area and orthotropic material behaviour.
+    approach: |
+      I implemented quadrilateral finite elements, assembled the global stiffness matrix, applied boundary conditions,
+      exported stress fields, and used differential evolution to search the geometry space.
+    experiments: |
+      Swept backward sweep and dihedral angles across material-property combinations, comparing 4-node and 8-node meshes
+      and visualising stress fields in ParaView.
+    results: |
+      The strongest design lesson was the trade-off between accuracy, computational cost, and geometry constraints.
+      Higher-order elements improved stress-gradient capture near critical regions but increased computational time.
+    learnings:
+      - "Numerical optimisation is only useful when constraints are enforced cleanly"
+      - "Mesh order and geometry parameterisation can change the interpretation of stress trends"
+  links:
+    repo: https://github.com/tyecam1/AircraftWing-FEM-Solver
+    docs: ""
+    demo: ""
+    video: ""
+    paper: https://github.com/tyecam1/AircraftWing-FEM-Solver/blob/main/docs/FinalReport.pdf
+    dataset: ""
+  media:
+    hero: { src: /assets/img/fem-wing-hero-MaxVM.png, alt: "Von Mises stress field", caption: "Von Mises stress in simplified wing section" }
+    gallery:
+      - { src: /assets/img/fem-wing-4NodeComparison.png, alt: "4-node element comparison", caption: "4-node element comparison" }
+      - { src: /assets/img/fem-wing-8NodedComparison.png, alt: "8-node element comparison", caption: "8-node element comparison" }
+      - { src: /assets/img/fem-wing-EigenVec1.png, alt: "Eigenvector mode 1", caption: "Eigenvector 1" }
+      - { src: /assets/img/fem-wing-EigenVec2.png, alt: "Eigenvector mode 2", caption: "Eigenvector 2" }
+      - { src: /assets/img/fem-wing-MaxPrincipleShear.png, alt: "Max principal shear", caption: "Max principal shear" }
+      - { src: /assets/img/fem-wing-PrincipleSurface.png, alt: "Principal stress surface", caption: "Principal stress surface" }
+      - { src: /assets/img/fem-wing-stressXX.png, alt: "Stress XX field", caption: "Stress XX" }
+      - { src: /assets/img/fem-wing-stressYY.png, alt: "Stress YY field", caption: "Stress YY" }
+      - { src: /assets/img/fem-wing-VMsurface.png, alt: "Von Mises surface", caption: "Von Mises surface" }
+  responsibilities:
+    - "Designed and implemented the FEM solver"
+    - "Ran geometry sweeps and optimisation studies"
+    - "Produced visualisations and final report"
+  team: "Individual project"
+
+- key: hybrid-tidal-wind
+  featured: false
+  status: past
+  toc_title: Severn Estuary Wind & Tidal Feasibility
+  title: Offshore Wind and Tidal Feasibility Study for Industrial Decarbonisation
+  dates:
+    start: 2024-09-01
+    end: 2025-05-01
+  role: Resource & Array Modelling · Condition Monitoring · Financial Analysis
+  domain: Renewable Energy | Offshore Engineering | Sustainability
+  one_liner: >
+    Feasibility study for decarbonising an industrial chemical site with offshore wind, tidal analysis, grid integration, and cost modelling.
+  summary_short: >
+    Assessed renewable energy options for the Dow Barry site, including wind resource, tidal feasibility, turbine layout,
+    grid connection, foundation assumptions, structural health monitoring, and levelised cost of energy. The final concept
+    favoured offshore wind because the tidal option became infeasible at the required industrial energy scale.
+  tags: [Resource assessment, Bathymetry, Offshore wind, Tidal energy, Grid connection, LCOE, SHM]
+  stack: [Python, PyWake, SciPy, MATLAB, GIS, Google Earth Pro]
+  impact_metrics:
+    - { label: Wind concept, value: "21 × 15 MW", note: "Vestas V236-15 MW turbine assumption" }
+    - { label: Study AEP, value: "≈1,344 GWh/yr", note: "Estimated after wake modelling assumptions" }
+    - { label: Industrial demand, value: "≈1.1–1.3 TWh/yr", note: "Order-of-magnitude decarbonisation requirement" }
+  highlights:
+    - "Mapped wind, tidal, bathymetry, shipping, and grid constraints"
+    - "Compared wind and tidal feasibility at industrial energy demand scale"
+    - "Included condition-monitoring and maintenance assumptions in the feasibility narrative"
+  case_study:
+    problem: >
+      A chemical manufacturing site needs very large, reliable, low-carbon energy. The challenge was not simply to
+      estimate generation, but to test whether candidate renewable options were feasible once bathymetry, shipping,
+      grid connection, wake losses, maintenance, and cost were included.
+    approach: >
+      The project integrated resource assessment, turbine selection, wake modelling, cable routing, grid-connection
+      assumptions, foundation design, environmental considerations, structural health monitoring, and levelised cost
+      modelling into a single feasibility narrative.
+    experiments:
+      - "Compared wind, tidal, and hybrid options under site and energy-demand constraints"
+      - "Modelled wind-farm wake effects and turbine layout options"
+      - "Assessed why tidal turbine counts became impractical at the required scale"
+    results: >
+      Offshore wind was the more feasible route under the study assumptions. Tidal energy remained technically
+      interesting but required an impractically large turbine count and faced major uncertainty around bathymetry,
+      wake losses, shipping, and installation complexity.
+    learnings:
+      - "A renewable concept only matters if it survives siting, grid, maintenance, and cost constraints"
+      - "Hybrid systems can smooth supply but may add more integration burden than value at a constrained site"
+      - "Early sensitivity analysis is essential when feasibility depends on uncertain resource data"
+    next_steps:
+      - "Use higher-resolution site data and official maritime constraints"
+      - "Validate resource models with site-specific measurement campaigns"
+      - "Run sensitivity analysis on grid export, storage, and downtime assumptions"
+  links: { repo: "", docs: "", demo: "", video: "", paper: "", dataset: "" }
+  media:
+    hero: { src: /assets/projects/img/tidal-array.png, alt: "Google Earth rendering of offshore renewable array", caption: "Offshore renewable array feasibility concept" }
+    gallery: []
+  videos:
+    - id: R84wCpUQfaM
+      title: Renewable Energy Park Design Documentary
+  responsibilities:
+    - "Built resource and bathymetric models"
+    - "Contributed to array-layout and feasibility analysis"
+    - "Led LCOE benchmarking and sustainability analysis"
+    - "Proposed condition-monitoring framework"
+  team: ["Imogen Anderson (Civil)", "Victoria Bridges-Galvez (Civil)", "Tye Cameron-Robson (Mechanical)", "Tom Daniels (Mechanical)", "Valerija Kolosova (Civil)", "Jack Tricklebank (Mechanical)"]
