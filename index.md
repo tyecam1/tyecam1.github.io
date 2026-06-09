@@ -6,23 +6,23 @@ title: ""
 <div class="home">
 
 <section class="home-intro">
-  <p class="kicker">PhD Research · Human-Robot Collaboration · Robotics Systems</p>
-  <h1>Investigating when collaborative robots become worth adopting in real process-engineering work.</h1>
+  <p class="kicker">PhD Research · Human-Robot Collaboration · Robotics Systems Engineering</p>
+  <h1>Designing evidence-led robotics research around adoption, safety, and real industrial work.</h1>
   <p class="lede">
-    I’m a PhD researcher at the University of Strathclyde working on human-centred collaborative robotics for process-engineering and laboratory environments. My work connects adoption evidence, industrial task analysis, human factors, safety-aware benchmarking, and practical ROS-based system integration.
+    I’m a PhD researcher at the University of Strathclyde working on collaborative robotics for process-engineering and laboratory environments. My work asks when a robot becomes worth adopting in a real workflow, connecting industrial task analysis, human factors, safety-aware benchmarking, and practical robotics system integration.
   </p>
 
   <ul class="skill-chips" aria-label="Core tools and methods">
-    <li class="chip">Collaborative robotics</li>
+    <li class="chip">Human-robot collaboration</li>
     <li class="chip">Process engineering</li>
-    <li class="chip">Human factors</li>
+    <li class="chip">Design Research Methodology</li>
     <li class="chip">Benchmark design</li>
+    <li class="chip">Human factors</li>
+    <li class="chip">Safety-aware autonomy</li>
     <li class="chip">ROS Noetic</li>
     <li class="chip">Python</li>
-    <li class="chip">RTAB-Map</li>
     <li class="chip">RGB-D perception</li>
-    <li class="chip">Haptic feedback</li>
-    <li class="chip">Control & RL</li>
+    <li class="chip">Research engineering</li>
   </ul>
 </section>
 
